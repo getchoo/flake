@@ -5,6 +5,7 @@
 		git
 		neofetch
 		nixos-option
+		pinentry-curses
 		python310
 		vim
 	];
