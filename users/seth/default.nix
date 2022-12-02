@@ -12,7 +12,7 @@
 		extraGroups = ["wheel"];
 		isNormalUser = true;
 		hashedPassword = "$6$PbSrwbVIGtuaPbBx$RvnW/TvFLhxO9T0rc9NG8IExNXkaelh77fVsKoNmKLsKxtkCkR6Z5q9AcyLIgrodaByz1zZyQAj3.1gM7vEOv1";
-		shell = pkgs.bash;
+		shell = pkgs.zsh;
 	};
 
 	home-manager.users.seth = {
