@@ -4,9 +4,11 @@
 	programs.neovim = {
 		enable = true;
 		extraPackages = with pkgs; [
+			alejandra
 			black
 			clang
 			codespell
+			deadnix
 			nodePackages.alex
 			nodePackages.bash-language-server
 			nodePackages.prettier
@@ -14,6 +16,7 @@
 			python310Packages.flake8
 			rust-analyzer
 			rustfmt
+			statix
 			stylua
 			sumneko-lua-language-server
 		];
