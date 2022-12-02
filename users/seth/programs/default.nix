@@ -14,6 +14,7 @@
 		bat
 		clang
 		deadnix
+		eclint
 		exa
 		fd
 		lld

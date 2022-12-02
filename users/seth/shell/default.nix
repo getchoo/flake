@@ -10,8 +10,8 @@
 	];
 
 	home.sessionVariables = {
-		EDITOR = pkgs.neovim;
-		VISUAL = pkgs.neovim;
+		EDITOR = "nvim";
+		VISUAL = "nvim";
 		CARGO_HOME = "${config.xdg.dataHome}/cargo";
 		RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
 		LESSHISTFILE = "${config.xdg.stateHome}/less/history";
