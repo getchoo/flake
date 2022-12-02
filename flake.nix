@@ -7,17 +7,16 @@
 	};
 
 	outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }: {
-		nixosConfigurations.glados = nixpkgs.lib.nixosSystem {
+		nixosConfigurations.glados-wsl = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			modules = [
-				./configuration.nix
-				./hosts/glados
 				home-manager.nixosModules.home-manager
 				{
-					home-manager.useGlobalPkgs = true;
-					home-manager.useUserPackages = true;
-					home-manager.users.seth = import ./seth;
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
 				}
+
+				./hosts/glados-wsl
 				
 				nixos-wsl.nixosModules.wsl
 				({ config, lib, pkgs, ... }: {
