@@ -1,13 +1,16 @@
-{ config, lib, pkgs, ... }:
-
 {
+	config,
+	lib,
+	pkgs,
+	...
+}: {
 	programs.zsh = {
 		enable = true;
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
-    enableVteIntegration = true;
-    completionInit = ''
-      autoload -Uz bashcompinit compinit
+		enableAutosuggestions = true;
+		enableSyntaxHighlighting = true;
+		enableVteIntegration = true;
+		completionInit = ''
+			autoload -Uz bashcompinit compinit
 			local zdump="${config.xdg.cacheHome}/zsh/zdump"
 			bashcompinit
 			compinit -d "$zdump"
@@ -16,8 +19,8 @@
 				zcompile "$zdump"
 			fi
 			unset zdump
-    '';
-    defaultKeymap = "emacs";
+		'';
+		defaultKeymap = "emacs";
 		dotDir = ".config/zsh";
 		initExtra = ''
 			zmodload zsh/zutil
@@ -39,14 +42,14 @@
 
 			# clear backbuffer with ctrl-l
 			function clear-screen-and-scrollback() {
-			    echoti civis >"$TTY"
-			    printf '%b' '\e[H\e[2J' >"$TTY"
-			    zle .reset-prompt
-			    zle -R
-			    printf '%b' '\e[3J' >"$TTY"
-			    echoti cnorm >"$TTY"
+					echoti civis >"$TTY"
+					printf '%b' '\e[H\e[2J' >"$TTY"
+					zle .reset-prompt
+					zle -R
+					printf '%b' '\e[3J' >"$TTY"
+					echoti cnorm >"$TTY"
 			}
-			
+
 			zle -N clear-screen-and-scrollback
 			bindkey '^L' clear-screen-and-scrollback
 		'';
@@ -83,12 +86,12 @@
 
 			{
 				name = "cattppuccin-zsh-syntax-highlighting";
-        src = pkgs.fetchFromGitHub {
-          owner = "catppuccin";
-          repo = "zsh-syntax-highlighting";
-          rev = "06d519c20798f0ebe275fc3a8101841faaeee8ea";
-          sha256 = "sha256-Q7KmwUd9fblprL55W0Sf4g7lRcemnhjh4/v+TacJSfo=";
-        };
+				src = pkgs.fetchFromGitHub {
+					owner = "catppuccin";
+					repo = "zsh-syntax-highlighting";
+					rev = "06d519c20798f0ebe275fc3a8101841faaeee8ea";
+					sha256 = "sha256-Q7KmwUd9fblprL55W0Sf4g7lRcemnhjh4/v+TacJSfo=";
+				};
 
 				file = "themes/catppuccin_mocha-zsh-syntax-highlighting.zsh";
 			}

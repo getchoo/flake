@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
 	imports = [
 		./git.nix
 		# ./mangohud
@@ -12,12 +10,15 @@
 	];
 
 	home.packages = with pkgs; [
+		alejandra
 		bat
 		clang
+		deadnix
 		exa
 		fd
 		lld
-		ripgrep	
+		ripgrep
+		statix
 		python311
 	];
 }

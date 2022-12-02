@@ -6,20 +6,31 @@
 		home-manager.inputs.nixpkgs.follows = "nixpkgs";
 	};
 
-	outputs = { self, nixpkgs, nixos-wsl, home-manager, ... }: {
+	outputs = {
+		self,
+		nixpkgs,
+		nixos-wsl,
+		home-manager,
+		...
+	}: {
 		nixosConfigurations.glados-wsl = nixpkgs.lib.nixosSystem {
 			system = "x86_64-linux";
 			modules = [
 				home-manager.nixosModules.home-manager
 				{
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+					home-manager.useGlobalPkgs = true;
+					home-manager.useUserPackages = true;
 				}
 
 				./hosts/glados-wsl
-				
+
 				nixos-wsl.nixosModules.wsl
-				({ config, lib, pkgs, ... }: {
+				({
+					config,
+					lib,
+					pkgs,
+					...
+				}: {
 					environment.noXlibs = lib.mkForce false;
 					wsl = {
 						enable = true;

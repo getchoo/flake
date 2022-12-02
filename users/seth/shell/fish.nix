@@ -1,6 +1,9 @@
-{ config, lib, pkgs, ...}:
-
 {
+	config,
+	lib,
+	pkgs,
+	...
+}: {
 	programs.fish = {
 		enable = true;
 		plugins = [
@@ -28,7 +31,6 @@
 					sha256 = "sha256-/JIKRRHjaO2jC0NNPBiSaLe8pR2ASv24/LFKOJoZPjk=";
 				};
 			}
-
 		];
 	};
 }

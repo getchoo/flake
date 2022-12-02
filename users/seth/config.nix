@@ -1,10 +1,8 @@
-{ config, ... }:
-
-{
+{config, ...}: {
 	imports = [
 		./options.nix
 		./programs
-		./shell	      
+		./shell
 	];
 
 	options.seth = {

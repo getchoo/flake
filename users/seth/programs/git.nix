@@ -1,11 +1,9 @@
-{ config, ...}:
-
-{
+{config, ...}: {
 	programs.git = {
 		enable = true;
 		extraConfig = {
-			init = { defaultBranch = "main"; };
-			safe = { directory = "/etc/nixos"; };
+			init = {defaultBranch = "main";};
+			safe = {directory = "/etc/nixos";};
 		};
 		signing = {
 			key = "D31BD0D494BBEE86";
