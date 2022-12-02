@@ -15,13 +15,4 @@ with config; with lib; with pkgs;
 				initialHashedPassword = mkDefault "!";
 			};
 
-			seth = {
-				extraGroups = [ "wheel" ];
-				isNormalUser = true;
-				hashedPassword = "idontknowhowtosecurethis";
-				shell = fish;
-			};
-
-		};
-	};
 }

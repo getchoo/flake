@@ -15,6 +15,7 @@
 			rust-analyzer
 			rustfmt
 			stylua
+			sumneko-lua-language-server
 		];
 		plugins = with pkgs.vimPlugins; [
 			lualine-nvim
@@ -25,7 +26,7 @@
 			nvim-lspconfig
 			null-ls-nvim
 			plenary-nvim
-			nvim-treesitter
+			(nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
 			nvim-cmp
 			cmp-nvim-lsp
 			cmp-buffer
@@ -43,7 +44,7 @@
 	};
 
 	xdg.configFile."nvim" = {
-		source = ./nvim;
+		source = ./lua;
 		recursive = true;
 	};
 }

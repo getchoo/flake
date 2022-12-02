@@ -9,7 +9,7 @@
 	#   opengl.enable = true;
 	# };
 
-	networking.hostName = "glados";
+	networking.hostName = "glados-wsl";
 
 	programs = {
 		gnupg = {

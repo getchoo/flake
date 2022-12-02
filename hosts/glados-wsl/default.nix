@@ -1,8 +1,11 @@
-{ pkgs, config, modulesPath, ... }:
+{ config, modulesPath, pkgs, ...}:
 
 {
 	imports = [
-		"${modulesPath}/profiles/minimal.nix"
+		(modulesPath + "/profiles/minimal.nix")
+		./config.nix
+		./packages.nix
+		../../users/seth
 	];
 
 	# enable non-free packages

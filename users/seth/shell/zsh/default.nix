@@ -3,9 +3,23 @@
 {
 	programs.zsh = {
 		enable = true;
-		dotDir = "${config.xdg.configHome}/zsh";
-		initExtra = ''
+    enableAutosuggestions = true;
+    enableSyntaxHighlighting = true;
+    enableVteIntegration = true;
+    completionInit = ''
+      autoload -Uz bashcompinit compinit
 			local zdump="${config.xdg.cacheHome}/zsh/zdump"
+			bashcompinit
+			compinit -d "$zdump"
+			if [[ ! "$zdump.zwc" -nt "$zdump" ]]
+			then
+				zcompile "$zdump"
+			fi
+			unset zdump
+    '';
+    defaultKeymap = "emacs";
+		dotDir = ".config/zsh";
+		initExtra = ''
 			zmodload zsh/zutil
 			zmodload zsh/complist
 			zstyle ":completion::*" group-name ""
@@ -14,20 +28,11 @@
 			zstyle ":completion::*" use-cache "true"
 			zstyle ":completion::*" cache-path "$zdump"
 
-			bashcompinit
-			compinit -d "$zdump"
-			if [[ ! "$zdump.zwc" -nt "$zdump" ]]
-			then
-				zcompile "$zdump"
-			fi
-			unset zdump
-
 			unsetopt beep
 			unsetopt hist_beep
 			unsetopt ignore_braces
 			unsetopt list_beep
 			setopt always_to_end
-			setopt emacs
 			setopt inc_append_history
 			setopt prompt_subst
 			setopt share_history
@@ -71,20 +76,26 @@
 			}
 
 			{
-				name = "cattppuccin_theme-zsh-syntax-highlighting";
-				src = ./zsh-files;
-				file = "catppuccin_frappe-zsh-syntax-highlighting.zsh";
-			}
-
-			{
 				name = "zsh-syntax-highlighting";
 				src = pkgs.zsh-syntax-highlighting;
 				file = "share/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh";
 			}
 
 			{
+				name = "cattppuccin-zsh-syntax-highlighting";
+        src = pkgs.fetchFromGitHub {
+          owner = "catppuccin";
+          repo = "zsh-syntax-highlighting";
+          rev = "06d519c20798f0ebe275fc3a8101841faaeee8ea";
+          sha256 = "sha256-Q7KmwUd9fblprL55W0Sf4g7lRcemnhjh4/v+TacJSfo=";
+        };
+
+				file = "themes/catppuccin_mocha-zsh-syntax-highlighting.zsh";
+			}
+
+			{
 				name = "powerlevel10k-config";
-				src = ./zsh-files;
+				src = ./files;
 				file = ".p10k.zsh";
 			}
 		];
