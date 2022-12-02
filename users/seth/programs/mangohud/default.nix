@@ -1,6 +1,8 @@
-{ config, pkgs, ...}:
-
 {
+	config,
+	pkgs,
+	...
+}: {
 	home.packages = [
 		pkgs.mangohud
 	];

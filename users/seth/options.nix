@@ -1,7 +1,9 @@
-{ config, lib, ... }:
-
-with lib;
 {
+	config,
+	lib,
+	...
+}:
+with lib; {
 	options.seth = with types; {
 		devel-packages = mkOption {
 			type = bool;

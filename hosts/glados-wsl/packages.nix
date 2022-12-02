@@ -1,6 +1,8 @@
-{ confg, pkgs, ... }:
-
 {
+	confg,
+	pkgs,
+	...
+}: {
 	environment.systemPackages = with pkgs; [
 		git
 		neofetch

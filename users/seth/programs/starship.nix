@@ -1,10 +1,8 @@
-{ config, ...}:
-
-{
+{config, ...}: {
 	programs.starship = {
 		enable = false;
 		settings = {
-			format = """
+			format = "" "
 				$username\
 				$hostname\
 				$directory\
@@ -25,7 +23,7 @@
 				$container\
 				$shell\
 				$character
-			""";
+			" "";
 		};
 	};
 }

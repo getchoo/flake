@@ -1,6 +1,4 @@
-{ config, ...}:
-
-{
+{config, ...}: {
 	config.programs.npm = {
 		enable = true;
 		npmrc = ''

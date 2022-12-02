@@ -1,7 +1,10 @@
-{ lib, config, ... }:
-
-with builtins; with lib;
 {
+	lib,
+	config,
+	...
+}:
+with builtins;
+with lib; {
 	security.sudo = {
 		configFile = ''
 			Defaults	env_reset
@@ -10,8 +13,15 @@ with builtins; with lib;
 		'';
 		execWheelOnly = true;
 		extraRules = [
-			{ users = [ "root" ]; groups = [ "root" ]; commands = [ "ALL" ]; }
-			{ users = [ "seth" ]; commands = [ "ALL" ]; }
+			{
+				users = ["root"];
+				groups = ["root"];
+				commands = ["ALL"];
+			}
+			{
+				users = ["seth"];
+				commands = ["ALL"];
+			}
 		];
 	};
 }
