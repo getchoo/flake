@@ -1,0 +1,92 @@
+{ config, lib, pkgs, ... }:
+
+{
+	programs.zsh = {
+		enable = true;
+		dotDir = "${config.xdg.configHome}/zsh";
+		initExtra = ''
+			local zdump="${config.xdg.cacheHome}/zsh/zdump"
+			zmodload zsh/zutil
+			zmodload zsh/complist
+			zstyle ":completion::*" group-name ""
+			zstyle ":completion:*" menu "select"
+			zstyle ":completion:*" squeeze-slashes "true"
+			zstyle ":completion::*" use-cache "true"
+			zstyle ":completion::*" cache-path "$zdump"
+
+			bashcompinit
+			compinit -d "$zdump"
+			if [[ ! "$zdump.zwc" -nt "$zdump" ]]
+			then
+				zcompile "$zdump"
+			fi
+			unset zdump
+
+			unsetopt beep
+			unsetopt hist_beep
+			unsetopt ignore_braces
+			unsetopt list_beep
+			setopt always_to_end
+			setopt emacs
+			setopt inc_append_history
+			setopt prompt_subst
+			setopt share_history
+
+			# clear backbuffer with ctrl-l
+			function clear-screen-and-scrollback() {
+			    echoti civis >"$TTY"
+			    printf '%b' '\e[H\e[2J' >"$TTY"
+			    zle .reset-prompt
+			    zle -R
+			    printf '%b' '\e[3J' >"$TTY"
+			    echoti cnorm >"$TTY"
+			}
+			
+			zle -N clear-screen-and-scrollback
+			bindkey '^L' clear-screen-and-scrollback
+		'';
+		history = {
+			expireDuplicatesFirst = true;
+			path = "${config.xdg.stateHome}/zsh/zsh_history";
+			save = 1000;
+			size = 100;
+		};
+		plugins = [
+			{
+				name = "powerlevel10k";
+				src = pkgs.zsh-powerlevel10k;
+				file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+			}
+
+			{
+				name = "zsh-completions";
+				src = pkgs.zsh-completions;
+				file = "share/zsh-completions/zsh-completions.plugin.zsh";
+			}
+
+			{
+				name = "zsh-autosuggestions";
+				src = pkgs.zsh-autosuggestions;
+				file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
+			}
+
+			{
+				name = "cattppuccin_theme-zsh-syntax-highlighting";
+				src = ./zsh-files;
+				file = "catppuccin_frappe-zsh-syntax-highlighting.zsh";
+			}
+
+			{
+				name = "zsh-syntax-highlighting";
+				src = pkgs.zsh-syntax-highlighting;
+				file = "share/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh";
+			}
+
+			{
+				name = "powerlevel10k-config";
+				src = ./zsh-files;
+				file = ".p10k.zsh";
+			}
+		];
+	};
+}
