@@ -25,7 +25,7 @@
 						enable = true;
 						defaultUser = "seth";
 						nativeSystemd = true;
-						wslConf.network.hostname = "glados";
+						wslConf.network.hostname = "glados-wsl";
 						startMenuLaunchers = false;
 						interop.includePath = false;
 					};
