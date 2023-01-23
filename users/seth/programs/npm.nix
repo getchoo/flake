@@ -1,5 +1,5 @@
 {config, ...}: {
-	config.programs.npm = {
+	programs.npm = {
 		enable = true;
 		npmrc = ''
 			prefix=${config.xdg.dataHome}/npm

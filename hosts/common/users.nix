@@ -3,20 +3,17 @@
 	lib,
 	pkgs,
 	...
-}:
-with config;
-with lib;
-with pkgs; {
+}: {
 	users = {
-		defaultUserShell = bash;
+		defaultUserShell = pkgs.bash;
 		mutableUsers = false;
 
 		users = {
 			root = {
 				home = "/root";
-				uid = ids.uids.root;
+				uid = config.ids.uids.root;
 				group = "root";
-				initialHashedPassword = mkDefault "!";
+				initialHashedPassword = lib.mkDefault "!";
 			};
 		};
 	};

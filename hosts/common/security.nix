@@ -2,9 +2,7 @@
 	lib,
 	config,
 	...
-}:
-with builtins;
-with lib; {
+}: {
 	security.sudo = {
 		configFile = ''
 			Defaults	env_reset
