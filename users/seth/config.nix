@@ -1,4 +1,4 @@
-{config, ...}: {
+_: {
 	imports = [
 		./options.nix
 		./programs

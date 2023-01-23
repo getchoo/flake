@@ -1,8 +1,4 @@
-{
-	confg,
-	pkgs,
-	...
-}: {
+{pkgs, ...}: {
 	environment.systemPackages = with pkgs; [
 		git
 		gnupg1
