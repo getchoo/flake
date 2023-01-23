@@ -7,8 +7,8 @@
 		pkgs.mangohud
 	];
 
-	xdg.configFile."MangoHud" = {
-		source = ./MangoHud;
+	xdg.configFile.MangoHud = {
+		source = ./config;
 		recursive = true;
 	};
 }

@@ -20,5 +20,6 @@
 
 	home.shellAliases = {
 		ls = "exa --icons";
+		diff = "diff --color=auto";
 	};
 }

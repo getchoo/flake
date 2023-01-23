@@ -1,8 +1,4 @@
-{
-	config,
-	nix,
-	...
-}: {
+{config, ...}: {
 	programs.vim = {
 		enable = true;
 		settings = {

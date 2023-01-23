@@ -5,13 +5,6 @@
 }: {
 	programs.bash = {
 		enable = true;
-		bashrcExtra = ''
-			# drop into fish
-			if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z $BASH_EXECUTION_STRING ]]
-			then
-				exec fish
-			fi
-		'';
 		historyFile = "${config.xdg.stateHome}/bash/history";
 		historyFileSize = 1000;
 		historySize = 100;
