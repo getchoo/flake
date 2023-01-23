@@ -1,4 +1,6 @@
+--
 -- load custom file types
+--
 
 local filetypes = {
 	filename = {

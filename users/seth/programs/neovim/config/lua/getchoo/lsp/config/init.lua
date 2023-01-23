@@ -1,4 +1,7 @@
--- wrapper for all configs
+--
+-- load all lsp configs
+--
+
 local cmp = require("getchoo.lsp.config.cmp")
 local lsp_config = require("getchoo.lsp.config.lsp_config")
 local mason = require("getchoo.lsp.config.mason")

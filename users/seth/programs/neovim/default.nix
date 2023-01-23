@@ -8,7 +8,6 @@
 		enable = true;
 		extraPackages = with pkgs; [
 			alejandra
-			black
 			clang
 			codespell
 			deadnix
@@ -16,12 +15,13 @@
 			nodePackages.bash-language-server
 			nodePackages.prettier
 			nodePackages.pyright
-			python310Packages.flake8
+			pylint
 			rust-analyzer
 			rustfmt
 			statix
 			stylua
 			sumneko-lua-language-server
+			yapf
 		];
 		plugins = with pkgs.vimPlugins; [
 			lualine-nvim
@@ -49,8 +49,8 @@
 		];
 	};
 
-	xdg.configFile."nvim" = {
-		source = ./lua;
+	xdg.configFile.nvim = {
+		source = ./config;
 		recursive = true;
 	};
 }

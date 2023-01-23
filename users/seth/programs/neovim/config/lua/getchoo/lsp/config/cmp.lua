@@ -1,3 +1,7 @@
+--
+-- config for nvim-cmp
+--
+
 local cmp = require("cmp")
 local mapping = cmp.mapping
 local luasnip = require("luasnip")

@@ -1,3 +1,7 @@
+--
+-- setup lsp_config
+--
+
 local cmp = require("getchoo.lsp.config.cmp")
 local sources = require("getchoo.lsp.config.sources")
 

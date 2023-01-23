@@ -1,4 +1,7 @@
+--
 -- config for mason tools
+--
+
 local sources = require("getchoo.lsp.config.sources")
 
 local M = {}
