@@ -17,6 +17,7 @@
 		eclint
 		exa
 		fd
+		gh
 		lld
 		ripgrep
 		statix
