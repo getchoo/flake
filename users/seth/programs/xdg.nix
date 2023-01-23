@@ -1,4 +1,4 @@
-{config, ...}: {
+_: {
 	xdg = {
 		enable = true;
 	};

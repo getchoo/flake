@@ -1,4 +1,4 @@
-{config, ...}: {
+_: {
 	programs.starship = {
 		enable = false;
 		settings = {

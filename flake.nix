@@ -7,7 +7,6 @@
 	};
 
 	outputs = {
-		self,
 		nixpkgs,
 		nixos-wsl,
 		home-manager,
@@ -25,12 +24,7 @@
 				./hosts/glados-wsl
 
 				nixos-wsl.nixosModules.wsl
-				({
-					config,
-					lib,
-					pkgs,
-					...
-				}: {
+				({lib, ...}: {
 					environment.noXlibs = lib.mkForce false;
 					wsl = {
 						enable = true;

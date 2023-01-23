@@ -1,8 +1,4 @@
-{
-	lib,
-	config,
-	...
-}: {
+_: {
 	security.sudo = {
 		configFile = ''
 			Defaults	env_reset
