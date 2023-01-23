@@ -1,9 +1,12 @@
+--
+-- config for null_ls
+--
+
 local sources = require("getchoo.lsp.config.sources")
 
 local M = {}
 
 -- only use null-ls for formatting
-
 -- for neovim >= 8
 local lsp_formatting = function(bufnr)
 	vim.lsp.buf.format({
@@ -22,8 +25,9 @@ local formatting_on_attach = function(client, bufnr)
 			group = augroup,
 			buffer = bufnr,
 			callback = function()
-				-- local params = require("vim.lsp.util").make_formatting_params({})
-				-- client.request("textDocument/formatting", params, nil, bufnr)
+				-- for neovim < 8
+				---- local params = require("vim.lsp.util").make_formatting_params({})
+				---- client.request("textDocument/formatting", params, nil, bufnr)
 				lsp_formatting(bufnr) -- neovim >= 8
 			end,
 		})

@@ -1,6 +1,7 @@
 --
 -- setup lsp environment
 --
+
 require("getchoo.lsp.server")
 require("getchoo.lsp.keymap")
 local config = require("getchoo.lsp.config")
