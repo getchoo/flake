@@ -1,5 +1,5 @@
 {config, ...}: let
-	value = config.sys.wsl.enable;
+	value = !config.sys.wsl.enable;
 in {
 	services = {
 		journald.extraConfig = ''
