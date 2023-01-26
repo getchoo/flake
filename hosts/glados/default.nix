@@ -1,5 +1,4 @@
 {
-	config,
 	modulesPath,
 	pkgs,
 	...
@@ -12,10 +11,9 @@
 		./boot.nix
 		./network.nix
 		./packages.nix
+		./services.nix
 		../../users/seth
 	];
-
-	system.gui-stuff = true;
 
 	# enable non-free packages
 	nixpkgs.config.allowUnfree = true;
@@ -25,4 +23,5 @@
 	nix.settings.experimental-features = ["nix-command" "flakes"];
 
 	system.stateVersion = "23.05";
+	sys.gui.enable = true;
 }

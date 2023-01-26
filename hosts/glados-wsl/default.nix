@@ -1,22 +1,23 @@
 {
-	config,
-	modulesPath,
-	pkgs,
-	...
+  config,
+  modulesPath,
+  pkgs,
+  ...
 }: {
-	imports = [
-		(modulesPath + "/profiles/minimal.nix")
-		../common
-		./packages.nix
-		../../users/seth
-	];
+  imports = [
+    (modulesPath + "/profiles/minimal.nix")
+    ../common
+    ../../users/seth
+  ];
 
-	# enable non-free packages
-	nixpkgs.config.allowUnfree = true;
+  sys.wsl.enable = true;
 
-	# Enable nix flakes
-	nix.package = pkgs.nixFlakes;
-	nix.settings.experimental-features = ["nix-command" "flakes"];
+  # enable non-free packages
+  nixpkgs.config.allowUnfree = true;
 
-	system.stateVersion = "22.11";
+  # Enable nix flakes
+  nix.package = pkgs.nixFlakes;
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  system.stateVersion = "22.11";
 }

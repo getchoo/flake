@@ -11,7 +11,10 @@ local M = {
 	null_ls = {
 		diagnostics.alex,
 		diagnostics.codespell,
+		diagnostics.deadnix,
 		diagnostics.pylint,
+		diagnostics.statix,
+		formatting.alejandra,
 		formatting.codespell,
 		formatting.prettier,
 		formatting.rustfmt,

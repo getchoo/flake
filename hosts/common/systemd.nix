@@ -1,10 +1,12 @@
-{config, ...}: {
+{config, ...}: let
+	value = config.sys.wsl.enable;
+in {
 	services = {
 		journald.extraConfig = ''
 			MaxRetentionSec=1w
 		'';
 		resolved = {
-			enable = true;
+			enable = value;
 			dnssec = "allow-downgrade";
 			extraConfig = ''
 				[Resolve]

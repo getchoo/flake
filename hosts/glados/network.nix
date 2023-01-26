@@ -1,4 +1,4 @@
-{config, ...}: {
+_: {
 	networking = {
 		hostId = "replace_me";
 		networkmanager = {

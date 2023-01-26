@@ -1,8 +1,4 @@
-{
-	nixpkgs,
-	home-manager,
-	...
-}: {
+{home-manager, ...}: {
 	mkHost = {
 		name,
 		modules,

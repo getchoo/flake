@@ -1,4 +1,4 @@
-{config, ...}: {
+_: {
 	services = {
 		dbus.enable = true;
 		pipewire = {
@@ -9,4 +9,5 @@
 			pulse.enable = true;
 		};
 	};
+	hardware.pulseaudio.enable = false;
 }

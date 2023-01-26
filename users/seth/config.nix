@@ -4,9 +4,5 @@ _: {
 		./programs
 		./shell
 	];
-
-	options.seth = {
-		devel-packages = false;
-		gui-stuff = false;
-	};
+	seth.devel.enable = true;
 }

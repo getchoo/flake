@@ -1,14 +1,9 @@
 {lib, ...}: {
 	options.seth = with lib.types; {
-		devel-packages = lib.mkOption {
-			type = bool;
+		devel.enable = lib.mkOption {
+			type = types.bool;
 			default = false;
 			description = "install development packages for neovim lsp";
-		};
-		gui-stuff = lib.mkOption {
-			type = bool;
-			default = false;
-			description = "install gui-related packages";
 		};
 	};
 }

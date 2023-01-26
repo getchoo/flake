@@ -1,14 +1,14 @@
 {lib, ...}: {
-	options.system = with lib.types; {
-		devel-packages = lib.mkOption {
-			type = bool;
-			default = false;
-			description = "install development packages for neovim lsp";
-		};
-		gui-stuff = lib.mkOption {
-			type = bool;
+	options.sys = with lib; {
+		gui.enable = mkOption {
+			type = types.bool;
 			default = false;
 			description = "install gui-related packages";
+		};
+		wsl.enable = mkOption {
+			type = types.bool;
+			default = false;
+			description = "signifies that the flake is being installed in wsl";
 		};
 	};
 }

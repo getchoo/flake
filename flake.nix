@@ -9,7 +9,6 @@
 	};
 
 	outputs = inputs @ {
-		self,
 		nixpkgs,
 		nixpkgsUnstable,
 		lanzaboote,

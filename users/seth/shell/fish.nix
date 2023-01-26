@@ -1,9 +1,4 @@
-{
-	config,
-	lib,
-	pkgs,
-	...
-}: {
+{pkgs, ...}: {
 	programs.fish = {
 		enable = true;
 		plugins = [

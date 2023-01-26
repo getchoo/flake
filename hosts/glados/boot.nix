@@ -19,7 +19,5 @@
 			enable = true;
 			pkiBundle = "/etc/secureboot";
 		};
-
-		supportedFilesystems = ["zfs"];
 	};
 }
