@@ -20,15 +20,7 @@ local M = {
 		formatting.rustfmt,
 		formatting.stylua,
 		formatting.yapf,
-	},
-	mason = {
-		"alex",
-		"codespell",
-		"prettier",
-		"pylint",
-		"stylua",
-		"yapf",
-	},
+	}
 }
 
 return M
