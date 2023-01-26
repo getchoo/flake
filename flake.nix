@@ -12,26 +12,28 @@
 		self,
 		nixpkgs,
 		nixpkgsUnstable,
+    lanzaboote,
+    nixos-wsl,
 		...
 	}: let
-		util = import ./util;
+		util = import ./util/host.nix inputs;
 	in {
 		nixosConfigurations = {
-			glados = util.host.mkHost {
+			glados = util.mkHost {
 				name = "glados";
 				modules = [
-					self.lanzaboote.nixosModules.lanzaboote
+					lanzaboote.nixosModules.lanzaboote
 
 					./hosts/glados
 				];
 				pkgs = nixpkgsUnstable;
 			};
-			glados-wsl = util.host.mkHost {
+			glados-wsl = util.mkHost {
 				name = "glados-wsl";
 				modules = [
 					./hosts/glados-wsl
 
-					self.nixos-wsl.nixosModules.wsl
+					nixos-wsl.nixosModules.wsl
 					({lib, ...}: {
 						environment.noXlibs = lib.mkForce false;
 						wsl = {

@@ -1,20 +1,20 @@
-{lib, ...}:
-with lib; {
+{nixpkgs, home-manager, ...}:
+
+{
 	mkHost = {
 		name,
 		modules,
 		system ? "x86_64-linux",
 		pkgs,
 	}:
-		nixosSystem {
+		pkgs.lib.nixosSystem {
 			inherit system;
 			modules =
 				[
 					../hosts/common
 
 					{
-						nixpkgs.pkgs = pkgs;
-						networking.hostName = mkDefault name;
+						networking.hostName = nixpkgs.lib.mkDefault name;
 					}
 
 					home-manager.nixosModules.home-manager
