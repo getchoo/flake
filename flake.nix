@@ -12,8 +12,8 @@
 		self,
 		nixpkgs,
 		nixpkgsUnstable,
-    lanzaboote,
-    nixos-wsl,
+		lanzaboote,
+		nixos-wsl,
 		...
 	}: let
 		util = import ./util/host.nix inputs;

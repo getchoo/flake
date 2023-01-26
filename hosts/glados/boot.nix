@@ -12,12 +12,9 @@
 		kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 		kernelParams = ["nohibernate"];
 
-		loader = {
-			systemd-boot = {
-				enable = lib.mkForce false;
-			};
-			efi.canTouchEfiVariables = true;
-		};
+		bootspec.enable = true;
+		loader.systemd-boot.enable = lib.mkForce false;
+
 		lanzaboote = {
 			enable = true;
 			pkiBundle = "/etc/secureboot";

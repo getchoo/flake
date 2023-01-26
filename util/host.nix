@@ -1,28 +1,31 @@
-{nixpkgs, home-manager, ...}:
-
 {
+	nixpkgs,
+	home-manager,
+	...
+}: {
 	mkHost = {
 		name,
 		modules,
 		system ? "x86_64-linux",
 		pkgs,
 	}:
-		pkgs.lib.nixosSystem {
-			inherit system;
-			modules =
-				[
-					../hosts/common
+		with pkgs.lib;
+			nixosSystem {
+				inherit system;
+				modules =
+					[
+						../hosts/common
 
-					{
-						networking.hostName = nixpkgs.lib.mkDefault name;
-					}
+						{
+							networking.hostName = mkDefault name;
+						}
 
-					home-manager.nixosModules.home-manager
-					{
-						home-manager.useGlobalPkgs = true;
-						home-manager.useUserPackages = true;
-					}
-				]
-				++ modules;
-		};
+						home-manager.nixosModules.home-manager
+						{
+							home-manager.useGlobalPkgs = true;
+							home-manager.useUserPackages = true;
+						}
+					]
+					++ modules;
+			};
 }

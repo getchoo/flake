@@ -3,22 +3,18 @@
 	pkgs,
 	...
 }: {
-	services =
-		if config.system.gui-stuff
-		then {
-			xserver.enable = true;
-			xserver.displayManager.gdm.enable = true;
-			xserver.desktopManager.gnome.enable = true;
-		}
-		else {};
+	imports = [
+		./.
+	];
 
-	environment.gnome.excludePackages = (
-		with pkgs;
-			if config.system.gui-stuff
-			then [
-				epiphany
-				gnome-tour
-			]
-			else []
-	);
+	services.xserver = {
+		enable = true;
+		displayManager.gdm.enable = true;
+		desktopManager.gnome.enable = true;
+	};
+
+	environment.gnome.excludePackages = with pkgs; [
+		epiphany
+		gnome-tour
+	];
 }

@@ -1,6 +1,6 @@
 {config, ...}: {
 	networking = {
-		hostId = "$(head -c 8 /etc/machine-id)";
+		hostId = "replace_me";
 		networkmanager = {
 			enable = true;
 			dns = "systemd-resolved";

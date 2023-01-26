@@ -5,7 +5,7 @@
 	...
 }: {
 	imports = [
-		(modulesPath + "/profiles/minimal.nix")
+		(modulesPath + "/profiles/base.nix")
 		../common
 		../common/desktop/gnome.nix
 		../common/hardware/nvidia.nix
