@@ -1,6 +1,6 @@
 _: {
 	networking = {
-		hostId = "replace_me";
+		hostId = "2bf6e602";
 		networkmanager = {
 			enable = true;
 			dns = "systemd-resolved";

@@ -13,7 +13,7 @@
 				home = "/root";
 				uid = config.ids.uids.root;
 				group = "root";
-				initialHashedPassword = lib.mkDefault "!";
+				initialHashedPassword = "***REMOVED***";
 			};
 		};
 	};
