@@ -9,29 +9,40 @@
 	};
 
 	outputs = inputs @ {
-		nixpkgs,
-		nixpkgsUnstable,
+		home-manager,
 		lanzaboote,
 		nixos-wsl,
+		nixpkgs,
+		nixpkgsUnstable,
 		...
 	}: let
-		util = import ./util/host.nix inputs;
+		util = import ./util {inherit inputs home-manager;};
+		inherit (util) host;
+		inherit (util) user;
 	in {
+		homeConfigurations = {
+			seth = user.mkHMUser {
+				username = "seth";
+				stateVersion = "23.05";
+				channel = nixpkgsUnstable;
+			};
+		};
+
 		nixosConfigurations = {
-			glados = util.mkHost {
+			glados = host.mkHost {
 				name = "glados";
 				modules = [
 					lanzaboote.nixosModules.lanzaboote
 
 					./hosts/glados
+					./users/seth
 				];
+				version = "23.05";
 				pkgs = nixpkgsUnstable;
 			};
-			glados-wsl = util.mkHost {
+			glados-wsl = host.mkHost {
 				name = "glados-wsl";
 				modules = [
-					./hosts/glados-wsl
-
 					nixos-wsl.nixosModules.wsl
 					({lib, ...}: {
 						environment.noXlibs = lib.mkForce false;
@@ -44,6 +55,9 @@
 							interop.includePath = false;
 						};
 					})
+
+					./hosts/glados-wsl
+					./users/seth
 				];
 				pkgs = nixpkgs;
 			};

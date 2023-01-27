@@ -1,20 +1,24 @@
 {
 	config,
 	pkgs,
+	home-manager,
 	...
 }: {
-	config.users.users.seth = {
+	users.users.seth = {
 		extraGroups = ["wheel"];
 		isNormalUser = true;
 		hashedPassword = "***REMOVED***";
 		shell = pkgs.zsh;
 	};
 
-	config.home-manager.users.seth = {
+	home-manager.users.seth = {
 		imports = [
-			./config.nix
+			./home.nix
 		];
 
 		home.stateVersion = config.system.stateVersion;
+		nixpkgs.config.allowUnfree = true;
+		programs.home-manager.enable = true;
+		systemd.user.startServices = true;
 	};
 }

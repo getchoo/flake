@@ -4,5 +4,6 @@ _: {
 		./programs
 		./shell
 	];
+
 	seth.devel.enable = true;
 }
