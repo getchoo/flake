@@ -2,8 +2,6 @@
 -- setup plugins
 --
 
-require("getchoo.plugins")
-
 local M = {}
 
 M.bufferline = {
@@ -12,6 +10,22 @@ M.bufferline = {
 	icons = true,
 	maximum_padding = 2,
 	semantic_letters = true,
+}
+
+M.catppuccin = {
+	flavour = "mocha", -- mocha, macchiato, frappe, latte
+	integrations = {
+		barbar = true,
+		gitsigns = true,
+		lightspeed = true,
+		cmp = true,
+		nvimtree = true,
+		treesitter_context = true,
+		treesitter = true,
+		telescope = true,
+		lsp_trouble = true,
+	},
+	no_italic = true,
 }
 
 M.lualine = {
@@ -24,6 +38,7 @@ M.lualine = {
 M.tree = {}
 
 require("bufferline").setup(M.bufferline)
+require("catppuccin").setup(M.catppuccin)
 require("lualine").setup(M.lualine)
 require("nvim-tree").setup(M.tree)
 

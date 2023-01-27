@@ -5,7 +5,7 @@
 local cmd = vim.cmd
 local opt = vim.opt
 
-vim.g.use_lsp_plugins = false;
+vim.g.use_lsp_plugins = true;
 
 require("getchoo")
 
@@ -20,3 +20,4 @@ opt.wrap = false
 opt.syntax = "on"
 cmd("filetype plugin indent on")
 opt.termguicolors = true
+vim.api.nvim_command("colorscheme catppuccin")
