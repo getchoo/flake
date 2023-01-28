@@ -12,6 +12,12 @@
 		if desktop == "gnome"
 		then {
 			"org/gnome/shell" = {
+				disable-user-extensions = false;
+				enabled-extensions = [
+					"appindicatorsupport@rgcjonas.gmail.com"
+					"appindicatorsupport@rgcjonas.gmail.com"
+					"caffeine@patapon.info"
+				];
 				favorite-apps = [
 					"firefox.desktop"
 					"org.gnome.Nautilus.desktop"
@@ -26,15 +32,6 @@
 			"org/gnome/desktop/wm/keybindings" = {
 				switch-windows = "['<Alt>Tab']";
 				switch-windows-backward = "['<Shift><Alt>Tab']";
-			};
-
-			"org/gnome/shell" = {
-				disable-user-extensions = false;
-				enabled-extensions = [
-					"appindicatorsupport@rgcjonas.gmail.com"
-					"appindicatorsupport@rgcjonas.gmail.com"
-					"caffeine@patapon.info"
-				];
 			};
 		}
 		else {};

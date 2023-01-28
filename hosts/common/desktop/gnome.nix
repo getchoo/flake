@@ -18,7 +18,10 @@
 					gnome-contacts
 					gnome-music
 				]);
-			systemPackages = with pkgs; [adw-gtk3 blackbox-terminal];
+			systemPackages = with pkgs; [
+				adw-gtk3
+				blackbox-terminal
+			];
 		}
 		else {};
 
@@ -31,6 +34,5 @@
 		else {};
 in {
 	environment = environmentConfig;
-
 	services.xserver = xserverConfig;
 }

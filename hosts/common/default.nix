@@ -1,6 +1,7 @@
 {config, ...}: {
 	imports = [
 		./documentation.nix
+		./desktop
 		./fonts.nix
 		./locale.nix
 		./options.nix
@@ -10,5 +11,5 @@
 		./users.nix
 	];
 
-	config.services.kmscon.enable = true;
+	# config.services.kmscon.enable = true;
 }
