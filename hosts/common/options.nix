@@ -10,5 +10,10 @@
 			default = false;
 			description = "signifies that the flake is being installed in wsl";
 		};
+		desktop = mkOption {
+			type = types.str;
+			default = "";
+			description = "set the desktop";
+		};
 	};
 }

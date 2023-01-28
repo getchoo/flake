@@ -9,5 +9,8 @@ _: {
 		./services.nix
 	];
 
-	sys.gui.enable = true;
+	sys = {
+		gui.enable = true;
+		desktop = "gnome";
+	};
 }

@@ -1,8 +1,10 @@
-{pkgs, ...}: {
-	imports = [
-		./.
-	];
-
+{
+	config,
+	pkgs,
+	...
+}:
+if config.sys.desktop == "plasma"
+then {
 	services.xserver = {
 		displayManager.sddm.enable = true;
 		desktopManager.plasma5 = {
@@ -17,3 +19,4 @@
 		};
 	};
 }
+else {}
