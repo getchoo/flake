@@ -28,13 +28,9 @@
 			"org/gnome/desktop/interface" = {
 				color-scheme = "prefer-dark";
 			};
-
-			"org/gnome/desktop/wm/keybindings" = {
-				switch-windows = "['<Alt>Tab']";
-				switch-windows-backward = "['<Shift><Alt>Tab']";
-			};
 		}
 		else {};
+
 	gtkConfig =
 		if desktop == "gnome"
 		then {
@@ -44,24 +40,10 @@
 				name = "adw-gtk3";
 				package = pkgs.adw-gtk3;
 			};
-
-			gtk3.extraConfig = {
-				Settings = ''
-					gtk-application-prefer-dark-theme=1
-				'';
-			};
-
-			gtk4.extraConfig = {
-				Settings = ''
-					gtk-application-prefer-dark-theme=1
-				'';
-			};
 		}
 		else {};
 in {
 	home.packages = homePackages;
-
 	dconf.settings = dconfSettings;
-
 	gtk = gtkConfig;
 }
