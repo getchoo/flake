@@ -27,11 +27,15 @@ in {
 	home.packages = with pkgs;
 		[
 			bat
+			discord
 			exa
 			fd
 			gh
 			lld
+			rclone
+			restic
 			ripgrep
+			steam
 			python311
 		]
 		++ develPackages;

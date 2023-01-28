@@ -5,5 +5,10 @@
 			default = false;
 			description = "install development packages for neovim lsp";
 		};
+		desktop = mkOption {
+			type = types.str;
+			default = "";
+			description = "enable settings for gnome";
+		};
 	};
 }

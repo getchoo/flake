@@ -1,5 +1,6 @@
 _: {
 	imports = [
+		./desktop/gnome.nix
 		./options.nix
 		./programs
 		./shell
