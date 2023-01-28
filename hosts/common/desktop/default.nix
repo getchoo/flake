@@ -1,5 +1,6 @@
 {lib, ...}: {
-	programs.xwayland.enable = true;
-	xdg.portal.enable = true;
 	environment.noXlibs = lib.mkForce false;
+	programs.xwayland.enable = true;
+	services.xserver.enable = true;
+	xdg.portal.enable = true;
 }

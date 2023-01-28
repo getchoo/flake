@@ -2,15 +2,24 @@
 	imports = [
 		./.
 	];
+	environment = {
+		gnome.excludePackages = with pkgs;
+			[
+				epiphany
+				gnome-tour
+			]
+			++ (with pkgs.gnome; [
+				cheese
+				geary
+				gnome-characters
+				gnome-contacts
+				gnome-music
+			]);
+		systemPackages = with pkgs; [adw-gtk3 blackbox-terminal];
+	};
 
 	services.xserver = {
-		enable = true;
 		displayManager.gdm.enable = true;
 		desktopManager.gnome.enable = true;
 	};
-
-	environment.gnome.excludePackages = with pkgs; [
-		epiphany
-		gnome-tour
-	];
 }
