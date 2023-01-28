@@ -3,6 +3,11 @@
 	pkgs,
 	...
 }: let
+	neovimConfig =
+		if config.seth.devel.enable
+		then "vim.g.use_lsp_plugins = true"
+		else "vim.g.use_lsp_plugins = false";
+
 	lspPackages =
 		if config.seth.devel.enable
 		then
@@ -29,7 +34,6 @@
 		if config.seth.devel.enable
 		then
 			with pkgs.vimPlugins; [
-				nvim-tree-lua
 				nvim-lspconfig
 				null-ls-nvim
 				plenary-nvim
@@ -43,7 +47,6 @@
 				luasnip
 				cmp_luasnip
 				trouble-nvim
-				nvim-web-devicons
 				telescope-nvim
 				gitsigns-nvim
 				editorconfig-nvim
@@ -55,10 +58,12 @@ in {
 		extraPackages = lspPackages;
 		plugins = with pkgs.vimPlugins;
 			[
-				lualine-nvim
-				catppuccin-nvim
 				barbar-nvim
+				catppuccin-nvim
 				lightspeed-nvim
+				lualine-nvim
+				nvim-tree-lua
+				nvim-web-devicons
 			]
 			++ lspPlugins;
 	};
@@ -66,5 +71,29 @@ in {
 	xdg.configFile.nvim = {
 		source = ./config;
 		recursive = true;
+	};
+	xdg.configFile."nvim/init.lua" = {
+		text =
+			neovimConfig
+			+ ''
+
+				local cmd = vim.cmd
+				local opt = vim.opt
+
+				require("getchoo")
+
+				-- text options
+				opt.tabstop = 2
+				opt.shiftwidth = 2
+				opt.expandtab = false
+				opt.smartindent = true
+				opt.wrap = false
+
+				-- appearance
+				opt.syntax = "on"
+				cmd("filetype plugin indent on")
+				opt.termguicolors = true
+				vim.api.nvim_command("colorscheme catppuccin")
+			'';
 	};
 }
