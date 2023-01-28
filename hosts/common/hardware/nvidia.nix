@@ -7,6 +7,8 @@
 		nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 		opengl = {
 			enable = true;
+			# make steam work
+			driSupport32Bit = true;
 			extraPackages = with pkgs; [
 				vaapiVdpau
 			];
