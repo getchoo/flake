@@ -6,18 +6,10 @@
 	environmentConfig =
 		if config.sys.desktop == "gnome"
 		then {
-			gnome.excludePackages = with pkgs;
-				[
-					epiphany
-					gnome-tour
-				]
-				++ (with pkgs.gnome; [
-					cheese
-					geary
-					gnome-characters
-					gnome-contacts
-					gnome-music
-				]);
+			gnome.excludePackages = with pkgs; [
+				epiphany
+				gnome-tour
+			];
 			systemPackages = with pkgs; [
 				adw-gtk3
 				blackbox-terminal

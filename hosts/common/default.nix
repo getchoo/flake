@@ -1,4 +1,4 @@
-{config, ...}: {
+_: {
 	imports = [
 		./documentation.nix
 		./desktop

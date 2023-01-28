@@ -1,9 +1,4 @@
-{config, ...}: let
-	sysDesktop = with builtins;
-		if config ? config.sys.desktop
-		then config.sys.desktop
-		else "";
-in {
+_: {
 	imports = [
 		./options.nix
 		./desktop
@@ -12,5 +7,5 @@ in {
 	];
 
 	seth.devel.enable = true;
-	seth.desktop = sysDesktop;
+	seth.desktop = "gnome";
 }
