@@ -8,7 +8,7 @@
 		desktop = mkOption {
 			type = types.str;
 			default = "";
-			description = "enable settings for gnome";
+			description = "choose a desktop configuration";
 		};
 	};
 }

@@ -14,6 +14,15 @@
 				statix
 			]
 		else [];
+
+	guiApps =
+		if config.seth.desktop != ""
+		then
+			with pkgs; [
+				discord
+				steam
+			]
+		else [];
 in {
 	imports = [
 		./git.nix
@@ -27,7 +36,6 @@ in {
 	home.packages = with pkgs;
 		[
 			bat
-			discord
 			exa
 			fd
 			gh
@@ -35,8 +43,8 @@ in {
 			rclone
 			restic
 			ripgrep
-			steam
 			python311
 		]
-		++ develPackages;
+		++ develPackages
+		++ guiApps;
 }
