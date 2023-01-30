@@ -33,8 +33,6 @@
 				name = "glados";
 				modules = [
 					lanzaboote.nixosModules.lanzaboote
-
-					./hosts/glados
 					./users/seth
 				];
 				version = "23.05";
@@ -55,8 +53,6 @@
 							interop.includePath = false;
 						};
 					})
-
-					./hosts/glados-wsl
 					./users/seth
 				];
 				pkgs = nixpkgs;

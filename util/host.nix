@@ -12,6 +12,7 @@
 				modules =
 					[
 						../hosts/common
+						../hosts/${name}
 
 						({pkgs, ...}: {
 							system.stateVersion = version;
