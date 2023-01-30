@@ -20,6 +20,8 @@
 		then
 			with pkgs; [
 				discord
+				element-desktop
+				spotify
 				steam
 			]
 		else [];
