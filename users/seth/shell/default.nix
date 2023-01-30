@@ -16,6 +16,11 @@
 
 	home.shellAliases = {
 		ls = "exa --icons";
+		la = "ls -a";
 		diff = "diff --color=auto";
+		g = "git";
+		gs = "g status";
+		nixsw = "sudo nixos-rebuild switch";
+		nixup = "nixsw --upgrade";
 	};
 }
