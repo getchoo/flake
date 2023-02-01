@@ -5,6 +5,7 @@
 		nixos-wsl.url = "git+https://github.com/nix-community/NixOS-WSL?ref=main";
 		home-manager.url = "github:nix-community/home-manager";
 		home-manager.inputs.nixpkgs.follows = "nixpkgs";
+		nixos-hardware.url = "github.com:NixOS/nixos-hardware";
 		lanzaboote.url = "github:nix-community/lanzaboote";
 	};
 
@@ -53,6 +54,7 @@
 							interop.includePath = false;
 						};
 					})
+					nixos-hardware.nixosModules.common-cpu-amd-pstate
 					./users/seth
 				];
 				pkgs = nixpkgs;
