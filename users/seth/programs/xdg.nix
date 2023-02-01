@@ -1,5 +1,5 @@
-_: {
+{config, ...}: {
 	xdg = {
-		enable = true;
+		enable = !config.seth.standalone;
 	};
 }

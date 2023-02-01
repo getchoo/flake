@@ -1,6 +1,6 @@
 {config, ...}: {
 	programs.bash = {
-		enable = true;
+		enable = !config.seth.standalone;
 		historyFile = "${config.xdg.stateHome}/bash/history";
 		historyFileSize = 1000;
 		historySize = 100;

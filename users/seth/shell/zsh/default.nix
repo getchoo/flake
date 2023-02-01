@@ -4,7 +4,7 @@
 	...
 }: {
 	programs.zsh = {
-		enable = true;
+		enable = !config.seth.standalone;
 		enableAutosuggestions = true;
 		enableSyntaxHighlighting = true;
 		enableVteIntegration = true;

@@ -10,5 +10,10 @@
 			default = "";
 			description = "choose a desktop configuration";
 		};
+		standalone = mkOption {
+			type = types.bool;
+			default = false;
+			description = "set to true if using home-manager standalone";
+		};
 	};
 }

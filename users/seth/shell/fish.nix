@@ -1,6 +1,10 @@
-{pkgs, ...}: {
+{
+	config,
+	pkgs,
+	...
+}: {
 	programs.fish = {
-		enable = true;
+		enable = !config.seth.standalone;
 		plugins = [
 			{
 				name = "autopair-fish";

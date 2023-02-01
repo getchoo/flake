@@ -4,11 +4,11 @@
 	...
 }: let
 	homePackages =
-		if config.seth.desktop != "null"
+		if config.seth.desktop != ""
 		then with pkgs; [mangohud]
 		else [];
 	mangohudConf =
-		if config.seth.desktop != "null"
+		if config.seth.desktop != ""
 		then {
 			source = ./config;
 			recursive = true;
@@ -17,5 +17,5 @@
 in {
 	home.packages = homePackages;
 
-	xdg.configFile.MangoHud = mangohudConf;
+	# xdg.configFile.MangoHud = mangohudConf;
 }

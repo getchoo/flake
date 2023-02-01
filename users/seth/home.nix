@@ -8,4 +8,5 @@ _: {
 
 	seth.devel.enable = true;
 	seth.desktop = "gnome";
+	# seth.standalone = true;
 }

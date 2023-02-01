@@ -11,6 +11,7 @@
 				clang
 				deadnix
 				eclint
+				lld
 				statix
 			]
 		else [];
@@ -24,6 +25,10 @@
 				spotify
 				steam
 			]
+		else [];
+	systemPackages =
+		if !config.seth.standalone
+		then with pkgs; [python311]
 		else [];
 in {
 	imports = [
@@ -41,12 +46,11 @@ in {
 			exa
 			fd
 			gh
-			lld
 			rclone
 			restic
 			ripgrep
-			python311
 		]
 		++ develPackages
-		++ guiApps;
+		++ guiApps
+		++ systemPackages;
 }
