@@ -210,6 +210,21 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1674550793,
+        "narHash": "sha256-ljJlIFQZwtBbzWqWTmmw2O5BFmQf1A/DspwMOQtGXHk=",
+        "ref": "refs/heads/master",
+        "rev": "b7ac0a56029e4f9e6743b9993037a5aaafd57103",
+        "revCount": 1132,
+        "type": "git",
+        "url": "https://github.com/nixos/nixos-hardware"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://github.com/nixos/nixos-hardware"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat_4",
@@ -374,6 +389,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
+        "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",
         "nixpkgsUnstable": "nixpkgsUnstable"

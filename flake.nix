@@ -5,13 +5,14 @@
 		nixos-wsl.url = "git+https://github.com/nix-community/NixOS-WSL?ref=main";
 		home-manager.url = "github:nix-community/home-manager";
 		home-manager.inputs.nixpkgs.follows = "nixpkgs";
-		nixos-hardware.url = "github.com:NixOS/nixos-hardware";
+		nixos-hardware.url = "git+https://github.com/nixos/nixos-hardware";
 		lanzaboote.url = "github:nix-community/lanzaboote";
 	};
 
 	outputs = inputs @ {
 		home-manager,
 		lanzaboote,
+		nixos-hardware,
 		nixos-wsl,
 		nixpkgs,
 		nixpkgsUnstable,
