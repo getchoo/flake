@@ -44,12 +44,6 @@
 					lanzaboote.nixosModules.lanzaboote
 
 					./users/seth
-					./users/seth/options.nix
-
-					{
-						seth.desktop = "gnome";
-						seth.devel.enable = true;
-					}
 				];
 
 				version = "23.05";
@@ -73,11 +67,6 @@
 					})
 
 					./users/seth
-					./users/seth/options.nix
-
-					{
-						seth.devel.enable = true;
-					}
 				];
 
 				pkgs = nixpkgs;
