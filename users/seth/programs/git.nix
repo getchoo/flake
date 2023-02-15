@@ -12,4 +12,7 @@
 		userEmail = "getchoo@tuta.io";
 		userName = "seth";
 	};
+	services.gpg-agent.extraConfig = ''
+		pinentry-program /run/current-system/sw/bin/pinentry
+	'';
 }

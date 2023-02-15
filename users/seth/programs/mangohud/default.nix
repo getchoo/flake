@@ -10,8 +10,7 @@
 	mangohudConf =
 		if config.seth.desktop != ""
 		then {
-			source = ./config;
-			recursive = true;
+			source = ./MangoHud.conf;
 		}
 		else {};
 in {

@@ -7,22 +7,30 @@
 		if config.sys.gui.enable
 		then with pkgs; [firefox]
 		else [];
+
+	pinentry =
+		if config.sys.desktop == "gnome"
+		then pkgs.pinentry-gnome
+		else pkgs.pinentry-curses;
 in {
 	environment.systemPackages = with pkgs;
 		[
 			git
 			neofetch
-			pinentry-curses
 			python310
 			vim
 		]
-		++ extraPkgs;
+		++ extraPkgs
+		++ [pinentry];
 
 	programs = {
 		gnupg = {
 			agent = {
 				enable = true;
-				pinentryFlavor = "curses";
+				pinentryFlavor =
+					if config.sys.desktop == "gnome"
+					then "gnome3"
+					else "curses";
 			};
 		};
 	};
