@@ -19,31 +19,47 @@
 		...
 	}: let
 		util = import ./util {inherit inputs home-manager;};
-		inherit (util) host;
-		inherit (util) user;
+		inherit (util) host user;
 	in {
 		homeConfigurations = {
 			seth = user.mkHMUser {
 				username = "seth";
 				stateVersion = "23.05";
 				channel = nixpkgsUnstable;
+				modules = [
+					({config, ...}: {
+						config.seth.standalone = true;
+					})
+				];
 			};
 		};
 
-		nixosConfigurations = {
-			glados = host.mkHost {
+		nixosConfigurations =
+			(host.mkHost {
 				name = "glados";
 				modules = [
+					nixos-hardware.nixosModules.common-cpu-amd-pstate
+					nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
+					nixos-hardware.nixosModules.common-pc-ssd
 					lanzaboote.nixosModules.lanzaboote
+
 					./users/seth
+					./users/seth/options.nix
+
+					{
+						seth.desktop = "gnome";
+						seth.devel.enable = true;
+					}
 				];
+
 				version = "23.05";
 				pkgs = nixpkgsUnstable;
-			};
-			glados-wsl = host.mkHost {
+			})
+			// (host.mkHost {
 				name = "glados-wsl";
 				modules = [
 					nixos-wsl.nixosModules.wsl
+
 					({lib, ...}: {
 						environment.noXlibs = lib.mkForce false;
 						wsl = {
@@ -55,11 +71,16 @@
 							interop.includePath = false;
 						};
 					})
-					nixos-hardware.nixosModules.common-cpu-amd-pstate
+
 					./users/seth
+					./users/seth/options.nix
+
+					{
+						seth.devel.enable = true;
+					}
 				];
+
 				pkgs = nixpkgs;
-			};
-		};
+			});
 	};
 }
