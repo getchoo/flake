@@ -1,6 +1,6 @@
-{config, ...}: {
+_: {
 	programs.git = {
-		enable = !config.seth.standalone;
+		enable = true;
 		extraConfig = {
 			init = {defaultBranch = "main";};
 			safe = {directory = "/etc/nixos";};

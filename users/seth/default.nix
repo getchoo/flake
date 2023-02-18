@@ -2,19 +2,27 @@
 	config,
 	pkgs,
 	home-manager,
+	desktop,
 	...
 }: {
 	users.users.seth = {
 		extraGroups = ["wheel"];
 		isNormalUser = true;
 		hashedPassword = "***REMOVED***";
-		shell = pkgs.zsh;
+		shell = pkgs.bash;
 	};
 
 	home-manager.users.seth = {
-		imports = [
-			./home.nix
-		];
+		imports =
+			[
+				./home.nix
+				./shell
+			]
+			++ (
+				if (desktop != "")
+				then [./desktop]
+				else []
+			);
 
 		home.stateVersion = config.system.stateVersion;
 		nixpkgs.config.allowUnfree = true;

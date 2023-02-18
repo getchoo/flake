@@ -42,11 +42,8 @@ require("catppuccin").setup(M.catppuccin)
 require("lualine").setup(M.lualine)
 require("nvim-tree").setup(M.tree)
 
-if vim.g.use_lsp_plugins then
-	require("getchoo.ftdetect")
-	require("getchoo.lsp")
-end
-
+require("getchoo.ftdetect")
+require("getchoo.lsp")
 require("getchoo.keymap")
 
 return M

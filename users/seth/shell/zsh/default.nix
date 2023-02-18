@@ -4,7 +4,7 @@
 	...
 }: {
 	programs.zsh = {
-		enable = !config.seth.standalone;
+		enable = false;
 		enableAutosuggestions = true;
 		enableSyntaxHighlighting = true;
 		enableVteIntegration = true;
@@ -22,6 +22,9 @@
 		defaultKeymap = "emacs";
 		dotDir = ".config/zsh";
 		initExtra = ''
+			autoload -Uz promptinit
+			prompt walters
+
 			zmodload zsh/zutil
 			zmodload zsh/complist
 			zstyle ":completion::*" group-name ""
@@ -35,7 +38,6 @@
 			unsetopt ignore_braces
 			unsetopt list_beep
 			setopt always_to_end
-			setopt inc_append_history
 			setopt prompt_subst
 			setopt share_history
 
@@ -59,28 +61,16 @@
 			size = 100;
 		};
 		plugins = [
-			{
-				name = "powerlevel10k";
-				src = pkgs.zsh-powerlevel10k;
-				file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-			}
+			# {
+			# 	name = "powerlevel10k";
+			# 	src = pkgs.zsh-powerlevel10k;
+			# 	file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
+			# }
 
 			{
 				name = "zsh-completions";
 				src = pkgs.zsh-completions;
 				file = "share/zsh-completions/zsh-completions.plugin.zsh";
-			}
-
-			{
-				name = "zsh-autosuggestions";
-				src = pkgs.zsh-autosuggestions;
-				file = "share/zsh-autosuggestions/zsh-autosuggestions.zsh";
-			}
-
-			{
-				name = "zsh-syntax-highlighting";
-				src = pkgs.zsh-syntax-highlighting;
-				file = "share/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh";
 			}
 
 			{
@@ -95,11 +85,11 @@
 				file = "themes/catppuccin_mocha-zsh-syntax-highlighting.zsh";
 			}
 
-			{
-				name = "powerlevel10k-config";
-				src = ./files;
-				file = ".p10k.zsh";
-			}
+			# {
+			# 	name = "powerlevel10k-config";
+			# 	src = ./files;
+			# 	file = ".p10k.zsh";
+			# }
 		];
 	};
 }

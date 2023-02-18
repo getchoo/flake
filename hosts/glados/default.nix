@@ -6,9 +6,4 @@ _: {
 		./network.nix
 		./services.nix
 	];
-
-	sys = {
-		gui.enable = true;
-		desktop = "gnome";
-	};
 }

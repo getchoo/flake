@@ -1,20 +1,7 @@
-{
-	config,
-	pkgs,
-	...
-}: let
-	homePackages =
-		if config.seth.desktop != ""
-		then with pkgs; [mangohud]
-		else [];
-	mangohudConf =
-		if config.seth.desktop != ""
-		then {
-			source = ./MangoHud.conf;
-		}
-		else {};
-in {
-	home.packages = homePackages;
+{pkgs, ...}: {
+	home.packages = with pkgs; [mangohud];
 
-	# xdg.configFile.MangoHud = mangohudConf;
+	xdg.configFile.MangoHud = {
+		source = ./MangoHud.conf;
+	};
 }

@@ -1,14 +1,22 @@
 {
-	config,
 	lib,
+	desktop,
 	...
 }: let
-	gui = config.sys.gui.enable;
+	gui = desktop != "";
 in {
-	imports = [
-		./gnome.nix
-		./plasma.nix
-	];
+	imports =
+		[]
+		++ (
+			if (desktop == "gnome")
+			then [./gnome.nix]
+			else []
+		)
+		++ (
+			if (desktop == "plasma")
+			then [./plasma.nix]
+			else []
+		);
 
 	environment.noXlibs = lib.mkForce false;
 	programs.xwayland.enable = gui;

@@ -1,10 +1,8 @@
-{config, ...}: let
-	value = config.sys.wsl.enable;
-in {
+{wsl, ...}: {
 	security = {
-		apparmor.enable = value;
-		audit.enable = value;
-		auditd.enable = value;
+		apparmor.enable = !wsl;
+		audit.enable = !wsl;
+		auditd.enable = !wsl;
 		rtkit.enable = true;
 		sudo = {
 			configFile = ''

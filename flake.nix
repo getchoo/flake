@@ -26,11 +26,7 @@
 				username = "seth";
 				stateVersion = "23.05";
 				channel = nixpkgsUnstable;
-				modules = [
-					({config, ...}: {
-						config.seth.standalone = true;
-					})
-				];
+				modules = [];
 			};
 		};
 
@@ -45,7 +41,10 @@
 
 					./users/seth
 				];
-
+				specialArgs = {
+					desktop = "gnome";
+					wsl = false;
+				};
 				version = "23.05";
 				pkgs = nixpkgsUnstable;
 			})
@@ -54,8 +53,7 @@
 				modules = [
 					nixos-wsl.nixosModules.wsl
 
-					({lib, ...}: {
-						environment.noXlibs = lib.mkForce false;
+					{
 						wsl = {
 							enable = true;
 							defaultUser = "seth";
@@ -64,12 +62,16 @@
 							startMenuLaunchers = false;
 							interop.includePath = false;
 						};
-					})
+					}
 
 					./users/seth
 				];
-
-				pkgs = nixpkgs;
+				specialArgs = {
+					desktop = "";
+					wsl = true;
+				};
+				version = "23.05";
+				pkgs = nixpkgsUnstable;
 			});
 	};
 }

@@ -4,7 +4,7 @@
 		stateVersion ? "22.11",
 		system ? "x86_64-linux",
 		channel,
-		modules,
+		modules ? [],
 	}:
 		home-manager.lib.homeManagerConfiguration {
 			pkgs = channel.legacyPackages.${system};

@@ -3,12 +3,13 @@
 		name,
 		modules,
 		system ? "x86_64-linux",
+		specialArgs ? {},
 		version ? "22.11",
 		pkgs,
 	}: {
 		${name} = with pkgs.lib;
 			nixosSystem {
-				inherit system;
+				inherit system specialArgs;
 				modules =
 					[
 						../hosts/common
@@ -27,8 +28,11 @@
 
 						home-manager.nixosModules.home-manager
 						{
-							home-manager.useGlobalPkgs = true;
-							home-manager.useUserPackages = true;
+							home-manager = {
+								useGlobalPkgs = true;
+								useUserPackages = true;
+								extraSpecialArgs = specialArgs;
+							};
 						}
 					]
 					++ modules;

@@ -4,7 +4,6 @@ _: {
 		./desktop
 		./fonts.nix
 		./locale.nix
-		./options.nix
 		./packages.nix
 		./security.nix
 		./systemd.nix

@@ -1,15 +1,11 @@
 {
-	config,
 	pkgs,
+	desktop,
 	...
 }: let
-	extraPkgs =
-		if config.sys.gui.enable
-		then with pkgs; [firefox]
-		else [];
-
+	gui = desktop != "";
 	pinentry =
-		if config.sys.desktop == "gnome"
+		if desktop == "gnome"
 		then pkgs.pinentry-gnome
 		else pkgs.pinentry-curses;
 in {
@@ -17,10 +13,14 @@ in {
 		[
 			git
 			neofetch
-			python310
+			python311
 			vim
 		]
-		++ extraPkgs
+		++ (
+			if gui
+			then with pkgs; [firefox]
+			else []
+		)
 		++ [pinentry];
 
 	programs = {
@@ -28,7 +28,7 @@ in {
 			agent = {
 				enable = true;
 				pinentryFlavor =
-					if config.sys.desktop == "gnome"
+					if desktop == "gnome"
 					then "gnome3"
 					else "curses";
 			};

@@ -1,6 +1,12 @@
 {config, ...}: {
 	programs.bash = {
-		enable = !config.seth.standalone;
+		enable = true;
+		bashrcExtra = ''
+			if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z "$BASH_EXECUTION_STRING" ]]
+			then
+				exec fish
+			fi
+		'';
 		historyFile = "${config.xdg.stateHome}/bash/history";
 		historyFileSize = 1000;
 		historySize = 100;
