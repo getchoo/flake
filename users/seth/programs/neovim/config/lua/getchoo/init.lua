@@ -13,6 +13,7 @@ M.bufferline = {
 }
 
 M.catppuccin = {
+	compiler_path = vim.fn.expand('$XDG_CACHE_HOME/nvim/compile'),
 	flavour = "mocha", -- mocha, macchiato, frappe, latte
 	integrations = {
 		barbar = true,

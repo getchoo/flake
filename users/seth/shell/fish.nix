@@ -16,16 +16,6 @@
 					sha256 = "sha256-aij48yQHeAKCoAD43rGhqW8X/qmEGGkg8B4jSeqjVU0=";
 				};
 			}
-
-			{
-				name = "catppuccin-fish";
-				src = pkgs.fetchFromGitHub {
-					owner = "catppuccin";
-					repo = "fish";
-					rev = "8d0b07ad927f976708a1f875eb9aacaf67876137";
-					sha256 = "sha256-/JIKRRHjaO2jC0NNPBiSaLe8pR2ASv24/LFKOJoZPjk=";
-				};
-			}
 		];
 	};
 }

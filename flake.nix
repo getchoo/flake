@@ -2,10 +2,10 @@
 	inputs = {
 		nixpkgs.url = "nixpkgs/nixos-22.11";
 		nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
-		nixos-wsl.url = "git+https://github.com/nix-community/NixOS-WSL?ref=main";
+		nixos-wsl.url = "github:nix-community/NixOS-WSL?ref=main";
 		home-manager.url = "github:nix-community/home-manager";
 		home-manager.inputs.nixpkgs.follows = "nixpkgs";
-		nixos-hardware.url = "git+https://github.com/nixos/nixos-hardware";
+		nixos-hardware.url = "github:NixOS/nixos-hardware";
 		lanzaboote.url = "github:nix-community/lanzaboote";
 	};
 

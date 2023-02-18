@@ -1,10 +1,10 @@
-_: {
+{wsl, ...}: {
 	services = {
 		journald.extraConfig = ''
 			MaxRetentionSec=1w
 		'';
 		resolved = {
-			enable = true;
+			enable = !wsl;
 			dnssec = "allow-downgrade";
 			extraConfig = ''
 				[Resolve]
