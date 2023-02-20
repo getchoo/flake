@@ -14,11 +14,19 @@
           ../users/${username}/home.nix
           {
             nixpkgs.config.allowUnfree = true;
+
+            nix = {
+              package = channel.legacyPackages.${system}.nixFlakes;
+              settings.experimental-features = [ "nix-command" "flakes" ];
+            };
+
             systemd.user.startServices = true;
+
             home = {
               inherit username stateVersion;
               homeDirectory = "/home/${username}";
             };
+
             programs.home-manager.enable = true;
           }
         ]

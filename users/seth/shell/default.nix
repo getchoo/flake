@@ -2,13 +2,11 @@
   imports = [
     ./bash.nix
     ./fish.nix
-    ./zsh
+    ./zsh.nix
   ];
 
   home = {
     sessionVariables = {
-      EDITOR = "nvim";
-      VISUAL = "nvim";
       GPG_TTY = "$(tty)";
       CARGO_HOME = "${config.xdg.dataHome}/cargo";
       RUSTUP_HOME = "${config.xdg.dataHome}/rustup";

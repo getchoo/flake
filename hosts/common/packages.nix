@@ -4,27 +4,22 @@
 }:
 let
   gui = desktop != "";
-  pinentry =
+  pinentry = with pkgs;
     if desktop == "gnome"
-    then pkgs.pinentry-gnome
-    else pkgs.pinentry-curses;
+    then pinentry-gnome
+    else pinentry-curses;
 in
 {
   environment.systemPackages = with pkgs;
     [
-      git
       neofetch
       python311
-      vim
     ]
-    ++ (
-      if gui
-      then with pkgs; [ firefox ]
-      else [ ]
-    )
     ++ [ pinentry ];
 
   programs = {
+    firefox.enable = if gui then true else false;
+    git.enable = true;
     gnupg = {
       agent = {
         enable = true;
@@ -34,5 +29,6 @@ in
           else "curses";
       };
     };
+    vim.defaultEditor = true;
   };
 }

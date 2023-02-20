@@ -29,8 +29,9 @@
         );
 
       home.stateVersion = config.system.stateVersion;
+
       nixpkgs.config.allowUnfree = true;
-      programs.home-manager.enable = true;
+
       systemd.user.startServices = true;
     };
   };

@@ -23,8 +23,10 @@
                 nixpkgs.config.allowUnfree = true;
 
                 # Enable nix flakes
-                nix.package = pkgs.nixFlakes;
-                nix.settings.experimental-features = [ "nix-command" "flakes" ];
+                nix = {
+                  package = pkgs.nixFlakes;
+                  settings.experimental-features = [ "nix-command" "flakes" ];
+                };
               })
 
               home-manager.nixosModules.home-manager
