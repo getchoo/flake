@@ -1,8 +1,8 @@
 _: {
-	programs.starship = {
-		enable = false;
-		settings = {
-			format = "" "
+  programs.starship = {
+    enable = false;
+    settings = {
+      format = "" "
 				$username\
 				$hostname\
 				$directory\
@@ -24,6 +24,6 @@ _: {
 				$shell\
 				$character
 			" "";
-		};
-	};
+    };
+  };
 }

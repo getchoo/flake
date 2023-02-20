@@ -1,3 +1,3 @@
-{pkgs, ...}: {
-	home.packages = with pkgs; [catppuccin-kde];
+{ pkgs, ... }: {
+  home.packages = with pkgs; [ catppuccin-kde ];
 }
