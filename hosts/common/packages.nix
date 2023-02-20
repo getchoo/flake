@@ -34,5 +34,6 @@ in
           else "curses";
       };
     };
+    zsh.enable = true;
   };
 }

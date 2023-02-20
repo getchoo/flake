@@ -8,7 +8,7 @@
     extraGroups = [ "wheel" ];
     isNormalUser = true;
     hashedPassword = "***REMOVED***";
-    shell = pkgs.bash;
+    shell = pkgs.zsh;
   };
 
   home-manager = {

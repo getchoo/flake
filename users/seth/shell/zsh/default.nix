@@ -3,9 +3,8 @@
 , ...
 }: {
   programs.zsh = {
-    enable = false;
+    enable = true;
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
     enableVteIntegration = true;
     completionInit = ''
       autoload -Uz bashcompinit compinit
@@ -90,5 +89,6 @@
       # 	file = ".p10k.zsh";
       # }
     ];
+    enableSyntaxHighlighting = true;
   };
 }
