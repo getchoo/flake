@@ -8,8 +8,10 @@
     extraGroups = [ "wheel" ];
     isNormalUser = true;
     hashedPassword = "***REMOVED***";
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
+
+  programs.fish.enable = true;
 
   home-manager = {
     useGlobalPkgs = true;

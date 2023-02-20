@@ -3,7 +3,7 @@
 , ...
 }: {
   programs.zsh = {
-    enable = true;
+    enable = false;
     enableAutosuggestions = true;
     enableVteIntegration = true;
     completionInit = ''
@@ -59,12 +59,6 @@
       size = 100;
     };
     plugins = [
-      # {
-      # 	name = "powerlevel10k";
-      # 	src = pkgs.zsh-powerlevel10k;
-      # 	file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
-      # }
-
       {
         name = "zsh-completions";
         src = pkgs.zsh-completions;
@@ -82,12 +76,6 @@
 
         file = "themes/catppuccin_mocha-zsh-syntax-highlighting.zsh";
       }
-
-      # {
-      # 	name = "powerlevel10k-config";
-      # 	src = ./files;
-      # 	file = ".p10k.zsh";
-      # }
     ];
     enableSyntaxHighlighting = true;
   };
