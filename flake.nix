@@ -75,5 +75,7 @@
           version = "23.05";
           pkgs = nixpkgsUnstable;
         });
+
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
     };
 }
