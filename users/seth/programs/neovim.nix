@@ -29,7 +29,7 @@
       cmp-vsnip
       editorconfig-nvim
       gitsigns-nvim
-      lightspeed-nvim
+      leap-nvim
       lualine-nvim
       luasnip
       nvim-cmp
@@ -44,304 +44,292 @@
       vim-vsnip
     ];
     extraLuaConfig = ''
-       local cmd = vim.cmd
-       local opt = vim.opt
-
-       -- text options
-       opt.tabstop = 2
-       opt.shiftwidth = 2
-       opt.expandtab = false
-       opt.smartindent = true
-       opt.wrap = false
+         local cmd = vim.cmd
+         local opt = vim.opt
 
 
-       -- appearance
-       opt.syntax = "on"
-       cmd("filetype plugin indent on")
-       opt.termguicolors = true
-
-       -- filetypes
-       local filetypes = {
-       	filename = {
-       	  PKGBUILD = "text",
-       	  [".makepkg.conf"] = "text",
-       	},
-       }
-
-       vim.filetype.add(filetypes)
+         -- text options
+         opt.tabstop = 2
+         opt.shiftwidth = 2
+         opt.expandtab = false
+         opt.smartindent = true
+         opt.wrap = false
 
 
-       -- helper functions/variables
-       local cmp = require("cmp")
-       local luasnip = require("luasnip")
-       local null_ls = require("null-ls")
+         -- appearance
+         opt.syntax = "on"
+         cmd("filetype plugin indent on")
+         opt.termguicolors = true
 
-       --- catppuccin
-       local compile_path = vim.fn.stdpath("cache") .. "/catppuccin-nvim"
-       vim.fn.mkdir(compile_path, "p")
-       vim.opt.runtimepath:append(compile_path)
+         -- filetypes
+         local filetypes = {
+         	filename = {
+         		PKGBUILD = "text",
+         		[".makepkg.conf"] = "text",
+         	},
+         }
 
-       ---- cmp
-       local mapping = cmp.mapping
-       local has_words_before = function()
-       	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-       	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-       end
-
-       local feedkey = function(key, mode)
-       	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-       end
-
-       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-       capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-       ---- null ls
-       ------ nulls-ls shorthand
-       local diagnostics = null_ls.builtins.diagnostics
-       local formatting = null_ls.builtins.formatting
-
-       ------ auto-format
-       -- for neovim >= 8
-       local lsp_formatting = function(bufnr)
-       	vim.lsp.buf.format({
-       	filter = function(client)
-       		return client.name == "null-ls"
-       	end,
-       	bufnr = bufnr,
-       	})
-       end
-
-       local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-       local formatting_on_attach = function(client, bufnr)
-       	if client.supports_method("textDocument/formatting") then
-       		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-       		vim.api.nvim_create_autocmd("BufWritePre", {
-       			group = augroup,
-       			buffer = bufnr,
-       			callback = function()
-       			  -- for neovim < 8
-       			  ---- local params = require("vim.lsp.util").make_formatting_params({})
-       			  ---- client.request("textDocument/formatting", params, nil, bufnr)
-       			  lsp_formatting(bufnr) -- neovim >= 8
-       			end,
-       		})
-       	end
-       end
+         vim.filetype.add(filetypes)
 
 
-       -- plugin config
-       bufferline_config = {
-       	animation = true,
-       	auto_hide = true,
-       	icons = true,
-       	maximum_padding = 2,
-       	semantic_letters = true,
-       }
+         -- plugin config
+         ---- catppuccin
+         local compile_path = vim.fn.stdpath("cache") .. "/catppuccin-nvim"
+         vim.fn.mkdir(compile_path, "p")
+         vim.opt.runtimepath:append(compile_path)
 
-       catppuccin_config = {
-       		compile_path = compile_path,
-       		flavour = "mocha", -- mocha, macchiato, frappe, latte
-       		integrations = {
-       			barbar = true,
-       			gitsigns = true,
-       			lightspeed = true,
-       			cmp = true,
-       			nvimtree = true,
-       			treesitter_context = true,
-       			treesitter = true,
-       			telescope = true,
-       			lsp_trouble = true,
-       		},
-       		no_italic = true,
-       }
+         require("catppuccin").setup({
+         	compile_path = compile_path,
+         	flavour = "mocha", -- mocha, macchiato, frappe, latte
+         	integrations = {
+         		barbar = true,
+         		cmp = true,
+         		gitsigns = true,
+         		leap = true,
+         		native_lsp = {
+         			enabled = true,
+         		},
+         		nvimtree = true,
+         		treesitter_context = true,
+         		treesitter = true,
+         		telescope = true,
+         		lsp_trouble = true,
+         	},
+         	no_italic = true,
+         })
+         vim.api.nvim_command("colorscheme catppuccin")
 
-       cmp_config = {
-       	snippet = {
-       		expand = function(args)
-       			vim.fn["vsnip#anonymous"](args.body)
-       				luasnip.lsp_expand(args.body)
-       			end,
-       	},
+         ---- bufferline
+         require("bufferline").setup({
+         	animation = true,
+         	auto_hide = true,
+         	highlights = require("catppuccin.groups.integrations.bufferline").get(),
+         	icons = true,
+         	maximum_padding = 2,
+         	semantic_letters = true,
+         })
 
-       	mapping = mapping.preset.insert({
-       		["<Tab>"] = cmp.mapping(function(fallback)
-       			if cmp.visible() then
-       				cmp.select_next_item()
-       			elseif luasnip.expand_or_jumpable() then
-       				luasnip.expand_or_jump()
-       			elseif vim.fn["vsnip#available"](1) == 1 then
-       				feedkey("<Plug>(vsnip-expand-or-jump)", "")
-       			elseif has_words_before() then
-       				cmp.complete()
-       			else
-       				fallback()
-       			end
-       		end, { "i", "s" }),
-       		["<S-Tab>"] = cmp.mapping(function(fallback)
-       			if cmp.visible() then
-       				cmp.select_prev_item()
-       			elseif luasnip.jumpable(-1) then
-       				luasnip.jump(-1)
-       			elseif vim.fn["vsnip#available"](-1) == 1 then
-       				feedkey("<Plug>(vsnip-jump-prev)", "")
-       			else
-       				fallback()
-       			end
-       		end, { "i", "s" }),
-       	}),
+         ---- cmp
+         local cmp = require("cmp")
+         local luasnip = require("luasnip")
+         local mapping = cmp.mapping
 
-       	sources = cmp.config.sources({
-       	  { name = "nvim_lsp" },
-       	  { name = "luasnip" },
-       	  { name = "vsnip" },
-       	  { name = "buffer" },
-       	  { name = "path" },
-       	}),
+         local has_words_before = function()
+         	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+         	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+         end
 
-       	capabilities = capabilities,
+         local feedkey = function(key, mode)
+         	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+         end
+      local cmp_on_attach = function(_, bufnr)
+         		vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+         	end
 
-       	on_attach = function(_, bufnr)
-       	  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-       	end,
-       }
+         local capabilities = require("cmp_nvim_lsp").default_capabilities()
+         capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-       sources = {
-       	lsp_servers = { "rust_analyzer", "pyright", "bashls" },
-       	null_ls = {
-       		diagnostics.alex,
-       		diagnostics.codespell,
-       		diagnostics.deadnix,
-       		diagnostics.pylint,
-       		diagnostics.statix,
-      formatting.alejandra,
-       		formatting.codespell,
-       		formatting.prettier,
-       		formatting.rustfmt,
-       		formatting.stylua,
-       		formatting.yapf,
-       	}
-       }
+         require("cmp").setup({
+         	snippet = {
+         		expand = function(args)
+         			vim.fn["vsnip#anonymous"](args.body)
+         			luasnip.lsp_expand(args.body)
+         		end,
+         	},
 
-       local lsp_on_attach = function(client, bufnr)
-         cmp_config.on_attach(client, bufnr)
-       end
+         	mapping = mapping.preset.insert({
+         		["<Tab>"] = cmp.mapping(function(fallback)
+         			if cmp.visible() then
+         				cmp.select_next_item()
+         			elseif luasnip.expand_or_jumpable() then
+         				luasnip.expand_or_jump()
+         			elseif vim.fn["vsnip#available"](1) == 1 then
+         				feedkey("<Plug>(vsnip-expand-or-jump)", "")
+         			elseif has_words_before() then
+         				cmp.complete()
+         			else
+         				fallback()
+         			end
+         		end, { "i", "s" }),
+         		["<S-Tab>"] = cmp.mapping(function(fallback)
+         			if cmp.visible() then
+         				cmp.select_prev_item()
+         			elseif luasnip.jumpable(-1) then
+         				luasnip.jump(-1)
+         			elseif vim.fn["vsnip#available"](-1) == 1 then
+         				feedkey("<Plug>(vsnip-jump-prev)", "")
+         			else
+         				fallback()
+         			end
+         		end, { "i", "s" }),
+         	}),
 
-       local all_config = {
-       	capabilities = cmp.capabilities,
-       	on_attach = lsp_on_attach,
-       }
+         	sources = cmp.config.sources({
+         		{ name = "nvim_lsp" },
+         		{ name = "luasnip" },
+         		{ name = "vsnip" },
+         		{ name = "buffer" },
+         		{ name = "path" },
+         	}),
 
-       servers = {}
-       for _, server in ipairs(sources.lsp_servers) do
-       	servers[server] = all_config
-       end
+         	capabilities = capabilities,
 
-       servers["lua_ls"] = {
-       	capabilities = cmp_config.capabilities,
-       	on_attach = lsp_on_attach,
-       	settings = {
-       		Lua = {
-       			runtime = {
-       				version = "LuaJIT",
-       			},
-       			diagnostics = {
-       				globals = { "vim" },
-       			},
-       			workspace = {
-       				library = vim.api.nvim_get_runtime_file("", true),
-       			},
-       		},
-       	},
-       }
+         	on_attach = cmp_on_attach,
+         })
 
-       lsp_config = {
-       	servers = servers
-       }
+         ---- gitsigns
+         require("gitsigns").setup({})
 
-       lualine_config = {
-       	options = {
-       		theme = "catppuccin",
-       	},
-       	extensions = { "nvim-tree" },
-       }
+         ---- leap
+         require("leap").add_default_mappings()
 
-       null_ls_config = {
-       	on_attach = formatting_on_attach,
-       	sources = sources.null_ls,
-       }
+         ---- lsp sources
+         local null_ls = require("null-ls")
+         local diagnostics = null_ls.builtins.diagnostics
+         local formatting = null_ls.builtins.formatting
 
-       tree_config = {}
+         local sources = {
+         	lsp_servers = { "rust_analyzer", "pyright", "bashls" },
+         	null_ls = {
+         		diagnostics.alex,
+         		diagnostics.codespell,
+         		diagnostics.deadnix,
+         		diagnostics.pylint,
+         		diagnostics.statix,
+         		formatting.alejandra,
+         		formatting.codespell,
+         		formatting.prettier,
+         		formatting.rustfmt,
+         		formatting.stylua,
+         		formatting.yapf,
+         	},
+         }
 
-       treesitter_config = {
-       	auto_install = false,
-       	highlight = {
-       		enable = true,
-       		additional_vim_regex_highlighting = false,
-       	},
-       }
+         --- lsp config
+         local all_config = {
+         	capabilities = capabilities,
+         	on_attach = cmp_on_attach,
+         }
 
-       trouble = {}
+         local servers = {}
+         for _, server in ipairs(sources.lsp_servers) do
+         	servers[server] = all_config
+         end
+
+         servers["lua_ls"] = {
+         	capabilities = capabilities,
+         	on_attach = cmp_on_attach,
+         	settings = {
+         		Lua = {
+         			runtime = {
+         				version = "LuaJIT",
+         			},
+         			diagnostics = {
+         				globals = { "vim" },
+         			},
+         			workspace = {
+         				library = vim.api.nvim_get_runtime_file("", true),
+         			},
+         		},
+         	},
+         }
+
+         for server, settings in pairs(servers) do
+         	require("lspconfig")[server].setup(settings)
+         end
+
+         ---- lualine
+         require("lualine").setup({
+         	options = {
+         		theme = "catppuccin",
+         	},
+         	extensions = { "nvim-tree" },
+         })
+
+         ---- null-ls
+         -- auto-format
+         local lsp_formatting = function(bufnr)
+         	vim.lsp.buf.format({
+         		filter = function(client)
+         			return client.name == "null-ls"
+         		end,
+         		bufnr = bufnr,
+         	})
+         end
+
+         local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+         local formatting_on_attach = function(client, bufnr)
+         	if client.supports_method("textDocument/formatting") then
+         		vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+         		vim.api.nvim_create_autocmd("BufWritePre", {
+         			group = augroup,
+         			buffer = bufnr,
+         			callback = function()
+         				lsp_formatting(bufnr)
+         			end,
+         		})
+         	end
+         end
+
+         require("null-ls").setup({
+         	on_attach = formatting_on_attach,
+         	sources = sources.null_ls,
+         })
+
+         ---- nvim-tree
+         require("nvim-tree").setup({})
+
+         ---- treesitter
+         require("nvim-treesitter.configs").setup({
+         	auto_install = false,
+         	highlight = {
+         		enable = true,
+         		additional_vim_regex_highlighting = false,
+         	},
+         })
+
+         ---- trouble
+         require("trouble").setup({})
 
 
-       -- init plugins
-       local lspconfig = require("lspconfig")
-
-       require("bufferline").setup(bufferline_config)
-       require("catppuccin").setup(catppuccin_config)
-       vim.api.nvim_command("colorscheme catppuccin")
-       require("cmp").setup(cmp_config)
-       require("gitsigns").setup()
-       require("lualine").setup(lualine_config)
-       require("null-ls").setup(null_ls_config)
-       require("nvim-tree").setup(tree_config)
-       require("nvim-treesitter.configs").setup(treesitter_config)
-       require("trouble").setup(trouble_config)
-
-       for server, settings in pairs(lsp_config.servers) do
-       	lspconfig[server].setup(settings)
-       end
+         -- keybinds
+         local opts = { noremap = true, silent = true }
+         local set = function(mode, key, vimcmd)
+         	vim.keymap.set(mode, key, vimcmd, opts)
+         end
 
 
-       -- filetypes
-       local opts = { noremap = true, silent = true }
-       local set = function(mode, key, cmd)
-       	vim.keymap.set(mode, key, cmd, opts)
-       end
+         set("n", "<leader>t", function()
+         	vim.cmd("NvimTreeToggle")
+         end)
 
+         for i = 1, 9 do
+         	set("n", "<leader>" .. i, function()
+         		local vimcmd = "BufferGoto " .. i
+         		vim.cmd(vimcmd)
+         	end)
+         end
 
-       -- keybinds
-       set("n", "<leader>t", function()
-       	vim.cmd("NvimTreeToggle")
-       end)
+         set("n", "<leader>p", function()
+         	vim.cmd("BufferPick")
+         end)
 
-       for i = 1, 9 do
-       	set("n", "<leader>" .. i, function()
-       		local cmd = "BufferGoto " .. i
-       		vim.cmd(cmd)
-       	end)
-       end
+         set("n", "<leader>q", function()
+         	vim.cmd("BufferClose")
+         end)
 
-       set("n", "<leader>p", function()
-       	vim.cmd("BufferPick")
-       end)
+         set("n", "<space>e", vim.diagnostic.open_float)
+         set("n", "[d", vim.diagnostic.goto_prev)
+         set("n", "]d", vim.diagnostic.goto_next)
+         set("n", "<space>q", vim.diagnostic.setloclist)
 
-       set("n", "<leader>q", function()
-       	vim.cmd("BufferClose")
-       end)
+         set("n", "<space>f", function()
+         	vim.cmd("Telescope")
+         end)
 
-       set("n", "<space>e", vim.diagnostic.open_float)
-       set("n", "[d", vim.diagnostic.goto_prev)
-       set("n", "]d", vim.diagnostic.goto_next)
-       set("n", "<space>q", vim.diagnostic.setloclist)
-
-       set("n", "<space>f", function()
-       	vim.cmd("Telescope")
-       end)
-
-       set("n", "<space>t", function()
-       	vim.cmd("TroubleToggle")
-       end)
-
+         set("n", "<space>t", function()
+         	vim.cmd("TroubleToggle")
+         end)
     '';
   };
 }
