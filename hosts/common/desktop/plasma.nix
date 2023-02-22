@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   services.xserver = {
     displayManager.sddm.enable = true;
     desktopManager.plasma5 = {

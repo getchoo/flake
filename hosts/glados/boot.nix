@@ -1,7 +1,8 @@
-{ config
-, lib
-, pkgs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  ...
 }: {
   environment.systemPackages = with pkgs; [
     sbctl
@@ -9,7 +10,7 @@
 
   boot = {
     kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-    kernelParams = [ "nohibernate" ];
+    kernelParams = ["nohibernate"];
 
     bootspec.enable = true;
     loader.systemd-boot.enable = lib.mkForce false;
@@ -18,6 +19,6 @@
       enable = true;
       pkiBundle = "/etc/secureboot";
     };
-    supportedFilesystems = [ "zfs" "ntfs" ];
+    supportedFilesystems = ["zfs" "ntfs"];
   };
 }

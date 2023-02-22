@@ -1,22 +1,23 @@
-{ pkgs, ... }: {
-
+{pkgs, ...}: {
   xdg.configFile."fish/themes" = {
     recursive = true;
     source =
       pkgs.fetchFromGitHub
-        {
-          owner = "catppuccin";
-          repo = "fish";
-          rev = "b90966686068b5ebc9f80e5b90fdf8c02ee7a0ba";
-          sha256 = "sha256-wQlYQyqklU/79K2OXRZXg5LvuIugK7vhHgpahpLFaOw=";
-        } + "/themes";
+      {
+        owner = "catppuccin";
+        repo = "fish";
+        rev = "b90966686068b5ebc9f80e5b90fdf8c02ee7a0ba";
+        sha256 = "sha256-wQlYQyqklU/79K2OXRZXg5LvuIugK7vhHgpahpLFaOw=";
+      }
+      + "/themes";
   };
 
   programs.fish = {
     enable = true;
     interactiveShellInit = ''
       			fish_config theme choose "Catppuccin Mocha"
-      		'';
+      direnv hook fish | source
+    '';
     plugins = [
       {
         name = "autopair-fish";

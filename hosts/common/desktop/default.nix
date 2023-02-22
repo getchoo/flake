@@ -1,22 +1,21 @@
-{ lib
-, desktop
-, ...
-}:
-let
-  gui = desktop != "";
-in
 {
+  lib,
+  desktop,
+  ...
+}: let
+  gui = desktop != "";
+in {
   imports =
-    [ ]
+    []
     ++ (
       if (desktop == "gnome")
-      then [ ./gnome.nix ]
-      else [ ]
+      then [./gnome.nix]
+      else []
     )
     ++ (
       if (desktop == "plasma")
-      then [ ./plasma.nix ]
-      else [ ]
+      then [./plasma.nix]
+      else []
     );
 
   environment.noXlibs = lib.mkForce false;

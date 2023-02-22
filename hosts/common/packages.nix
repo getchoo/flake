@@ -1,24 +1,26 @@
-{ pkgs
-, desktop
-, ...
-}:
-let
+{
+  pkgs,
+  desktop,
+  ...
+}: let
   gui = desktop != "";
   pinentry = with pkgs;
     if desktop == "gnome"
     then pinentry-gnome
     else pinentry-curses;
-in
-{
+in {
   environment.systemPackages = with pkgs;
     [
       neofetch
       python311
     ]
-    ++ [ pinentry ];
+    ++ [pinentry];
 
   programs = {
-    firefox.enable = if gui then true else false;
+    firefox.enable =
+      if gui
+      then true
+      else false;
     git.enable = true;
     gnupg = {
       agent = {

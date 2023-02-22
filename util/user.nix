@@ -1,12 +1,11 @@
-{ home-manager, ... }: {
-  mkHMUser =
-    { username
-    , stateVersion ? "22.11"
-    , system ? "x86_64-linux"
-    , channel
-    , modules ? [ ]
-    ,
-    }:
+{home-manager, ...}: {
+  mkHMUser = {
+    username,
+    stateVersion ? "22.11",
+    system ? "x86_64-linux",
+    channel,
+    modules ? [],
+  }:
     home-manager.lib.homeManagerConfiguration {
       pkgs = channel.legacyPackages.${system};
       modules =
@@ -17,7 +16,7 @@
 
             nix = {
               package = channel.legacyPackages.${system}.nixFlakes;
-              settings.experimental-features = [ "nix-command" "flakes" ];
+              settings.experimental-features = ["nix-command" "flakes"];
             };
 
             systemd.user.startServices = true;

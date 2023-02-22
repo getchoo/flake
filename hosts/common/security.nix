@@ -1,4 +1,4 @@
-{ wsl, ... }: {
+{wsl, ...}: {
   security = {
     apparmor.enable = !wsl;
     audit.enable = !wsl;
@@ -13,13 +13,13 @@
       execWheelOnly = true;
       extraRules = [
         {
-          users = [ "root" ];
-          groups = [ "root" ];
-          commands = [ "ALL" ];
+          users = ["root"];
+          groups = ["root"];
+          commands = ["ALL"];
         }
         {
-          users = [ "seth" ];
-          commands = [ "ALL" ];
+          users = ["seth"];
+          commands = ["ALL"];
         }
       ];
     };

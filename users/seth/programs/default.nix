@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ./git.nix
     ./neovim.nix
@@ -21,6 +21,15 @@
     ripgrep
     statix
   ];
+
+  programs = {
+    direnv = {
+      enable = true;
+      nix-direnv = {
+        enable = true;
+      };
+    };
+  };
 
   xdg.enable = true;
 }

@@ -1,11 +1,12 @@
-{ config
-, pkgs
-, home-manager
-, desktop
-, ...
+{
+  config,
+  pkgs,
+  home-manager,
+  desktop,
+  ...
 }: {
   users.users.seth = {
-    extraGroups = [ "wheel" ];
+    extraGroups = ["wheel"];
     isNormalUser = true;
     hashedPassword = "***REMOVED***";
     shell = pkgs.fish;
@@ -24,8 +25,8 @@
         ]
         ++ (
           if (desktop != "")
-          then [ ./desktop ]
-          else [ ]
+          then [./desktop]
+          else []
         );
 
       home.stateVersion = config.system.stateVersion;

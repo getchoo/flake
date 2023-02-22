@@ -1,6 +1,7 @@
-{ pkgs
-, desktop
-, ...
+{
+  pkgs,
+  desktop,
+  ...
 }: {
   imports =
     [
@@ -8,8 +9,8 @@
     ]
     ++ (
       if (desktop == "gnome")
-      then [ ./gnome.nix ]
-      else [ ./plasma.nix ]
+      then [./gnome.nix]
+      else [./plasma.nix]
     );
 
   home.packages = with pkgs; [
