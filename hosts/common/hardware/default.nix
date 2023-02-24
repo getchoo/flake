@@ -1,5 +1,3 @@
 _: {
-  imports = [
-    ./nvidia.nix
-  ];
+  hardware.enableAllFirmware = true;
 }

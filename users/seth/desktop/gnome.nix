@@ -6,7 +6,6 @@
       disable-user-extensions = false;
       enabled-extensions = [
         "appindicatorsupport@rgcjonas.gmail.com"
-        "appindicatorsupport@rgcjonas.gmail.com"
         "caffeine@patapon.info"
       ];
       favorite-apps = [

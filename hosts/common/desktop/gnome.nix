@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   environment = {
     gnome.excludePackages = with pkgs; [
       epiphany
@@ -11,7 +15,10 @@
   };
 
   services.xserver = {
-    displayManager.gdm.enable = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = lib.mkForce true;
+    };
     desktopManager.gnome.enable = true;
   };
 }

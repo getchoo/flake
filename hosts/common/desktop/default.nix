@@ -19,7 +19,10 @@ in {
     );
 
   environment.noXlibs = lib.mkForce false;
-  programs.xwayland.enable = gui;
+  programs = {
+    dconf.enable = gui;
+    xwayland.enable = gui;
+  };
   services.xserver.enable = gui;
   xdg.portal.enable = gui;
 }
