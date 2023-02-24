@@ -27,6 +27,9 @@
         stateVersion = "23.05";
         channel = nixpkgsUnstable;
         modules = [];
+        extraSpecialArgs = {
+          standalone = true;
+        };
       };
     };
 

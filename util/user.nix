@@ -5,9 +5,11 @@
     system ? "x86_64-linux",
     channel,
     modules ? [],
+    extraSpecialArgs ? {},
   }:
     home-manager.lib.homeManagerConfiguration {
       pkgs = channel.legacyPackages.${system};
+      inherit extraSpecialArgs;
       modules =
         [
           ../users/${username}/home.nix
