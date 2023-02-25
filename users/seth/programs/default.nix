@@ -7,11 +7,8 @@
   ];
 
   home.packages = with pkgs; [
-    alejandra
     bat
-    clang
-    deadnix
-    eclint
+    llvmPackages_15.stdenv
     exa
     fd
     gh
@@ -19,7 +16,6 @@
     rclone
     restic
     ripgrep
-    statix
   ];
 
   programs = {

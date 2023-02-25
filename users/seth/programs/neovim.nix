@@ -4,9 +4,9 @@
     defaultEditor = true;
     extraPackages = with pkgs; [
       alejandra
-      clang
       codespell
       deadnix
+      llvmPackages_15.stdenv
       nodePackages.alex
       nodePackages.bash-language-server
       nodePackages.prettier
