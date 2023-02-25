@@ -18,6 +18,9 @@
     nixpkgsUnstable,
     ...
   }: let
+    supportedSystems = ["x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin"];
+    forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+    nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
     util = import ./util {inherit inputs home-manager;};
     inherit (util) host user;
   in {
@@ -46,7 +49,7 @@
         ];
         specialArgs = {
           desktop = "gnome";
-          standalone = true;
+          standalone = false;
           wsl = false;
         };
         version = "23.05";
@@ -72,13 +75,13 @@
         ];
         specialArgs = {
           desktop = "";
-          standalone = true;
+          standalone = false;
           wsl = true;
         };
         version = "23.05";
         pkgs = nixpkgsUnstable;
       });
 
-    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    formatter = forAllSystems (system: nixpkgsFor.${system}.alejandra);
   };
 }
