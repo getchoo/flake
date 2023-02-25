@@ -26,6 +26,11 @@
       command = "blackbox";
       binding = "<Control><Alt>t";
     };
+    "com/raggesilver/BlackBox" = {
+      font = ''FiraCode Nerd Font 12'';
+      theme-dark = ''Catppuccin-Mocha'';
+      remember-window-size = true;
+    };
   };
 
   gtk = {
@@ -34,5 +39,45 @@
       name = "adw-gtk3";
       package = pkgs.adw-gtk3;
     };
+  };
+
+  xdg.dataFile."blackbox/schemes/Catppuccin-Mocha.json" = {
+    text = ''
+      {
+        "name": "Catppuccin-Mocha",
+        "comment": "Soothing pastel theme for the high-spirited!",
+        "background-color": "#1E1E2E",
+        "foreground-color": "#CDD6F4",
+        "badge-color": "#585B70",
+        "bold-color": "#585B70",
+        "cursor-background-color": "#F5E0DC",
+        "cursor-foreground-color": "#1E1E2E",
+        "highlight-background-color": "#F5E0DC",
+        "highlight-foreground-color": "#1E1E2E",
+        "palette": [
+          "#45475A",
+          "#F38BA8",
+          "#A6E3A1",
+          "#F9E2AF",
+          "#89B4FA",
+          "#F5C2E7",
+          "#94E2D5",
+          "#BAC2DE",
+          "#585B70",
+          "#F38BA8",
+          "#A6E3A1",
+          "#F9E2AF",
+          "#89B4FA",
+          "#F5C2E7",
+          "#94E2D5",
+          "#A6ADC8"
+        ],
+        "use-badge-color": false,
+        "use-bold-color": false,
+        "use-cursor-color": true,
+        "use-highlight-color": true,
+        "use-theme-colors": false
+      }
+    '';
   };
 }
