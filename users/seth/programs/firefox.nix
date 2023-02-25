@@ -9,7 +9,6 @@
         ublock-origin
       ];
       isDefault = true;
-      search.default = "DuckDuckGo";
     };
   };
 }
