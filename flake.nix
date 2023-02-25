@@ -58,6 +58,7 @@
           }
         ];
         specialArgs = {
+          nixpkgsStable = nixpkgs;
           desktop = "gnome";
           standalone = false;
           wsl = false;
