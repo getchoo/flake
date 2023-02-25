@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [mangohud];
 
-  xdg.configFile."MangoHud.conf" = {
+  xdg.configFile."MangoHud/MangoHud.conf" = {
     text = ''
       legacy_layout=false
       cpu_stats
