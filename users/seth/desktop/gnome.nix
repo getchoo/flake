@@ -16,6 +16,13 @@
     };
     "org/gnome/desktop/interface" = {
       color-scheme = "prefer-dark";
+      font-antialiasing = ''rgba'';
+      font-name = ''Noto Sans 11'';
+      document-font-name = ''Noto Sans 11'';
+      monospace-font-name = ''FiraCode Nerd Font 10'';
+    };
+    "org/gnome/desktop/wm/preferences" = {
+      titlebar-font = ''Noto Sans Bold 11'';
     };
     "org/gnome/desktop/wm/keybindings" = {
       switch-windows = ["<Alt>Tab"];
