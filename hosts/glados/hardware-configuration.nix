@@ -18,31 +18,33 @@
   boot.extraModulePackages = [];
 
   fileSystems."/" = {
-    device = "rpool/nixos/root";
-    fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    device = "/dev/mapper/cryptroot";
+    fsType = "btrfs";
+    options = ["subvol=root" "compress=zstd" "noatime"];
   };
 
-  fileSystems."/home" = {
-    device = "rpool/nixos/home";
-    fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+  boot.initrd.luks.devices."cryptroot".device = "/dev/disk/by-uuid/bbbc1f37-53f5-4776-a70e-f2779179de50";
+
+  fileSystems."/var/log" = {
+    device = "/dev/mapper/cryptroot";
+    fsType = "btrfs";
+    options = ["subvol=var_log" "compress=zstd" "noatime"];
   };
 
   fileSystems."/nix" = {
-    device = "rpool/nixos/nixstore";
-    fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+    device = "/dev/mapper/cryptroot";
+    fsType = "btrfs";
+    options = ["subvol=nix" "compress=zstd" "noatime" "nodatacow"];
   };
 
-  fileSystems."/var/log" = {
-    device = "rpool/nixos/var/log";
-    fsType = "zfs";
-    options = ["zfsutil" "X-mount.mkdir"];
+  fileSystems."/home" = {
+    device = "/dev/mapper/cryptroot";
+    fsType = "btrfs";
+    options = ["subvol=home" "compress=zstd" "noatime"];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/5B1B-6423";
+    device = "/dev/disk/by-uuid/B95B-9412";
     fsType = "vfat";
   };
 
