@@ -50,7 +50,11 @@
 
           ./users/seth
           {
-            nixpkgs.overlays = [nur.overlay];
+            nixpkgs.overlays = let
+              localOverlay = _: super: {
+                discord-canary = super.discord-canary.override {withOpenASAR = true;};
+              };
+            in [nur.overlay localOverlay];
           }
         ];
         specialArgs = {
