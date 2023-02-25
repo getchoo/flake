@@ -21,6 +21,9 @@
       document-font-name = ''Noto Sans 11'';
       monospace-font-name = ''FiraCode Nerd Font 10'';
     };
+    "org/gnome/desktop/peripherals/mouse" = {
+      accel-profile = ''flat'';
+    };
     "org/gnome/desktop/wm/preferences" = {
       titlebar-font = ''Noto Sans Bold 11'';
     };
