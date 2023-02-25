@@ -11,12 +11,13 @@ in {
       if gui
       then
         with pkgs; [
+          corefonts
+          fira-code
+          (nerdfonts.override {fonts = ["FiraCode"];})
           noto-fonts
           noto-fonts-extra
           noto-fonts-emoji
           noto-fonts-cjk-sans
-          fira-code
-          (nerdfonts.override {fonts = ["FiraCode"];})
         ]
       else [];
     fontconfig.defaultFonts =
