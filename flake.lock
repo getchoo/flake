@@ -358,6 +358,21 @@
         "type": "indirect"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1677336410,
+        "narHash": "sha256-MUatp+RjIQD9Br0yRVMmZwZgSGnCVpmAxYuzj7NzPek=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "6f1d9d380e7922cc302e2d21cb3615d918f4a001",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks-nix": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -393,7 +408,8 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs_3",
-        "nixpkgsUnstable": "nixpkgsUnstable"
+        "nixpkgsUnstable": "nixpkgsUnstable",
+        "nur": "nur"
       }
     },
     "rust-overlay": {

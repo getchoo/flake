@@ -6,6 +6,7 @@
   imports =
     [
       ../programs/mangohud.nix
+      ../programs/firefox.nix
     ]
     ++ (
       if (desktop == "gnome")

@@ -1,12 +1,13 @@
 {
   inputs = {
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    lanzaboote.url = "github:nix-community/lanzaboote";
     nixpkgs.url = "nixpkgs/nixos-22.11";
     nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
     nixos-wsl.url = "github:nix-community/NixOS-WSL?ref=main";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    lanzaboote.url = "github:nix-community/lanzaboote";
+    nur.url = "github:nix-community/NUR";
   };
 
   outputs = inputs @ {
@@ -16,6 +17,7 @@
     nixos-wsl,
     nixpkgs,
     nixpkgsUnstable,
+    nur,
     ...
   }: let
     supportedSystems = ["x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin"];
@@ -44,8 +46,12 @@
           nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
           nixos-hardware.nixosModules.common-pc-ssd
           lanzaboote.nixosModules.lanzaboote
+          nur.nixosModules.nur
 
           ./users/seth
+          {
+            nixpkgs.overlays = [nur.overlay];
+          }
         ];
         specialArgs = {
           desktop = "gnome";
