@@ -9,8 +9,7 @@
   ];
 
   boot = {
-    kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-    kernelParams = ["nohibernate"];
+    kernelPackages = pkgs.linuxPackages_latest;
 
     bootspec.enable = true;
     loader.systemd-boot.enable = lib.mkForce false;
@@ -19,6 +18,6 @@
       enable = true;
       pkiBundle = "/etc/secureboot";
     };
-    supportedFilesystems = ["zfs" "ntfs"];
+    supportedFilesystems = ["btrfs" "ntfs"];
   };
 }
