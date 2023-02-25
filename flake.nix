@@ -46,6 +46,7 @@
         ];
         specialArgs = {
           desktop = "gnome";
+          standalone = true;
           wsl = false;
         };
         version = "23.05";
@@ -71,6 +72,7 @@
         ];
         specialArgs = {
           desktop = "";
+          standalone = true;
           wsl = true;
         };
         version = "23.05";
