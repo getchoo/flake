@@ -33,6 +33,7 @@
         channel = nixpkgsUnstable;
         modules = [];
         extraSpecialArgs = {
+          nixpkgsStable = nixpkgs;
           standalone = true;
         };
       };
@@ -58,8 +59,8 @@
           }
         ];
         specialArgs = {
-          nixpkgsStable = nixpkgs;
           desktop = "gnome";
+          nixpkgsStable = nixpkgs;
           standalone = false;
           wsl = false;
         };
@@ -86,6 +87,7 @@
         ];
         specialArgs = {
           desktop = "";
+          nixpkgsStable = nixpkgs;
           standalone = false;
           wsl = true;
         };
