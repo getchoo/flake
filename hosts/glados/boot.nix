@@ -16,6 +16,13 @@ in {
   boot = {
     kernelPackages = pinned-kernel.pkgs.linuxPackages_6_1;
 
+    kernel.sysctl = {
+      "vm.swappiness" = 100;
+      "vm.vfs_cache_pressure" = 500;
+      "vm.dirty_background_ratio" = 1;
+      "vm.dirty_ratio" = 50;
+    };
+
     bootspec.enable = true;
     loader.systemd-boot.enable = lib.mkForce false;
 

@@ -8,4 +8,13 @@ _: {
     ./network.nix
     ./services.nix
   ];
+
+  powerManagement.cpuFreqGovernor = "ondemand";
+
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    swapDevices = 1;
+    memoryPercent = 50;
+  };
 }
