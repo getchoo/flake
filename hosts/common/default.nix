@@ -16,7 +16,10 @@ _: {
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-    settings.warn-dirty = false;
+    settings = {
+      auto-optimise-store = true;
+      warn-dirty = false;
+    };
   };
   # config.services.kmscon.enable = true;
 }
