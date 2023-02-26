@@ -11,9 +11,11 @@
 in {
   environment.systemPackages = with pkgs; [
     sbctl
+    tpm2-tss
   ];
 
   boot = {
+    initrd.systemd.enable = true;
     kernelPackages = pinned-kernel.pkgs.linuxPackages_6_1;
 
     kernel.sysctl = {
