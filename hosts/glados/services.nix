@@ -1,6 +1,9 @@
 _: {
   services = {
-    dbus.enable = true;
+    dbus = {
+      enable = true;
+      apparmor = "enabled";
+    };
     pipewire = {
       enable = true;
       wireplumber.enable = true;
