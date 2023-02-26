@@ -11,6 +11,11 @@ _: {
 
   powerManagement.cpuFreqGovernor = "ondemand";
 
+  security.tpm2 = {
+    enable = true;
+    abrmd.enable = true;
+  };
+
   zramSwap = {
     enable = true;
     algorithm = "zstd";
