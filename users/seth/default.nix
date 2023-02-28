@@ -31,7 +31,10 @@
 
       home.stateVersion = config.system.stateVersion;
 
-      nixpkgs.config.allowUnfree = true;
+      nixpkgs.config = {
+        allowUnfree = true;
+        allowUnsupportedSystem = true;
+      };
 
       systemd.user.startServices = true;
     };

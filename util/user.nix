@@ -14,7 +14,10 @@
         [
           ../users/${username}/home.nix
           {
-            nixpkgs.config.allowUnfree = true;
+            nixpkgs.config = {
+              allowUnfree = true;
+              allowUnsupportedSystem = true;
+            };
 
             nix = {
               package = channel.legacyPackages.${system}.nixFlakes;

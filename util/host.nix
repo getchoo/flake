@@ -19,7 +19,10 @@
               system.stateVersion = version;
               networking.hostName = mkDefault name;
               # enable non-free packages
-              nixpkgs.config.allowUnfree = true;
+              nixpkgs.config = {
+                allowUnfree = true;
+                allowUnsupportedSystem = true;
+              };
 
               # Enable nix flakes
               nix = {
