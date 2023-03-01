@@ -23,41 +23,27 @@
     supportedSystems = ["x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin"];
     forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
     nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
+
     util = import ./util {inherit inputs home-manager;};
     inherit (util) host user;
-  in {
-    homeConfigurations = {
-      seth = user.mkHMUser {
-        username = "seth";
-        stateVersion = "23.05";
-        channel = nixpkgsUnstable;
-        modules = [];
-        extraSpecialArgs = {
+
+    seth = {
+      specialArgs ? {},
+      pkgs ? nixpkgsUnstable,
+    }:
+      forAllSystems (system:
+        import ./users/seth {
+          inherit pkgs specialArgs system user;
           nixpkgsStable = nixpkgs;
-          standalone = true;
-        };
-      };
-    };
+        });
+  in {
+    homeConfigurations = forAllSystems (system: {
+      inherit ((seth {}).${system}.hm) seth;
+    });
 
     nixosConfigurations =
-      (host.mkHost {
+      (host.mkHost rec {
         name = "glados";
-        modules = [
-          nixos-hardware.nixosModules.common-cpu-amd-pstate
-          nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
-          nixos-hardware.nixosModules.common-pc-ssd
-          lanzaboote.nixosModules.lanzaboote
-          nur.nixosModules.nur
-
-          ./users/seth
-          {
-            nixpkgs.overlays = let
-              localOverlay = _: super: {
-                discord-canary = super.discord-canary.override {withOpenASAR = true;};
-              };
-            in [nur.overlay localOverlay];
-          }
-        ];
         specialArgs = {
           desktop = "gnome";
           nixpkgsStable = nixpkgs;
@@ -66,25 +52,26 @@
         };
         version = "23.05";
         pkgs = nixpkgsUnstable;
+        modules =
+          [
+            nixos-hardware.nixosModules.common-cpu-amd-pstate
+            nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
+            nixos-hardware.nixosModules.common-pc-ssd
+            lanzaboote.nixosModules.lanzaboote
+            nur.nixosModules.nur
+
+            {
+              nixpkgs.overlays = let
+                localOverlay = _: super: {
+                  discord-canary = super.discord-canary.override {withOpenASAR = true;};
+                };
+              in [nur.overlay localOverlay];
+            }
+          ]
+          ++ (seth {inherit specialArgs pkgs;}).x86_64-linux.system;
       })
-      // (host.mkHost {
+      // (host.mkHost rec {
         name = "glados-wsl";
-        modules = [
-          nixos-wsl.nixosModules.wsl
-
-          {
-            wsl = {
-              enable = true;
-              defaultUser = "seth";
-              nativeSystemd = true;
-              wslConf.network.hostname = "glados-wsl";
-              startMenuLaunchers = false;
-              interop.includePath = false;
-            };
-          }
-
-          ./users/seth
-        ];
         specialArgs = {
           desktop = "";
           nixpkgsStable = nixpkgs;
@@ -93,6 +80,21 @@
         };
         version = "23.05";
         pkgs = nixpkgsUnstable;
+        modules =
+          [
+            nixos-wsl.nixosModules.wsl
+            {
+              wsl = {
+                enable = true;
+                defaultUser = "seth";
+                nativeSystemd = true;
+                wslConf.network.hostname = "glados-wsl";
+                startMenuLaunchers = false;
+                interop.includePath = false;
+              };
+            }
+          ]
+          ++ (seth {inherit specialArgs pkgs;}).x86_64-linux.system;
       });
 
     formatter = forAllSystems (system: nixpkgsFor.${system}.alejandra);

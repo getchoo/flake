@@ -1,4 +1,4 @@
-{home-manager, ...}: {
+_: {
   mkHost = {
     name,
     modules,
@@ -18,6 +18,7 @@
             ({pkgs, ...}: {
               system.stateVersion = version;
               networking.hostName = mkDefault name;
+
               # enable non-free packages
               nixpkgs.config = {
                 allowUnfree = true;
@@ -30,15 +31,6 @@
                 settings.experimental-features = ["nix-command" "flakes"];
               };
             })
-
-            home-manager.nixosModules.home-manager
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                extraSpecialArgs = specialArgs;
-              };
-            }
           ]
           ++ modules;
       };

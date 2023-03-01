@@ -1,42 +1,39 @@
 {
-  config,
   pkgs,
-  home-manager,
-  desktop,
-  ...
-}: {
-  users.users.seth = {
-    extraGroups = ["wheel"];
-    isNormalUser = true;
-    hashedPassword = "***REMOVED***";
-    shell = pkgs.fish;
+  specialArgs,
+  user,
+  system ? "x86_64-linux",
+  nixpkgsStable,
+}: let
+  common = {
+    username = "seth";
+    stateVersion = "23.05";
   };
-
-  programs.fish.enable = true;
-
-  home-manager = {
-    useGlobalPkgs = true;
-    useUserPackages = true;
-    users.seth = {
-      imports =
-        [
-          ./home.nix
-          ./shell
-        ]
-        ++ (
-          if (desktop != "")
-          then [./desktop]
-          else []
-        );
-
-      home.stateVersion = config.system.stateVersion;
-
-      nixpkgs.config = {
-        allowUnfree = true;
-        allowUnsupportedSystem = true;
+in
+  with user; {
+    hm.seth = mkHMUser {
+      inherit (common) username stateVersion;
+      inherit system;
+      channel = pkgs;
+      extraSpecialArgs = {
+        inherit nixpkgsStable;
+        standalone = true;
+        desktop = "";
       };
-
-      systemd.user.startServices = true;
     };
-  };
-}
+
+    system = mkUser {
+      inherit (common) username stateVersion;
+      inherit system;
+      extraGroups = ["wheel"];
+      extraModules = [
+        {
+          programs.fish.enable = true;
+        }
+      ];
+      extraSpecialArgs = specialArgs;
+      hashedPassword = "***REMOVED***";
+      shell = pkgs.legacyPackages.${system}.fish;
+      hm = true;
+    };
+  }

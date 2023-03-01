@@ -1,10 +1,22 @@
-{home-manager, ...}: {
+{home-manager, ...}: let
+  commonHM = {
+    nixpkgs.config = {
+      allowUnfree = true;
+      allowUnsupportedSystem = true;
+    };
+    xdg.configFile."nixpkgs/config.nix".text = ''
+      {
+        allowUnfree = true;
+      }
+    '';
+  };
+in {
   mkHMUser = {
     username,
-    stateVersion ? "22.11",
-    system ? "x86_64-linux",
     channel,
     modules ? [],
+    stateVersion ? "22.11",
+    system ? "x86_64-linux",
     extraSpecialArgs ? {},
   }:
     home-manager.lib.homeManagerConfiguration {
@@ -13,27 +25,68 @@
       modules =
         [
           ../users/${username}/home.nix
-          {
-            nixpkgs.config = {
-              allowUnfree = true;
-              allowUnsupportedSystem = true;
-            };
+          ({pkgs, ...}:
+            {
+              home = {
+                inherit username stateVersion;
+                homeDirectory = "/home/${username}";
+              };
 
-            nix = {
-              package = channel.legacyPackages.${system}.nixFlakes;
-              settings.experimental-features = ["nix-command" "flakes"];
-            };
-
-            systemd.user.startServices = true;
-
-            home = {
-              inherit username stateVersion;
-              homeDirectory = "/home/${username}";
-            };
-
-            programs.home-manager.enable = true;
-          }
+              programs.home-manager.enable = true;
+              nix = {
+                package = pkgs.nixFlakes;
+                settings.experimental-features = ["nix-command" "flakes"];
+              };
+            }
+            // commonHM)
         ]
         ++ modules;
     };
+  mkUser = {
+    username,
+    extraGroups ? [],
+    extraModules ? [],
+    extraSpecialArgs ? {},
+    hashedPassword,
+    hm ? false,
+    shell,
+    stateVersion,
+    system ? "x86_64-linux",
+  }:
+    [
+      {
+        users.users.${username} = {
+          inherit extraGroups hashedPassword shell;
+          isNormalUser = true;
+        };
+      }
+    ]
+    ++ extraModules
+    ++ (
+      if hm
+      then [
+        home-manager.nixosModules.home-manager
+        {
+          home-manager = {
+            inherit extraSpecialArgs;
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.${username} =
+              {
+                imports = [
+                  ../users/${username}/home.nix
+                ];
+                home.stateVersion = stateVersion;
+              }
+              // commonHM
+              // (
+                if builtins.match ".*-linux" system != null
+                then {systemd.user.startServices = true;}
+                else {}
+              );
+          };
+        }
+      ]
+      else []
+    );
 }

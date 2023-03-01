@@ -11,7 +11,12 @@
     ++ (
       if (desktop == "gnome")
       then [./gnome.nix]
-      else [./plasma.nix]
+      else []
+    )
+    ++ (
+      if (desktop == "plasma")
+      then [./plasma.nix]
+      else []
     );
 
   home.packages = with pkgs; [
