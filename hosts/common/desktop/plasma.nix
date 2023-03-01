@@ -8,6 +8,7 @@
         plasma-browser-integration
         print-manager
       ];
+      useQtScaling = true;
     };
   };
 }

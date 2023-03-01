@@ -20,6 +20,7 @@
     );
 
   home.packages = with pkgs; [
+    chromium
     discord-canary
     element-desktop
     spotify
