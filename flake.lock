@@ -172,11 +172,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1676367705,
-        "narHash": "sha256-un5UbRat9TwruyImtwUGcKF823rCEp4fQxnsaLFL7CM=",
+        "lastModified": 1677704978,
+        "narHash": "sha256-3ijjQ5Vb51NdHvslbCpG8/UZ61ECcogxguRqgknlejc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "da72e6fc6b7dc0c3f94edbd310aae7cd95c678b5",
+        "rev": "f8077880359b72bbd290ee216b105f200a6f7cc7",
         "type": "github"
       },
       "original": {
@@ -197,11 +197,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1676047505,
-        "narHash": "sha256-VN4Qe2Lyu0106QIc+RX8BuzrqpzHb0UzzDVsnNb++s4=",
+        "lastModified": 1677488617,
+        "narHash": "sha256-7Y/xDEr2paX7m4+x9lP+5d8CCFVbNCP961NaXc62+Hk=",
         "owner": "nix-community",
         "repo": "lanzaboote",
-        "rev": "a75e2b4c952766adfd41787f09087ad6980c154d",
+        "rev": "a3bff52602cf310e991153e4260b4aa01f4ecb29",
         "type": "github"
       },
       "original": {
@@ -212,11 +212,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1676699914,
-        "narHash": "sha256-cM2Hd+odgCYWSUiYPZGW/4B+OI64S0lrdf9YR9ts9I4=",
+        "lastModified": 1677591639,
+        "narHash": "sha256-DMlAyge+u3K+JOFLA5YfdjqagdAYJf29YGBWpy5izg4=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "9bbcc37b011b0d925f3115888ea77f58487619b8",
+        "rev": "77de4cd09db4dbee9551ed2853cfcf113d7dc5ce",
         "type": "github"
       },
       "original": {
@@ -229,7 +229,9 @@
       "inputs": {
         "flake-compat": "flake-compat_4",
         "flake-utils": "flake-utils_2",
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": [
+          "nixpkgs"
+        ]
       },
       "locked": {
         "lastModified": 1676381420,
@@ -314,11 +316,11 @@
     },
     "nixpkgsUnstable": {
       "locked": {
-        "lastModified": 1676569297,
-        "narHash": "sha256-2n4C4H3/U+3YbDrQB6xIw7AaLdFISCCFwOkcETAigqU=",
+        "lastModified": 1677587185,
+        "narHash": "sha256-zYT66MAYwctAQqI5VBw3LbBXiSKdB8vuMAqCGG8onbE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "ac1f5b72a9e95873d1de0233fddcb56f99884b37",
+        "rev": "68196a61c26748d3e53a6803de3d2f8c69f27831",
         "type": "github"
       },
       "original": {
@@ -329,27 +331,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1675918889,
-        "narHash": "sha256-hy7re4F9AEQqwZxubct7jBRos6md26bmxnCjxf5utJA=",
+        "lastModified": 1677624842,
+        "narHash": "sha256-4DF9DbDuK4/+KYx0L6XcPBeDHUFVCtzok2fWtwXtb5w=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "49efda9011e8cdcd6c1aad30384cb1dc230c82fe",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-22.11",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
-        "lastModified": 1676546582,
-        "narHash": "sha256-MJ+PXNmUyxnMTFoss7G2lEcUY2cfYZM6RudBAL5aX1k=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "2fb7d749c084890192b2cd08ba264e5e4a14df1b",
+        "rev": "d70f5cd5c3bef45f7f52698f39e7cc7a89daa7f0",
         "type": "github"
       },
       "original": {
@@ -360,11 +346,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1677336410,
-        "narHash": "sha256-MUatp+RjIQD9Br0yRVMmZwZgSGnCVpmAxYuzj7NzPek=",
+        "lastModified": 1677718193,
+        "narHash": "sha256-Um07hNATYWscT/GrmK2OJ7Chur6Fedhzo+oK5hCx8yU=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "6f1d9d380e7922cc302e2d21cb3615d918f4a001",
+        "rev": "d5b688e216d97c438896d631e89e27dc66d5e28d",
         "type": "github"
       },
       "original": {
@@ -407,7 +393,7 @@
         "lanzaboote": "lanzaboote",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgsUnstable": "nixpkgsUnstable",
         "nur": "nur"
       }
