@@ -1,12 +1,14 @@
 {
   inputs = {
-    nixpkgs.url = "nixpkgs/nixos-22.11";
     nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    lanzaboote.url = "github:nix-community/lanzaboote";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,12 +18,12 @@
   };
 
   outputs = inputs @ {
+    nixpkgs,
+    nixpkgsUnstable,
     home-manager,
     lanzaboote,
     nixos-hardware,
     nixos-wsl,
-    nixpkgs,
-    nixpkgsUnstable,
     nur,
     ...
   }: let
