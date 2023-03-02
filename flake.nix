@@ -36,11 +36,7 @@
       specialArgs ? {},
       pkgs ? nixpkgsUnstable,
     }:
-      forAllSystems (system:
-        import ./users/seth {
-          inherit pkgs specialArgs system user;
-          nixpkgsStable = nixpkgs;
-        });
+      forAllSystems (system: import ./users/seth {inherit pkgs specialArgs system user;});
   in {
     homeConfigurations = forAllSystems (system: {
       inherit ((seth {}).${system}.hm) seth;
@@ -79,7 +75,6 @@
         name = "glados-wsl";
         specialArgs = {
           desktop = "";
-          nixpkgsStable = nixpkgs;
           standalone = false;
           wsl = true;
         };

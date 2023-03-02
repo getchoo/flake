@@ -3,7 +3,6 @@
   specialArgs,
   user,
   system ? "x86_64-linux",
-  nixpkgsStable,
 }: let
   common = {
     username = "seth";
@@ -16,7 +15,6 @@ in
       inherit system;
       channel = pkgs;
       extraSpecialArgs = {
-        inherit nixpkgsStable;
         standalone = true;
         desktop = "";
       };

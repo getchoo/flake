@@ -1,10 +1,4 @@
-{
-  pkgs,
-  nixpkgsStable,
-  ...
-}: let
-  treesitter-pinned = import nixpkgsStable {system = "x86_64-linux";};
-in {
+{pkgs, ...}: {
   programs.neovim = {
     enable = true;
     defaultEditor = true;
@@ -42,7 +36,7 @@ in {
       nvim-lspconfig
       null-ls-nvim
       nvim-tree-lua
-      treesitter-pinned.pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+      nvim-treesitter.withAllGrammars
       nvim-web-devicons
       plenary-nvim
       telescope-nvim
