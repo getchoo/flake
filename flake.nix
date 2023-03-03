@@ -1,6 +1,10 @@
 {
   inputs = {
     nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
+    getchoo = {
+      url = "github:getchoo/overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -20,6 +24,7 @@
   outputs = inputs @ {
     nixpkgs,
     nixpkgsUnstable,
+    getchoo,
     home-manager,
     lanzaboote,
     nixos-hardware,
@@ -64,11 +69,8 @@
             nur.nixosModules.nur
 
             {
-              nixpkgs.overlays = let
-                localOverlay = _: super: {
-                  discord-canary = super.discord-canary.override {withOpenASAR = true;};
-                };
-              in [nur.overlay localOverlay];
+              nixpkgs.overlays = [nur.overlay getchoo.overlays.default];
+              nix.registry.getchoo.flake = getchoo;
             }
           ]
           ++ (seth {inherit specialArgs pkgs;}).x86_64-linux.system;
@@ -94,6 +96,9 @@
                 startMenuLaunchers = false;
                 interop.includePath = false;
               };
+
+              nixpkgs.overlays = [getchoo.overlays.default];
+              nix.registry.getchoo.flake = getchoo;
             }
           ]
           ++ (seth {inherit specialArgs pkgs;}).x86_64-linux.system;
