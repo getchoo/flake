@@ -7,6 +7,7 @@ _: {
   };
 
   time = {
+    hardwareClockInLocalTime = true;
     timeZone = "America/New_York";
   };
 }
