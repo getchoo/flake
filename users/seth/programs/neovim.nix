@@ -6,7 +6,8 @@
       alejandra
       codespell
       deadnix
-      llvmPackages_15.stdenv
+      llvmPackages_15.clang
+      llvmPackages_15.libclang
       nodePackages.alex
       nodePackages.bash-language-server
       nodePackages.prettier
@@ -189,7 +190,7 @@
          local formatting = null_ls.builtins.formatting
 
          local sources = {
-         	lsp_servers = { "rust_analyzer", "pyright", "bashls" },
+         	lsp_servers = { "rust_analyzer", "pyright", "bashls", "clangd" },
          	null_ls = {
          		diagnostics.alex,
          		diagnostics.codespell,

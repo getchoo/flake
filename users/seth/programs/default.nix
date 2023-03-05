@@ -9,7 +9,7 @@
   home.packages = with pkgs; [
     bat
     btop
-    llvmPackages_15.stdenv
+    llvmPackages_15.clang
     exa
     fd
     gh
