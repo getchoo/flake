@@ -7,8 +7,8 @@
     nvidia = {
       package = config.boot.kernelPackages.nvidiaPackages.stable;
       modesetting.enable = true;
-      nvidiaPersistenced = true;
-      powerManagement.enable = true;
+      # nvidiaPersistenced = true;
+      # powerManagement.enable = true;
     };
     opengl = {
       enable = true;

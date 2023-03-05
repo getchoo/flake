@@ -1,14 +1,8 @@
 {
   lib,
   pkgs,
-  nixpkgsStable,
   ...
-}: let
-  pinned-kernel = import nixpkgsStable {
-    system = "x86_64-linux";
-    config.allowUnfree = true;
-  };
-in {
+}: {
   environment.systemPackages = with pkgs; [
     sbctl
     tpm2-tss
@@ -16,7 +10,7 @@ in {
 
   boot = {
     initrd.systemd.enable = true;
-    kernelPackages = pinned-kernel.pkgs.linuxPackages_6_1;
+    kernelPackages = pkgs.linuxPackages_6_1;
 
     kernel.sysctl = {
       "vm.swappiness" = 100;

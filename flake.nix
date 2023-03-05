@@ -54,7 +54,6 @@
         name = "glados";
         specialArgs = {
           desktop = "gnome";
-          nixpkgsStable = nixpkgs;
           standalone = false;
           wsl = false;
         };
