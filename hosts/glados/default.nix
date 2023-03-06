@@ -9,6 +9,10 @@ _: {
     ./services.nix
   ];
 
+  environment.etc."environment".text = ''
+    LIBVA_DRIVER_NAME=vdpau
+  '';
+
   powerManagement.cpuFreqGovernor = "ondemand";
 
   security.tpm2 = {
