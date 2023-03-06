@@ -1,6 +1,9 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
+    catppuccin-cursors
     catppuccin-kde
+    catppuccin-kvantum
+    libsForQt5.qtstyleplugin-kvantum
     papirus-icon-theme
   ];
 
