@@ -151,11 +151,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1677822144,
-        "narHash": "sha256-Dhou4Zm367UElSDHrq9fdMWupo0w+Rj5NHyHDWMpYvw=",
+        "lastModified": 1678068193,
+        "narHash": "sha256-GShouHeMPx7IKA+hqwy3oSd5kIO9SJYV0xjNQW5upUQ=",
         "owner": "getchoo",
         "repo": "overlay",
-        "rev": "46a9e8fe282b847f8afa6e5a4ff6e021948485db",
+        "rev": "a430e3115c4b02297fef614d957981cb3bb25b2b",
         "type": "github"
       },
       "original": {

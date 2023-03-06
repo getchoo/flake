@@ -1,5 +1,12 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [adw-gtk3] ++ (with pkgs.gnomeExtensions; [appindicator blur-my-shell caffeine]);
+  home.packages = with pkgs;
+    [adw-gtk3]
+    ++ (with pkgs.gnomeExtensions; [
+      appindicator
+      blur-my-shell
+      caffeine
+      gradience
+    ]);
 
   dconf.settings = {
     "org/gnome/shell" = {
