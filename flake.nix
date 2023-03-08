@@ -24,85 +24,31 @@
   outputs = inputs @ {
     nixpkgs,
     nixpkgsUnstable,
-    getchoo,
-    home-manager,
-    lanzaboote,
-    nixos-hardware,
-    nixos-wsl,
-    nur,
     ...
   }: let
-    supportedSystems = ["x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin"];
+    supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
     forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-    nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
 
-    util = import ./util {inherit inputs home-manager;};
-    inherit (util) host user;
+    mkPkgsFor = pkgs: forAllSystems (system: import pkgs {inherit system;});
+    channels = {
+      nixpkgs = mkPkgsFor nixpkgs;
+      nixpkgsUnstable = mkPkgsFor nixpkgsUnstable;
+    };
 
-    seth = {
-      specialArgs ? {},
-      pkgs ? nixpkgsUnstable,
-    }:
-      forAllSystems (system: import ./users/seth {inherit pkgs specialArgs system user;});
+    util = import ./util {
+      inherit (nixpkgs) lib;
+      inherit inputs;
+    };
+    inherit (util.host) mapHosts;
+    inherit (util.user) mapHMUsers;
+
+    users = import ./users {inherit inputs;};
+    hosts = import ./hosts {inherit inputs;};
   in {
-    homeConfigurations = forAllSystems (system: {
-      inherit ((seth {}).${system}.hm) seth;
-    });
+    homeConfigurations = forAllSystems (system: mapHMUsers (users.users {inherit system;}));
 
-    nixosConfigurations =
-      (host.mkHost rec {
-        name = "glados";
-        specialArgs = {
-          desktop = "gnome";
-          standalone = false;
-          wsl = false;
-        };
-        version = "23.05";
-        pkgs = nixpkgsUnstable;
-        modules =
-          [
-            nixos-hardware.nixosModules.common-cpu-amd-pstate
-            nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
-            nixos-hardware.nixosModules.common-pc-ssd
-            lanzaboote.nixosModules.lanzaboote
-            nur.nixosModules.nur
+    nixosConfigurations = mapHosts hosts;
 
-            {
-              nixpkgs.overlays = [nur.overlay getchoo.overlays.default];
-              nix.registry.getchoo.flake = getchoo;
-            }
-          ]
-          ++ (seth {inherit specialArgs pkgs;}).x86_64-linux.system;
-      })
-      // (host.mkHost rec {
-        name = "glados-wsl";
-        specialArgs = {
-          desktop = "";
-          standalone = false;
-          wsl = true;
-        };
-        version = "23.05";
-        pkgs = nixpkgsUnstable;
-        modules =
-          [
-            nixos-wsl.nixosModules.wsl
-            {
-              wsl = {
-                enable = true;
-                defaultUser = "seth";
-                nativeSystemd = true;
-                wslConf.network.hostname = "glados-wsl";
-                startMenuLaunchers = false;
-                interop.includePath = false;
-              };
-
-              nixpkgs.overlays = [getchoo.overlays.default];
-              nix.registry.getchoo.flake = getchoo;
-            }
-          ]
-          ++ (seth {inherit specialArgs pkgs;}).x86_64-linux.system;
-      });
-
-    formatter = forAllSystems (system: nixpkgsFor.${system}.alejandra);
+    formatter = forAllSystems (system: channels.nixpkgs.${system}.alejandra);
   };
 }

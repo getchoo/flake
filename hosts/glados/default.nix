@@ -1,13 +1,24 @@
-_: {
+{
+  config,
+  home-manager,
+  ...
+}: {
   imports = [
-    ../common/hardware
-    ../common/hardware/nvidia.nix
-    ../common/virtualisation.nix
+    ../../profiles/desktop/gnome
+    ../../profiles/hardware/nvidia.nix
+    ../../profiles/virtualisation.nix
+    ../../users/seth
     ./boot.nix
     ./hardware-configuration.nix
     ./network.nix
     ./services.nix
   ];
+
+  home-manager.users.seth = {
+    imports = [
+      ../../users/seth/desktop/gnome
+    ];
+  };
 
   environment.etc."environment".text = ''
     LIBVA_DRIVER_NAME=vdpau
@@ -26,4 +37,6 @@ _: {
     swapDevices = 1;
     memoryPercent = 50;
   };
+
+  system.stateVersion = "23.05";
 }

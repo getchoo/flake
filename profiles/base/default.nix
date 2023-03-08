@@ -1,16 +1,11 @@
-_: {
+{pkgs, ...}: {
   imports = [
     ./documentation.nix
-    ./desktop
-    ./fonts.nix
-    ./locale.nix
     ./packages.nix
-    ./security.nix
-    ./systemd.nix
-    ./users.nix
   ];
 
   nix = {
+    package = pkgs.nixFlakes;
     gc = {
       automatic = true;
       dates = "weekly";
@@ -19,7 +14,7 @@ _: {
     settings = {
       auto-optimise-store = true;
       warn-dirty = false;
+      experimental-features = ["nix-command" "flakes"];
     };
   };
-  # config.services.kmscon.enable = true;
 }

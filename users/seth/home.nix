@@ -1,16 +1,25 @@
-{desktop, ...}: let
-  usingDesktop = desktop != "";
-in {
-  imports =
-    [
-      ./programs
-      ./shell
-    ]
-    ++ (
-      if usingDesktop
-      then [./desktop]
-      else []
-    );
+{
+  lib,
+  pkgs,
+  ...
+}: {
+  imports = [
+    ./programs
+    ./shell
+  ];
 
-  nix.settings.warn-dirty = false;
+  nix = {
+    package = lib.mkDefault pkgs.nixFlakes;
+    settings.warn-dirty = false;
+  };
+  xdg = {
+    enable = true;
+    configFile."nixpkgs/config.nix".text = ''
+      {
+       	allowUnfree = true;
+        allowUnsupportedSystem;
+      }
+    '';
+  };
+  home.stateVersion = "23.05";
 }

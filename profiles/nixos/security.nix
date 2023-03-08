@@ -1,8 +1,12 @@
-{wsl, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   security = {
-    apparmor.enable = !wsl;
-    audit.enable = !wsl;
-    auditd.enable = !wsl;
+    apparmor.enable = lib.mkDefault true;
+    audit.enable = lib.mkDefault true;
+    auditd.enable = lib.mkDefault true;
     rtkit.enable = true;
     sudo = {
       execWheelOnly = true;
@@ -19,5 +23,10 @@
       ];
     };
     polkit.enable = true;
+  };
+
+  users = {
+    defaultUserShell = pkgs.bash;
+    mutableUsers = false;
   };
 }

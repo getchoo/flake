@@ -1,38 +1,45 @@
-_: {
+{
+  lib,
+  inputs,
+  mapFilterDirs,
+}: rec {
   mkHost = {
     name,
     modules,
-    system ? "x86_64-linux",
     specialArgs ? {},
-    version ? "22.11",
+    system ? "x86_64-linux",
+    stateVersion ? "22.11",
     pkgs,
-  }: {
-    ${name} = with pkgs.lib;
+  }:
+    with pkgs.lib;
       nixosSystem {
         inherit system specialArgs;
         modules =
           [
-            ../hosts/common
+            ../profiles/base
+            ../profiles/nixos
             ../hosts/${name}
 
-            ({pkgs, ...}: {
-              system.stateVersion = version;
+            {
+              system.stateVersion = stateVersion;
               networking.hostName = mkDefault name;
-
-              # enable non-free packages
-              nixpkgs.config = {
-                allowUnfree = true;
-                allowUnsupportedSystem = true;
+              nixpkgs = {
+                overlays = with inputs; [nur.overlay getchoo.overlays.default];
+                config = {
+                  allowUnfree = true;
+                  allowUnsupportedSystem = true;
+                };
               };
-
-              # Enable nix flakes
-              nix = {
-                package = pkgs.nixFlakes;
-                settings.experimental-features = ["nix-command" "flakes"];
-              };
-            })
+              nix.registry.getchoo.flake = inputs.getchoo;
+            }
           ]
           ++ modules;
       };
-  };
+
+  mapHosts = hosts:
+    mapFilterDirs ../hosts (_: v: v == "directory") (name: _:
+      mkHost {
+        inherit name;
+        inherit (hosts.${name}) modules system stateVersion pkgs;
+      });
 }

@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  standalone,
   ...
 }: {
   xdg.configFile."fish/themes" = {
@@ -19,18 +18,14 @@
 
   programs.fish = {
     enable = true;
-    interactiveShellInit =
-      ''
-        fish_config theme choose "Catppuccin Mocha"
-        direnv hook fish | source
-      ''
-      + (
-        if standalone
-        then ''
-          . ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.fish
-        ''
-        else ''''
-      );
+    interactiveShellInit = ''
+      set -l nixfile ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.fish
+      if test -e $nixfile
+      	source $nixfile
+      end
+      fish_config theme choose "Catppuccin Mocha"
+      direnv hook fish | source
+    '';
     plugins = [
       {
         name = "autopair-fish";

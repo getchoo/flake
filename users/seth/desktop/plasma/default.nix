@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+  imports = [
+    ../.
+  ];
   home.packages = with pkgs; [
     catppuccin-cursors
     catppuccin-kde

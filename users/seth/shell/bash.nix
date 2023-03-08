@@ -1,16 +1,10 @@
-{
-  config,
-  standalone,
-  ...
-}: {
+{config, ...}: {
   programs.bash = {
     enable = true;
-    bashrcExtra =
-      if standalone
-      then ''
-        . ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
-      ''
-      else '''';
+    bashrcExtra = ''
+      nixfile=${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
+      [ -e "$nixfile" ] && source "$nixfile"
+    '';
     historyFile = "${config.xdg.stateHome}/bash/history";
     historyFileSize = 1000;
     historySize = 100;

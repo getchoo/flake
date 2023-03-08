@@ -1,37 +1,24 @@
 {
+  config,
   pkgs,
-  specialArgs,
-  user,
-  system ? "x86_64-linux",
-}: let
-  common = {
-    username = "seth";
-    stateVersion = "23.05";
+  home-manager,
+  ...
+}: {
+  users.users.seth = {
+    extraGroups = ["wheel"];
+    isNormalUser = true;
+    hashedPassword = "***REMOVED***";
+    shell = pkgs.fish;
   };
-in
-  with user; {
-    hm.seth = mkHMUser {
-      inherit (common) username stateVersion;
-      inherit system;
-      channel = pkgs;
-      extraSpecialArgs = {
-        standalone = true;
-        desktop = "";
-      };
-    };
 
-    system = mkUser {
-      inherit (common) username stateVersion;
-      inherit system;
-      extraGroups = ["wheel"];
-      extraModules = [
-        {
-          programs.fish.enable = true;
-        }
-      ];
-      extraSpecialArgs = specialArgs;
-      hashedPassword = "***REMOVED***";
-      shell = pkgs.legacyPackages.${system}.fish;
-      hm = true;
-    };
-  }
+  programs.fish.enable = true;
+
+  home-manager.users.seth = let
+    inherit (config.nixpkgs) overlays;
+  in {
+    imports = [
+      ./home.nix
+    ];
+    nixpkgs.overlays = overlays;
+  };
+}

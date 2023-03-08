@@ -1,10 +1,4 @@
-{
-  pkgs,
-  desktop,
-  ...
-}:
-if desktop != ""
-then {
+{pkgs, ...}: {
   fonts = {
     enableDefaultFonts = true;
     fonts = with pkgs; [
@@ -24,4 +18,3 @@ then {
     };
   };
 }
-else {}

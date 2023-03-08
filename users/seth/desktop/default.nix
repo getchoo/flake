@@ -1,23 +1,8 @@
-{
-  pkgs,
-  desktop,
-  ...
-}: {
-  imports =
-    [
-      ../programs/mangohud.nix
-      ../programs/firefox.nix
-    ]
-    ++ (
-      if (desktop == "gnome")
-      then [./gnome.nix]
-      else []
-    )
-    ++ (
-      if (desktop == "plasma")
-      then [./plasma.nix]
-      else []
-    );
+{pkgs, ...}: {
+  imports = [
+    ../programs/mangohud.nix
+    ../programs/firefox.nix
+  ];
 
   home.packages = with pkgs; [
     chromium

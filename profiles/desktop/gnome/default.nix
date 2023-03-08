@@ -3,6 +3,9 @@
   lib,
   ...
 }: {
+  imports = [
+    ../.
+  ];
   environment = {
     gnome.excludePackages = with pkgs; [
       epiphany
@@ -11,6 +14,7 @@
     systemPackages = with pkgs; [
       adw-gtk3
       blackbox-terminal
+      pinentry-gnome
     ];
   };
 
@@ -21,4 +25,6 @@
     };
     desktopManager.gnome.enable = true;
   };
+
+  programs.gnupg.agent.pinentryFlavor = "gnome3";
 }

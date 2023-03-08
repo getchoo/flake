@@ -1,4 +1,7 @@
 {pkgs, ...}: {
+  imports = [
+    ../.
+  ];
   home.packages = with pkgs;
     [adw-gtk3]
     ++ (with pkgs.gnomeExtensions; [
@@ -8,45 +11,48 @@
       gradience
     ]);
 
-  dconf.settings = {
-    "org/gnome/shell" = {
-      disable-user-extensions = false;
-      enabled-extensions = [
-        "appindicatorsupport@rgcjonas.gmail.com"
-        "caffeine@patapon.info"
-      ];
-      favorite-apps = [
-        "firefox.desktop"
-        "org.gnome.Nautilus.desktop"
-        "discord-canary.desktop"
-      ];
-    };
-    "org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-      font-antialiasing = ''rgba'';
-      font-name = ''Noto Sans 11'';
-      document-font-name = ''Noto Sans 11'';
-      monospace-font-name = ''FiraCode Nerd Font 10'';
-    };
-    "org/gnome/desktop/peripherals/mouse" = {
-      accel-profile = ''flat'';
-    };
-    "org/gnome/desktop/wm/preferences" = {
-      titlebar-font = ''Noto Sans Bold 11'';
-    };
-    "org/gnome/desktop/wm/keybindings" = {
-      switch-windows = ["<Alt>Tab"];
-      switch-windows-backward = ["<Shift><Alt>Tab"];
-    };
-    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-      name = "blackbox";
-      command = "blackbox";
-      binding = "<Control><Alt>t";
-    };
-    "com/raggesilver/BlackBox" = {
-      font = ''FiraCode Nerd Font 12'';
-      theme-dark = ''Catppuccin-Mocha'';
-      remember-window-size = true;
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = [
+          "appindicatorsupport@rgcjonas.gmail.com"
+          "caffeine@patapon.info"
+        ];
+        favorite-apps = [
+          "firefox.desktop"
+          "org.gnome.Nautilus.desktop"
+          "discord-canary.desktop"
+        ];
+      };
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        font-antialiasing = ''rgba'';
+        font-name = ''Noto Sans 11'';
+        document-font-name = ''Noto Sans 11'';
+        monospace-font-name = ''FiraCode Nerd Font 10'';
+      };
+      "org/gnome/desktop/peripherals/mouse" = {
+        accel-profile = ''flat'';
+      };
+      "org/gnome/desktop/wm/preferences" = {
+        titlebar-font = ''Noto Sans Bold 11'';
+      };
+      "org/gnome/desktop/wm/keybindings" = {
+        switch-windows = ["<Alt>Tab"];
+        switch-windows-backward = ["<Shift><Alt>Tab"];
+      };
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+        name = "blackbox";
+        command = "blackbox";
+        binding = "<Control><Alt>t";
+      };
+      "com/raggesilver/BlackBox" = {
+        font = ''FiraCode Nerd Font 12'';
+        theme-dark = ''Catppuccin-Mocha'';
+        remember-window-size = true;
+      };
     };
   };
 
