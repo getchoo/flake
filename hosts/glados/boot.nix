@@ -10,7 +10,7 @@
 
   boot = {
     initrd.systemd.enable = true;
-    kernelPackages = pkgs.linuxPackages_6_1;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     kernel.sysctl = {
       "vm.swappiness" = 100;

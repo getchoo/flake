@@ -17,7 +17,7 @@
     configFile."nixpkgs/config.nix".text = ''
       {
        	allowUnfree = true;
-        allowUnsupportedSystem;
+        allowUnsupportedSystem = true;
       }
     '';
   };
