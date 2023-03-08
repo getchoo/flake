@@ -1,8 +1,4 @@
-{
-  config,
-  home-manager,
-  ...
-}: {
+{home-manager, ...}: {
   imports = [
     ../../profiles/desktop/gnome
     ../../profiles/hardware/nvidia.nix
