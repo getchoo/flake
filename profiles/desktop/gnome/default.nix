@@ -15,6 +15,7 @@
       adw-gtk3
       blackbox-terminal
       pinentry-gnome
+      pinentry-gnome
     ];
   };
 

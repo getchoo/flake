@@ -2,6 +2,9 @@
   imports = [
     ../.
   ];
+
+  environment.systemPackages = with pkgs; [pinentry-qt];
+
   services.xserver = {
     displayManager.sddm.enable = true;
     desktopManager.plasma5 = {
@@ -14,4 +17,6 @@
       useQtScaling = true;
     };
   };
+
+  programs.gnupg.agent.pinentryFlavor = "qt";
 }
