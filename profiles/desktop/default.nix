@@ -9,7 +9,7 @@
   ];
   environment = {
     noXlibs = lib.mkForce false;
-    systemPackages = with pkgs; [pinentry-curses];
+    systemPackages = with pkgs; [pinentry-curses wl-clipboard xclip];
   };
   programs = {
     dconf.enable = true;
