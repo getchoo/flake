@@ -19,11 +19,17 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nur.url = "github:nix-community/NUR";
+    pre-commit-hooks = {
+      url = "github:cachix/pre-commit-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs @ {
+    self,
     nixpkgs,
     nixpkgsUnstable,
+    pre-commit-hooks,
     ...
   }: let
     supportedSystems = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
@@ -45,10 +51,35 @@
     users = import ./users {inherit inputs;};
     hosts = import ./hosts {inherit inputs;};
   in {
+    checks = forAllSystems (system: {
+      pre-commit-check = pre-commit-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          alejandra.enable = true;
+          deadnix.enable = true;
+          statix.enable = true;
+        };
+      };
+    });
+
+    devShells = forAllSystems (system: let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+      with pkgs; {
+        default = mkShell {
+          inherit (self.checks.${system}.pre-commit-check) shellHook;
+          packages = [
+            alejandra
+            deadnix
+            statix
+          ];
+        };
+      });
+
+    formatter = forAllSystems (system: channels.nixpkgs.${system}.alejandra);
+
     homeConfigurations = forAllSystems (system: mapHMUsers (users.users {inherit system;}));
 
     nixosConfigurations = mapHosts hosts;
-
-    formatter = forAllSystems (system: channels.nixpkgs.${system}.alejandra);
   };
 }

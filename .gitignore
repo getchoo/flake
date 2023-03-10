@@ -1,1 +1,6 @@
+# build artifacts
 result
+
+# dev shell
+.pre-commit-config.yaml
+.direnv/

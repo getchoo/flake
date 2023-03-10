@@ -1,0 +1,26 @@
+name: check flake
+
+on:
+  pull_request:
+    paths:
+      - "**.nix"
+  push:
+    paths:
+      - "**.nix"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: cachix/install-nix-action@v19
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: |
+          export NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1
+          export NIXPKGS_ALLOW_BROKEN=1
+          export NIXPKGS_ALLOW_UNFREE=1
+          nix flake check --impure
