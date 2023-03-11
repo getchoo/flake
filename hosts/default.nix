@@ -9,11 +9,8 @@ with inputs; let
       home-manager.nixosModules.home-manager
       nur.nixosModules.nur
       {
-        services.openssh = {
-          enable = true;
-        };
         age = {
-          identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+          identityPaths = ["/etc/age/key"];
           secrets = {
             rootPassword.file = ../secrets/rootPassword.age;
             sethPassword.file = ../secrets/sethPassword.age;
