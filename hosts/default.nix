@@ -12,8 +12,8 @@ with inputs; let
         age = {
           identityPaths = ["/etc/age/key"];
           secrets = {
-            rootPassword.file = ../secrets/rootPassword.age;
-            sethPassword.file = ../secrets/sethPassword.age;
+            rootPassword.file = ../users/secrets/rootPassword.age;
+            sethPassword.file = ../users/secrets/sethPassword.age;
           };
         };
       }

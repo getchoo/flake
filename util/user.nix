@@ -25,7 +25,7 @@
     };
 
   mapHMUsers = users:
-    mapFilterDirs ../users (n: v: v == "directory" && n != "root") (username: _:
+    mapFilterDirs ../users (n: v: v == "directory" && n != "root" && n != "secrets") (username: _:
       mkHMUser {
         inherit username;
         inherit (users.${username}) pkgs stateVersion;
