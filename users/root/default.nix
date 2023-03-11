@@ -3,6 +3,6 @@
     home = "/root";
     uid = config.ids.uids.root;
     group = "root";
-    initialHashedPassword = "***REMOVED***";
+    passwordFile = config.age.secrets.rootPassword.path;
   };
 }

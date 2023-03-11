@@ -7,8 +7,8 @@
   users.users.seth = {
     extraGroups = ["wheel"];
     isNormalUser = true;
-    hashedPassword = "***REMOVED***";
     shell = pkgs.fish;
+    passwordFile = config.age.secrets.sethPassword.path;
   };
 
   programs.fish.enable = true;

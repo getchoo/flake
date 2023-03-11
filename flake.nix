@@ -1,6 +1,10 @@
 {
   inputs = {
     nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgsUnstable";
+    };
     getchoo = {
       url = "github:getchoo/overlay";
       inputs.nixpkgs.follows = "nixpkgs";

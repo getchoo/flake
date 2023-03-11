@@ -5,8 +5,21 @@ with inputs; let
     stateVersion = "23.05";
     pkgs = nixpkgsUnstable;
     modules = with inputs; [
+      agenix.nixosModules.default
       home-manager.nixosModules.home-manager
       nur.nixosModules.nur
+      {
+        services.openssh = {
+          enable = true;
+        };
+        age = {
+          identityPaths = ["/etc/ssh/ssh_host_ed25519_key"];
+          secrets = {
+            rootPassword.file = ../secrets/rootPassword.age;
+            sethPassword.file = ../secrets/sethPassword.age;
+          };
+        };
+      }
     ];
   };
 in {
