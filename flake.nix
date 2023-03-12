@@ -54,11 +54,14 @@
     pre-commit-hooks,
     ...
   }: let
-    util = import ./util {
-      inherit (nixpkgs) lib;
-      inherit inputs;
-    };
-    inherit (util) mapHosts mapHMUsers;
+    inherit
+      (import ./util {
+        inherit (nixpkgs) lib;
+        inherit inputs;
+      })
+      mapHosts
+      mapHMUsers
+      ;
 
     users = import ./users {inherit inputs;};
     hosts = import ./hosts {inherit inputs;};
