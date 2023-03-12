@@ -13,13 +13,16 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: checkout repo
+        uses: actions/checkout@v3
 
-      - uses: cachix/install-nix-action@v19
+      - name: install nix
+        uses: cachix/install-nix-action@v19
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: |
+      - name: run nix flake check
+        run: |
           export NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1
           export NIXPKGS_ALLOW_BROKEN=1
           export NIXPKGS_ALLOW_UNFREE=1
