@@ -76,6 +76,7 @@
             alejandra.enable = true;
             deadnix.enable = true;
             statix.enable = true;
+            stylua.enable = true;
           };
         };
       };
@@ -87,6 +88,7 @@
             alejandra
             deadnix
             statix
+            stylua
           ];
         };
       };
