@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./git.nix
-    ./neovim.nix
+    ./neovim
     ./vim.nix
   ];
 
