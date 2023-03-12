@@ -2,7 +2,6 @@
   imports = [
     ./git.nix
     ./neovim.nix
-    ./starship.nix
     ./vim.nix
   ];
 
