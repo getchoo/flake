@@ -10,5 +10,5 @@
   in
     mapAttrs map dirs;
 in
-  (import ./host.nix {inherit lib inputs mapFilterDirs;})
-  // (import ./user.nix {inherit lib inputs mapFilterDirs;})
+  (import ./host.nix {inherit inputs mapFilterDirs;})
+  // (import ./user.nix {inherit inputs mapFilterDirs;})

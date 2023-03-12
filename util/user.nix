@@ -1,8 +1,6 @@
 {
-  lib,
   inputs,
   mapFilterDirs,
-  ...
 }: rec {
   mkHMUser = {
     username,
