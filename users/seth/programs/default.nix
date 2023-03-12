@@ -13,6 +13,7 @@
     fd
     gh
     lld
+    nix-your-shell
     rclone
     restic
     ripgrep
