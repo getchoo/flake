@@ -64,43 +64,12 @@
     };
   };
 
-  xdg.dataFile."blackbox/schemes/Catppuccin-Mocha.json" = {
-    text = ''
-      {
-        "name": "Catppuccin-Mocha",
-        "comment": "Soothing pastel theme for the high-spirited!",
-        "background-color": "#1E1E2E",
-        "foreground-color": "#CDD6F4",
-        "badge-color": "#585B70",
-        "bold-color": "#585B70",
-        "cursor-background-color": "#F5E0DC",
-        "cursor-foreground-color": "#1E1E2E",
-        "highlight-background-color": "#F5E0DC",
-        "highlight-foreground-color": "#1E1E2E",
-        "palette": [
-          "#45475A",
-          "#F38BA8",
-          "#A6E3A1",
-          "#F9E2AF",
-          "#89B4FA",
-          "#F5C2E7",
-          "#94E2D5",
-          "#BAC2DE",
-          "#585B70",
-          "#F38BA8",
-          "#A6E3A1",
-          "#F9E2AF",
-          "#89B4FA",
-          "#F5C2E7",
-          "#94E2D5",
-          "#A6ADC8"
-        ],
-        "use-badge-color": false,
-        "use-bold-color": false,
-        "use-cursor-color": true,
-        "use-highlight-color": true,
-        "use-theme-colors": false
-      }
-    '';
-  };
+  xdg.dataFile."blackbox/schemes/Catppuccin-Mocha.json".source =
+    pkgs.fetchFromGitHub {
+      owner = "catppuccin";
+      repo = "tilix";
+      rev = "3fd05e03419321f2f2a6aad6da733b28be1765ef";
+      sha256 = "sha256-SI7QxQ+WBHzeuXbTye+s8pi4tDVZOV4Aa33mRYO276k=";
+    }
+    + "/src/Catppuccin-Mocha.json";
 }
