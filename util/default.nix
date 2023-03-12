@@ -2,13 +2,13 @@
   inputs,
   lib,
 }: let
-  mapFilterDirs = dir: filter: map:
-    with builtins;
-    with lib; let
-      dirs = filterAttrs filter (readDir dir);
-    in
-      mapAttrs map dirs;
-in {
-  host = import ./host.nix {inherit lib inputs mapFilterDirs;};
-  user = import ./user.nix {inherit lib inputs mapFilterDirs;};
-}
+  inherit (builtins) readDir;
+  inherit (lib) filterAttrs mapAttrs;
+
+  mapFilterDirs = dir: filter: map: let
+    dirs = filterAttrs filter (readDir dir);
+  in
+    mapAttrs map dirs;
+in
+  (import ./host.nix {inherit lib inputs mapFilterDirs;})
+  // (import ./user.nix {inherit lib inputs mapFilterDirs;})

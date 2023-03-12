@@ -58,8 +58,7 @@
       inherit (nixpkgs) lib;
       inherit inputs;
     };
-    inherit (util.host) mapHosts;
-    inherit (util.user) mapHMUsers;
+    inherit (util) mapHosts mapHMUsers;
 
     users = import ./users {inherit inputs;};
     hosts = import ./hosts {inherit inputs;};
