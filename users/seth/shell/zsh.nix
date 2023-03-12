@@ -3,10 +3,11 @@
   pkgs,
   ...
 }: {
+  home.packages = with pkgs; [fzf];
+
   programs.zsh = {
-    enable = false;
+    enable = true;
     enableAutosuggestions = true;
-    enableVteIntegration = true;
     completionInit = ''
       autoload -Uz bashcompinit compinit
       local zdump="${config.xdg.cacheHome}/zsh/zdump"
@@ -21,8 +22,9 @@
     defaultKeymap = "emacs";
     dotDir = ".config/zsh";
     initExtra = ''
-      autoload -Uz promptinit
-      prompt walters
+      autoload -Uz promptinit colors
+      promptinit
+      colors
 
       zmodload zsh/zutil
       zmodload zsh/complist
@@ -61,12 +63,6 @@
     };
     plugins = [
       {
-        name = "zsh-completions";
-        src = pkgs.zsh-completions;
-        file = "share/zsh-completions/zsh-completions.plugin.zsh";
-      }
-
-      {
         name = "cattppuccin-zsh-syntax-highlighting";
         src = pkgs.fetchFromGitHub {
           owner = "catppuccin";
@@ -76,6 +72,30 @@
         };
 
         file = "themes/catppuccin_mocha-zsh-syntax-highlighting.zsh";
+      }
+
+      {
+        name = "nix-zsh-completions";
+        src = pkgs.nix-zsh-completions;
+        file = "share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh";
+      }
+
+      {
+        name = "zsh-autopair";
+        src = pkgs.zsh-autopair;
+        file = "share/zsh/zsh-autopair/autopair.zsh";
+      }
+
+      {
+        name = "zsh-fzf-tab";
+        src = pkgs.zsh-fzf-tab;
+        file = "share/fzf-tab/fzf-tab.plugin.zsh";
+      }
+
+      {
+        name = "zsh-completions";
+        src = pkgs.zsh-completions;
+        file = "share/zsh-completions/zsh-completions.plugin.zsh";
       }
     ];
     enableSyntaxHighlighting = true;
