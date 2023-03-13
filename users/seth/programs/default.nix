@@ -12,6 +12,7 @@
     gh
     lld
     nix-your-shell
+    nurl
     rclone
     restic
     ripgrep
