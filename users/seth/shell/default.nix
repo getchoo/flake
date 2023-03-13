@@ -42,7 +42,7 @@
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "$EDITOR";
-      GPG_TTY = "$(tty)";
+      GPG_TTY = "$TTY";
       CARGO_HOME = "${config.xdg.dataHome}/cargo";
       RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
       LESSHISTFILE = "${config.xdg.stateHome}/less/history";
