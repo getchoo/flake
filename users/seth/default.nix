@@ -12,6 +12,7 @@
   };
 
   programs.fish.enable = true;
+  nix.settings.trusted-users = ["seth"];
 
   home-manager.users.seth = let
     inherit (config.nixpkgs) overlays;
