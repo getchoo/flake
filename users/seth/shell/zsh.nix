@@ -22,9 +22,15 @@
     defaultKeymap = "emacs";
     dotDir = ".config/zsh";
     initExtra = ''
+      if [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-*.zsh" ]]; then
+        source "$XDG_CACHE_HOME/p10k-instant-prompt-*.zsh"
+      fi
       autoload -Uz promptinit colors
       promptinit
       colors
+
+      direnv hook zsh | source
+      nix-your-shell zsh | source
 
       zmodload zsh/zutil
       zmodload zsh/complist
@@ -54,6 +60,8 @@
 
       zle -N clear-screen-and-scrollback
       bindkey '^L' clear-screen-and-scrollback
+
+      [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
     '';
     history = {
       expireDuplicatesFirst = true;
@@ -78,6 +86,12 @@
         name = "nix-zsh-completions";
         src = pkgs.nix-zsh-completions;
         file = "share/zsh/plugins/nix/nix-zsh-completions.plugin.zsh";
+      }
+
+      {
+        name = "powerlevel10k";
+        src = pkgs.zsh-powerlevel10k;
+        file = "share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
       }
 
       {
