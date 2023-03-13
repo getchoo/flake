@@ -15,6 +15,7 @@
       pylint
       rust-analyzer
       rustfmt
+      shellcheck
       statix
       stylua
       sumneko-lua-language-server

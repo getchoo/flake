@@ -120,6 +120,7 @@ local sources = {
 		diagnostics.codespell,
 		diagnostics.deadnix,
 		diagnostics.pylint,
+		diagnostics.shellcheck,
 		diagnostics.statix,
 		formatting.alejandra,
 		formatting.codespell,
