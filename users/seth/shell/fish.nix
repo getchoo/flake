@@ -23,22 +23,24 @@
       if test -e $nixfile
       	source $nixfile
       end
+
       fish_config theme choose "Catppuccin Mocha"
       nix-your-shell fish | source
+
+      abbr -a !! --position anywhere --function last_history_item
     '';
+    functions = {
+      last_history_item.body = "echo $history[1]";
+    };
+
     plugins = [
       {
         name = "autopair-fish";
-        src = pkgs.fishPlugins.autopair-fish;
-      }
-
-      {
-        name = "puffer-fish";
         src = pkgs.fetchFromGitHub {
-          owner = "nickeb96";
-          repo = "puffer-fish";
-          rev = "fd0a9c95da59512beffddb3df95e64221f894631";
-          sha256 = "sha256-aij48yQHeAKCoAD43rGhqW8X/qmEGGkg8B4jSeqjVU0=";
+          owner = "jorgebucaran";
+          repo = "autopair.fish";
+          rev = "4d1752ff5b39819ab58d7337c69220342e9de0e2";
+          sha256 = "sha256-qt3t1iKRRNuiLWiVoiAYOu+9E7jsyECyIqZJ/oRIT1A=";
         };
       }
     ];
