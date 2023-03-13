@@ -24,7 +24,6 @@
       	source $nixfile
       end
       fish_config theme choose "Catppuccin Mocha"
-      direnv hook fish | source
       nix-your-shell fish | source
     '';
     plugins = [

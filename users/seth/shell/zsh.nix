@@ -29,8 +29,7 @@
       promptinit
       colors
 
-      direnv hook zsh | source
-      nix-your-shell zsh | source
+      nix-your-shell zsh | source /dev/stdin
 
       zmodload zsh/zutil
       zmodload zsh/complist
