@@ -6,6 +6,8 @@
   imports = [
     ../nixos
     ./fonts.nix
+    ./network.nix
+    ./services.nix
   ];
   environment = {
     noXlibs = lib.mkForce false;

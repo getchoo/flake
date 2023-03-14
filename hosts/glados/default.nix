@@ -6,8 +6,6 @@
     ../../users/seth
     ./boot.nix
     ./hardware-configuration.nix
-    ./network.nix
-    ./services.nix
   ];
 
   home-manager.users.seth = {
