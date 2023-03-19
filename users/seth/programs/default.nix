@@ -7,6 +7,7 @@
 
   home.packages = with pkgs; [
     btop
+    cargo
     llvmPackages_15.clang
     fd
     gh
@@ -16,6 +17,8 @@
     rclone
     restic
     ripgrep
+    rustc
+    rustfmt
   ];
 
   programs = {
