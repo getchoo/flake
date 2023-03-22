@@ -54,6 +54,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    agenix,
     flake-utils,
     openwrt-imagebuilder,
     pre-commit-hooks,
@@ -90,8 +91,10 @@
         default = mkShell {
           inherit (self.checks.${system}.pre-commit-check) shellHook;
           packages = [
+            agenix.packages.${system}.agenix
             alejandra
             deadnix
+            git-crypt
             statix
             stylua
           ];
