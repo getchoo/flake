@@ -38,6 +38,10 @@
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     nur.url = "github:nix-community/NUR";
+    openwrt-imagebuilder = {
+      url = "github:astro/nix-openwrt-imagebuilder";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgsUnstable";
@@ -51,6 +55,7 @@
     self,
     nixpkgs,
     flake-utils,
+    openwrt-imagebuilder,
     pre-commit-hooks,
     ...
   }: let
@@ -99,5 +104,7 @@
     })
     // {
       nixosConfigurations = mapHosts hosts;
+
+      packages.x86_64-linux.turret = nixpkgs.legacyPackages.x86_64-linux.callPackage ./hosts/turret {inherit openwrt-imagebuilder;};
     };
 }

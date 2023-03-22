@@ -36,7 +36,7 @@
       };
 
   mapHosts = hosts:
-    mapFilterDirs ../hosts (_: v: v == "directory") (name: _:
+    mapFilterDirs ../hosts (n: v: v == "directory" && n != "turret") (name: _:
       mkHost {
         inherit name;
         inherit (hosts.${name}) modules system stateVersion pkgs;
