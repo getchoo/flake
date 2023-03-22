@@ -1,5 +1,5 @@
 {
-  description = "getchoo's flake for nixos and home configurations";
+  description = "getchoo's flake for system configurations";
 
   inputs = {
     nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
