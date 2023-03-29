@@ -4,6 +4,7 @@
   ...
 }: {
   environment.systemPackages = with pkgs; [
+    cachix
     hyfetch
     neofetch
     pinentry-curses
