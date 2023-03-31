@@ -1,5 +1,8 @@
 alias b := build
 alias c := check
+alias f := fmt
+alias l := lint
+alias p := pre-commit
 alias sw := switch
 alias up := upgrade
 
@@ -16,6 +19,15 @@ build:
 
 check:
 	nix flake check --impure
+
+fmt:
+	pre-commit run alejandra && pre-commit run stylua
+
+lint:
+	pre-commit run statix && pre-commit run deadnix
+
+pre-commit:
+	pre-commit run
 
 [linux]
 switch:
