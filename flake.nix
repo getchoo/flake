@@ -94,7 +94,9 @@
             agenix.packages.${system}.agenix
             alejandra
             deadnix
+            fzf
             git-crypt
+            just
             statix
             stylua
           ];

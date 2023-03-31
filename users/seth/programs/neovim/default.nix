@@ -40,6 +40,7 @@
       nvim-tree-lua
       nvim-treesitter.withAllGrammars
       nvim-web-devicons
+      pkgs.vim-just
       plenary-nvim
       telescope-nvim
       trouble-nvim
