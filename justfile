@@ -11,7 +11,7 @@ default:
 
 [linux]
 build:
-	nixos-rebuild build --flake .
+	nixos-rebuild build --impure --flake .
 
 [macos]
 build:
