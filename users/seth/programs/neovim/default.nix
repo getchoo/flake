@@ -22,7 +22,7 @@
       yapf
     ];
     plugins = with pkgs.vimPlugins; [
-      barbar-nvim
+      bufferline-nvim
       catppuccin-nvim
       cmp-nvim-lsp
       cmp-buffer
@@ -30,10 +30,12 @@
       cmp-path
       cmp-vsnip
       editorconfig-nvim
+      fidget-nvim
       gitsigns-nvim
       leap-nvim
       lualine-nvim
       luasnip
+      nvim-autopairs
       nvim-cmp
       nvim-lspconfig
       null-ls-nvim
