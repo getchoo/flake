@@ -51,6 +51,11 @@ require("cmp").setup({
 				fallback()
 			end
 		end, { "i", "s" }),
+		["<C-b>"] = mapping.scroll_docs(-4),
+		["<C-f>"] = mapping.scroll_docs(4),
+		["<C-Space>"] = mapping.complete(),
+		["<C-e>"] = mapping.abort(),
+		["<CR>"] = mapping.confirm({ select = true }),
 	}),
 
 	sources = cmp.config.sources({
@@ -67,7 +72,7 @@ require("cmp").setup({
 })
 
 ---- fidget
-require("fidget").setup({})
+require("fidget").setup()
 
 ---- lsp sources
 local null_ls = require("null-ls")
@@ -75,18 +80,34 @@ local diagnostics = null_ls.builtins.diagnostics
 local formatting = null_ls.builtins.formatting
 
 local sources = {
-	lsp_servers = { "rust_analyzer", "pyright", "bashls", "clangd" },
+	lsp_servers = {
+		"bashls",
+		"clangd",
+		"pyright",
+		"rust_analyzer",
+		"tsserver",
+		--"tailwindcss",
+		"nimls",
+	},
 	null_ls = {
+		diagnostics.actionlint,
 		diagnostics.alex,
 		diagnostics.codespell,
 		diagnostics.deadnix,
+		diagnostics.eslint,
+		diagnostics.markdownlint,
 		diagnostics.pylint,
 		diagnostics.shellcheck,
 		diagnostics.statix,
 		formatting.alejandra,
+		formatting.beautysh,
 		formatting.codespell,
+		formatting.just,
+		formatting.markdownlint,
+		formatting.nimpretty,
 		formatting.prettier,
 		formatting.rustfmt,
+		formatting.shellharden,
 		formatting.stylua,
 		formatting.yapf,
 	},
@@ -156,4 +177,4 @@ require("null-ls").setup({
 })
 
 ---- trouble
-require("trouble").setup({})
+require("trouble").setup()
