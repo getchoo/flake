@@ -39,7 +39,7 @@ require("bufferline").setup({
 })
 
 ---- gitsigns
-require("gitsigns").setup({})
+require("gitsigns").setup()
 
 ---- leap
 require("leap").add_default_mappings()
@@ -53,13 +53,11 @@ require("lualine").setup({
 })
 
 ---- nvim-tree
-require("nvim-tree").setup({})
+require("nvim-tree").setup()
 
 ---- treesitter
 require("nvim-treesitter.configs").setup({
 	auto_install = false,
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = false,
-	},
+	highlight = { enable = true },
+	indent = { enable = true },
 })

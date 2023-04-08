@@ -35,7 +35,6 @@
       cmp-buffer
       cmp_luasnip
       cmp-path
-      cmp-vsnip
       editorconfig-nvim
       fidget-nvim
       gitsigns-nvim
@@ -53,7 +52,6 @@
       plenary-nvim
       telescope-nvim
       trouble-nvim
-      vim-vsnip
     ];
     extraLuaConfig = ''
       require("getchoo")
