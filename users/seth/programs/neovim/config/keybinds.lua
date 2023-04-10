@@ -32,3 +32,7 @@ end)
 set("n", "<leader>p", function()
 	vim.cmd("TroubleToggle")
 end)
+
+set("n", "<leader>z", function()
+	vim.api.nvim_clear_autocmds({ group = "LspFormatting" })
+end)
