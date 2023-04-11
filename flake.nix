@@ -84,6 +84,7 @@
         pre-commit-check = pre-commit-hooks.lib.${system}.run {
           src = ./.;
           hooks = {
+            actionlint.enable = true;
             alejandra.enable = true;
             deadnix.enable = true;
             statix.enable = true;
@@ -96,6 +97,7 @@
         default = mkShell {
           inherit (self.checks.${system}.pre-commit-check) shellHook;
           packages = [
+            actionlint
             agenix.packages.${system}.agenix
             alejandra
             deadnix
