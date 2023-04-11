@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{pkgs, ...}: let
+  channelPath = "/etc/nix/channels/nixpkgs";
+in {
   imports = [
     ./documentation.nix
     ./packages.nix
@@ -22,5 +24,12 @@
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       ];
     };
+    nixPath = [
+      "nixpkgs=${channelPath}"
+    ];
   };
+
+  systemd.tmpfiles.rules = [
+    "L+ ${channelPath}     - - - - ${pkgs.path}"
+  ];
 }

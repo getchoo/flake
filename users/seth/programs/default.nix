@@ -7,6 +7,7 @@
 
   home.packages = with pkgs; [
     btop
+    cachix
     cargo
     llvmPackages_15.clang
     fd
