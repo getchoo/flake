@@ -6,20 +6,23 @@
     username,
     pkgs,
     stateVersion ? "22.11",
+    modules ? [],
   }:
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = [
-        ../users/${username}/home.nix
-        {
-          home = {
-            inherit username stateVersion;
-            homeDirectory = "/home/${username}";
-          };
+      modules =
+        [
+          ../users/${username}/home.nix
+          {
+            home = {
+              inherit username stateVersion;
+              homeDirectory = "/home/${username}";
+            };
 
-          programs.home-manager.enable = true;
-        }
-      ];
+            programs.home-manager.enable = true;
+          }
+        ]
+        ++ modules;
     };
 
   mapHMUsers = users:
@@ -27,5 +30,9 @@
       mkHMUser {
         inherit username;
         inherit (users.${username}) pkgs stateVersion;
+        modules =
+          if builtins.hasAttr "modules" users.${username}
+          then users.${username}.modules
+          else {};
       });
 }
