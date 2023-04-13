@@ -1,12 +1,17 @@
 {
   lib,
   modulesPath,
+  pkgs,
   ...
 }: {
   imports = [
     (modulesPath + "/profiles/minimal.nix")
     ../../profiles/nixos
     ../../users/seth
+  ];
+
+  environment.systemPackages = with pkgs; [
+    wslu
   ];
 
   wsl = {
