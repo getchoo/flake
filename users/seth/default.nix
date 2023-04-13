@@ -14,6 +14,9 @@
   programs.fish.enable = true;
   nix.settings.trusted-users = ["seth"];
 
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+
   home-manager.users.seth = let
     inherit (config.nixpkgs) overlays;
   in {
