@@ -40,5 +40,9 @@
       mkHost {
         inherit name;
         inherit (hosts.${name}) modules system stateVersion pkgs;
+        specialArgs =
+          if builtins.hasAttr "specialArgs" hosts.${name}
+          then hosts.${name}.specialArgs
+          else {};
       });
 }
