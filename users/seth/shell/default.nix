@@ -38,6 +38,7 @@
           format = "$all";
           palette = "catppuccin_mocha";
         }
+        // builtins.fromTOML (builtins.readFile ./starship.toml)
         // builtins.fromTOML (builtins.readFile
           (pkgs.fetchFromGitHub
             {
@@ -46,11 +47,9 @@
               rev = "3e3e54410c3189053f4da7a7043261361a1ed1bc";
               sha256 = "sha256-soEBVlq3ULeiZFAdQYMRFuswIIhI9bclIU8WXjxd7oY=";
             }
-            + /palettes/mocha.toml));
+            + "/palettes/mocha.toml"));
     };
   };
-
-  #xdg.configFile."starship.toml".source = ./starship.toml;
 
   home = {
     sessionVariables = {
@@ -67,8 +66,6 @@
       diff = "diff --color=auto";
       g = "git";
       gs = "g status";
-      nixsw = "sudo nixos-rebuild switch";
-      nixup = "nixsw --upgrade";
     };
   };
 }
