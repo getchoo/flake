@@ -26,7 +26,13 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "flake-utils";
+    };
+    # TODO: remove when this commit is used in lanzaboote:
+    # https://github.com/oxalica/rust-overlay/commit/c949d341f2b507857d589c48d1bd719896a2a224
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
@@ -34,6 +40,8 @@
       inputs.flake-compat.follows = "flake-compat";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
+      # TODO: ditto
+      inputs.rust-overlay.follows = "rust-overlay";
     };
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
