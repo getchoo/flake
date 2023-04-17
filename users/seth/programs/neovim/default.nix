@@ -14,7 +14,6 @@
       nodePackages.alex
       nodePackages.bash-language-server
       nodePackages.eslint
-      nodePackages.markdownlint-cli
       nodePackages.prettier
       nodePackages.pyright
       nodePackages.typescript-language-server
