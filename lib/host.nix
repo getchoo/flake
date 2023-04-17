@@ -15,27 +15,28 @@
         inherit system specialArgs;
         modules =
           [
-            ../profiles/base
-            ../profiles/nixos
+            ../modules
             ../hosts/${name}
 
             {
               system.stateVersion = stateVersion;
               networking.hostName = mkDefault name;
+
               nixpkgs = {
                 overlays = with inputs; [nur.overlay getchoo.overlays.default];
-                config = {
-                  allowUnfree = true;
-                  allowUnsupportedSystem = true;
-                };
+                config.allowUnfree = true;
               };
               nix.registry.getchoo.flake = inputs.getchoo;
+
+              nixos.enable = true;
             }
           ]
           ++ modules;
       };
 
-  mapHosts = hosts:
+  mapHosts = inputs: let
+    hosts = import ../hosts inputs;
+  in
     mapFilterDirs ../hosts (n: v: v == "directory" && n != "turret") (name: _:
       mkHost {
         inherit name;

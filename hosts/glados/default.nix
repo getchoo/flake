@@ -1,12 +1,17 @@
 {home-manager, ...}: {
   imports = [
-    ../../profiles/desktop/gnome
-    ../../profiles/hardware/nvidia.nix
-    ../../profiles/virtualisation.nix
     ../../users/seth
     ./boot.nix
     ./hardware-configuration.nix
   ];
+
+  myHardware = {
+    enable = true;
+    nvidia.enable = true;
+  };
+
+  nixos.virtualisation.enable = true;
+  desktop.gnome.enable = true;
 
   home-manager.users.seth = {
     imports = [

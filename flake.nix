@@ -74,16 +74,13 @@
     ...
   }: let
     inherit
-      (import ./util {
+      (import ./lib {
         inherit (nixpkgs) lib;
         inherit inputs;
       })
       mapHosts
       mapHMUsers
       ;
-
-    users = import ./users {inherit inputs;};
-    hosts = import ./hosts {inherit inputs;};
   in
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
@@ -120,11 +117,15 @@
 
       formatter = pkgs.alejandra;
 
-      homeConfigurations = mapHMUsers (users.users {inherit system;});
+      homeConfigurations = mapHMUsers inputs system;
+
+      packages = {
+        turret = pkgs.callPackage ./hosts/turret {inherit openwrt-imagebuilder;};
+      };
     })
     // {
-      nixosConfigurations = mapHosts hosts;
+      nixosConfigurations = mapHosts inputs;
 
-      packages.x86_64-linux.turret = nixpkgs.legacyPackages.x86_64-linux.callPackage ./hosts/turret {inherit openwrt-imagebuilder;};
+      nixosModules.getchoo = import ./modules;
     };
 }

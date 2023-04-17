@@ -1,9 +1,11 @@
-{inputs}:
+inputs: system:
 with inputs; {
-  users = {system}: {
-    seth = {
-      pkgs = nixpkgsUnstable.legacyPackages.${system};
-      stateVersion = "23.05";
+  seth = {
+    pkgs = import nixpkgsUnstable {
+      inherit system;
+      overlays = [nur.overlay getchoo.overlays.default];
     };
+
+    stateVersion = "23.05";
   };
 }

@@ -1,12 +1,10 @@
 {
-  lib,
   modulesPath,
   pkgs,
   ...
 }: {
   imports = [
     (modulesPath + "/profiles/minimal.nix")
-    ../../profiles/nixos
     ../../users/seth
   ];
 
@@ -26,11 +24,17 @@
     interop.includePath = false;
   };
 
-  services.resolved.enable = lib.mkForce false;
+  services = {
+    dbus.apparmor = "disabled";
+    resolved.enable = false;
+  };
+
+  nixos.networking.enable = false;
+
   security = {
-    apparmor.enable = lib.mkForce false;
-    audit.enable = lib.mkForce false;
-    auditd.enable = lib.mkForce false;
+    apparmor.enable = false;
+    audit.enable = false;
+    auditd.enable = false;
   };
 
   system.stateVersion = "23.05";

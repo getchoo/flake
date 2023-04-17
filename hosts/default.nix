@@ -1,4 +1,4 @@
-{inputs}:
+inputs:
 with inputs; let
   common = {
     system = "x86_64-linux";

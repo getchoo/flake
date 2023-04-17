@@ -1,3 +1,0 @@
-_: {
-  hardware.enableAllFirmware = true;
-}
