@@ -111,14 +111,16 @@
       formatter = pkgs.alejandra;
 
       homeConfigurations = mapHMUsers inputs system;
-
-      packages = {
-        turret = pkgs.callPackage ./hosts/turret {inherit openwrt-imagebuilder;};
-      };
     })
     // {
       nixosConfigurations = mapHosts inputs;
 
       nixosModules.getchoo = import ./modules;
+
+      packages.x86_64-linux = let
+        pkgs = import nixpkgs {system = "x86_64-linux";};
+      in {
+        turret = pkgs.callPackage ./hosts/turret {inherit openwrt-imagebuilder;};
+      };
     };
 }
