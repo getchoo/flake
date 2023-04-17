@@ -21,7 +21,7 @@
     getchoo = {
       url = "github:getchoo/overlay";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "flake-utils";
+      inputs.flake-compat.follows = "flake-compat";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
