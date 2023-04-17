@@ -1,12 +1,10 @@
-{
-  inputs,
-  mapFilterDirs,
-}: rec {
+{mapFilterDirs}: rec {
   mkHMUser = {
     username,
     pkgs,
     stateVersion ? "22.11",
     modules ? [],
+    inputs,
   }:
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
@@ -30,7 +28,7 @@
   in
     mapFilterDirs ../users (n: v: v == "directory" && n != "secrets") (username: _:
       mkHMUser {
-        inherit username;
+        inherit username inputs;
         inherit (users.${username}) pkgs stateVersion;
         modules =
           if builtins.hasAttr "modules" users.${username}

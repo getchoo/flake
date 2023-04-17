@@ -1,7 +1,4 @@
-{
-  inputs,
-  lib,
-}: let
+{lib}: let
   inherit (builtins) readDir;
   inherit (lib) filterAttrs mapAttrs;
 
@@ -10,5 +7,5 @@
   in
     mapAttrs map dirs;
 in
-  (import ./host.nix {inherit inputs mapFilterDirs;})
-  // (import ./user.nix {inherit inputs mapFilterDirs;})
+  (import ./host.nix {inherit mapFilterDirs;})
+  // (import ./user.nix {inherit mapFilterDirs;})

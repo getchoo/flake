@@ -1,7 +1,4 @@
-{
-  inputs,
-  mapFilterDirs,
-}: rec {
+{mapFilterDirs}: rec {
   mkHost = {
     name,
     modules,
@@ -9,6 +6,7 @@
     system ? "x86_64-linux",
     stateVersion ? "22.11",
     pkgs,
+    inputs,
   }:
     with pkgs.lib;
       nixosSystem {
@@ -39,7 +37,7 @@
   in
     mapFilterDirs ../hosts (n: v: v == "directory" && n != "turret") (name: _:
       mkHost {
-        inherit name;
+        inherit name inputs;
         inherit (hosts.${name}) modules system stateVersion pkgs;
         specialArgs =
           if builtins.hasAttr "specialArgs" hosts.${name}

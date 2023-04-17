@@ -73,14 +73,7 @@
     pre-commit-hooks,
     ...
   }: let
-    inherit
-      (import ./lib {
-        inherit (nixpkgs) lib;
-        inherit inputs;
-      })
-      mapHosts
-      mapHMUsers
-      ;
+    inherit (import ./lib {inherit (nixpkgs) lib;}) mapHosts mapHMUsers;
   in
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
