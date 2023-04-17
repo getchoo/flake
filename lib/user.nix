@@ -1,4 +1,4 @@
-{mapFilterDirs}: rec {
+{lib}: rec {
   mkHMUser = {
     username,
     pkgs,
@@ -25,14 +25,11 @@
 
   mapHMUsers = inputs: system: let
     users = import ../users inputs system;
+    inherit (lib.my) mapFilterDirs;
   in
     mapFilterDirs ../users (n: v: v == "directory" && n != "secrets") (username: _:
-      mkHMUser {
-        inherit username inputs;
-        inherit (users.${username}) pkgs stateVersion;
-        modules =
-          if builtins.hasAttr "modules" users.${username}
-          then users.${username}.modules
-          else [];
-      });
+      mkHMUser ({
+          inherit username inputs;
+        }
+        // users.${username}));
 }

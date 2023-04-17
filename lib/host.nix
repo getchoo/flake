@@ -1,4 +1,4 @@
-{mapFilterDirs}: rec {
+{lib}: rec {
   mkHost = {
     name,
     modules,
@@ -34,14 +34,11 @@
 
   mapHosts = inputs: let
     hosts = import ../hosts inputs;
+    inherit (lib.my) mapFilterDirs;
   in
     mapFilterDirs ../hosts (n: v: v == "directory" && n != "turret") (name: _:
-      mkHost {
-        inherit name inputs;
-        inherit (hosts.${name}) modules system stateVersion pkgs;
-        specialArgs =
-          if builtins.hasAttr "specialArgs" hosts.${name}
-          then hosts.${name}.specialArgs
-          else {};
-      });
+      mkHost ({
+          inherit name inputs;
+        }
+        // hosts.${name}));
 }

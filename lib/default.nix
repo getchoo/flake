@@ -2,10 +2,15 @@
   inherit (builtins) readDir;
   inherit (lib) filterAttrs mapAttrs;
 
-  mapFilterDirs = dir: filter: map: let
-    dirs = filterAttrs filter (readDir dir);
-  in
-    mapAttrs map dirs;
+  my = {
+    mapFilterDirs = dir: filter: map: let
+      dirs = filterAttrs filter (readDir dir);
+    in
+      mapAttrs map dirs;
+  };
+
+  myLib = lib.extend (_: _: {inherit my;});
+  common = {lib = myLib;};
 in
-  (import ./host.nix {inherit mapFilterDirs;})
-  // (import ./user.nix {inherit mapFilterDirs;})
+  (import ./host.nix common)
+  // (import ./user.nix common)
