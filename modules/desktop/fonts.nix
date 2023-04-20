@@ -12,6 +12,7 @@ in {
   config = mkIf cfg.enable {
     fonts = {
       enableDefaultFonts = true;
+
       fonts = with pkgs; [
         corefonts
         fira-code
@@ -22,11 +23,14 @@ in {
         noto-fonts-cjk-sans
       ];
 
-      fontconfig.defaultFonts = {
-        serif = ["Noto Serif"];
-        sansSerif = ["Noto Sans"];
-        emoji = ["Noto Color Emoji"];
-        monospace = ["Fira Code"];
+      fontconfig = {
+        enable = true;
+        defaultFonts = {
+          serif = ["Noto Serif"];
+          sansSerif = ["Noto Sans"];
+          emoji = ["Noto Color Emoji"];
+          monospace = ["Fira Code"];
+        };
       };
     };
   };
