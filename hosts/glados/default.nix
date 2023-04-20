@@ -15,8 +15,10 @@
 
   home-manager.users.seth = {
     imports = [
-      ../../users/seth/desktop/gnome
+      ../../users/seth/desktop
     ];
+
+    desktop.gnome.enable = true;
   };
 
   environment.etc."environment".text = ''

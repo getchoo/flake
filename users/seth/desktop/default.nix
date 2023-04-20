@@ -1,6 +1,8 @@
 {pkgs, ...}: {
   imports = [
     ./budgie
+    ./gnome
+    ./plasma
     ../programs/mangohud.nix
     ../programs/firefox.nix
   ];

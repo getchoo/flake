@@ -23,6 +23,7 @@
     imports = [
       ./home.nix
     ];
+
     nixpkgs.overlays = overlays;
   };
 }

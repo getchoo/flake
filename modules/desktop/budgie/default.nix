@@ -43,7 +43,7 @@ in {
 
     environment.budgie.excludePackages = with pkgs; [
       qogir-theme
-      qogir-icon
+      qogir-icon-theme
     ];
 
     environment.systemPackages = with pkgs; [
