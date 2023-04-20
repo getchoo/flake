@@ -9,6 +9,7 @@
 in {
   imports = [
     ./audio.nix
+    ./budgie
     ./fonts.nix
     ./gnome
     ./plasma
