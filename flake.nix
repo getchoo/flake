@@ -123,7 +123,7 @@
       packages.x86_64-linux = let
         pkgs = import nixpkgs {system = "x86_64-linux";};
       in {
-        turret = pkgs.callPackage ./hosts/turret {inherit openwrt-imagebuilder;};
+        turret = pkgs.callPackage ./hosts/_turret {inherit openwrt-imagebuilder;};
       };
     };
 }
