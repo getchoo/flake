@@ -1,8 +1,4 @@
-{
-  home-manager,
-  self,
-  ...
-}: {
+{home-manager, ...}: {
   imports = [
     ./boot.nix
     ./hardware-configuration.nix
@@ -17,11 +13,10 @@
   desktop.gnome.enable = true;
 
   home-manager.users.seth = {
-    imports = [
-      "${self}/users/seth/desktop"
-    ];
-
-    desktop.gnome.enable = true;
+    desktop = {
+      enable = true;
+      gnome.enable = true;
+    };
   };
 
   environment.etc."environment".text = ''

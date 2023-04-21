@@ -23,6 +23,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
     };
+    haumea = {
+      url = "github:nix-community/haumea";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -68,18 +72,29 @@
     self,
     nixpkgs,
     agenix,
+    haumea,
     getchoo,
     flake-utils,
     openwrt-imagebuilder,
     pre-commit-hooks,
     ...
   }: let
-    getchooLib = getchoo.lib (inputs // {inherit self;});
-
+    inherit (flake-utils.lib) eachDefaultSystem;
     inherit (getchooLib.configs) mapHMUsers mapHosts;
+
+    getchooLib = let
+      args = {
+        users = with haumea.lib;
+          load {
+            src = ./users;
+            loader = loaders.path;
+          };
+      };
+    in
+      getchoo.lib (inputs // args);
   in
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
+    eachDefaultSystem (system: let
+      pkgs = import nixpkgs {inherit system;};
     in {
       checks = {
         pre-commit-check = pre-commit-hooks.lib.${system}.run {
@@ -94,10 +109,12 @@
         };
       };
 
-      devShells = with pkgs; {
+      devShells = let
+        inherit (pkgs) mkShell;
+      in {
         default = mkShell {
           inherit (self.checks.${system}.pre-commit-check) shellHook;
-          packages = [
+          packages = with pkgs; [
             actionlint
             agenix.packages.${system}.agenix
             alejandra

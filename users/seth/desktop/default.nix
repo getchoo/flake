@@ -1,4 +1,12 @@
-{pkgs, ...}: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
+  cfg = config.desktop;
+  inherit (lib) mkEnableOption mkIf;
+in {
   imports = [
     ./budgie
     ./gnome
@@ -7,11 +15,15 @@
     ../programs/firefox.nix
   ];
 
-  home.packages = with pkgs; [
-    chromium
-    discord-canary
-    element-desktop
-    spotify
-    steam
-  ];
+  options.desktop.enable = mkEnableOption "enable desktop configuration";
+
+  config.home = mkIf cfg.enable {
+    packages = with pkgs; [
+      chromium
+      discord-canary
+      element-desktop
+      spotify
+      steam
+    ];
+  };
 }

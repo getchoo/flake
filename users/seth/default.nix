@@ -22,6 +22,7 @@
   in {
     imports = [
       ./home.nix
+      ./desktop
     ];
 
     nixpkgs.overlays = overlays;

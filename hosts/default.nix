@@ -10,7 +10,7 @@ with inputs; let
       nur.nixosModules.nur
 
       self.nixosModules.getchoo
-      "${self}/users/seth"
+      users.seth.default
 
       {
         age = {
