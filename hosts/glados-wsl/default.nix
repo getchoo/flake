@@ -5,7 +5,6 @@
 }: {
   imports = [
     (modulesPath + "/profiles/minimal.nix")
-    ../../users/seth
   ];
 
   environment.systemPackages = with pkgs; [
@@ -30,6 +29,8 @@
   };
 
   nixos.networking.enable = false;
+
+  networking.hostName = "glados-wsl";
 
   security = {
     apparmor.enable = false;

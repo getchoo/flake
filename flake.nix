@@ -68,12 +68,15 @@
     self,
     nixpkgs,
     agenix,
+    getchoo,
     flake-utils,
     openwrt-imagebuilder,
     pre-commit-hooks,
     ...
   }: let
-    inherit (import ./lib {inherit (nixpkgs) lib;}) mapHosts mapHMUsers;
+    getchooLib = getchoo.lib (inputs // {inherit self;});
+
+    inherit (getchooLib.configs) mapHMUsers mapHosts;
   in
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = nixpkgs.legacyPackages.${system};
@@ -110,10 +113,10 @@
 
       formatter = pkgs.alejandra;
 
-      homeConfigurations = mapHMUsers inputs system;
+      homeConfigurations = mapHMUsers system ./users;
     })
     // {
-      nixosConfigurations = mapHosts inputs;
+      nixosConfigurations = mapHosts ./hosts;
 
       nixosModules.getchoo = import ./modules;
 

@@ -1,6 +1,9 @@
-{home-manager, ...}: {
+{
+  home-manager,
+  self,
+  ...
+}: {
   imports = [
-    ../../users/seth
     ./boot.nix
     ./hardware-configuration.nix
   ];
@@ -15,7 +18,7 @@
 
   home-manager.users.seth = {
     imports = [
-      ../../users/seth/desktop
+      "${self}/users/seth/desktop"
     ];
 
     desktop.gnome.enable = true;
@@ -25,6 +28,7 @@
     LIBVA_DRIVER_NAME=vdpau
   '';
 
+  networking.hostName = "glados";
   powerManagement.cpuFreqGovernor = "ondemand";
 
   security.tpm2 = {

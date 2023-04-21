@@ -8,7 +8,14 @@
     ./shell
   ];
 
+  home = {
+    username = "seth";
+    homeDirectory = "/home/seth";
+    stateVersion = "23.05";
+  };
+
   nix.package = lib.mkDefault pkgs.nixFlakes;
+
   xdg = {
     enable = true;
     configFile."nixpkgs/config.nix".text = ''
@@ -18,5 +25,4 @@
       }
     '';
   };
-  home.stateVersion = "23.05";
 }
