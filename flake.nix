@@ -19,6 +19,10 @@
       flake = false;
     };
     flake-utils.url = "github:numtide/flake-utils";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
     getchoo = {
       url = "github:getchoo/overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +36,18 @@
     haumea = {
       url = "github:nix-community/haumea";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    hercules-ci-agent = {
+      url = "github:hercules-ci/hercules-ci-agent";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
+    };
+    hercules-ci-effects = {
+      url = "github:hercules-ci/hercules-ci-effects";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.hercules-ci-agent.follows = "hercules-ci-agent";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -49,6 +65,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
       inputs.flake-utils.follows = "flake-utils";
+      inputs.flake-parts.follows = "flake-parts";
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
       # TODO: ditto
       inputs.rust-overlay.follows = "rust-overlay";
@@ -80,20 +97,18 @@
 
   outputs = inputs @ {
     self,
-    nixpkgs,
     agenix,
     haumea,
     getchoo,
-    flake-utils,
     nixinate,
     openwrt-imagebuilder,
     pre-commit-hooks,
+    flake-parts,
     ...
   }: let
-    inherit (flake-utils.lib) eachDefaultSystem;
     inherit (getchooLib.configs) mapHMUsers mapHosts;
 
-    getchooLib = let
+    getchooLib = with inputs; let
       args = {
         users = with haumea.lib;
           load {
@@ -104,55 +119,78 @@
     in
       getchoo.lib (inputs // args);
   in
-    eachDefaultSystem (system: let
-      pkgs = import nixpkgs {inherit system;};
-    in {
-      apps = nixinate.nixinate.${system} self;
-      checks = {
-        pre-commit-check = pre-commit-hooks.lib.${system}.run {
-          src = ./.;
-          hooks = {
-            actionlint.enable = true;
-            alejandra.enable = true;
-            deadnix.enable = true;
-            statix.enable = true;
-            stylua.enable = true;
+    flake-parts.lib.mkFlake {inherit inputs;} {
+      imports = [
+        inputs.hercules-ci-effects.flakeModule
+      ];
+
+      flake = {
+        nixosConfigurations = mapHosts ./hosts;
+
+        nixosModules.getchoo = import ./modules;
+      };
+
+      hercules-ci = {
+        flake-update = {
+          enable = true;
+          when.hour = [0];
+        };
+      };
+
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+
+      perSystem = {
+        pkgs,
+        system,
+        ...
+      }: {
+        apps = nixinate.nixinate.${system} self;
+        checks = {
+          pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
+            src = ./.;
+            hooks = {
+              actionlint.enable = true;
+              alejandra.enable = true;
+              deadnix.enable = true;
+              statix.enable = true;
+              stylua.enable = true;
+            };
           };
         };
-      };
 
-      devShells = let
-        inherit (pkgs) mkShell;
-      in {
-        default = mkShell {
-          inherit (self.checks.${system}.pre-commit-check) shellHook;
-          packages = with pkgs; [
-            actionlint
-            agenix.packages.${system}.agenix
-            alejandra
-            deadnix
-            fzf
-            git-crypt
-            just
-            statix
-            stylua
-          ];
+        devShells = let
+          inherit (pkgs) mkShell;
+        in {
+          default = mkShell {
+            inherit (self.checks.${system}.pre-commit-check) shellHook;
+            packages = with inputs;
+            with pkgs; [
+              actionlint
+              agenix.packages.${system}.agenix
+              alejandra
+              deadnix
+              fzf
+              git-crypt
+              just
+              statix
+              stylua
+            ];
+          };
         };
-      };
 
-      formatter = pkgs.alejandra;
+        formatter = pkgs.alejandra;
 
-      homeConfigurations = mapHMUsers system ./users;
-    })
-    // {
-      nixosConfigurations = mapHosts ./hosts;
+        legacyPackages.homeConfigurations = mapHMUsers system ./users;
 
-      nixosModules.getchoo = import ./modules;
-
-      packages.x86_64-linux = let
-        pkgs = import nixpkgs {system = "x86_64-linux";};
-      in {
-        turret = pkgs.callPackage ./hosts/_turret {inherit openwrt-imagebuilder;};
+        packages = with inputs;
+        with pkgs; {
+          turret = callPackage ./hosts/_turret {inherit openwrt-imagebuilder;};
+        };
       };
     };
 }
