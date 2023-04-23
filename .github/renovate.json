@@ -5,18 +5,25 @@
     ":semanticCommits",
     ":semanticPrefixChore",
     ":semanticCommitScope(deps)",
-    "schedule:earlyMondays"
+    ":maintainLockFilesWeekly",
+    "helpers:pinGitHubActionDigests"
   ],
+  "rebaseWhen": "behind-base-branch",
   "packageRules": [
     {
       "matchDepNames": ["nixpkgs", "nixpkgsUnstable", "openwrt-imagebuilder"],
-      "extends": ["schedule:automergeDaily"]
+      "automerge": true,
+      "lockFileMaintenance": {
+        "extends": ["schedule:daily"]
+      },
+      "extends": [
+        "schedule:automergeDaily",
+        ":automergeRequireAllStatusChecks",
+        ":automergePr"
+      ]
     }
   ],
   "nix": {
-    "enabled": true
-  },
-  "lockFileMaintenance": {
     "enabled": true
   }
 }
