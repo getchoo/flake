@@ -18,6 +18,7 @@ with inputs; let
           secrets = {
             rootPassword.file = "${self}/users/_secrets/rootPassword.age";
             sethPassword.file = "${self}/users/_secrets/sethPassword.age";
+            pbodyPassword.file = "${self}/users/_secrets/pbodyPassword.age";
           };
         };
 
@@ -44,6 +45,7 @@ in {
         nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
         nixos-hardware.nixosModules.common-pc-ssd
         lanzaboote.nixosModules.lanzaboote
+        (import "${self}/modules/nixos/virtualisation")
       ];
   };
   glados-wsl = {
@@ -53,5 +55,34 @@ in {
       ++ [
         nixos-wsl.nixosModules.wsl
       ];
+  };
+  p-body = {
+    builder = nixpkgs.lib.nixosSystem;
+    inherit (common) system;
+
+    specialArgs = let
+      unstable = import nixpkgsUnstable {
+        inherit (common) system;
+        overlays = [guzzle_api.overlays.default];
+      };
+    in {inherit (unstable) guzzle-api-server;};
+
+    modules = [
+      agenix.nixosModules.default
+      guzzle_api.nixosModules.guzzle_api
+      (import "${self}/modules/base")
+      (import "${self}/modules/nixos")
+
+      {
+        age = {
+          identityPaths = ["/etc/age/key"];
+          secrets = {
+            rootPassword.file = "${self}/users/_secrets/rootPassword.age";
+            pbodyPassword.file = "${self}/users/_secrets/pbodyPassword.age";
+          };
+        };
+        nixos.enable = true;
+      }
+    ];
   };
 }

@@ -1,6 +1,10 @@
 let
-  key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ5K+yLHuz4kyCkJDX2Gd/uGVNEJroIAU/h0f9E2Mapn getchoo-nix";
+  keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ5K+yLHuz4kyCkJDX2Gd/uGVNEJroIAU/h0f9E2Mapn getchoo-nix"
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAVieG9wj00Cz0Co7QYNkoTgfO+B8EO5vlZdfMvCHD76 root@p-body"
+  ];
 in {
-  "rootPassword.age".publicKeys = [key];
-  "sethPassword.age".publicKeys = [key];
+  "rootPassword.age".publicKeys = keys;
+  "sethPassword.age".publicKeys = keys;
+  "pbodyPassword.age".publicKeys = keys;
 }

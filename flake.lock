@@ -185,6 +185,29 @@
         "type": "github"
       }
     },
+    "guzzle_api": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgsUnstable"
+        ],
+        "pre-commit-hooks": [
+          "pre-commit-hooks"
+        ]
+      },
+      "locked": {
+        "lastModified": 1682242317,
+        "narHash": "sha256-9lIEkAryZAPxij90Kt51zrN9+w9bq1Ws0pCqTl5ae80=",
+        "owner": "getchoo",
+        "repo": "guzzle_api",
+        "rev": "f90cc8fd86535169342a17acf14013529c25a0b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getchoo",
+        "repo": "guzzle_api",
+        "type": "github"
+      }
+    },
     "haumea": {
       "inputs": {
         "nixpkgs": [
@@ -437,6 +460,7 @@
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "getchoo": "getchoo",
+        "guzzle_api": "guzzle_api",
         "haumea": "haumea",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
