@@ -133,6 +133,12 @@
     };
   };
 
+  swapDevices = [
+    {
+      device = "/swapfile";
+    }
+  ];
+
   system.stateVersion = "22.11";
 
   users.users = let
@@ -149,4 +155,6 @@
       inherit openssh;
     };
   };
+
+  zramSwap.enable = true;
 }
