@@ -1,0 +1,22 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":semanticCommits",
+    ":semanticPrefixChore",
+    ":semanticCommitScope(deps)",
+    "schedule:earlyMondays"
+  ],
+  "packageRules": [
+    {
+      "matchDepNames": ["nixpkgs", "nixpkgsUnstable", "openwrt-imagebuilder"],
+      "extends": ["schedule:automergeDaily"]
+    }
+  ],
+  "nix": {
+    "enabled": true
+  },
+  "lockFileMaintenance": {
+    "enabled": true
+  }
+}
