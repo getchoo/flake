@@ -101,6 +101,7 @@
     haumea,
     getchoo,
     nixinate,
+    nixpkgs,
     openwrt-imagebuilder,
     pre-commit-hooks,
     flake-parts,
@@ -118,6 +119,13 @@
       };
     in
       getchoo.lib (inputs // args);
+
+    systems = [
+      "x86_64-linux"
+      "aarch64-linux"
+      "x86_64-darwin"
+      "aarch64-darwin"
+    ];
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
@@ -137,19 +145,15 @@
         };
       };
 
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
+      herculesCI.ciSystems = ["x86_64-linux"];
+
+      inherit systems;
 
       perSystem = {
         pkgs,
         system,
         ...
       }: {
-        apps = nixinate.nixinate.${system} self;
         checks = {
           pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
             src = ./.;
@@ -192,5 +196,6 @@
           turret = callPackage ./hosts/_turret {inherit openwrt-imagebuilder;};
         };
       };
-    };
+    }
+    // {apps = nixpkgs.lib.genAttrs systems (system: nixinate.nixinate.${system} self);};
 }
