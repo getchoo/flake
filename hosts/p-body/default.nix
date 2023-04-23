@@ -10,11 +10,15 @@
   ];
 
   base = {
+    enable = true;
     documentation.enable = false;
     defaultPackages.enable = false;
   };
 
-  nixos.networking.enable = false;
+  nixos = {
+    enable = true;
+    networking.enable = false;
+  };
 
   networking = {
     hostName = "p-body";

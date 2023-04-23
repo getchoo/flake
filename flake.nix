@@ -53,6 +53,10 @@
       # TODO: ditto
       inputs.rust-overlay.follows = "rust-overlay";
     };
+    nixinate = {
+      url = "github:MatthewCroughan/nixinate";
+      inputs.nixpkgs.follows = "nixpkgsUnstable";
+    };
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -81,6 +85,7 @@
     haumea,
     getchoo,
     flake-utils,
+    nixinate,
     openwrt-imagebuilder,
     pre-commit-hooks,
     ...
@@ -102,6 +107,7 @@
     eachDefaultSystem (system: let
       pkgs = import nixpkgs {inherit system;};
     in {
+      apps = nixinate.nixinate.${system} self;
       checks = {
         pre-commit-check = pre-commit-hooks.lib.${system}.run {
           src = ./.;

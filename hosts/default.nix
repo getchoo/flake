@@ -45,7 +45,7 @@ in {
         nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
         nixos-hardware.nixosModules.common-pc-ssd
         lanzaboote.nixosModules.lanzaboote
-        (import "${self}/modules/nixos/virtualisation")
+        (import "${self}/modules/nixos/virtualisation.nix")
       ];
   };
   glados-wsl = {
@@ -81,7 +81,16 @@ in {
             pbodyPassword.file = "${self}/users/_secrets/pbodyPassword.age";
           };
         };
+
         nixos.enable = true;
+
+        _module.args.nixinate = {
+          host = "167.99.145.73";
+          sshUser = "root";
+          buildOn = "remote";
+          substituteOnTarget = true;
+          hermetic = false;
+        };
       }
     ];
   };
