@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: install nix
-        uses: cachix/install-nix-action@v19
+        uses: cachix/install-nix-action@29bd9290ef037a3ecbdafe83cbd2185e9dd0fa0a # v20
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
