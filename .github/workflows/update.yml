@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
 
       - name: install nix
-        uses: cachix/install-nix-action@v20
+        uses: cachix/install-nix-action@29bd9290ef037a3ecbdafe83cbd2185e9dd0fa0a # v20
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -22,7 +22,7 @@ jobs:
         run: nix flake lock --update-input nixpkgs --update-input nixpkgsUnstable --update-input openwrt-imagebuilder
 
       - name: add and commit
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@61a88be553afe4206585b31aa72387c64295d08b # v9
         with:
           default_author: github_actions
           message: "chore: update nixpkgs inputs"
