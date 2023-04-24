@@ -163,5 +163,7 @@
     };
   };
 
+  nix.settings.trusted-users = ["p-body"];
+
   zramSwap.enable = true;
 }
