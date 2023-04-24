@@ -17,6 +17,11 @@
     defaultPackages.enable = false;
   };
 
+  environment.systemPackages = with pkgs; [
+    cachix
+    hercules-ci-agent.packages.x86_64-linux.hercules-ci-cli
+  ];
+
   nixos = {
     enable = true;
     networking.enable = false;
