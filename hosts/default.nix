@@ -79,7 +79,7 @@ in {
 
         _module.args.nixinate = {
           host = "167.99.145.73";
-          sshUser = "root";
+          sshUser = "p-body";
           buildOn = "remote";
           substituteOnTarget = true;
           hermetic = false;
