@@ -95,7 +95,7 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
-          "nixpkgs"
+          "nixpkgsUnstable"
         ]
       },
       "locked": {
@@ -241,7 +241,7 @@
         "haskell-flake": "haskell-flake",
         "nix-darwin": "nix-darwin",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgsUnstable"
         ],
         "pre-commit-hooks-nix": [
           "pre-commit-hooks"
@@ -270,7 +270,7 @@
           "hercules-ci-agent"
         ],
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgsUnstable"
         ]
       },
       "locked": {
