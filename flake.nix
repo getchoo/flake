@@ -100,8 +100,8 @@
     agenix,
     haumea,
     getchoo,
-    nixinate,
     nixpkgs,
+    nixinate,
     openwrt-imagebuilder,
     pre-commit-hooks,
     flake-parts,
@@ -119,13 +119,6 @@
       };
     in
       getchoo.lib (inputs // args);
-
-    systems = [
-      "x86_64-linux"
-      "aarch64-linux"
-      "x86_64-darwin"
-      "aarch64-darwin"
-    ];
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
@@ -145,15 +138,34 @@
         };
       };
 
-      herculesCI.ciSystems = ["x86_64-linux"];
+      herculesCI = let
+        inherit (import (inputs.hercules-ci-effects + "/vendor/hercules-ci-agent/default-herculesCI-for-flake.nix")) flakeToOutputs;
+      in rec {
+        ciSystems = ["x86_64-linux"];
+        onPush = {
+          default = {
+            outputs = with nixpkgs.lib;
+            # use defaults, but don't build hosts
+              mkForce (builtins.removeAttrs
+                (flakeToOutputs self {ciSystems = genAttrs ciSystems (_: {});})
+                ["nixosConfigurations" "packages"]);
+          };
+        };
+      };
 
-      inherit systems;
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
 
       perSystem = {
         pkgs,
         system,
         ...
       }: {
+        apps = (nixinate.nixinate.${system} self).nixinate;
         checks = {
           pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
             src = ./.;
@@ -196,6 +208,5 @@
           turret = callPackage ./hosts/_turret {inherit openwrt-imagebuilder;};
         };
       };
-    }
-    // {apps = nixpkgs.lib.genAttrs systems (system: nixinate.nixinate.${system} self);};
+    };
 }
