@@ -58,14 +58,7 @@ in {
   };
   p-body = {
     builder = nixpkgs.lib.nixosSystem;
-    inherit (common) system;
-
-    specialArgs = let
-      unstable = import nixpkgsUnstable {
-        inherit (common) system;
-        overlays = [guzzle_api.overlays.default];
-      };
-    in {inherit (unstable) guzzle-api-server;};
+    inherit (common) specialArgs system;
 
     modules = [
       agenix.nixosModules.default

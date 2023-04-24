@@ -1,12 +1,14 @@
 {
   config,
+  guzzle_api,
+  hercules-ci-agent,
   modulesPath,
   pkgs,
-  guzzle-api-server,
   ...
 }: {
   imports = [
     (modulesPath + "/virtualisation/digital-ocean-image.nix")
+    hercules-ci-agent.nixosModules.agent-service
   ];
 
   base = {
@@ -121,7 +123,7 @@
       enable = true;
       url = "http://167.99.145.73";
       port = "80";
-      package = guzzle-api-server;
+      package = guzzle_api.packages.x86_64-linux.guzzle-api-server;
     };
 
     hercules-ci-agent.enable = true;

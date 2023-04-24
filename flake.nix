@@ -134,7 +134,10 @@
       hercules-ci = {
         flake-update = {
           enable = true;
-          when.hour = [0];
+          when = {
+            hour = [0];
+            minute = 0;
+          };
         };
       };
 
