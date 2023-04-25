@@ -24,12 +24,12 @@ in {
       };
 
       nix = {
-        package = pkgs.nixFlakes;
+        package = mkDefault pkgs.nixFlakes;
 
         gc = {
-          automatic = true;
-          dates = "weekly";
-          options = "--delete-older-than 7d";
+          automatic = mkDefault true;
+          dates = mkDefault "weekly";
+          options = mkDefault "--delete-older-than 7d";
         };
 
         settings = {
