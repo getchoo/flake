@@ -163,7 +163,10 @@
     };
   };
 
-  nix.settings.trusted-users = ["p-body"];
+  nix = {
+    gc.options = "--delete-older-than 7d --max-freed 50G";
+    settings.trusted-users = ["p-body"];
+  };
 
   zramSwap.enable = true;
 }
