@@ -97,6 +97,7 @@
     agenix,
     haumea,
     getchoo,
+    hercules-ci-effects,
     nixpkgs,
     nixinate,
     openwrt-imagebuilder,
@@ -119,7 +120,7 @@
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
-        inputs.hercules-ci-effects.flakeModule
+        hercules-ci-effects.flakeModule
       ];
 
       flake = {
@@ -139,16 +140,28 @@
       };
 
       herculesCI = let
-        inherit (import (inputs.hercules-ci-effects + "/vendor/hercules-ci-agent/default-herculesCI-for-flake.nix")) flakeToOutputs;
+        inherit (import (hercules-ci-effects + "/vendor/hercules-ci-agent/default-herculesCI-for-flake.nix")) flakeToOutputs;
       in rec {
         ciSystems = ["x86_64-linux"];
         onPush = {
           default = {
-            outputs = with nixpkgs.lib;
-            # use defaults, but don't build hosts
-              mkForce (builtins.removeAttrs
-                (flakeToOutputs self {ciSystems = genAttrs ciSystems (_: {});})
-                ["nixosConfigurations" "packages"]);
+            outputs = with builtins;
+            with nixpkgs.lib; let
+              # use defaults, but only evaluate hosts
+              defaults =
+                removeAttrs
+                (flakeToOutputs self {
+                  ciSystems = genAttrs ciSystems (_: {});
+                })
+                ["nixosConfigurations" "packages"];
+
+              evaluate = mapAttrs (_: v:
+                seq
+                v.config.system.build.toplevel
+                v._module.args.pkgs.emptyFile)
+              self.nixosConfigurations;
+            in
+              mkForce (defaults // evaluate);
           };
         };
       };
