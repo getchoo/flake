@@ -15,10 +15,6 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-22.11";
     nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgsUnstable";
-    };
     # this is just to avoid having multiple versions in flake.lock
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -90,19 +86,23 @@
       inputs.flake-compat.follows = "flake-compat";
       inputs.flake-utils.follows = "flake-utils";
     };
+    ragenix = {
+      url = "github:yaxitech/ragenix";
+      inputs.nixpkgs.follows = "nixpkgsUnstable";
+    };
   };
 
   outputs = inputs @ {
     self,
-    agenix,
-    haumea,
+    flake-parts,
     getchoo,
+    haumea,
     hercules-ci-effects,
     nixpkgs,
     nixinate,
     openwrt-imagebuilder,
     pre-commit-hooks,
-    flake-parts,
+    ragenix,
     ...
   }: let
     inherit (getchooLib.configs) mapHMUsers mapHosts;
@@ -200,7 +200,7 @@
             packages = with inputs;
             with pkgs; [
               actionlint
-              agenix.packages.${system}.agenix
+              ragenix.packages.${system}.ragenix
               alejandra
               deadnix
               fzf

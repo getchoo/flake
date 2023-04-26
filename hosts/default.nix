@@ -5,7 +5,7 @@ with inputs; let
     builder = nixpkgsUnstable.lib.nixosSystem;
 
     modules = [
-      agenix.nixosModules.default
+      ragenix.nixosModules.default
       home-manager.nixosModules.home-manager
       nur.nixosModules.nur
 
@@ -62,7 +62,7 @@ in {
     system = "aarch64-linux";
 
     modules = [
-      agenix.nixosModules.default
+      ragenix.nixosModules.default
       (import "${self}/modules/base")
       (import "${self}/modules/nixos")
       (import "${self}/modules/server")
@@ -91,7 +91,7 @@ in {
     inherit (common) specialArgs system;
 
     modules = [
-      agenix.nixosModules.default
+      ragenix.nixosModules.default
       guzzle_api.nixosModules.guzzle_api
       (import "${self}/modules/base")
       (import "${self}/modules/nixos")
