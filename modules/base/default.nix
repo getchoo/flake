@@ -34,7 +34,6 @@ in {
 
         settings = {
           auto-optimise-store = true;
-          warn-dirty = false;
           experimental-features = ["nix-command" "flakes"];
           trusted-substituters = [
             "https://nix-community.cachix.org"
