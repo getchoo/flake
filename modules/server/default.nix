@@ -12,8 +12,8 @@ in {
   config = mkIf cfg.enable {
     base = {
       enable = true;
-      documentation.enable = mkDefault false;
-      defaultPackages.enable = mkDefault false;
+      documentation.enable = false;
+      defaultPackages.enable = false;
     };
 
     environment.systemPackages = [pkgs.cachix];
@@ -35,25 +35,25 @@ in {
     nix.gc.options = "--delete-older-than 7d --max-freed 50G";
 
     programs = {
-      git.enable = true;
-      vim.defaultEditor = true;
+      git.enable = mkDefault true;
+      vim.defaultEditor = mkDefault true;
     };
 
     security = {
-      pam.enableSSHAgentAuth = true;
+      pam.enableSSHAgentAuth = mkDefault true;
     };
 
     services = {
       endlessh = {
-        enable = true;
-        port = 22;
-        openFirewall = true;
+        enable = mkDefault true;
+        port = mkDefault 22;
+        openFirewall = mkDefault true;
       };
 
       openssh = {
         enable = true;
-        passwordAuthentication = false;
-        ports = [420];
+        passwordAuthentication = mkDefault false;
+        ports = mkDefault [420];
       };
     };
   };
