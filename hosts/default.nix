@@ -56,6 +56,36 @@ in {
         nixos-wsl.nixosModules.wsl
       ];
   };
+  atlas = {
+    builder = nixpkgs.lib.nixosSystem;
+    inherit (common) specialArgs;
+    system = "aarch64-linux";
+
+    modules = [
+      agenix.nixosModules.default
+      (import "${self}/modules/base")
+      (import "${self}/modules/nixos")
+      (import "${self}/modules/server")
+
+      {
+        age = {
+          identityPaths = ["/etc/age/key"];
+          secrets = {
+            rootPassword.file = "${self}/users/_secrets/rootPassword.age";
+            atlasPassword.file = "${self}/users/_secrets/atlasPassword.age";
+          };
+        };
+
+        _module.args.nixinate = {
+          host = "164.152.18.102";
+          sshUser = "atlas";
+          buildOn = "remote";
+          substituteOnTarget = true;
+          hermetic = false;
+        };
+      }
+    ];
+  };
   p-body = {
     builder = nixpkgs.lib.nixosSystem;
     inherit (common) specialArgs system;
@@ -65,6 +95,7 @@ in {
       guzzle_api.nixosModules.guzzle_api
       (import "${self}/modules/base")
       (import "${self}/modules/nixos")
+      (import "${self}/modules/server")
 
       {
         age = {
@@ -74,8 +105,6 @@ in {
             pbodyPassword.file = "${self}/users/_secrets/pbodyPassword.age";
           };
         };
-
-        nixos.enable = true;
 
         _module.args.nixinate = {
           host = "167.99.145.73";
