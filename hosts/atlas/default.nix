@@ -14,7 +14,7 @@
   boot.cleanTmpDir = true;
 
   environment.systemPackages = with pkgs; [
-    hercules-ci-agent.packages.x86_64-linux.hercules-ci-cli
+    hercules-ci-agent.packages.aarch64-linux.hercules-ci-cli
   ];
 
   networking.hostName = "atlas";
