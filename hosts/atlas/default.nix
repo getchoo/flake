@@ -19,7 +19,21 @@
 
   networking.hostName = "atlas";
   nix = {
-    settings.trusted-users = ["atlas" "nix-ssh"];
+    settings = {
+      trusted-users = ["atlas" "nix-ssh"];
+      trusted-substituters = [
+        "https://nix-community.cachix.org"
+        "https://hercules-ci.cachix.org"
+        "https://wurzelpfropf.cachix.org"
+      ];
+
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        "hercules-ci.cachix.org-1:ZZeDl9Va+xe9j+KqdzoBZMFJHVQ42Uu/c/1/KMC5Lw0="
+        "wurzelpfropf.cachix.org-1:ilZwK5a6wJqVr7Fyrzp4blIEkGK+LJT0QrpWr1qBNq0="
+      ];
+    };
+
     sshServe = {
       enable = true;
       keys = [
