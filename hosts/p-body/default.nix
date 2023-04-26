@@ -18,7 +18,21 @@
   ];
 
   networking.hostName = "p-body";
-  nix.settings.trusted-users = ["p-body"];
+  nix.settings = {
+    trusted-substituters = [
+      "https://nix-community.cachix.org"
+      "https://hercules-ci.cachix.org"
+      "ssh://nix-ssh@164.152.18.102:420"
+    ];
+
+    trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "hercules-ci.cachix.org-1:ZZeDl9Va+xe9j+KqdzoBZMFJHVQ42Uu/c/1/KMC5Lw0="
+      "164.152.18.102:1qdvbe6dUxq/UPgB4G2JzOOqj1cU0WlNO+OrlQC2ticKX/RTM50jWpN3VswO10DPIrRLUnrTl+UtoNL3Vgu3Ow=="
+    ];
+
+    trusted-users = ["p-body"];
+  };
 
   services = {
     #caddy = {
