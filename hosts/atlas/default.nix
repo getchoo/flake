@@ -33,22 +33,10 @@
         "wurzelpfropf.cachix.org-1:ilZwK5a6wJqVr7Fyrzp4blIEkGK+LJT0QrpWr1qBNq0="
       ];
     };
-
-    sshServe = {
-      enable = true;
-      keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIlNzPwEdNMT+wuW9pfYBQ7CSNUhBAF7rRXTRD4UIx9Z hercules-ci-agent@p-body"
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF+0oAgrDPVGl/SL54koypwWzMzjnVdqTm+QNkU2amF9 p-body@p-body"
-      ];
-    };
   };
 
   services = {
     hercules-ci-agent.enable = true;
-    nix-serve = {
-      enable = true;
-      secretKeyFile = "/var/cache-priv-key.pem";
-    };
   };
 
   swapDevices = [
