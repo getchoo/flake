@@ -6,7 +6,6 @@ alias lo := lock
 alias p := pre-commit
 alias sw := switch
 alias ul := unlock
-alias up := upgrade
 
 default:
     @just --choose
@@ -51,11 +50,3 @@ update:
 update-nixpkgs:
     nix flake lock \
     	--update-input nixpkgs --update-input nixpkgsUnstable
-
-[linux]
-upgrade:
-    sudo nixos-rebuild switch --upgrade --impure --flake .
-
-[macos]
-upgrade:
-    darwin-rebuild switch --upgrade --flake .
