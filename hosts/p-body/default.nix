@@ -11,40 +11,14 @@
     hercules-ci-agent.nixosModules.agent-service
   ];
 
-  base = {
-    enable = true;
-    documentation.enable = false;
-    defaultPackages.enable = false;
-  };
+  server.enable = true;
 
   environment.systemPackages = with pkgs; [
-    cachix
     hercules-ci-agent.packages.x86_64-linux.hercules-ci-cli
   ];
 
-  nixos = {
-    enable = true;
-    networking.enable = false;
-  };
-
-  networking = {
-    hostName = "p-body";
-    firewall = let
-      ports = [80 420];
-    in {
-      allowedUDPPorts = ports;
-      allowedTCPPorts = ports;
-    };
-  };
-
-  programs = {
-    git.enable = true;
-    vim.defaultEditor = true;
-  };
-
-  security = {
-    pam.enableSSHAgentAuth = true;
-  };
+  networking.hostName = "p-body";
+  nix.settings.trusted-users = ["p-body"];
 
   services = {
     #caddy = {
@@ -118,25 +92,13 @@
     #  };
     #};
 
-    endlessh = {
-      enable = true;
-      port = 22;
-      openFirewall = true;
-    };
+    hercules-ci-agent.enable = true;
 
     guzzle-api = {
       enable = true;
       url = "http://167.99.145.73";
       port = "80";
       package = guzzle_api.packages.x86_64-linux.guzzle-api-server;
-    };
-
-    hercules-ci-agent.enable = true;
-
-    openssh = {
-      enable = true;
-      passwordAuthentication = false;
-      ports = [420];
     };
   };
 
@@ -161,11 +123,6 @@
       passwordFile = config.age.secrets.pbodyPassword.path;
       inherit openssh;
     };
-  };
-
-  nix = {
-    gc.options = "--delete-older-than 7d --max-freed 50G";
-    settings.trusted-users = ["p-body"];
   };
 
   zramSwap.enable = true;
