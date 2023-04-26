@@ -142,7 +142,11 @@
       herculesCI = let
         inherit (import (hercules-ci-effects + "/vendor/hercules-ci-agent/default-herculesCI-for-flake.nix")) flakeToOutputs;
       in rec {
-        ciSystems = ["x86_64-linux"];
+        ciSystems = [
+          "x86_64-linux"
+          "aarch64-linux"
+        ];
+
         onPush = {
           default = {
             outputs = with builtins;
