@@ -41,13 +41,6 @@
     hercules-ci-agent.enable = true;
   };
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 4096;
-    }
-  ];
-
   system.stateVersion = "22.11";
 
   users.users = let
