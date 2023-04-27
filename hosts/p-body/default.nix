@@ -20,12 +20,14 @@
   networking.hostName = "p-body";
   nix.settings = {
     trusted-substituters = [
+      "https://getchoo.cachix.org"
       "https://nix-community.cachix.org"
       "https://hercules-ci.cachix.org"
       "https://wurzelpfropf.cachix.org"
     ];
 
     trusted-public-keys = [
+      "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "hercules-ci.cachix.org-1:ZZeDl9Va+xe9j+KqdzoBZMFJHVQ42Uu/c/1/KMC5Lw0="
       "wurzelpfropf.cachix.org-1:ilZwK5a6wJqVr7Fyrzp4blIEkGK+LJT0QrpWr1qBNq0="
