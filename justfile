@@ -1,5 +1,7 @@
 alias b := build
 alias c := check
+alias d := deploy
+alias da := deploy-all
 alias f := fmt
 alias l := lint
 alias lo := lock
@@ -20,6 +22,11 @@ build:
 
 check:
     nix flake check --impure
+
+deploy HOST:
+    nix run .#{{ HOST }}
+
+deploy-all: (deploy "atlas") (deploy "p-body")
 
 fmt:
     pre-commit run alejandra && pre-commit run stylua
