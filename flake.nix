@@ -3,12 +3,16 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://nix-community.cachix.org"
-      "https://hercules-ci.cachix.org"
+      "https://getchoo.cachix.org" # personal cache
+      "https://nix-community.cachix.org" # nix-community
+      "https://hercules-ci.cachix.org" # hercules-ci
+      "https://wurzelpfropf.cachix.org" # rage-nix
     ];
     extra-trusted-public-keys = [
+      "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "hercules-ci.cachix.org-1:ZZeDl9Va+xe9j+KqdzoBZMFJHVQ42Uu/c/1/KMC5Lw0="
+      "wurzelpfropf.cachix.org-1:ilZwK5a6wJqVr7Fyrzp4blIEkGK+LJT0QrpWr1qBNq0="
     ];
   };
 
@@ -20,6 +24,7 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
+    # ditto
     flake-utils.url = "github:numtide/flake-utils";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
