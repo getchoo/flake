@@ -2,7 +2,10 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  inherit (builtins) fromTOML readFile;
+  inherit (pkgs) fetchFromGitHub;
+in {
   imports = [
     ./bash.nix
     ./fish.nix
@@ -15,7 +18,7 @@
         theme = "catppuccin";
       };
       themes = {
-        catppuccin = builtins.readFile (pkgs.fetchFromGitHub {
+        catppuccin = readFile (fetchFromGitHub {
             owner = "catppuccin";
             repo = "bat";
             rev = "ba4d16880d63e656acced2b7d4e034e4a93f74b1";
@@ -24,11 +27,13 @@
           + "/Catppuccin-mocha.tmTheme");
       };
     };
+
     exa = {
       enable = true;
       enableAliases = true;
       icons = true;
     };
+
     starship = {
       enable = true;
       enableBashIntegration = false;
@@ -37,10 +42,11 @@
         {
           format = "$all";
           palette = "catppuccin_mocha";
+          command_timeout = 50;
         }
-        // builtins.fromTOML (builtins.readFile ./starship.toml)
-        // builtins.fromTOML (builtins.readFile
-          (pkgs.fetchFromGitHub
+        // fromTOML (readFile ./starship.toml)
+        // fromTOML (readFile
+          (fetchFromGitHub
             {
               owner = "catppuccin";
               repo = "starship";

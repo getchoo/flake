@@ -18,6 +18,7 @@
 
   programs.fish = {
     enable = true;
+
     interactiveShellInit = ''
       set -l nixfile ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.fish
       if test -e $nixfile
@@ -29,20 +30,19 @@
 
       abbr -a !! --position anywhere --function last_history_item
     '';
+
     functions = {
       last_history_item.body = "echo $history[1]";
     };
 
-    plugins = [
-      {
-        name = "autopair-fish";
-        src = pkgs.fetchFromGitHub {
-          owner = "jorgebucaran";
-          repo = "autopair.fish";
-          rev = "4d1752ff5b39819ab58d7337c69220342e9de0e2";
-          sha256 = "sha256-qt3t1iKRRNuiLWiVoiAYOu+9E7jsyECyIqZJ/oRIT1A=";
-        };
-      }
-    ];
+    plugins = let
+      mkFishPlugins = builtins.map (plugin: {
+        name = plugin;
+        inherit (pkgs.fishPlugins.${plugin}) src;
+      });
+    in
+      mkFishPlugins [
+        "autopair"
+      ];
   };
 }

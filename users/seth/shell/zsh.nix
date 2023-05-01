@@ -8,6 +8,7 @@
   programs.zsh = {
     enable = true;
     enableAutosuggestions = true;
+
     completionInit = ''
       autoload -Uz bashcompinit compinit
       local zdump="${config.xdg.cacheHome}/zsh/zdump"
@@ -19,8 +20,10 @@
       fi
       unset zdump
     '';
+
     defaultKeymap = "emacs";
     dotDir = ".config/zsh";
+
     initExtra = ''
       if [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-*.zsh" ]]; then
         source "$XDG_CACHE_HOME/p10k-instant-prompt-*.zsh"
@@ -62,12 +65,14 @@
 
       [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
     '';
+
     history = {
       expireDuplicatesFirst = true;
       path = "${config.xdg.stateHome}/zsh/zsh_history";
       save = 1000;
       size = 100;
     };
+
     plugins = [
       {
         name = "cattppuccin-zsh-syntax-highlighting";
@@ -100,17 +105,12 @@
       }
 
       {
-        name = "zsh-fzf-tab";
-        src = pkgs.zsh-fzf-tab;
-        file = "share/fzf-tab/fzf-tab.plugin.zsh";
-      }
-
-      {
         name = "zsh-completions";
         src = pkgs.zsh-completions;
         file = "share/zsh-completions/zsh-completions.plugin.zsh";
       }
     ];
+
     enableSyntaxHighlighting = true;
   };
 }
