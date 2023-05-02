@@ -11,7 +11,11 @@
 
   server.enable = true;
 
-  boot.cleanTmpDir = true;
+  boot = {
+    cleanTmpDir = true;
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+  };
 
   environment.systemPackages = with pkgs; [
     hercules-ci-agent.packages.aarch64-linux.hercules-ci-cli

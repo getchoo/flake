@@ -1,18 +1,22 @@
 {modulesPath, ...}: {
-  imports = [(modulesPath + "/profiles/qemu-guest.nix")];
-  boot.loader.grub = {
-    efiSupport = true;
-    efiInstallAsRemovable = true;
-    device = "nodev";
-  };
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/EC6B-53AA";
-    fsType = "vfat";
-  };
-  boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "xen_blkfront"];
-  boot.initrd.kernelModules = ["nvme"];
+  imports = [
+    (modulesPath + "/profiles/qemu-guest.nix")
+  ];
+
+  boot.initrd.availableKernelModules = ["virtio_pci" "usbhid"];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = [];
+  boot.extraModulePackages = [];
+
   fileSystems."/" = {
-    device = "/dev/sda1";
+    device = "/dev/disk/by-uuid/f0c84809-83f5-414b-a973-496d25d74c6d";
     fsType = "ext4";
   };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/A253-0826";
+    fsType = "vfat";
+  };
+
+  swapDevices = [];
 }
