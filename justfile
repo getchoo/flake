@@ -7,6 +7,7 @@ alias l := lint
 alias lo := lock
 alias p := pre-commit
 alias sw := switch
+alias t := test
 alias ul := unlock
 
 default:
@@ -47,6 +48,14 @@ switch:
 [macos]
 switch:
     darwin-rebuild switch --flake .
+
+[linux]
+test:
+    sudo nixos-rebuild test --impure --flake .
+
+[macos]
+test:
+    darwin-rebuild test --flake .
 
 unlock:
     git-crypt unlock
