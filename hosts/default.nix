@@ -95,7 +95,7 @@ in {
         };
 
         _module.args.nixinate = {
-          host = "164.152.18.102";
+          host = "164.152.17.183";
           sshUser = "atlas";
           buildOn = "remote";
           substituteOnTarget = true;
