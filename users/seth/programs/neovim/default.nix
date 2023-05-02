@@ -11,6 +11,7 @@
       just
       llvmPackages_15.clang
       llvmPackages_15.libclang
+      nil
       nodePackages.alex
       nodePackages.bash-language-server
       nodePackages.eslint

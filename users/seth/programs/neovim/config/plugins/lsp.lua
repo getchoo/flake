@@ -48,6 +48,7 @@ local sources = {
 	lsp_servers = {
 		"bashls",
 		"clangd",
+		"nil_ls",
 		"pyright",
 		"rust_analyzer",
 		"tsserver",
