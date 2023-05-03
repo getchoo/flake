@@ -16,9 +16,8 @@ with inputs; let
         age = {
           identityPaths = ["/etc/age/key"];
           secrets = {
-            rootPassword.file = "${self}/users/_secrets/rootPassword.age";
-            sethPassword.file = "${self}/users/_secrets/sethPassword.age";
-            pbodyPassword.file = "${self}/users/_secrets/pbodyPassword.age";
+            rootPassword.file = "${self}/secrets/shared/rootPassword.age";
+            sethPassword.file = "${self}/secrets/shared/sethPassword.age";
           };
         };
 
@@ -93,8 +92,11 @@ in {
         age = {
           identityPaths = ["/etc/age/key"];
           secrets = {
-            rootPassword.file = "${self}/users/_secrets/rootPassword.age";
-            atlasPassword.file = "${self}/users/_secrets/atlasPassword.age";
+            rootPassword.file = "${self}/secrets/hosts/atlas/rootPassword.age";
+            atlasPassword.file = "${self}/secrets/hosts/atlas/atlasPassword.age";
+            binaryCache.file = "${self}/secrets/hosts/atlas/binaryCache.age";
+            clusterToken.file = "${self}/secrets/hosts/atlas/clusterToken.age";
+            secretsJson.file = "${self}/secrets/hosts/atlas/secretsJson.age";
           };
         };
 
@@ -125,8 +127,11 @@ in {
         age = {
           identityPaths = ["/etc/age/key"];
           secrets = {
-            rootPassword.file = "${self}/users/_secrets/rootPassword.age";
-            pbodyPassword.file = "${self}/users/_secrets/pbodyPassword.age";
+            rootPassword.file = "${self}/secrets/hosts/p-body/rootPassword.age";
+            pbodyPassword.file = "${self}/secrets/hosts/p-body/pbodyPassword.age";
+            binaryCache.file = "${self}/secrets/hosts/p-body/binaryCache.age";
+            clusterToken.file = "${self}/secrets/hosts/p-body/clusterToken.age";
+            secretsJson.file = "${self}/secrets/hosts/p-body/secretsJson.age";
           };
         };
 

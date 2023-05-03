@@ -108,7 +108,14 @@
     #  };
     #};
 
-    hercules-ci-agent.enable = true;
+    hercules-ci-agent = {
+      enable = true;
+      settings = {
+        binaryCachesPath = config.age.secrets.binaryCache.path;
+        clusterJoinTokenPath = config.age.secrets.clusterToken.path;
+        secretsJsonPath = config.age.secrets.secretsJson.path;
+      };
+    };
 
     guzzle-api = {
       enable = true;
