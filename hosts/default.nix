@@ -125,7 +125,7 @@ in {
 
         _module.args.nixinate = {
           host = "164.152.17.183";
-          sshUser = "atlas";
+          sshUser = "root";
           buildOn = "remote";
           substituteOnTarget = true;
           hermetic = false;
@@ -181,7 +181,7 @@ in {
 
         _module.args.nixinate = {
           host = "167.99.145.73";
-          sshUser = "p-body";
+          sshUser = "root";
           buildOn = "remote";
           substituteOnTarget = true;
           hermetic = false;
