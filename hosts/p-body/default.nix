@@ -13,7 +13,7 @@
 
   server.enable = true;
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     hercules-ci-agent.packages.x86_64-linux.hercules-ci-cli
   ];
 

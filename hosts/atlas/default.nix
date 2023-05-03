@@ -17,7 +17,7 @@
     loader.efi.canTouchEfiVariables = true;
   };
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     hercules-ci-agent.packages.aarch64-linux.hercules-ci-cli
   ];
 

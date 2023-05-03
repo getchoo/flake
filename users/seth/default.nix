@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  home-manager,
   ...
 }: {
   users.users.seth = {

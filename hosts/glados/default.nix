@@ -1,4 +1,4 @@
-{home-manager, ...}: {
+_: {
   imports = [
     ./boot.nix
     ./hardware-configuration.nix
