@@ -99,7 +99,7 @@ in {
           identityPaths = ["/etc/age/key"];
           secrets = {
             rootPassword.file = "${self}/secrets/hosts/atlas/rootPassword.age";
-            atlasPassword.file = "${self}/secrets/hosts/atlas/pbodyPassword.age";
+            atlasPassword.file = "${self}/secrets/hosts/atlas/atlasPassword.age";
 
             binaryCache =
               {
