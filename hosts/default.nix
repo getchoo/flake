@@ -89,14 +89,35 @@ in {
       (import "${self}/modules/server")
 
       {
-        age = {
+        age = let
+          hercArgs = {
+            mode = "400";
+            owner = "hercules-ci-agent";
+            group = "hercules-ci-agent";
+          };
+        in {
           identityPaths = ["/etc/age/key"];
           secrets = {
             rootPassword.file = "${self}/secrets/hosts/atlas/rootPassword.age";
-            atlasPassword.file = "${self}/secrets/hosts/atlas/atlasPassword.age";
-            binaryCache.file = "${self}/secrets/hosts/atlas/binaryCache.age";
-            clusterToken.file = "${self}/secrets/hosts/atlas/clusterToken.age";
-            secretsJson.file = "${self}/secrets/hosts/atlas/secretsJson.age";
+            atlasPassword.file = "${self}/secrets/hosts/atlas/pbodyPassword.age";
+
+            binaryCache =
+              {
+                file = "${self}/secrets/hosts/atlas/binaryCache.age";
+              }
+              // hercArgs;
+
+            clusterToken =
+              {
+                file = "${self}/secrets/hosts/atlas/clusterToken.age";
+              }
+              // hercArgs;
+
+            secretsJson =
+              {
+                file = "${self}/secrets/hosts/atlas/secretsJson.age";
+              }
+              // hercArgs;
           };
         };
 
@@ -124,14 +145,35 @@ in {
       (import "${self}/modules/server")
 
       {
-        age = {
+        age = let
+          hercArgs = {
+            mode = "400";
+            owner = "hercules-ci-agent";
+            group = "hercules-ci-agent";
+          };
+        in {
           identityPaths = ["/etc/age/key"];
           secrets = {
             rootPassword.file = "${self}/secrets/hosts/p-body/rootPassword.age";
             pbodyPassword.file = "${self}/secrets/hosts/p-body/pbodyPassword.age";
-            binaryCache.file = "${self}/secrets/hosts/p-body/binaryCache.age";
-            clusterToken.file = "${self}/secrets/hosts/p-body/clusterToken.age";
-            secretsJson.file = "${self}/secrets/hosts/p-body/secretsJson.age";
+
+            binaryCache =
+              {
+                file = "${self}/secrets/hosts/p-body/binaryCache.age";
+              }
+              // hercArgs;
+
+            clusterToken =
+              {
+                file = "${self}/secrets/hosts/p-body/clusterToken.age";
+              }
+              // hercArgs;
+
+            secretsJson =
+              {
+                file = "${self}/secrets/hosts/p-body/secretsJson.age";
+              }
+              // hercArgs;
           };
         };
 
