@@ -1,6 +1,6 @@
 inputs:
 with inputs; let
-  common = rec {
+  common = {
     system = "x86_64-linux";
     builder = nixpkgsUnstable.lib.nixosSystem;
 
@@ -28,7 +28,11 @@ with inputs; let
         };
 
         nix = {
-          registry.getchoo.flake = getchoo;
+          registry = {
+            getchoo.flake = getchoo;
+            nixpkgs.flake = nixpkgsUnstable;
+          };
+
           settings = {
             trusted-substituters = [
               "https://getchoo.cachix.org"
@@ -94,6 +98,8 @@ in {
           };
         };
 
+        nix.registry.nixpkgs.flake = nixpkgs;
+
         _module.args.nixinate = {
           host = "164.152.17.183";
           sshUser = "atlas";
@@ -123,6 +129,8 @@ in {
             pbodyPassword.file = "${self}/users/_secrets/pbodyPassword.age";
           };
         };
+
+        nix.registry.nixpkgs.flake = nixpkgs;
 
         _module.args.nixinate = {
           host = "167.99.145.73";
