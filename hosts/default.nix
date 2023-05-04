@@ -83,9 +83,9 @@ in {
 
     modules = [
       ragenix.nixosModules.default
-      (import "${self}/modules/base")
-      (import "${self}/modules/nixos")
-      (import "${self}/modules/server")
+      "${self}/modules/base"
+      "${self}/modules/nixos"
+      "${self}/modules/server"
 
       {
         age = let
@@ -139,9 +139,9 @@ in {
     modules = [
       ragenix.nixosModules.default
       guzzle_api.nixosModules.guzzle_api
-      (import "${self}/modules/base")
-      (import "${self}/modules/nixos")
-      (import "${self}/modules/server")
+      "${self}/modules/base"
+      "${self}/modules/nixos"
+      "${self}/modules/server"
 
       {
         age = let
