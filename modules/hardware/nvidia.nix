@@ -4,13 +4,13 @@
   pkgs,
   ...
 }: let
-  cfg = config.myHardware.nvidia;
+  cfg = config.getchoo.hardware.nvidia;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.myHardware.nvidia.enable = mkEnableOption "enable nvidia support";
+  options.getchoo.hardware.nvidia.enable = mkEnableOption "enable nvidia support";
 
   config = mkIf cfg.enable {
-    myHardware.enable = true;
+    getchoo.hardware.enable = true;
 
     hardware = {
       nvidia = {

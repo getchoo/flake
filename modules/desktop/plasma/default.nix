@@ -4,13 +4,13 @@
   pkgs,
   ...
 }: let
-  cfg = config.desktop.plasma;
+  cfg = config.getchoo.desktop.plasma;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.desktop.plasma.enable = mkEnableOption "enable plasma";
+  options.getchoo.desktop.plasma.enable = mkEnableOption "enable plasma";
 
   config = mkIf cfg.enable {
-    desktop.enable = true;
+    getchoo.desktop.enable = true;
 
     environment.systemPackages = with pkgs; [pinentry-qt];
 

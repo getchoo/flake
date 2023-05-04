@@ -9,7 +9,7 @@
     hercules-ci-agent.nixosModules.agent-service
   ];
 
-  server.enable = true;
+  getchoo.server.enable = true;
 
   boot = {
     cleanTmpDir = true;

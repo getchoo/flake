@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.nixos.virtualisation;
+  cfg = config.getchoo.nixos.virtualisation;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.nixos.virtualisation.enable = mkEnableOption "enable podman";
+  options.getchoo.nixos.virtualisation.enable = mkEnableOption "enable podman";
 
   config = mkIf cfg.enable {
     virtualisation = {

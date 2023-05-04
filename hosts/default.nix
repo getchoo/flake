@@ -49,7 +49,7 @@ with inputs; let
           };
         };
 
-        nixos.enable = true;
+        getchoo.nixos.enable = true;
         system.stateVersion = "23.05";
       }
     ];

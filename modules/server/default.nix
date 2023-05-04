@@ -4,24 +4,26 @@
   pkgs,
   ...
 }: let
-  cfg = config.server;
+  cfg = config.getchoo.server;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.server.enable = mkEnableOption "enable server configuration";
+  options.getchoo.server.enable = mkEnableOption "enable server configuration";
 
   config = mkIf cfg.enable {
-    base = {
-      enable = true;
-      documentation.enable = false;
-      defaultPackages.enable = false;
+    getchoo = {
+      base = {
+        enable = true;
+        documentation.enable = false;
+        defaultPackages.enable = false;
+      };
+
+      nixos = {
+        enable = true;
+        networking.enable = false;
+      };
     };
 
     environment.systemPackages = [pkgs.cachix];
-
-    nixos = {
-      enable = true;
-      networking.enable = false;
-    };
 
     networking = {
       firewall = let

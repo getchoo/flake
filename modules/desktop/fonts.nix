@@ -4,10 +4,10 @@
   lib,
   ...
 }: let
-  cfg = config.desktop.fonts;
+  cfg = config.getchoo.desktop.fonts;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.desktop.fonts.enable = mkEnableOption "enable default fonts";
+  options.getchoo.desktop.fonts.enable = mkEnableOption "enable default fonts";
 
   config = mkIf cfg.enable {
     fonts = {

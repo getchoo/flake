@@ -4,13 +4,14 @@ _: {
     ./hardware-configuration.nix
   ];
 
-  myHardware = {
-    enable = true;
-    nvidia.enable = true;
+  getchoo = {
+    desktop.gnome.enable = true;
+    hardware = {
+      enable = true;
+      nvidia.enable = true;
+    };
+    nixos.virtualisation.enable = true;
   };
-
-  nixos.virtualisation.enable = true;
-  desktop.gnome.enable = true;
 
   home-manager.users.seth = {
     desktop = {

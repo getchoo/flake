@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.base.documentation;
+  cfg = config.getchoo.base.documentation;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.base.documentation.enable = mkEnableOption "base module documentation";
+  options.getchoo.base.documentation.enable = mkEnableOption "base module documentation";
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [man-pages man-pages-posix];

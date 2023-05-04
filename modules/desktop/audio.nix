@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.desktop.audio;
+  cfg = config.getchoo.desktop.audio;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.desktop.audio.enable = mkEnableOption "enable audio support";
+  options.getchoo.desktop.audio.enable = mkEnableOption "enable audio support";
 
   config = mkIf cfg.enable {
     services = {

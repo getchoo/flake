@@ -11,7 +11,7 @@
     hercules-ci-agent.nixosModules.agent-service
   ];
 
-  server.enable = true;
+  getchoo.server.enable = true;
 
   environment.systemPackages = [
     hercules-ci-agent.packages.x86_64-linux.hercules-ci-cli

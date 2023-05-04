@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.nixos;
+  cfg = config.getchoo.nixos;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.nixos.enable = mkEnableOption "base nixos module";
+  options.getchoo.nixos.enable = mkEnableOption "base nixos module";
 
   imports = [
     ./locale.nix
@@ -18,11 +18,13 @@ in {
   ];
 
   config = mkIf cfg.enable {
-    base.enable = true;
-    nixos = {
-      defaultLocale.enable = mkDefault true;
-      defaultRoot.enable = mkDefault true;
-      networking.enable = mkDefault true;
+    getchoo = {
+      base.enable = true;
+      nixos = {
+        defaultLocale.enable = mkDefault true;
+        defaultRoot.enable = mkDefault true;
+        networking.enable = mkDefault true;
+      };
     };
   };
 }

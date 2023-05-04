@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.nixos.defaultRoot;
+  cfg = config.getchoo.nixos.defaultRoot;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.nixos.defaultRoot.enable = mkEnableOption "enable default root user";
+  options.getchoo.nixos.defaultRoot.enable = mkEnableOption "enable default root user";
 
   config = mkIf cfg.enable {
     users.users.root = {

@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.myHardware;
+  cfg = config.getchoo.hardware;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.myHardware.enable = mkEnableOption "hardware module";
+  options.getchoo.hardware.enable = mkEnableOption "hardware module";
 
   imports = [
     ./nvidia.nix

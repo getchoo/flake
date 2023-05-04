@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.nixos.defaultLocale;
+  cfg = config.getchoo.nixos.defaultLocale;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.nixos.defaultLocale.enable = mkEnableOption "enable default locale";
+  options.getchoo.nixos.defaultLocale.enable = mkEnableOption "enable default locale";
 
   config = mkIf cfg.enable {
     i18n = {

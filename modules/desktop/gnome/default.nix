@@ -4,13 +4,13 @@
   lib,
   ...
 }: let
-  cfg = config.desktop.gnome;
+  cfg = config.getchoo.desktop.gnome;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.desktop.gnome.enable = mkEnableOption "enable gnome";
+  options.getchoo.desktop.gnome.enable = mkEnableOption "enable gnome";
 
   config = mkIf cfg.enable {
-    desktop.enable = true;
+    getchoo.desktop.enable = true;
 
     environment = {
       gnome.excludePackages = with pkgs; [

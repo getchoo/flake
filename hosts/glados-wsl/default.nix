@@ -11,6 +11,8 @@
     wslu
   ];
 
+  getchoo.nixos.networking.enable = false;
+
   wsl = {
     enable = true;
     defaultUser = "seth";
@@ -27,8 +29,6 @@
     dbus.apparmor = "disabled";
     resolved.enable = false;
   };
-
-  nixos.networking.enable = false;
 
   networking.hostName = "glados-wsl";
 

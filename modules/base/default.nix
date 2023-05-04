@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.base;
+  cfg = config.getchoo.base;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.base.enable = mkEnableOption "base module";
+  options.getchoo.base.enable = mkEnableOption "base module";
 
   imports = [
     ./documentation.nix
@@ -18,7 +18,7 @@ in {
     channelPath = "/etc/nix/channels/nixpkgs";
   in
     mkIf cfg.enable {
-      base = {
+      getchoo.base = {
         documentation.enable = mkDefault true;
         defaultPackages.enable = mkDefault true;
       };
@@ -35,12 +35,6 @@ in {
         settings = {
           auto-optimise-store = true;
           experimental-features = ["nix-command" "flakes"];
-          trusted-substituters = [
-            "https://nix-community.cachix.org"
-          ];
-          trusted-public-keys = [
-            "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          ];
         };
 
         nixPath = [
