@@ -10,7 +10,7 @@ with inputs; let
       nur.nixosModules.nur
 
       self.nixosModules.getchoo
-      users.seth.default
+      "${self}/users/seth"
 
       {
         age = {
@@ -66,7 +66,6 @@ in {
         nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
         nixos-hardware.nixosModules.common-pc-ssd
         lanzaboote.nixosModules.lanzaboote
-        (import "${self}/modules/nixos/virtualisation.nix")
       ];
   };
   glados-wsl = {

@@ -14,7 +14,7 @@ in {
     ./root.nix
     ./security.nix
     ./systemd.nix
-    #./virtualisation.nix
+    ./virtualisation.nix
   ];
 
   config = mkIf cfg.enable {

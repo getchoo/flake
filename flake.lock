@@ -279,26 +279,6 @@
         "type": "github"
       }
     },
-    "haumea": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1683133372,
-        "narHash": "sha256-rTZazktrmQ6HVQchrQPGLA4QgxC1ulla1ajt/WMNL+Y=",
-        "owner": "nix-community",
-        "repo": "haumea",
-        "rev": "30cce612bd12b653d11bb89cf03d93403eca6f0b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "haumea",
-        "type": "github"
-      }
-    },
     "hercules-ci-agent": {
       "inputs": {
         "flake-parts": [
@@ -616,7 +596,6 @@
         "flake-utils": "flake-utils",
         "getchoo": "getchoo",
         "guzzle_api": "guzzle_api",
-        "haumea": "haumea",
         "hercules-ci-agent": "hercules-ci-agent",
         "hercules-ci-effects": "hercules-ci-effects",
         "home-manager": "home-manager",
