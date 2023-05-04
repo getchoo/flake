@@ -15,14 +15,14 @@ default:
 
 [linux]
 build:
-    nixos-rebuild build --impure --flake .
+    nixos-rebuild build --flake .
 
 [macos]
 build:
     darwin-rebuild --flake .
 
 check:
-    nix flake check --impure
+    nix flake check
 
 deploy HOST:
     nix run .#{{ HOST }}
@@ -43,7 +43,7 @@ pre-commit:
 
 [linux]
 switch:
-    sudo nixos-rebuild switch --impure --flake .
+    sudo nixos-rebuild switch --flake .
 
 [macos]
 switch:
@@ -51,7 +51,7 @@ switch:
 
 [linux]
 test:
-    sudo nixos-rebuild test --impure --flake .
+    sudo nixos-rebuild test --flake .
 
 [macos]
 test:
