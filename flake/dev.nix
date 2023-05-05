@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  inherit (inputs) pre-commit-hooks;
+  inherit (inputs) pre-commit-hooks ragenix;
 in {
   perSystem = {
     pkgs,
