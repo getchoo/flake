@@ -1,40 +1,23 @@
 {
   config,
   guzzle_api,
-  hercules-ci-agent,
   modulesPath,
   pkgs,
   ...
 }: {
   imports = [
     (modulesPath + "/virtualisation/digital-ocean-image.nix")
-    hercules-ci-agent.nixosModules.agent-service
   ];
 
-  getchoo.server.enable = true;
-
-  environment.systemPackages = [
-    hercules-ci-agent.packages.x86_64-linux.hercules-ci-cli
-  ];
+  _module.args.nixinate = {
+    host = "167.99.145.73";
+    sshUser = "root";
+    buildOn = "remote";
+    substituteOnTarget = true;
+    hermetic = false;
+  };
 
   networking.hostName = "p-body";
-  nix.settings = {
-    trusted-substituters = [
-      "https://getchoo.cachix.org"
-      "https://nix-community.cachix.org"
-      "https://hercules-ci.cachix.org"
-      "https://wurzelpfropf.cachix.org"
-    ];
-
-    trusted-public-keys = [
-      "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "hercules-ci.cachix.org-1:ZZeDl9Va+xe9j+KqdzoBZMFJHVQ42Uu/c/1/KMC5Lw0="
-      "wurzelpfropf.cachix.org-1:ilZwK5a6wJqVr7Fyrzp4blIEkGK+LJT0QrpWr1qBNq0="
-    ];
-
-    trusted-users = ["p-body"];
-  };
 
   services = {
     #caddy = {
@@ -108,15 +91,6 @@
     #  };
     #};
 
-    hercules-ci-agent = {
-      enable = true;
-      settings = {
-        binaryCachesPath = config.age.secrets.binaryCache.path;
-        clusterJoinTokenPath = config.age.secrets.clusterToken.path;
-        secretsJsonPath = config.age.secrets.secretsJson.path;
-      };
-    };
-
     guzzle-api = {
       enable = true;
       url = "http://167.99.145.73";
@@ -143,7 +117,7 @@
       extraGroups = ["wheel"];
       isNormalUser = true;
       shell = pkgs.bash;
-      passwordFile = config.age.secrets.pbodyPassword.path;
+      passwordFile = config.age.secrets.userPassword.path;
       inherit openssh;
     };
   };

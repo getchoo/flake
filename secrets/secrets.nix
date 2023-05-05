@@ -11,13 +11,13 @@ in {
   "shared/sethPassword.age".publicKeys = main;
 
   "hosts/atlas/rootPassword.age".publicKeys = keys;
-  "hosts/atlas/atlasPassword.age".publicKeys = keys;
+  "hosts/atlas/userPassword.age".publicKeys = keys;
   "hosts/atlas/binaryCache.age".publicKeys = keys;
   "hosts/atlas/clusterToken.age".publicKeys = keys;
   "hosts/atlas/secretsJson.age".publicKeys = keys;
 
   "hosts/p-body/rootPassword.age".publicKeys = keys;
-  "hosts/p-body/pbodyPassword.age".publicKeys = keys;
+  "hosts/p-body/userPassword.age".publicKeys = keys;
   "hosts/p-body/binaryCache.age".publicKeys = keys;
   "hosts/p-body/clusterToken.age".publicKeys = keys;
   "hosts/p-body/secretsJson.age".publicKeys = keys;

@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  inherit (inputs) pre-commit-hooks ragenix;
+  inherit (inputs) pre-commit-hooks;
 in {
   perSystem = {
     pkgs,
@@ -12,7 +12,7 @@ in {
   }: {
     checks = {
       pre-commit-check = pre-commit-hooks.lib.${system}.run {
-        src = ./.;
+        src = ./..;
         hooks = {
           actionlint.enable = true;
           alejandra.enable = true;

@@ -1,6 +1,6 @@
 {
-  inputs,
   self,
+  inputs,
   ...
 }: let
   inherit (inputs) hercules-ci-effects nixpkgs;
@@ -20,7 +20,11 @@ in {
   };
 
   herculesCI = let
-    inherit (import (hercules-ci-effects + "/vendor/hercules-ci-agent/default-herculesCI-for-flake.nix")) flakeToOutputs;
+    inherit
+      (import
+        (hercules-ci-effects + "/vendor/hercules-ci-agent/default-herculesCI-for-flake.nix"))
+      flakeToOutputs
+      ;
   in rec {
     ciSystems = [
       "x86_64-linux"

@@ -6,7 +6,7 @@
       "https://getchoo.cachix.org" # personal cache
       "https://nix-community.cachix.org" # nix-community
       "https://hercules-ci.cachix.org" # hercules-ci
-      "https://wurzelpfropf.cachix.org" # rage-nix
+      "https://wurzelpfropf.cachix.org" # ragenix
     ];
     extra-trusted-public-keys = [
       "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="
@@ -19,12 +19,11 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-22.11";
     nixpkgsUnstable.url = "nixpkgs/nixos-unstable";
-    # this is just to avoid having multiple versions in flake.lock
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
     };
-    # ditto
+    # this is just to avoid having multiple versions in flake.lock
     flake-utils.url = "github:numtide/flake-utils";
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
@@ -93,6 +92,12 @@
     };
   };
 
-  outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} {imports = [./flake];};
+  outputs = inputs:
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      imports = [
+        ./flake
+        ./hosts
+        ./users
+      ];
+    };
 }

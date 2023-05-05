@@ -1,6 +1,5 @@
 _: {
   imports = [
-    ./configs.nix
     ./ci.nix
     ./dev.nix
   ];
