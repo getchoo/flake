@@ -115,7 +115,7 @@ servers["nil_ls"] = {
 		["nil"] = {
 			nix = {
 				flake = {
-					autoArchive = nil,
+					autoArchive = false,
 					autoEvalInputs = false,
 				},
 			},
