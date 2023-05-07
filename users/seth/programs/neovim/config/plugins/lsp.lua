@@ -48,7 +48,6 @@ local sources = {
 	lsp_servers = {
 		"bashls",
 		"clangd",
-		"nil_ls",
 		"pyright",
 		"rust_analyzer",
 		"tsserver",
@@ -78,7 +77,11 @@ local sources = {
 }
 
 --- lsp config
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = vim.tbl_deep_extend(
+	"force",
+	require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
+	{ workspace = { didChangeWatchedFiles = { dynamicRegistration = true } } }
+)
 
 local all_config = {
 	capabilities = capabilities,
@@ -101,6 +104,20 @@ servers["lua_ls"] = {
 			},
 			workspace = {
 				library = vim.api.nvim_get_runtime_file("", true),
+			},
+		},
+	},
+}
+
+servers["nil_ls"] = {
+	capabilities = capabilities,
+	settings = {
+		["nil"] = {
+			nix = {
+				flake = {
+					autoArchive = nil,
+					autoEvalInputs = false,
+				},
 			},
 		},
 	},
