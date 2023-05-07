@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  inherit (inputs) pre-commit-hooks ragenix;
+  inherit (inputs) nil pre-commit-hooks ragenix;
 in {
   perSystem = {
     pkgs,
@@ -17,6 +17,7 @@ in {
           actionlint.enable = true;
           alejandra.enable = true;
           deadnix.enable = true;
+          nil.enable = true;
           statix.enable = true;
           stylua.enable = true;
         };
@@ -30,12 +31,13 @@ in {
         inherit (self.checks.${system}.pre-commit-check) shellHook;
         packages = with pkgs; [
           actionlint
-          ragenix.packages.${system}.ragenix
           alejandra
           deadnix
           fzf
           git-crypt
           just
+          nil.packages.${system}.nil
+          ragenix.packages.${system}.ragenix
           statix
           stylua
         ];
