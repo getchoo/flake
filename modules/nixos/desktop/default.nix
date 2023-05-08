@@ -19,7 +19,7 @@ in {
 
   config = mkIf cfg.enable {
     getchoo = {
-      nixos.enable = true;
+      base.enable = true;
       desktop = {
         audio.enable = mkDefault true;
         fonts.enable = mkDefault true;

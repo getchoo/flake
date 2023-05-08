@@ -15,17 +15,11 @@ in {
   ];
 
   config = mkIf cfg.enable {
-    getchoo = {
-      base = {
-        enable = true;
-        documentation.enable = false;
-        defaultPackages.enable = false;
-      };
-
-      nixos = {
-        enable = true;
-        networking.enable = false;
-      };
+    getchoo.base = {
+      enable = true;
+      documentation.enable = false;
+      defaultPackages.enable = false;
+      networking.enable = false;
     };
 
     environment.systemPackages = [pkgs.cachix];

@@ -76,7 +76,7 @@ in {
       };
     };
 
-    nixosModules.getchoo = import ../modules;
+    nixosModules.getchoo = import ../modules/nixos;
   };
 
   perSystem = {

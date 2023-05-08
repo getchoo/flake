@@ -5,12 +5,12 @@ _: {
   ];
 
   getchoo = {
+    base.virtualisation.enable = true;
     desktop.gnome.enable = true;
     hardware = {
       enable = true;
       nvidia.enable = true;
     };
-    nixos.virtualisation.enable = true;
   };
 
   home-manager.users.seth = {

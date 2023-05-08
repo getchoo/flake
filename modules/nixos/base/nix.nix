@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.getchoo.base;
+  cfg = config.getchoo.base.nix-settings;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.getchoo.base.enable = mkEnableOption "base module";
+  options.getchoo.base.nix-settings.enable = mkEnableOption "base nix settings";
 
   imports = [
     ./documentation.nix
@@ -18,11 +18,6 @@ in {
     channelPath = "/etc/nix/channels/nixpkgs";
   in
     mkIf cfg.enable {
-      getchoo.base = {
-        documentation.enable = mkDefault true;
-        defaultPackages.enable = mkDefault true;
-      };
-
       nix = {
         package = mkDefault pkgs.nixFlakes;
 

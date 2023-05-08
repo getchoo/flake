@@ -11,7 +11,7 @@
     wslu
   ];
 
-  getchoo.nixos.networking.enable = false;
+  getchoo.base.networking.enable = false;
 
   wsl = {
     enable = true;

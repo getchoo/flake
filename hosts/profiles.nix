@@ -55,7 +55,7 @@ in {
           };
         };
 
-        getchoo.nixos.enable = true;
+        getchoo.base.enable = true;
         system.stateVersion = "23.05";
       }
     ];
@@ -68,9 +68,8 @@ in {
 
     modules = [
       ragenix.nixosModules.default
-      ../modules/base
-      ../modules/nixos
-      ../modules/server
+      ../modules/nixos/base
+      ../modules/nixos/server
 
       {
         getchoo.server.enable = true;
