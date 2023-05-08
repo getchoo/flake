@@ -99,15 +99,15 @@
   };
 
   outputs = inputs: let
-    inherit (inputs.getchoo) flakeModules;
+    inherit (inputs) getchoo;
     inherit (inputs.flake-parts.lib) mkFlake;
   in
     mkFlake {inherit inputs;} {
       imports = [
-        ./flake
         ./hosts
         ./users
-        flakeModules.default
+        ./modules/flake
+        getchoo.flakeModules.homeConfigurations
       ];
     };
 }
