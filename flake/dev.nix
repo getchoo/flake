@@ -33,8 +33,6 @@ in {
           actionlint
           alejandra
           deadnix
-          fzf
-          git-crypt
           just
           nil.packages.${system}.nil
           ragenix.packages.${system}.ragenix
