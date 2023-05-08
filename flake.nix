@@ -98,12 +98,16 @@
     };
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs = inputs: let
+    inherit (inputs.getchoo) flakeModules;
+    inherit (inputs.flake-parts.lib) mkFlake;
+  in
+    mkFlake {inherit inputs;} {
       imports = [
         ./flake
         ./hosts
         ./users
+        flakeModules.default
       ];
     };
 }

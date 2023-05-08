@@ -18,7 +18,7 @@
     };
 in {
   perSystem = {system, ...}: {
-    legacyPackages.homeConfigurations = {
+    homeConfigurations = {
       seth = mkHMUser {
         name = "seth";
         pkgs = import inputs.nixpkgsUnstable {
