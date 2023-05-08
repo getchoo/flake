@@ -1,6 +1,7 @@
 {
   inputs,
   self,
+  withSystem,
   ...
 }: let
   inherit (import ./profiles.nix {inherit inputs self;}) personal server;
@@ -77,17 +78,15 @@ in {
     };
 
     nixosModules.getchoo = import ../modules/nixos;
+
+    # openwrt-imagebuilder seems to only work
+    # on x64
+    packages.x86_64-linux.turret =
+      withSystem "x86_64-linux"
+      (s: s.pkgs.callPackage ./turret {inherit (inputs) openwrt-imagebuilder;});
   };
 
-  perSystem = {
-    pkgs,
-    system,
-    ...
-  }: {
+  perSystem = {system, ...}: {
     apps = (inputs.nixinate.nixinate.${system} self).nixinate;
-
-    packages = {
-      turret = pkgs.callPackage ./turret {inherit (inputs) openwrt-imagebuilder;};
-    };
   };
 }
