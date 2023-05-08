@@ -8,8 +8,6 @@ in {
     system = "x86_64-linux";
     builder = nixpkgsUnstable.lib.nixosSystem;
 
-    dir = ./.;
-
     modules = [
       ragenix.nixosModules.default
       home-manager.nixosModules.home-manager
@@ -67,8 +65,6 @@ in {
 
   server = {
     builder = nixpkgs.lib.nixosSystem;
-
-    dir = ./.;
 
     modules = [
       ragenix.nixosModules.default
