@@ -11,7 +11,7 @@
   ];
 
   _module.args.nixinate = {
-    host = "167.99.145.73";
+    host = "p-body";
     sshUser = "root";
     buildOn = "remote";
     substituteOnTarget = true;
