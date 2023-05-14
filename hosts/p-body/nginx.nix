@@ -54,24 +54,29 @@ in {
         enableACME = true;
         serverAliases = ["www.${domain}"];
 
-        locations =
-          {
-            "/" = {
-              root =
-                pkgs.writeTextDir "index.html"
-                ''
-                  <!DOCTYPE html>
-                  <html lang="en">
-                    <body style="text-align: center;">
-                      <iframe width="560" height="315" src="https://www.youtube.com/embed/voXpIgb9Nbk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    </body>
-                  </html>
-                '';
+        locations = {
+          "/" = {
+            root =
+              pkgs.writeTextDir "index.html"
+              ''
+                <!DOCTYPE html>
+                <html lang="en">
+                  <body style="text-align: center;">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/voXpIgb9Nbk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                  </body>
+                </html>
+              '';
 
-              index = "index.html";
-            };
-          }
-          // mkProxy "/api" config.services.guzzle-api.port;
+            index = "index.html";
+          };
+        };
+      };
+
+      "api.${domain}" = {
+        enableACME = true;
+        serverAliases = ["www.api.${domain}"];
+
+        locations = mkProxy "/" "8080";
       };
     };
   };
