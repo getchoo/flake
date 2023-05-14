@@ -26,7 +26,7 @@
   services = {
     guzzle-api = {
       enable = true;
-      url = "http://" + config.networking.domain;
+      url = "https://" + config.networking.domain + "/api";
       port = "8080";
       package = guzzle_api.packages.x86_64-linux.guzzle-api-server;
     };
