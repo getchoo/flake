@@ -65,6 +65,20 @@ in {
 
         locations = mkProxy "/" "3000";
       };
+
+      "status.${domain}" = {
+        enableACME = true;
+        serverAliases = ["www.status.${domain}"];
+        locations."/" = {
+          root =
+            pkgs.writeTextDir "notindex.html"
+            ''
+              lol
+            '';
+          index = "index.html";
+          tryFiles = "$uri =404";
+        };
+      };
     };
   };
 }
