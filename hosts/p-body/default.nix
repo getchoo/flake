@@ -19,7 +19,7 @@
   };
 
   networking = {
-    domain = "167.99.145.73";
+    domain = "mydadleft.me";
     hostName = "p-body";
   };
 

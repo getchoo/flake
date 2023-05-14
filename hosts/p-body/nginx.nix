@@ -1,4 +1,8 @@
-{config, ...}: let
+{
+  config,
+  pkgs,
+  ...
+}: let
   inherit (config.networking) domain;
 in {
   security.acme = {
@@ -38,35 +42,36 @@ in {
       # Enable XSS protection of the browser.
       # May be unnecessary when CSP is configured properly (see above)
       add_header X-XSS-Protection "1; mode=block";
-
-      # This might create errors
-      proxy_cookie_path / "/; secure; HttpOnly; SameSite=strict";
-
     '';
 
     virtualHosts = let
-      common = {
-        forceSSL = false;
-        enableACME = false;
-      };
-
       mkProxy = endpoint: port: {
         "${endpoint}".proxyPass = "http://127.0.0.1:${port}";
       };
     in {
       "${domain}" = {
-        inherit (common) enableACME forceSSL;
-
         default = true;
+        enableACME = true;
         serverAliases = ["www.${domain}"];
 
-        locations = mkProxy "/" config.services.guzzle-api.port;
-        #{
-        #  "/" = {
-        #    root = "/var/www";
-        #  };
-        #};
-        #// mkProxy "/api" config.services.guzzle-api.port;
+        locations =
+          {
+            "/" = {
+              root =
+                pkgs.writeTextDir "index.html"
+                ''
+                  <!DOCTYPE html>
+                  <html lang="en">
+                    <body style="text-align: center;">
+                      <iframe width="560" height="315" src="https://www.youtube.com/embed/voXpIgb9Nbk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    </body>
+                  </html>
+                '';
+
+              index = "index.html";
+            };
+          }
+          // mkProxy "/api" config.services.guzzle-api.port;
       };
     };
   };
