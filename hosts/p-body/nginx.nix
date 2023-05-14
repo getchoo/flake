@@ -5,6 +5,8 @@
 }: let
   inherit (config.networking) domain;
 in {
+  networking.firewall.allowedTCPPorts = [80 443];
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "getchoo@tuta.io";
