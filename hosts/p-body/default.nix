@@ -7,6 +7,7 @@
 }: {
   imports = [
     (modulesPath + "/virtualisation/digital-ocean-image.nix")
+    ./forgejo.nix
     ./nginx.nix
   ];
 
