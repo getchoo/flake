@@ -10,7 +10,6 @@ in {
 
   config = mkIf cfg.enable {
     services = {
-      openssh.openFirewall = false;
       tailscale.enable = mkDefault true;
     };
 
