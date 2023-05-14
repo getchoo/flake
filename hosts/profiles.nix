@@ -70,8 +70,10 @@ in {
       ragenix.nixosModules.default
       ../modules/nixos/base
       ../modules/nixos/server
+      ../modules/nixos/features/tailscale.nix
 
       {
+        getchoo.features.tailscale.enable = true;
         getchoo.server.enable = true;
         nix.registry.nixpkgs.flake = nixpkgs;
       }

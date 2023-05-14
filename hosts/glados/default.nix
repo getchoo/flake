@@ -2,11 +2,13 @@ _: {
   imports = [
     ./boot.nix
     ./hardware-configuration.nix
+    ../../modules/nixos/features/tailscale.nix
   ];
 
   getchoo = {
     base.virtualisation.enable = true;
     desktop.gnome.enable = true;
+    features.tailscale.enable = true;
     hardware = {
       enable = true;
       nvidia.enable = true;

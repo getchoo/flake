@@ -24,15 +24,6 @@ in {
 
     environment.systemPackages = [pkgs.cachix];
 
-    networking = {
-      firewall = let
-        ports = [80 420];
-      in {
-        allowedUDPPorts = ports;
-        allowedTCPPorts = ports;
-      };
-    };
-
     nix = {
       gc.options = "--delete-older-than 7d --max-freed 50G";
       settings = {
@@ -63,16 +54,17 @@ in {
     };
 
     services = {
-      endlessh = {
-        enable = mkDefault true;
-        port = mkDefault 22;
-        openFirewall = mkDefault true;
+      fail2ban = {
+        enable = true;
+        bantime-increment = {
+          enable = true;
+        };
+        maxretry = 5;
       };
 
       openssh = {
         enable = true;
         passwordAuthentication = mkDefault false;
-        ports = mkDefault [420];
       };
     };
   };

@@ -5,13 +5,17 @@
 }: {
   imports = [
     (modulesPath + "/profiles/minimal.nix")
+    ../../modules/nixos/features/tailscale.nix
   ];
 
   environment.systemPackages = with pkgs; [
     wslu
   ];
 
-  getchoo.base.networking.enable = false;
+  getchoo = {
+    base.networking.enable = false;
+    features.tailscale.enable = true;
+  };
 
   wsl = {
     enable = true;
