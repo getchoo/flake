@@ -2,7 +2,7 @@
   inputs,
   self,
 }: let
-  inherit (inputs) getchoo home-manager nil nixpkgs nixpkgsUnstable nur ragenix;
+  inherit (inputs) getchoo home-manager nixpkgs nixpkgsUnstable nur ragenix;
 in {
   personal = {
     system = "x86_64-linux";
@@ -28,7 +28,7 @@ in {
         };
 
         nixpkgs = {
-          overlays = [nil.overlays.nil nur.overlay getchoo.overlays.default];
+          overlays = [nur.overlay getchoo.overlays.default];
           config.allowUnfree = true;
         };
 

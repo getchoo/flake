@@ -63,12 +63,6 @@
       inputs.flake-parts.follows = "flake-parts";
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
     };
-    # TODO: remove this when nil is updated in nixpkgs-unstable
-    nil = {
-      url = "github:oxalica/nil";
-      inputs.nixpkgs.follows = "nixpkgsUnstable";
-      inputs.flake-utils.follows = "flake-utils";
-    };
     nixinate = {
       url = "github:MatthewCroughan/nixinate";
       inputs.nixpkgs.follows = "nixpkgsUnstable";

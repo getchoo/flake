@@ -3,7 +3,7 @@
   inputs,
   ...
 }: let
-  inherit (inputs) nil pre-commit-hooks ragenix;
+  inherit (inputs) pre-commit-hooks ragenix;
 in {
   perSystem = {
     pkgs,
@@ -34,7 +34,7 @@ in {
           alejandra
           deadnix
           just
-          nil.packages.${system}.nil
+          nil
           ragenix.packages.${system}.ragenix
           statix
           stylua
