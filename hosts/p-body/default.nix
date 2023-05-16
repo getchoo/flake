@@ -1,5 +1,6 @@
 {
   config,
+  getchoo-website,
   guzzle_api,
   modulesPath,
   pkgs,
@@ -23,6 +24,8 @@
     domain = "mydadleft.me";
     hostName = "p-body";
   };
+
+  nixpkgs.overlays = [getchoo-website.overlays.default];
 
   services = {
     guzzle-api = {

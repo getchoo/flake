@@ -34,21 +34,9 @@ in {
         enableACME = true;
         serverAliases = ["www.${domain}"];
 
-        locations = {
-          "/" = {
-            root =
-              pkgs.writeTextDir "index.html"
-              ''
-                <!DOCTYPE html>
-                <html lang="en">
-                  <body style="text-align: center;">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/voXpIgb9Nbk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                  </body>
-                </html>
-              '';
-
-            index = "index.html";
-          };
+        locations."/" = {
+          root = "${pkgs.getchoo-website}/libexec/getchoo-website/deps/getchoo-website/dist/";
+          index = "index.html";
         };
       };
 

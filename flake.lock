@@ -219,6 +219,29 @@
         "type": "github"
       }
     },
+    "getchoo-website": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgsUnstable"
+        ],
+        "pre-commit-hooks": [
+          "pre-commit-hooks"
+        ]
+      },
+      "locked": {
+        "lastModified": 1684228639,
+        "narHash": "sha256-kOQIvjFSqAR7hGB5qNx7FDMpIcydFExlxQ6lEIsATI4=",
+        "owner": "getchoo",
+        "repo": "getchoo.github.io",
+        "rev": "4b2f271406f4f32dee01d0ecb7d8528e9eae1c1d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getchoo",
+        "repo": "getchoo.github.io",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -595,6 +618,7 @@
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
         "getchoo": "getchoo",
+        "getchoo-website": "getchoo-website",
         "guzzle_api": "guzzle_api",
         "hercules-ci-agent": "hercules-ci-agent",
         "hercules-ci-effects": "hercules-ci-effects",
