@@ -221,19 +221,17 @@
     },
     "getchoo-website": {
       "inputs": {
-        "nixpkgs": [
-          "nixpkgsUnstable"
-        ],
+        "nixpkgs": "nixpkgs",
         "pre-commit-hooks": [
           "pre-commit-hooks"
         ]
       },
       "locked": {
-        "lastModified": 1684228639,
-        "narHash": "sha256-kOQIvjFSqAR7hGB5qNx7FDMpIcydFExlxQ6lEIsATI4=",
+        "lastModified": 1684237001,
+        "narHash": "sha256-9pOpquN8IBSI83s1Ahh7Vbi0hTL+TLQfsLsX81x4F3g=",
         "owner": "getchoo",
         "repo": "getchoo.github.io",
-        "rev": "4b2f271406f4f32dee01d0ecb7d8528e9eae1c1d",
+        "rev": "119d2a208944f7b4d37cf1afd275dbd6fa7cb0b0",
         "type": "github"
       },
       "original": {
@@ -309,9 +307,7 @@
         ],
         "haskell-flake": "haskell-flake",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": [
-          "nixpkgsUnstable"
-        ],
+        "nixpkgs": "nixpkgs_2",
         "pre-commit-hooks-nix": [
           "pre-commit-hooks"
         ]
@@ -495,16 +491,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1684130981,
-        "narHash": "sha256-5IPp/rUAOogega5xuRoxcpfkwlGDAyWdizL0Tp2GA4s=",
+        "lastModified": 1684139381,
+        "narHash": "sha256-YPLMeYE+UzxxP0qbkBzv3RBDvyGR5I4d7v2n8dI3+fY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d41eea2839de7de0f2cbe4aa90fde5db8afcd30a",
+        "rev": "17a689596b72d1906883484838eb1aaf51ab8001",
         "type": "github"
       },
       "original": {
         "id": "nixpkgs",
-        "ref": "nixos-22.11",
+        "ref": "nixos-unstable",
         "type": "indirect"
       }
     },
@@ -520,6 +516,37 @@
       "original": {
         "id": "nixpkgs",
         "ref": "nixos-unstable",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1684139381,
+        "narHash": "sha256-YPLMeYE+UzxxP0qbkBzv3RBDvyGR5I4d7v2n8dI3+fY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "17a689596b72d1906883484838eb1aaf51ab8001",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1684130981,
+        "narHash": "sha256-5IPp/rUAOogega5xuRoxcpfkwlGDAyWdizL0Tp2GA4s=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d41eea2839de7de0f2cbe4aa90fde5db8afcd30a",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-22.11",
         "type": "indirect"
       }
     },
@@ -627,7 +654,7 @@
         "nixinate": "nixinate",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_3",
         "nixpkgsUnstable": "nixpkgsUnstable",
         "nur": "nur",
         "openwrt-imagebuilder": "openwrt-imagebuilder",

@@ -1,9 +1,11 @@
 {
   config,
+  getchoo-website,
   pkgs,
   ...
 }: let
   inherit (config.networking) domain;
+  website = getchoo-website.packages.${pkgs.system}.default;
 in {
   networking.firewall.allowedTCPPorts = [80 443];
 
@@ -35,7 +37,7 @@ in {
         serverAliases = ["www.${domain}"];
 
         locations."/" = {
-          root = "${pkgs.getchoo-website}/libexec/getchoo-website/deps/getchoo-website/dist/";
+          root = "${website}/libexec/getchoo-website/deps/getchoo-website/dist/";
           index = "index.html";
         };
       };

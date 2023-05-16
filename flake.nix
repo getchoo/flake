@@ -36,7 +36,6 @@
     };
     getchoo-website = {
       url = "github:getchoo/getchoo.github.io";
-      inputs.nixpkgs.follows = "nixpkgsUnstable";
       inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     };
     guzzle_api = {
@@ -46,7 +45,6 @@
     };
     hercules-ci-agent = {
       url = "github:hercules-ci/hercules-ci-agent";
-      inputs.nixpkgs.follows = "nixpkgsUnstable";
       inputs.flake-parts.follows = "flake-parts";
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
     };
