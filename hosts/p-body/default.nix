@@ -9,7 +9,11 @@
   imports = [
     (modulesPath + "/virtualisation/digital-ocean-image.nix")
     ./forgejo.nix
+    ./grafana.nix
+    ./loki.nix
     ./nginx.nix
+    ./prometheus.nix
+    ./promtail.nix
   ];
 
   _module.args.nixinate = {

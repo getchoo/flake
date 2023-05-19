@@ -28,7 +28,10 @@ in {
 
     virtualHosts = let
       mkProxy = endpoint: port: {
-        "${endpoint}".proxyPass = "http://127.0.0.1:${port}";
+        "${endpoint}" = {
+          proxyPass = "http://127.0.0.1:${port}";
+          proxyWebsockets = true;
+        };
       };
     in {
       "${domain}" = {
@@ -68,6 +71,12 @@ in {
           index = "index.html";
           tryFiles = "$uri =404";
         };
+      };
+
+      "grafana.${domain}" = {
+        enableACME = true;
+        serverAliases = ["www.grafana.${domain}"];
+        locations = mkProxy "/" "4000";
       };
     };
   };
