@@ -1,11 +1,9 @@
 {
   config,
-  getchoo-website,
   pkgs,
   ...
 }: let
   inherit (config.networking) domain;
-  website = getchoo-website.packages.${pkgs.system}.default;
 in {
   networking.firewall.allowedTCPPorts = [80 443];
 
@@ -34,17 +32,6 @@ in {
         };
       };
     in {
-      "${domain}" = {
-        default = true;
-        enableACME = true;
-        serverAliases = ["www.${domain}"];
-
-        locations."/" = {
-          root = "${website}/libexec/getchoo-website/deps/getchoo-website/dist/";
-          index = "index.html";
-        };
-      };
-
       "api.${domain}" = {
         enableACME = true;
         serverAliases = ["www.api.${domain}"];
@@ -57,20 +44,6 @@ in {
         serverAliases = ["www.git.${domain}"];
 
         locations = mkProxy "/" "3000";
-      };
-
-      "status.${domain}" = {
-        enableACME = true;
-        serverAliases = ["www.status.${domain}"];
-        locations."/" = {
-          root =
-            pkgs.writeTextDir "notindex.html"
-            ''
-              lol
-            '';
-          index = "index.html";
-          tryFiles = "$uri =404";
-        };
       };
 
       "grafana.${domain}" = {

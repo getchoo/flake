@@ -219,27 +219,6 @@
         "type": "github"
       }
     },
-    "getchoo-website": {
-      "inputs": {
-        "nixpkgs": "nixpkgs",
-        "pre-commit-hooks": [
-          "pre-commit-hooks"
-        ]
-      },
-      "locked": {
-        "lastModified": 1684513717,
-        "narHash": "sha256-MUUeAYSowdJOEA7Y7Z4opLv+ZRfUzTHWW1PLtLK9wwA=",
-        "owner": "getchoo",
-        "repo": "getchoo.github.io",
-        "rev": "b316f63b98d5ba77f0a78f131d0e7de350a1ac80",
-        "type": "github"
-      },
-      "original": {
-        "owner": "getchoo",
-        "repo": "getchoo.github.io",
-        "type": "github"
-      }
-    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -307,7 +286,7 @@
         ],
         "haskell-flake": "haskell-flake",
         "nix-darwin": "nix-darwin",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "pre-commit-hooks-nix": [
           "pre-commit-hooks"
         ]
@@ -491,17 +470,18 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1681920287,
-        "narHash": "sha256-+/d6XQQfhhXVfqfLROJoqj3TuG38CAeoT6jO1g9r1k0=",
+        "lastModified": 1680213900,
+        "narHash": "sha256-cIDr5WZIj3EkKyCgj/6j3HBH4Jj1W296z7HTcWj1aMA=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "645bc49f34fa8eff95479f0345ff57e55b53437e",
+        "rev": "e3652e0735fbec227f342712f180f4f21f0594f2",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
+        "owner": "NixOS",
         "ref": "nixos-unstable",
-        "type": "indirect"
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "nixpkgsUnstable": {
@@ -520,22 +500,6 @@
       }
     },
     "nixpkgs_2": {
-      "locked": {
-        "lastModified": 1680213900,
-        "narHash": "sha256-cIDr5WZIj3EkKyCgj/6j3HBH4Jj1W296z7HTcWj1aMA=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "e3652e0735fbec227f342712f180f4f21f0594f2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
       "locked": {
         "lastModified": 1684398685,
         "narHash": "sha256-TRE62m91iZ5ArVMgA+uj22Yda8JoQuuhc9uwZ+NoX+0=",
@@ -645,7 +609,6 @@
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
         "getchoo": "getchoo",
-        "getchoo-website": "getchoo-website",
         "guzzle_api": "guzzle_api",
         "hercules-ci-agent": "hercules-ci-agent",
         "hercules-ci-effects": "hercules-ci-effects",
@@ -654,7 +617,7 @@
         "nixinate": "nixinate",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
-        "nixpkgs": "nixpkgs_3",
+        "nixpkgs": "nixpkgs_2",
         "nixpkgsUnstable": "nixpkgsUnstable",
         "nur": "nur",
         "openwrt-imagebuilder": "openwrt-imagebuilder",

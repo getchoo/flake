@@ -34,10 +34,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
     };
-    getchoo-website = {
-      url = "github:getchoo/getchoo.github.io";
-      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
-    };
     guzzle_api = {
       url = "github:getchoo/guzzle_api";
       inputs.nixpkgs.follows = "nixpkgsUnstable";
