@@ -1,10 +1,10 @@
 {config, ...}: let
-  scrapeExporter = name: exporter: {
+  scrapeExporter = name: host: port: {
     job_name = "${name}";
     static_configs = [
       {
         targets = [
-          "127.0.0.1:${toString config.services.prometheus.exporters.${exporter}.port}"
+          "${host}:${port}"
         ];
       }
     ];
@@ -21,7 +21,14 @@ in {
       };
     };
     scrapeConfigs = [
-      (scrapeExporter "p-body" "node")
+      (scrapeExporter "p-body" "127.0.0.1" "${toString config.services.prometheus.exporters.node.port}")
+      (scrapeExporter "atlas" "atlas" "5001")
     ];
   };
+
+  getchoo.server.services.promtail.clients = [
+    {
+      url = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}/loki/api/v1/push";
+    }
+  ];
 }

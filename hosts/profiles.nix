@@ -73,8 +73,13 @@ in {
       ../modules/nixos/features/tailscale.nix
 
       {
-        getchoo.features.tailscale.enable = true;
-        getchoo.server.enable = true;
+        getchoo = {
+          features.tailscale.enable = true;
+          server = {
+            enable = true;
+            services.promtail.enable = true;
+          };
+        };
         nix.registry.nixpkgs.flake = nixpkgs;
       }
     ];

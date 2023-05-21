@@ -1,8 +1,24 @@
-_: {
-  services.loki = {
+{
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.getchoo.server.services.loki;
+  inherit (lib) mkEnableOption mkIf mkOption types;
+in {
+  options.getchoo.server.services.loki = {
+    enable = mkEnableOption "enable loki";
+    port = mkOption {
+      type = types.port;
+      default = 3030;
+      description = "port for loki";
+    };
+  };
+
+  config.services.loki = mkIf cfg.enable {
     enable = true;
     configuration = {
-      server.http_listen_port = 3030;
+      server.http_listen_port = cfg.port;
       auth_enabled = false;
 
       ingester = {
