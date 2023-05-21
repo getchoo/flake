@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./prometheus.nix
   ];
 
   _module.args.nixinate = {
