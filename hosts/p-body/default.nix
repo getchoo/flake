@@ -9,6 +9,7 @@
     (modulesPath + "/virtualisation/digital-ocean-image.nix")
     ./forgejo.nix
     ./grafana.nix
+    ./loki.nix
     ./nginx.nix
     ./prometheus.nix
   ];
@@ -20,8 +21,6 @@
     substituteOnTarget = true;
     hermetic = false;
   };
-
-  getchoo.server.services.loki.enable = true;
 
   networking = {
     domain = "mydadleft.me";

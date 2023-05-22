@@ -1,33 +1,14 @@
-{config, ...}: let
-  scrapeExporter = name: host: port: {
-    job_name = "${name}";
-    static_configs = [
-      {
-        targets = [
-          "${host}:${port}"
-        ];
-      }
-    ];
-  };
-in {
-  services.prometheus = {
+{config, ...}: {
+  networking.firewall.allowedTCPPorts = [config.services.prometheus.exporters.node.port];
+
+  services.prometheus.exporters.node = {
     enable = true;
-    port = 5000;
-    exporters = {
-      node = {
-        enable = true;
-        enabledCollectors = ["systemd"];
-        port = 5001;
-      };
-    };
-    scrapeConfigs = [
-      (scrapeExporter "atlas" "127.0.0.1" "${toString config.services.prometheus.exporters.node.port}")
-    ];
+    enabledCollectors = ["systemd"];
   };
 
   getchoo.server.services.promtail.clients = [
     {
-      url = "p-body:3030/loki/api/v1/push";
+      url = "http://p-body:3030/loki/api/v1/push";
     }
   ];
 }
