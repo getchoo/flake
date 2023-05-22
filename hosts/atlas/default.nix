@@ -5,6 +5,8 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./miniflux.nix
+    ./nginx.nix
     ./prometheus.nix
   ];
 
@@ -22,7 +24,11 @@
     loader.efi.canTouchEfiVariables = true;
   };
 
-  networking.hostName = "atlas";
+  networking = {
+    domain = "mydadleft.me";
+    hostName = "atlas";
+  };
+
   system.stateVersion = "22.11";
 
   users.users = let

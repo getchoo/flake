@@ -15,6 +15,7 @@ in {
   "hosts/atlas/binaryCache.age".publicKeys = keys;
   "hosts/atlas/clusterToken.age".publicKeys = keys;
   "hosts/atlas/secretsJson.age".publicKeys = keys;
+  "hosts/atlas/miniflux.age".publicKeys = keys;
 
   "hosts/p-body/rootPassword.age".publicKeys = keys;
   "hosts/p-body/userPassword.age".publicKeys = keys;
