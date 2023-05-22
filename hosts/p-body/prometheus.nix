@@ -21,6 +21,8 @@ in {
     scrapeConfigs = [
       (scrapeExporter "p-body" "localhost" "${toString config.services.prometheus.exporters.node.port}")
       (scrapeExporter "atlas" "atlas" "${toString config.services.prometheus.exporters.node.port}")
+      (scrapeExporter "p-body-hydra" "127.0.0.1" "6001")
+      (scrapeExporter "p-body-hydra-queue" "127.0.0.1" "6002")
     ];
   };
 

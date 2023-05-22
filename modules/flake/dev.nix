@@ -1,18 +1,16 @@
 {
-  self,
   inputs,
+  self,
   ...
-}: let
-  inherit (inputs) pre-commit-hooks ragenix;
-in {
+}: {
   perSystem = {
     pkgs,
     system,
     ...
   }: {
     checks = {
-      pre-commit-check = pre-commit-hooks.lib.${system}.run {
-        src = ./..;
+      pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
+        src = ./.;
         hooks = {
           actionlint.enable = true;
           alejandra.enable = true;
@@ -29,12 +27,12 @@ in {
     in {
       default = mkShell {
         inherit (self.checks.${system}.pre-commit-check) shellHook;
-        packages = with pkgs; [
+        packages = with pkgs;
+        with inputs; [
           actionlint
           alejandra
           deadnix
           just
-          nil
           ragenix.packages.${system}.ragenix
           statix
           stylua

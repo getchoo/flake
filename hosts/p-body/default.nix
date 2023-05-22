@@ -7,8 +7,11 @@
 }: {
   imports = [
     (modulesPath + "/virtualisation/digital-ocean-image.nix")
+    ./buildMachines.nix
+    ./cachix.nix
     ./forgejo.nix
     ./grafana.nix
+    ./hydra.nix
     ./loki.nix
     ./nginx.nix
     ./prometheus.nix
@@ -21,6 +24,8 @@
     substituteOnTarget = true;
     hermetic = false;
   };
+
+  getchoo.server.secrets.enable = true;
 
   networking = {
     domain = "mydadleft.me";

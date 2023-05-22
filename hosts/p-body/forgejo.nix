@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  nixpkgsUnstable,
+  nixpkgs,
   ...
 }: let
   theme = pkgs.fetchzip {
@@ -22,7 +22,7 @@ in {
     domain = "git.${config.networking.domain}";
   in {
     enable = true;
-    package = (import nixpkgsUnstable {inherit (pkgs) system;}).forgejo;
+    package = (import nixpkgs {inherit (pkgs) system;}).forgejo;
     inherit domain;
     rootUrl = "https://${domain}/";
     appName = "forgejo: with daddy issues";

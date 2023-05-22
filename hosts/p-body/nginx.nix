@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{config, ...}: let
   inherit (config.networking) domain;
 in {
   networking.firewall.allowedTCPPorts = [80 443];
@@ -15,8 +11,6 @@ in {
   services.nginx = {
     enable = true;
 
-    additionalModules = [pkgs.nginxModules.fancyindex];
-
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
     recommendedProxySettings = true;
@@ -27,28 +21,41 @@ in {
     virtualHosts = let
       mkProxy = endpoint: port: {
         "${endpoint}" = {
-          proxyPass = "http://127.0.0.1:${port}";
+          proxyPass = "http://localhost:${port}";
           proxyWebsockets = true;
         };
       };
     in {
       "api.${domain}" = {
         enableACME = true;
-        serverAliases = ["www.api.${domain}"];
+        addSSL = true;
 
         locations = mkProxy "/" "8080";
       };
 
       "git.${domain}" = {
         enableACME = true;
-        serverAliases = ["www.git.${domain}"];
+        addSSL = true;
 
         locations = mkProxy "/" "3000";
       };
 
+      "hydra.${domain}" = {
+        enableACME = true;
+        addSSL = true;
+
+        locations."/" = {
+          proxyPass = "http://localhost:${toString config.services.hydra.port}";
+          extraConfig = ''
+            add_header Front-End-Https on;
+          '';
+        };
+      };
+
       "grafana.${domain}" = {
         enableACME = true;
-        serverAliases = ["www.grafana.${domain}"];
+        addSSL = true;
+
         locations = mkProxy "/" "4000";
       };
     };

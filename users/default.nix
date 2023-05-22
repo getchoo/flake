@@ -1,27 +1,15 @@
-{inputs, ...}: let
-  mkHMUser = {
-    name,
-    modules ? [],
-    pkgs ? import inputs.nixpkgs {system = "x86_64-linux";},
-    extraSpecialArgs ? inputs,
-  }:
-    inputs.home-manager.lib.homeManagerConfiguration {
-      inherit pkgs extraSpecialArgs;
-      modules =
-        [
-          {
-            programs.home-manager.enable = true;
-          }
-        ]
-        ++ [./${name}/home.nix]
-        ++ modules;
-    };
-in {
-  perSystem = {system, ...}: {
+{
+  inputs,
+  myLib,
+  ...
+}: {
+  perSystem = {system, ...}: let
+    inherit (myLib.my) mkHMUser;
+  in {
     homeConfigurations = {
       seth = mkHMUser {
         name = "seth";
-        pkgs = import inputs.nixpkgsUnstable {
+        pkgs = import inputs.nixpkgs {
           inherit system;
           overlays = with inputs; [nur.overlay getchoo.overlays.default];
         };

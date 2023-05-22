@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./cachix.nix
     ./miniflux.nix
     ./nginx.nix
     ./prometheus.nix
@@ -24,10 +25,17 @@
     loader.efi.canTouchEfiVariables = true;
   };
 
+  getchoo.server = {
+    secrets.enable = true;
+    services.loki.enable = true;
+  };
+
   networking = {
     domain = "mydadleft.me";
     hostName = "atlas";
   };
+
+  nix.settings.trusted-users = ["bob"];
 
   system.stateVersion = "22.11";
 
@@ -43,6 +51,14 @@
       shell = pkgs.bash;
       passwordFile = config.age.secrets.userPassword.path;
       inherit openssh;
+    };
+    bob = {
+      isNormalUser = true;
+      shell = pkgs.bash;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOtbxHjDADxqsG+AgCoiDq0uCsgcnJCIH+9rB6K5pIi9 p-body@p-body"
+        "ssh-ed25519 aaaac3nzac1lzdi1nte5aaaaimpv9widwxvyovh347caulkdgzg7+1m/rz1av5fk3bhm atlas getchoo@tuta.io"
+      ];
     };
   };
 
