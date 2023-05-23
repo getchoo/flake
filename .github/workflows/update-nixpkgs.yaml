@@ -2,8 +2,8 @@ name: update nixpkgs inputs
 
 on:
   schedule:
-    #  # run every 2 days, sunday-friday
-    - cron: "0 0 * * 0-5/2"
+    # run daily at 0:00 utc
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 permissions: read-all
