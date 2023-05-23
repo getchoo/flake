@@ -56,6 +56,8 @@ in {
       extraEnv = {HYDRA_DISALLOW_UNFREE = "0";};
     };
 
+    nix.settings.trusted-users = ["@${hydraGroup}"];
+
     users.users = {
       hydra-queue-runner.extraGroups = [hydraGroup];
       hydra-www.extraGroups = [hydraGroup];
