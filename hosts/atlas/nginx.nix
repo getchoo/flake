@@ -25,6 +25,8 @@
     in {
       "miniflux.${domain}" = {
         enableACME = true;
+        addSSL = true;
+
         locations = mkProxy "/" "7000";
       };
     };
