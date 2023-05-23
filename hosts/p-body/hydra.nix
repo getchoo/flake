@@ -3,64 +3,55 @@
   self,
   ...
 }: let
-  hydraUser = config.users.users.hydra.name;
   hydraGroup = config.users.users.hydra.group;
   inherit (config.networking) domain hostName;
 in {
-  config = {
-    age.secrets = let
-      commonArgs = {
-        mode = "440";
-        owner = hydraUser;
-        group = hydraGroup;
-      };
-    in {
-      "${hostName}2atlas" =
-        {
-          file = "${self}/secrets/hosts/${hostName}/${hostName}2atlas.age";
-        }
-        // commonArgs;
-
-      "hydraGH" =
-        {
-          file = "${self}/secrets/hosts/${hostName}/hydraGH.age";
-        }
-        // commonArgs;
+  age.secrets = {
+    "hydraGH" = {
+      file = "${self}/secrets/hosts/${hostName}/hydraGH.age";
+      mode = "440";
+      owner = config.users.users.hydra.name;
+      group = hydraGroup;
     };
+  };
 
-    services.hydra = {
-      enable = true;
-      hydraURL = "https://hydra.${domain}";
-      notificationSender = "hydra@${domain}";
-      listenHost = "localhost";
-      port = 6000;
-      useSubstitutes = true;
-      extraConfig = ''
-        Include ${config.age.secrets.hydraGH.path}
+  # https://github.com/NixOS/nix/issues/2002#issuecomment-375270656
+  nix.extraOptions = ''
+    allowed-uris = https:// http://
+  '';
 
-        compress_build_logs = 1
-        queue_runner_metrics_address = 127.0.0.1:6002
+  services.hydra = {
+    enable = true;
+    hydraURL = "https://hydra.${domain}";
+    notificationSender = "hydra@${domain}";
+    listenHost = "localhost";
+    port = 6000;
+    useSubstitutes = true;
+    extraConfig = ''
+      Include ${config.age.secrets.hydraGH.path}
 
-        <githubstatus>
-        	jobs = .*
-        	useShortContext = true
-        </githubstatus>
+      compress_build_logs = 1
+      queue_runner_metrics_address = 127.0.0.1:6002
 
-        <hydra_notify>
-          <prometheus>
-            listen_address = 127.0.0.1
-         	  port = 6001
-          </prometheus>
-        </hydra_notify>
-      '';
-      extraEnv = {HYDRA_DISALLOW_UNFREE = "0";};
-    };
+      <githubstatus>
+        jobs = .*
+        useShortContext = true
+      </githubstatus>
 
-    nix.settings.trusted-users = ["@${hydraGroup}"];
+      <hydra_notify>
+        <prometheus>
+          listen_address = 127.0.0.1
+          port = 6001
+        </prometheus>
+      </hydra_notify>
+    '';
+    extraEnv = {HYDRA_DISALLOW_UNFREE = "0";};
+  };
 
-    users.users = {
-      hydra-queue-runner.extraGroups = [hydraGroup];
-      hydra-www.extraGroups = [hydraGroup];
-    };
+  nix.settings.trusted-users = ["@${hydraGroup}"];
+
+  users.users = {
+    hydra-queue-runner.extraGroups = [hydraGroup];
+    hydra-www.extraGroups = [hydraGroup];
   };
 }
