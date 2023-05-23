@@ -27,7 +27,6 @@
 
   getchoo.server = {
     secrets.enable = true;
-    services.loki.enable = true;
   };
 
   networking = {
