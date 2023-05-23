@@ -1,14 +1,14 @@
 {
-  "use-hydra": {
+  "main": {
     "enabled": 1,
     "type": 1,
     "hidden": false,
-    "description": "build use-hydra branch",
-    "checkinterval": 300,
+    "description": "build main branch",
+    "checkinterval": 60,
     "schedulingshares": 10,
     "enableemail": false,
     "emailoverride": "",
     "keepnr": 3,
-    "flake": "github:getchoo/flake/use-hydra"
+    "flake": "github:getchoo/flake/main"
   }
 }
