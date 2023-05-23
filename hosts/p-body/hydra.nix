@@ -35,6 +35,7 @@ in {
 
       <githubstatus>
         jobs = .*
+        excludeBuildFromContext = 1
         useShortContext = true
       </githubstatus>
 
