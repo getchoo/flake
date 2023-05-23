@@ -11,7 +11,8 @@
       ];
     in
       with (myLib.my.ci supportedSystems); {
-        apps = mkCompatibleApps self.apps;
+        # CA derivations don't work on hydra
+        #apps = mkCompatibleApps self.apps;
         checks = mkCompatible self.checks;
         devShells = mkCompatible self.devShells;
         formatter = mkCompatibleFormatters self.formatter;
