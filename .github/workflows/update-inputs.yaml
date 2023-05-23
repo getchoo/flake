@@ -21,15 +21,9 @@ jobs:
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: setup cachix
-        uses: cachix/cachix-action@v12
-        with:
-          name: getchoo
-
       - name: update all inputs
         uses: DeterminateSystems/update-flake-lock@v19
         with:
-          inputs: nixpkgs nixpkgsUnstable
           commit-msg: "chore: update all inputs"
           pr-title: "chore: update all inputs"
           pr-body: |
