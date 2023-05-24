@@ -10,5 +10,31 @@
     "emailoverride": "",
     "keepnr": 3,
     "flake": "github:getchoo/flake"
+  },
+
+  "staging": {
+    "enabled": 1,
+    "type": 1,
+    "hidden": false,
+    "description": "build flake (staging for bors)",
+    "checkinterval": 60,
+    "schedulingshares": 100,
+    "enableemail": false,
+    "emailoverride": "",
+    "keepnr": 3,
+    "flake": "github:getchoo/flake/staging"
+  },
+
+  "trying": {
+    "enabled": 1,
+    "type": 1,
+    "hidden": false,
+    "description": "build flake (trying for bors)",
+    "checkinterval": 60,
+    "schedulingshares": 100,
+    "enableemail": false,
+    "emailoverride": "",
+    "keepnr": 3,
+    "flake": "github:getchoo/flake/trying"
   }
 }
