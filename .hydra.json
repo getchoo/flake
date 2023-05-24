@@ -3,12 +3,12 @@
     "enabled": 1,
     "type": 1,
     "hidden": false,
-    "description": "build main branch",
+    "description": "build flake",
     "checkinterval": 60,
-    "schedulingshares": 10,
+    "schedulingshares": 100,
     "enableemail": false,
     "emailoverride": "",
     "keepnr": 3,
-    "flake": "github:getchoo/flake/main"
+    "flake": "github:getchoo/flake"
   }
 }
