@@ -18,18 +18,19 @@ in {
     buildMachines = [
       {
         hostName = "localhost";
-        speedFactor = 75;
+        maxJobs = 2;
+        speedFactor = 100;
         supportedFeatures = ["big-parallel" "benchmark" "kvm" "nixos-test"];
         systems = ["x86_64-linux" "i686-linux"];
       }
       {
         hostName = "atlas";
         maxJobs = 4;
-        speedFactor = 100;
+        speedFactor = 75;
         sshUser = "bob";
         sshKey = config.age.secrets."${hostName}2atlas".path;
         supportedFeatures = ["benchmark" "big-parallel" "gccarch-armv8-a" "kvm" "nixos-test"];
-        systems = ["aarch64-linux" "x86_64-linux"];
+        systems = ["aarch64-linux" "x86_64-linux" "i686-linux"];
       }
     ];
 
