@@ -29,7 +29,7 @@ in {
         sshUser = "bob";
         sshKey = config.age.secrets."${hostName}2atlas".path;
         supportedFeatures = ["benchmark" "big-parallel" "gccarch-armv8-a" "kvm" "nixos-test"];
-        system = "aarch64-linux";
+        systems = ["aarch64-linux" "x86_64-linux"];
       }
     ];
 
