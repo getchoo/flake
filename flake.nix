@@ -32,6 +32,7 @@
 
     getchoo = {
       url = "github:getchoo/nix-exprs";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
     };
 
@@ -45,9 +46,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    hydra.url = "github:nixos/hydra";
+
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
+      inputs.flake-parts.follows = "flake-parts";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
     };

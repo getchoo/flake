@@ -1,5 +1,7 @@
 {
   config,
+  hydra,
+  pkgs,
   self,
   ...
 }: let
@@ -22,6 +24,7 @@ in {
 
   services.hydra = {
     enable = true;
+    package = hydra.packages.${pkgs.system}.hydra;
     hydraURL = "https://hydra.${domain}";
     notificationSender = "hydra@${domain}";
     listenHost = "localhost";
