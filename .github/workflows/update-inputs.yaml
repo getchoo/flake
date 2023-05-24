@@ -24,8 +24,8 @@ jobs:
       - name: update all inputs
         uses: DeterminateSystems/update-flake-lock@v19
         with:
-          commit-msg: "chore: update all inputs"
-          pr-title: "chore: update all inputs"
+          commit-msg: "flake: update all inputs"
+          pr-title: "flake: update all inputs"
           pr-body: |
             Automated changes by the [update-flake-lock](https://github.com/DeterminateSystems/update-flake-lock) GitHub Action.
 
