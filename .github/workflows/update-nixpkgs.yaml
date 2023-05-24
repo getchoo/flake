@@ -30,10 +30,6 @@ jobs:
           pr-body: |
             Automated changes by the [update-flake-lock](https://github.com/DeterminateSystems/update-flake-lock) GitHub Action.
 
-            ```
-            ${{ env.GIT_COMMIT_MESSAGE }}
-            ```
-
             bors r+
           nix-options: "--accept-flake-config"
           token: ${{ secrets.FLAKE_UPDATE }}
