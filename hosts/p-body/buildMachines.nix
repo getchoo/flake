@@ -20,7 +20,7 @@ in {
         hostName = "localhost";
         speedFactor = 75;
         supportedFeatures = ["big-parallel" "benchmark" "kvm" "nixos-test"];
-        system = "x86_64-linux";
+        systems = ["x86_64-linux" "i686-linux"];
       }
       {
         hostName = "atlas";
