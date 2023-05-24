@@ -17,7 +17,7 @@
         devShells = mkCompatible self.devShells;
         formatter = mkCompatibleFormatters self.formatter;
         homeConfigurations = mkCompatibleHM self.homeConfigurations;
-        hosts = mkCompatibleCfg' self.nixosConfigurations;
+        hosts = mkCompatibleCfg self.nixosConfigurations;
         packages = mkCompatiblePkgs self.packages;
       };
   };
