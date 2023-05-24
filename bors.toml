@@ -1,0 +1,5 @@
+status = [
+	"ci/hydra%"
+]
+
+delete_merged_branches = true
