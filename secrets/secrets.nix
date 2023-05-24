@@ -12,9 +12,11 @@ in {
   "hosts/atlas/rootPassword.age".publicKeys = atlas;
   "hosts/atlas/userPassword.age".publicKeys = atlas;
   "hosts/atlas/miniflux.age".publicKeys = atlas;
+  "hosts/atlas/authGH.age".publicKeys = atlas;
 
   "hosts/p-body/rootPassword.age".publicKeys = p-body;
   "hosts/p-body/userPassword.age".publicKeys = p-body;
   "hosts/p-body/p-body2atlas.age".publicKeys = p-body;
   "hosts/p-body/hydraGH.age".publicKeys = p-body;
+  "hosts/p-body/authGH.age".publicKeys = p-body;
 }

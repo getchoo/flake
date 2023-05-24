@@ -55,6 +55,7 @@ in {
   nix.settings.trusted-users = ["@${hydraGroup}"];
 
   users.users = {
+    ${hostName}.extraGroups = [hydraGroup];
     hydra-queue-runner.extraGroups = [hydraGroup];
     hydra-www.extraGroups = [hydraGroup];
   };

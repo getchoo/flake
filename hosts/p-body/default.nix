@@ -3,6 +3,7 @@
   guzzle_api,
   modulesPath,
   pkgs,
+  self,
   ...
 }: {
   imports = [
@@ -25,12 +26,23 @@
     hermetic = false;
   };
 
+  age.secrets.authGH = {
+    file = "${self}/secrets/hosts/${config.networking.hostName}/authGH.age";
+    mode = "440";
+    owner = config.users.users.root.name;
+    inherit (config.users.users.hydra) group;
+  };
+
   getchoo.server.secrets.enable = true;
 
   networking = {
     domain = "mydadleft.me";
     hostName = "p-body";
   };
+
+  nix.extraOptions = ''
+    !include ${config.age.secrets.authGH.path}
+  '';
 
   services = {
     guzzle-api = {

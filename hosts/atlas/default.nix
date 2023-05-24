@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  self,
   ...
 }: {
   imports = [
@@ -19,6 +20,13 @@
     hermetic = false;
   };
 
+  age.secrets.authGH = {
+    file = "${self}/secrets/hosts/${config.networking.hostName}/authGH.age";
+    mode = "440";
+    owner = config.users.users.root.name;
+    group = config.users.groups.wheel.name;
+  };
+
   boot = {
     binfmt.emulatedSystems = ["x86_64-linux" "i686-linux"];
     cleanTmpDir = true;
@@ -35,7 +43,13 @@
     hostName = "atlas";
   };
 
-  nix.settings.trusted-users = ["bob"];
+  nix = {
+    extraOptions = ''
+      !include ${config.age.secrets.authGH.path}
+    '';
+
+    settings.trusted-users = ["bob"];
+  };
 
   system.stateVersion = "22.11";
 
