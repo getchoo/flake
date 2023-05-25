@@ -25,7 +25,11 @@ in {
     environment.systemPackages = [pkgs.cachix];
 
     nix = {
-      gc.options = "--delete-older-than 7d --max-freed 50G";
+      gc = {
+        dates = "4d";
+        options = "--delete-older-than 7d --max-freed 50G";
+      };
+
       settings = {
         trusted-users = ["${config.networking.hostName}"];
         trusted-substituters = [
