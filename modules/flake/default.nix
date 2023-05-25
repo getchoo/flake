@@ -1,20 +1,11 @@
-{
-  inputs,
-  self,
-  ...
-}: {
+{inputs, ...}: {
   imports = [
     ./ci.nix
     ./dev.nix
   ];
 
-  _module.args.myLib = self.lib {
+  _module.args.myLib = inputs.getchoo.lib {
     inherit inputs;
-    inherit (inputs.nixpkgs) lib;
-  };
-
-  flake = {
-    lib = import ../../lib;
   };
 
   systems = [

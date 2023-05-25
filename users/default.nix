@@ -4,7 +4,7 @@
   ...
 }: {
   perSystem = {system, ...}: let
-    inherit (myLib.my) mkHMUser;
+    inherit (myLib.configs) mkHMUser;
   in {
     homeConfigurations = {
       seth = mkHMUser {

@@ -7,7 +7,7 @@
 }: {
   flake = {
     nixosConfigurations = let
-      inherit (myLib.my) mkNixOS;
+      inherit (myLib.configs) mkNixOS;
 
       profiles = import ./profiles.nix {inherit self inputs;};
     in {

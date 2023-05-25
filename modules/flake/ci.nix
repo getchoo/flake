@@ -10,7 +10,7 @@
         "aarch64-linux"
       ];
     in
-      with (myLib.my.ci supportedSystems); {
+      with (myLib.ci supportedSystems); {
         # CA derivations don't work on hydra
         #apps = mkCompatibleApps self.apps;
         checks = mkCompatible self.checks;
