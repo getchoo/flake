@@ -16,20 +16,10 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v3
 
-      - name: install nix
-        uses: cachix/install-nix-action@v20
-        with:
-          github_access_token: ${{ secrets.GITHUB_TOKEN }}
-
       - name: update nixpkgs inputs
-        uses: DeterminateSystems/update-flake-lock@v19
+        uses: ./.github/actions/flake-update
         with:
           inputs: nixpkgs nixpkgs-stable
           commit-msg: "flake: update nixpkgs inputs"
-          pr-title: "flake: update nixpkgs inputs"
-          pr-body: |
-            Automated changes by the [update-flake-lock](https://github.com/DeterminateSystems/update-flake-lock) GitHub Action.
-
-            bors r+
-          nix-options: "--accept-flake-config"
-          token: ${{ secrets.FLAKE_UPDATE }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          update-token: ${{ secrets.FLAKE_UPDATE }}
