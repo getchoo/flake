@@ -9,24 +9,14 @@ in {
     "${hostName}2atlas" = {
       file = "${self}/secrets/hosts/${hostName}/${hostName}2atlas.age";
       mode = "600";
-      owner = config.users.users.hydra-queue-runner.name;
-      inherit (config.users.users.hydra-queue-runner) group;
     };
   };
 
   nix = {
     buildMachines = [
       {
-        hostName = "localhost";
-        maxJobs = 2;
-        speedFactor = 100;
-        supportedFeatures = ["big-parallel" "benchmark" "kvm" "nixos-test"];
-        systems = ["x86_64-linux" "i686-linux"];
-      }
-      {
         hostName = "atlas";
         maxJobs = 4;
-        speedFactor = 75;
         sshUser = "bob";
         sshKey = config.age.secrets."${hostName}2atlas".path;
         supportedFeatures = ["benchmark" "big-parallel" "gccarch-armv8-a" "kvm" "nixos-test"];
@@ -34,7 +24,6 @@ in {
       }
     ];
 
-    distributedBuilds = true;
     settings.builders-use-substitutes = true;
   };
 }

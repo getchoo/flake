@@ -1,12 +1,10 @@
 {
   config,
   pkgs,
-  self,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
-    ./cachix.nix
     ./miniflux.nix
     ./nginx.nix
     ./prometheus.nix
@@ -20,13 +18,6 @@
     hermetic = false;
   };
 
-  age.secrets.authGH = {
-    file = "${self}/secrets/hosts/${config.networking.hostName}/authGH.age";
-    mode = "440";
-    owner = config.users.users.root.name;
-    group = config.users.groups.wheel.name;
-  };
-
   boot = {
     binfmt.emulatedSystems = ["x86_64-linux" "i686-linux"];
     cleanTmpDir = true;
@@ -36,6 +27,11 @@
 
   getchoo.server = {
     secrets.enable = true;
+
+    services.hercules-ci = {
+      enable = true;
+      secrets.enable = true;
+    };
   };
 
   networking = {
@@ -43,13 +39,7 @@
     hostName = "atlas";
   };
 
-  nix = {
-    extraOptions = ''
-      !include ${config.age.secrets.authGH.path}
-    '';
-
-    settings.trusted-users = ["bob"];
-  };
+  nix.settings.trusted-users = ["bob"];
 
   system.stateVersion = "22.11";
 
@@ -59,6 +49,7 @@
     ];
   in {
     root = {inherit openssh;};
+
     atlas = {
       extraGroups = ["wheel"];
       isNormalUser = true;
@@ -66,6 +57,7 @@
       passwordFile = config.age.secrets.userPassword.path;
       inherit openssh;
     };
+
     bob = {
       isNormalUser = true;
       shell = pkgs.bash;

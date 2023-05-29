@@ -2,7 +2,6 @@
 
 [![made with neovim](https://img.shields.io/static/v1?label=made%20with&message=neovim&color=00b952&style=flat-square&logo=neovim)](https://neovim.io/)
 [![nixos unstable](https://img.shields.io/static/v1?label=NixOS&message=unstable&color=5277c3&style=flat-square&logo=nixos)](https://nixos.org/)
-[![hydra build status](https://img.shields.io/endpoint?url=https://hydra.mydadleft.me/job/flake/main/hosts.glados/shield&color=8f97cb&style=flat-square&logo=github)](https://hydra.mydadleft.me/jobset/flake/main#tabs-jobs)
 
 greasy taco i love
 
@@ -11,7 +10,7 @@ greasy taco i love
 i like to have a few services, including:
 
 - [grafana](https://grafana.com/)
-- [hydra](https://github.com/NixOS/hydra)
+- [hercules-ci](https://hercules-ci.com)
 - [miniflux](https://miniflux.app/)
 - [prometheus](https://prometheus.io/)
 
@@ -43,11 +42,11 @@ my netgear wac104 router, using [nix-openwrt-imagebuilder](https://github.com/as
 
 ### atlas
 
-my ampere arm server from oracle, services my miniflux instance and a builder for hydra
+my ampere arm server from oracle, services my miniflux instance and a builder for hercules-ci
 
 ### p-body
 
-my amd64 server from digital ocean, hosts many services i use and is also a builder for hydra
+my amd64 server from digital ocean, hosts many services i use and is also a builder for hercules-ci
 
 ## fun screenshots
 

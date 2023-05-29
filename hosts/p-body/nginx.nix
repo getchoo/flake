@@ -40,18 +40,6 @@ in {
         locations = mkProxy "/" "3000";
       };
 
-      "hydra.${domain}" = {
-        enableACME = true;
-        addSSL = true;
-
-        locations."/" = {
-          proxyPass = "http://localhost:${toString config.services.hydra.port}";
-          extraConfig = ''
-            add_header Front-End-Https on;
-          '';
-        };
-      };
-
       "grafana.${domain}" = {
         enableACME = true;
         addSSL = true;

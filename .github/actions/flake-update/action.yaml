@@ -22,12 +22,15 @@ runs:
         github_access_token: ${{ inputs.github-token }}
 
     - uses: DeterminateSystems/update-flake-lock@v19
+      id: update
       with:
         commit-msg: ${{ inputs.commit-msg }}
         pr-title: ${{ inputs.commit-msg }}
-        pr-body: |
-          Automated changes by the [update-flake-lock](https://github.com/DeterminateSystems/update-flake-lock) GitHub Action.
-
-          bors r+
         nix-options: "--accept-flake-config"
         token: ${{ inputs.update-token }}
+
+    - name: auto-merge pull request
+      run: gh pr merge --auto --squash "$PR_ID"
+      env:
+        GITHUB_TOKEN: ${{ inputs.update-token }}
+        PR_ID: ${{ steps.update.outputs.pull-request-number }}

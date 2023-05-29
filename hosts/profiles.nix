@@ -73,11 +73,13 @@ in {
       {
         getchoo = {
           features.tailscale.enable = true;
+
           server = {
             enable = true;
             services.promtail.enable = true;
           };
         };
+
         nix.registry.nixpkgs.flake = nixpkgs-stable;
       }
     ];

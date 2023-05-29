@@ -3,16 +3,13 @@
   guzzle_api,
   modulesPath,
   pkgs,
-  self,
   ...
 }: {
   imports = [
     (modulesPath + "/virtualisation/digital-ocean-image.nix")
     ./buildMachines.nix
-    ./cachix.nix
     ./forgejo.nix
     ./grafana.nix
-    ./hydra.nix
     ./loki.nix
     ./nginx.nix
     ./prometheus.nix
@@ -26,23 +23,19 @@
     hermetic = false;
   };
 
-  age.secrets.authGH = {
-    file = "${self}/secrets/hosts/${config.networking.hostName}/authGH.age";
-    mode = "440";
-    owner = config.users.users.root.name;
-    inherit (config.users.users.hydra) group;
-  };
+  getchoo.server = {
+    secrets.enable = true;
 
-  getchoo.server.secrets.enable = true;
+    services.hercules-ci = {
+      enable = true;
+      secrets.enable = true;
+    };
+  };
 
   networking = {
     domain = "mydadleft.me";
     hostName = "p-body";
   };
-
-  nix.extraOptions = ''
-    !include ${config.age.secrets.authGH.path}
-  '';
 
   services = {
     guzzle-api = {
@@ -68,6 +61,7 @@
     ];
   in {
     root = {inherit openssh;};
+
     p-body = {
       extraGroups = ["wheel"];
       isNormalUser = true;

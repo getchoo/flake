@@ -38,15 +38,27 @@
 
     guzzle_api = {
       url = "github:getchoo/guzzle_api";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks.follows = "pre-commit-hooks";
+    };
+
+    hercules-ci-agent = {
+      url = "github:hercules-ci/hercules-ci-agent";
+      inputs.flake-parts.follows = "flake-parts";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
+    };
+
+    hercules-ci-effects = {
+      url = "github:getchoo/hercules-ci-effects/customize-flake-update";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.hercules-ci-agent.follows = "hercules-ci-agent";
     };
 
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    hydra.url = "github:nixos/hydra";
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
@@ -63,7 +75,7 @@
     };
 
     nixos-wsl = {
-      url = "github:nix-community/NixOS-WSL/main";
+      url = "github:nix-community/NixOS-WSL";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
       inputs.flake-utils.follows = "flake-utils";
@@ -96,7 +108,7 @@
         ./hosts
         ./modules/flake
         ./users
-        inputs.getchoo.flakeModules.default
+        inputs.getchoo.flakeModules.homeConfigurations
       ];
     };
 }
