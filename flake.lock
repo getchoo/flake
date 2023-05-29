@@ -470,11 +470,11 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1685043448,
-        "narHash": "sha256-U3BwyDc2OzBcZ8tD09qXibyivgOtOQFTFCVgFyJ+6MM=",
+        "lastModified": 1685215858,
+        "narHash": "sha256-IRMFoDXA6cYx3ifVw3B2JcC4JrjT5v7tRAx2vro2Ffs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9886352ec9ab3945896ee8a4185e961fe29df209",
+        "rev": "ba6e4ddeb3e8ad3f3e3bec63dafbc9fe558729bb",
         "type": "github"
       },
       "original": {
@@ -501,11 +501,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1684935479,
-        "narHash": "sha256-6QMMsXMr2nhmOPHdti2j3KRHt+bai2zw+LJfdCl97Mk=",
+        "lastModified": 1685168767,
+        "narHash": "sha256-wQgnxz0PdqbyKKpsWl/RU8T8QhJQcHfeC6lh1xRUTfk=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f91ee3065de91a3531329a674a45ddcb3467a650",
+        "rev": "e10802309bf9ae351eb27002c85cfdeb1be3b262",
         "type": "github"
       },
       "original": {
@@ -532,11 +532,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1685225422,
-        "narHash": "sha256-gZnlv+PXIWOKQ1nzdq7eLvtpxLI4uGtTLrbSsGb8dyw=",
+        "lastModified": 1685320818,
+        "narHash": "sha256-QRLfYOJuL/1lwPHmelTbvCK6EDQeWcKZfGF0QSbsJ5c=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "a9b5b5f574aa416e46b14d5b87fd56be17cf864b",
+        "rev": "e7bf6b743fc8b1aea39b926a5b4ca657270d393b",
         "type": "github"
       },
       "original": {
@@ -552,11 +552,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1685180507,
-        "narHash": "sha256-i5gb198AYspYf1hYeTig3fnMTP9yL654k7rJEt//ZCc=",
+        "lastModified": 1685268932,
+        "narHash": "sha256-3cJ0VTw9kinoJZKZela3iwfNzV3Jux4NRF07VAIPFV8=",
         "owner": "astro",
         "repo": "nix-openwrt-imagebuilder",
-        "rev": "8ef147fb45fe047ffbf3f7412573628ece8c5549",
+        "rev": "cac5473a0a36842adef206ba232980dc937f903d",
         "type": "github"
       },
       "original": {
