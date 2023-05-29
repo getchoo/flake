@@ -40,8 +40,8 @@ in {
             checks = mkCompatible self.checks;
             devShells = mkCompatible self.devShells;
             formatter = mkCompatibleFormatters self.formatter;
+            homeConfigurations = mkCompatibleHM self.homeConfigurations;
             hosts = mkCompatibleCfg' self.nixosConfigurations;
-            packages = mkCompatibleHM self.homeConfigurations;
           };
       };
     };
