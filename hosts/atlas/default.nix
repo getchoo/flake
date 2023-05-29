@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: {
@@ -39,7 +40,10 @@
     hostName = "atlas";
   };
 
-  nix.settings.trusted-users = ["bob"];
+  nix.settings = {
+    extra-platforms = lib.mkForce "";
+    trusted-users = ["bob"];
+  };
 
   system.stateVersion = "22.11";
 
