@@ -23,12 +23,10 @@ in {
   in {
     enable = true;
     package = (import nixpkgs {inherit (pkgs) system;}).forgejo;
-    inherit domain;
-    rootUrl = "https://${domain}/";
     appName = "forgejo: with daddy issues";
-    httpAddress = "127.0.0.1";
     user = "forgejo";
     database.user = "forgejo";
+
     settings = {
       indexer.REPO_INDEXER_ENABLED = true;
       session = {
@@ -41,7 +39,10 @@ in {
 
       server = {
         BUILTIN_SSH_USER = "forgejo";
+        DOMAIN = domain;
         ENABLE_GZIP = true;
+        HTTP_ADDR = "127.0.0.1";
+        ROOT_URL = "https://${domain}/";
         SSH_AUTHORIZED_KEYS_BACKUP = false;
         SSH_DOMAIN = domain;
       };

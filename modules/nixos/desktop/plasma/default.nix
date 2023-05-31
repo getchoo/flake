@@ -12,17 +12,19 @@ in {
   config = mkIf cfg.enable {
     getchoo.desktop.enable = true;
 
-    environment.systemPackages = with pkgs; [pinentry-qt];
+    environment = {
+      systemPackages = with pkgs; [pinentry-qt];
+      plasma5.excludePackages = with pkgs.libsForQt5; [
+        khelpcenter
+        plasma-browser-integration
+        print-manager
+      ];
+    };
 
     services.xserver = {
       displayManager.sddm.enable = true;
       desktopManager.plasma5 = {
         enable = true;
-        excludePackages = with pkgs.libsForQt5; [
-          khelpcenter
-          plasma-browser-integration
-          print-manager
-        ];
         useQtScaling = true;
       };
     };

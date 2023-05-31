@@ -16,7 +16,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "nixpkgs/nixos-22.11";
+    nixpkgs-stable.url = "nixpkgs/nixos-23.05";
 
     # this is just to avoid having multiple versions in flake.lock
     flake-compat = {

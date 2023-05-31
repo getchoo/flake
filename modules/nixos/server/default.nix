@@ -66,7 +66,7 @@ in {
 
       openssh = {
         enable = true;
-        passwordAuthentication = mkDefault false;
+        settings.PasswordAuthentication = mkDefault false;
       };
     };
   };
