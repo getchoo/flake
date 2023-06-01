@@ -21,9 +21,9 @@
 
   boot = {
     binfmt.emulatedSystems = ["x86_64-linux" "i686-linux"];
-    cleanTmpDir = true;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
+    tmp.cleanOnBoot = true;
   };
 
   getchoo.server = {
