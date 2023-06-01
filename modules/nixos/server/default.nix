@@ -27,7 +27,7 @@ in {
     nix = {
       gc = {
         dates = "*-*-1,5,9,13,17,21,25,29 00:00:00";
-        options = "--delete-older-than 2d --max-freed 50G";
+        options = "-d --delete-older-than 2d --max-freed 50G";
       };
 
       settings = {
