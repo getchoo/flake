@@ -40,7 +40,8 @@ in {
             checks = mkCompatible self.checks;
             devShells = mkCompatible self.devShells;
             formatter = mkCompatibleFormatters self.formatter;
-            homeConfigurations = mkCompatibleHM self.homeConfigurations;
+            # disabled to save storage
+            #homeConfigurations = mkCompatibleHM self.homeConfigurations;
             hosts = mkCompatibleCfg' self.nixosConfigurations;
           };
       };
