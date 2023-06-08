@@ -46,11 +46,10 @@
       url = "github:hercules-ci/hercules-ci-agent";
       inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
     };
 
     hercules-ci-effects = {
-      url = "github:getchoo/hercules-ci-effects/customize-flake-update";
+      url = "github:hercules-ci/hercules-ci-effects";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.hercules-ci-agent.follows = "hercules-ci-agent";
     };

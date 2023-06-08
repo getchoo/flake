@@ -331,16 +331,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1686158835,
-        "narHash": "sha256-hphoN0OqO0AjGm7ucVVS2Dwte9y56EBLGsy6qi/5WFw=",
-        "owner": "getchoo",
+        "lastModified": 1686181431,
+        "narHash": "sha256-S1IsZGwcMChJg3mgnKdFxh2c/D77B1NoOCd8s3tQQIg=",
+        "owner": "hercules-ci",
         "repo": "hercules-ci-effects",
-        "rev": "d70538c1f7ca1c0a6010dc01b59214f16d5dd9ce",
+        "rev": "657935127398706754113c1cea5800798ecb99a7",
         "type": "github"
       },
       "original": {
-        "owner": "getchoo",
-        "ref": "customize-flake-update",
+        "owner": "hercules-ci",
         "repo": "hercules-ci-effects",
         "type": "github"
       }
