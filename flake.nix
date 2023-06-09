@@ -23,6 +23,7 @@
       url = "github:edolstra/flake-compat";
       flake = false;
     };
+
     flake-utils.url = "github:numtide/flake-utils";
 
     flake-parts = {
@@ -44,13 +45,14 @@
 
     hercules-ci-agent = {
       url = "github:hercules-ci/hercules-ci-agent";
-      inputs.flake-parts.follows = "flake-parts";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
     };
 
     hercules-ci-effects = {
       url = "github:hercules-ci/hercules-ci-effects";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
       inputs.hercules-ci-agent.follows = "hercules-ci-agent";
     };
 
@@ -61,7 +63,6 @@
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
-      inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
       inputs.flake-parts.follows = "flake-parts";
       inputs.flake-utils.follows = "flake-utils";
@@ -96,7 +97,10 @@
       inputs.flake-utils.follows = "flake-utils";
     };
 
-    ragenix.url = "github:yaxitech/ragenix";
+    ragenix = {
+      url = "github:yaxitech/ragenix";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs = inputs:
