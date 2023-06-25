@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: let
   cfg = config.getchoo.hardware.nvidia;
@@ -22,12 +21,7 @@ in {
         enable = true;
         # make steam work
         driSupport32Bit = true;
-        extraPackages = with pkgs; [
-          vaapiVdpau
-        ];
       };
     };
-
-    services.xserver.videoDrivers = ["nvidia"];
   };
 }
