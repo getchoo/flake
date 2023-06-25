@@ -36,7 +36,16 @@
       cmp_luasnip
       cmp-path
       editorconfig-nvim
-      fidget-nvim
+      # TODO: stop pinning the `legacy` tag
+      # when fidget is rewritten
+      (fidget-nvim.overrideAttrs (_: {
+        src = pkgs.fetchFromGitHub {
+          owner = "j-hui";
+          repo = "fidget.nvim";
+          rev = "90c22e47be057562ee9566bad313ad42d622c1d3";
+          hash = "sha256-ZLe54bRMctXlBo8zH9Qy6HbrkVSlGhPiXg38aAja9C8=";
+        };
+      }))
       gitsigns-nvim
       leap-nvim
       lualine-nvim
