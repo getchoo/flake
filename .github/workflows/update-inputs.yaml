@@ -1,23 +1,19 @@
 name: update all inputs
 
 on:
-  # schedule:
-  #   # run every saturday
-  #   - cron: "0 0 * * 6"
+  schedule:
+    # run every saturday
+    - cron: "0 0 * * 6"
   workflow_dispatch:
-
-permissions: read-all
 
 jobs:
   update-lock:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: update all inputs
-        uses: ./.github/actions/flake-update
+      - uses: ./.github/actions/flake-update
         with:
           commit-msg: "flake: update all inputs"
           github-token: ${{ secrets.GITHUB_TOKEN }}

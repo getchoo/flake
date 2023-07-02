@@ -23,14 +23,7 @@
     hermetic = false;
   };
 
-  getchoo.server = {
-    secrets.enable = true;
-
-    services.hercules-ci = {
-      enable = true;
-      secrets.enable = true;
-    };
-  };
+  getchoo.server.secrets.enable = true;
 
   networking = {
     domain = "mydadleft.me";

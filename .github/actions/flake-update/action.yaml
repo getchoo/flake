@@ -1,18 +1,18 @@
 name: "update flake inputs"
 description: "wrapper around DeterminateSystems/update-flake-lock"
 inputs:
-  update-token:
-    description: "github write token for creating prs"
+  commit-msg:
     required: true
   github-token:
-    description: "github read token for avoid rate limits"
+    description: "github read token for increasing rate limits"
     required: false
     default: ""
   inputs:
     description: "flake inputs to update"
     required: false
     default: ""
-  commit-msg:
+  update-token:
+    description: "github write token for creating prs"
     required: true
 runs:
   using: "composite"
@@ -30,7 +30,7 @@ runs:
         token: ${{ inputs.update-token }}
 
     - name: auto-merge pull request
-      run: gh pr merge --auto --squash "$PR_ID"
+      run: gh pr merge --auto --rebase "$PR_ID"
       env:
         GITHUB_TOKEN: ${{ inputs.update-token }}
         PR_ID: ${{ steps.update.outputs.pull-request-number }}

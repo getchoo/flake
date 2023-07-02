@@ -212,72 +212,6 @@
         "type": "github"
       }
     },
-    "haskell-flake": {
-      "locked": {
-        "lastModified": 1684780604,
-        "narHash": "sha256-2uMZsewmRn7rRtAnnQNw1lj0uZBMh4m6Cs/7dV5YF08=",
-        "owner": "srid",
-        "repo": "haskell-flake",
-        "rev": "74210fa80a49f1b6f67223debdbf1494596ff9f2",
-        "type": "github"
-      },
-      "original": {
-        "owner": "srid",
-        "ref": "0.3.0",
-        "repo": "haskell-flake",
-        "type": "github"
-      }
-    },
-    "hercules-ci-agent": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "haskell-flake": "haskell-flake",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1687920713,
-        "narHash": "sha256-rJFC3eUWjS5VaKWETOTN+Tr8BVs1IcvYpaDeVa99P1Q=",
-        "owner": "hercules-ci",
-        "repo": "hercules-ci-agent",
-        "rev": "4132bda2fb896c170f08e276cff00a51ed4ba84f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "hercules-ci-agent",
-        "type": "github"
-      }
-    },
-    "hercules-ci-effects": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "hercules-ci-agent": [
-          "hercules-ci-agent"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1686830987,
-        "narHash": "sha256-1XLTM0lFr3NV+0rd55SQW/8oQ3ACnqlYcda3FelIwHU=",
-        "owner": "hercules-ci",
-        "repo": "hercules-ci-effects",
-        "rev": "04e4ab63b9eed2452edee1bb698827e1cb8265c6",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "hercules-ci-effects",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -547,8 +481,6 @@
         "flake-utils": "flake-utils",
         "getchoo": "getchoo",
         "guzzle_api": "guzzle_api",
-        "hercules-ci-agent": "hercules-ci-agent",
-        "hercules-ci-effects": "hercules-ci-effects",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
         "nixinate": "nixinate",

@@ -4,11 +4,13 @@
   nixConfig = {
     extra-substituters = [
       "https://getchoo.cachix.org" # personal cache
+      "https://cache.garnix.io" # garnix cache
       "https://nix-community.cachix.org" # nix-community
       "https://wurzelpfropf.cachix.org" # ragenix
     ];
     extra-trusted-public-keys = [
       "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="
+      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
       "wurzelpfropf.cachix.org-1:ilZwK5a6wJqVr7Fyrzp4blIEkGK+LJT0QrpWr1qBNq0="
     ];
@@ -24,6 +26,7 @@
       flake = false;
     };
 
+    # ditto
     flake-utils.url = "github:numtide/flake-utils";
 
     flake-parts = {
@@ -41,19 +44,6 @@
       url = "github:getchoo/guzzle_api";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks.follows = "pre-commit-hooks";
-    };
-
-    hercules-ci-agent = {
-      url = "github:hercules-ci/hercules-ci-agent";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
-    };
-
-    hercules-ci-effects = {
-      url = "github:hercules-ci/hercules-ci-effects";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
-      inputs.hercules-ci-agent.follows = "hercules-ci-agent";
     };
 
     home-manager = {
