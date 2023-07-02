@@ -1,0 +1,6 @@
+builds:
+  exclude: []
+  include:
+    - "checks.x86_64-linux.*"
+    - "checks.aarch64-linux.*"
+    - "devShells.x86_64-linux.default"

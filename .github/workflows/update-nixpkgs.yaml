@@ -1,25 +1,21 @@
 name: update nixpkgs inputs
 
 on:
-  # schedule:
-  #   # run daily at 0:00 utc
-  #   - cron: "0 0 * * *"
+  schedule:
+    # run daily at 0:00 utc
+    - cron: "0 0 * * *"
   workflow_dispatch:
-
-permissions: read-all
 
 jobs:
   update-nixpkgs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: update nixpkgs inputs
-        uses: ./.github/actions/flake-update
+      - uses: ./.github/actions/flake-update
         with:
-          inputs: nixpkgs nixpkgs-stable
           commit-msg: "flake: update nixpkgs inputs"
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          inputs: nixpkgs nixpkgs-stable
           update-token: ${{ secrets.FLAKE_UPDATE }}

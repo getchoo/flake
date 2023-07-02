@@ -2,7 +2,7 @@
 
 [![made with neovim](https://img.shields.io/static/v1?label=made%20with&message=neovim&color=00b952&style=flat-square&logo=neovim)](https://neovim.io/)
 [![nixos unstable](https://img.shields.io/static/v1?label=NixOS&message=unstable&color=5277c3&style=flat-square&logo=nixos)](https://nixos.org/)
-[![hercules-ci build status](https://img.shields.io/badge/dynamic/json?label=hercules-ci%20builds&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fgetchoo%2Fflake%2Fcommits%2Fmain%2Fstatus&color=8f97cb&style=flat-square&logo=github)](https://hercules-ci.com/github/getchoo/flake)
+[![built with garnix](https://img.shields.io/badge/built_with-garnix-blue?style=flat-square&logo=nixos&logoColor=00000&labelColor=262626&link=https%3A%2F%2Fgarnix.io)](https://garnix.io)
 
 greasy taco i love
 
@@ -11,7 +11,6 @@ greasy taco i love
 i like to have a few services, including:
 
 - [grafana](https://grafana.com/)
-- [hercules-ci](https://hercules-ci.com)
 - [miniflux](https://miniflux.app/)
 - [prometheus](https://prometheus.io/)
 
@@ -43,13 +42,17 @@ my netgear wac104 router, using [nix-openwrt-imagebuilder](https://github.com/as
 
 ### atlas
 
-my ampere arm server from oracle, services my miniflux instance and a builder for hercules-ci
+my ampere arm server from oracle, services my miniflux instance.
 
 ### p-body
 
-my amd64 server from digital ocean, hosts many services i use and is also a builder for hercules-ci
+my amd64 server from digital ocean, general host for services.
 
 ## fun screenshots
 
+<details>
+
 ![gnome](https://user-images.githubusercontent.com/48872998/223897323-87f8d547-511b-48c3-a2e1-8ff22ac361e9.png)
 ![neovim](https://user-images.githubusercontent.com/48872998/223897693-88eb0416-9ebc-45b6-837a-b28ada94336f.png)
+
+</details>
