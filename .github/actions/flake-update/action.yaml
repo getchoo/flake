@@ -17,16 +17,19 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: cachix/install-nix-action@v20
+    - name: install nix
+      uses: cachix/install-nix-action@v22
       with:
         github_access_token: ${{ inputs.github-token }}
 
-    - uses: DeterminateSystems/update-flake-lock@v19
+    - name: run update-flake-lock
+      uses: DeterminateSystems/update-flake-lock@v19
       id: update
       with:
         commit-msg: ${{ inputs.commit-msg }}
-        pr-title: ${{ inputs.commit-msg }}
+        inputs: ${{ inputs.inputs }}
         nix-options: "--accept-flake-config"
+        pr-title: ${{ inputs.commit-msg }}
         token: ${{ inputs.update-token }}
 
     - name: auto-merge pull request
