@@ -30,6 +30,7 @@ runs:
         token: ${{ inputs.update-token }}
 
     - name: auto-merge pull request
+      shell: bash
       run: gh pr merge --auto --rebase "$PR_ID"
       env:
         GITHUB_TOKEN: ${{ inputs.update-token }}
