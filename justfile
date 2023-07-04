@@ -57,4 +57,4 @@ update:
 
 update-nixpkgs:
     nix flake lock \
-    	--update-input nixpkgs --update-input nixpkgsUnstable
+    	--update-input nixpkgs --update-input nixpkgs-stable
