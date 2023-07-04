@@ -4,9 +4,7 @@
     ./dev.nix
   ];
 
-  _module.args.myLib = inputs.getchoo.lib {
-    inherit inputs;
-  };
+  _module.args.myLib = inputs.getchoo.lib;
 
   systems = [
     "x86_64-linux"

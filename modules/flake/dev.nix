@@ -10,7 +10,7 @@
   }: {
     checks = {
       pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-        src = ./.;
+        src = self;
         hooks = {
           actionlint.enable = true;
           alejandra.enable = true;
