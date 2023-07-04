@@ -8,7 +8,6 @@
   imports = [
     (modulesPath + "/virtualisation/digital-ocean-image.nix")
     ./buildMachines.nix
-    ./forgejo.nix
     ./grafana.nix
     ./loki.nix
     ./nginx.nix
