@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+_: {
   imports = [
     ./programs
     ./shell
@@ -13,6 +9,4 @@
     homeDirectory = "/home/seth";
     stateVersion = "23.05";
   };
-
-  nix.package = lib.mkDefault pkgs.nixFlakes;
 }

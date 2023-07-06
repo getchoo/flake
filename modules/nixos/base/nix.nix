@@ -19,8 +19,6 @@ in {
   in
     mkIf cfg.enable {
       nix = {
-        package = mkDefault pkgs.nixFlakes;
-
         gc = {
           automatic = mkDefault true;
           dates = mkDefault "weekly";
