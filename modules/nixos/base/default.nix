@@ -17,6 +17,7 @@ in {
     ./root.nix
     ./security.nix
     ./systemd.nix
+    ./upgrade-diff.nix
     ./virtualisation.nix
   ];
 
