@@ -5,15 +5,12 @@ inputs:
     required: true
   github-token:
     description: "github read token for increasing rate limits"
-    required: false
+    required: true
     default: ""
   inputs:
     description: "flake inputs to update"
     required: false
     default: ""
-  update-token:
-    description: "github write token for creating prs"
-    required: true
 runs:
   using: "composite"
   steps:
@@ -29,12 +26,14 @@ runs:
         commit-msg: ${{ inputs.commit-msg }}
         inputs: ${{ inputs.inputs }}
         nix-options: "--accept-flake-config"
+        pr-body: |
+          Automated changes by the [update-flake-lock](https://github.com/DeterminateSystems/update-flake-lock) GitHub Action.
         pr-title: ${{ inputs.commit-msg }}
-        token: ${{ inputs.update-token }}
+        token: ${{ inputs.github-token }}
 
     - name: auto-merge pull request
       shell: bash
       run: gh pr merge --auto --rebase "$PR_ID"
       env:
-        GITHUB_TOKEN: ${{ inputs.update-token }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
         PR_ID: ${{ steps.update.outputs.pull-request-number }}

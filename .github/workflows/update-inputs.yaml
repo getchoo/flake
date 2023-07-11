@@ -6,6 +6,10 @@ on:
     - cron: "0 0 * * 6"
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   update-lock:
     runs-on: ubuntu-latest
@@ -16,5 +20,4 @@ jobs:
       - uses: ./.github/actions/flake-update
         with:
           commit-msg: "flake: update all inputs"
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          update-token: ${{ secrets.FLAKE_UPDATE }}
+          github-token: ${{ github.token }}
