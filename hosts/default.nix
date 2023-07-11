@@ -7,40 +7,37 @@
 }: {
   flake = {
     nixosConfigurations = let
-      inherit (myLib.configs inputs) mkNixOS;
+      inherit (myLib.configs inputs) mkSystems;
 
       profiles = import ./profiles.nix {inherit self inputs;};
-    in {
-      glados = mkNixOS {
-        name = "glados";
-        modules = with inputs; [
-          nixos-hardware.nixosModules.common-cpu-amd-pstate
-          nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
-          nixos-hardware.nixosModules.common-pc-ssd
-          lanzaboote.nixosModules.lanzaboote
-        ];
-        profile = profiles.personal;
-      };
+    in
+      mkSystems {
+        glados = {
+          modules = with inputs; [
+            nixos-hardware.nixosModules.common-cpu-amd-pstate
+            nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
+            nixos-hardware.nixosModules.common-pc-ssd
+            lanzaboote.nixosModules.lanzaboote
+          ];
+          profile = profiles.personal;
+        };
 
-      glados-wsl = mkNixOS {
-        name = "glados-wsl";
-        modules = [inputs.nixos-wsl.nixosModules.wsl];
-        profile = profiles.personal;
-      };
+        glados-wsl = {
+          modules = [inputs.nixos-wsl.nixosModules.wsl];
+          profile = profiles.personal;
+        };
 
-      atlas = mkNixOS {
-        name = "atlas";
-        system = "aarch64-linux";
-        profile = profiles.server;
-      };
+        atlas = {
+          system = "aarch64-linux";
+          profile = profiles.server;
+        };
 
-      p-body = mkNixOS {
-        name = "p-body";
-        modules = [inputs.guzzle_api.nixosModules.guzzle_api];
-        system = "x86_64-linux";
-        profile = profiles.server;
+        p-body = {
+          modules = [inputs.guzzle_api.nixosModules.guzzle_api];
+          system = "x86_64-linux";
+          profile = profiles.server;
+        };
       };
-    };
 
     nixosModules.getchoo = import ../modules/nixos;
 
