@@ -7,19 +7,13 @@
 
   home.packages = with pkgs; [
     btop
-    cachix
-    cargo
-    llvmPackages_15.clang
     fd
     gh
-    lld
     nix-your-shell
     nurl
     rclone
     restic
     ripgrep
-    rustc
-    rustfmt
   ];
 
   programs = {

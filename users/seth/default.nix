@@ -15,14 +15,12 @@
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
 
-  home-manager.users.seth = let
-    inherit (config.nixpkgs) overlays;
-  in {
+  home-manager.users.seth = {
     imports = [
       ./home.nix
       ./desktop
     ];
 
-    nixpkgs.overlays = overlays;
+    nixpkgs.overlays = config.nixpkgs.overlays;
   };
 }
