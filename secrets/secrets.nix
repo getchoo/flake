@@ -15,6 +15,7 @@ in {
   "hosts/atlas/clusterToken.age".publicKeys = atlas;
   "hosts/atlas/secretsJson.age".publicKeys = atlas;
   "hosts/atlas/miniflux.age".publicKeys = atlas;
+  "hosts/atlas/tailscaleAuthKey.age".publicKeys = atlas;
 
   "hosts/p-body/rootPassword.age".publicKeys = p-body;
   "hosts/p-body/userPassword.age".publicKeys = p-body;
@@ -22,4 +23,5 @@ in {
   "hosts/p-body/binaryCache.age".publicKeys = p-body;
   "hosts/p-body/clusterToken.age".publicKeys = p-body;
   "hosts/p-body/secretsJson.age".publicKeys = p-body;
+  "hosts/p-body/tailscaleAuthKey.age".publicKeys = p-body;
 }
