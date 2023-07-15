@@ -74,7 +74,10 @@ in {
 
       {
         getchoo = {
-          features.tailscale.enable = true;
+          features.tailscale = {
+            enable = true;
+            ssh.enable = true;
+          };
 
           server = {
             enable = true;
