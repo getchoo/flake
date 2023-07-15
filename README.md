@@ -51,6 +51,7 @@ my amd64 server from digital ocean, general host for services.
 ## fun screenshots
 
 <details>
+<summary>click me!</summary>
 
 ![gnome](https://user-images.githubusercontent.com/48872998/223897323-87f8d547-511b-48c3-a2e1-8ff22ac361e9.png)
 ![neovim](https://user-images.githubusercontent.com/48872998/223897693-88eb0416-9ebc-45b6-837a-b28ada94336f.png)
