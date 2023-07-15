@@ -38,7 +38,7 @@ in {
       enable = true;
       settings = {
         "com.solus-project.budgie-panel:Budgie" = {
-          pinned-launchers = ["firefox.desktop" "nemo.desktop" "discord-canary.desktop"];
+          pinned-launchers = ["firefox.desktop" "nemo.desktop" "discord.desktop"];
         };
       };
     };

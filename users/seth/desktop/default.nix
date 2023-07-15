@@ -20,7 +20,9 @@ in {
   config.home = mkIf cfg.enable {
     packages = with pkgs; [
       chromium
-      discord-canary
+      (discord.override {
+        withOpenASAR = true;
+      })
       element-desktop
       spotify
       steam
