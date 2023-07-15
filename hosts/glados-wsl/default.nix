@@ -41,6 +41,4 @@
     audit.enable = false;
     auditd.enable = false;
   };
-
-  system.stateVersion = "23.05";
 }

@@ -40,6 +40,4 @@ _: {
     swapDevices = 1;
     memoryPercent = 50;
   };
-
-  system.stateVersion = "23.05";
 }
