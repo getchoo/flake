@@ -3,12 +3,15 @@ _: {
     ./boot.nix
     ./hardware-configuration.nix
     ../../modules/nixos/features/tailscale.nix
+    ../../modules/nixos/features/virtualisation.nix
   ];
 
   getchoo = {
-    base.virtualisation.enable = true;
     desktop.gnome.enable = true;
-    features.tailscale.enable = true;
+    features = {
+      tailscale.enable = true;
+      virtualisation.enable = true;
+    };
     hardware = {
       enable = true;
       nvidia.enable = true;

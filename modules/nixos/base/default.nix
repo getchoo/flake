@@ -18,7 +18,6 @@ in {
     ./security.nix
     ./systemd.nix
     ./upgrade-diff.nix
-    ./virtualisation.nix
   ];
 
   config = mkIf cfg.enable {
