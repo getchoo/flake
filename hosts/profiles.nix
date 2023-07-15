@@ -56,7 +56,7 @@ in {
         };
 
         getchoo.base.enable = true;
-        system.stateVersion = "23.05";
+        system.stateVersion = "23.11";
       }
     ];
 
@@ -86,6 +86,7 @@ in {
         };
 
         nix.registry.nixpkgs.flake = nixpkgs-stable;
+        system.stateVersion = "23.05";
       }
     ];
 

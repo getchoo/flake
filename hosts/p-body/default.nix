@@ -45,8 +45,6 @@
     }
   ];
 
-  system.stateVersion = "23.11";
-
   users.users.p-body = {
     extraGroups = ["wheel"];
     isNormalUser = true;

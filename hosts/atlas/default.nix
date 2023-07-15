@@ -34,8 +34,6 @@
 
   nix.settings.allowed-users = ["bob"];
 
-  system.stateVersion = "23.05";
-
   users.users = {
     atlas = {
       extraGroups = ["wheel"];
