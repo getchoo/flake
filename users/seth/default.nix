@@ -11,7 +11,6 @@
   };
 
   programs.fish.enable = true;
-  nix.settings.trusted-users = ["seth"];
 
   home-manager.useGlobalPkgs = true;
   home-manager.useUserPackages = true;
