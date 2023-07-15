@@ -11,9 +11,6 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      cachix
-      hyfetch
-      neofetch
       pinentry-curses
       python311
     ];
