@@ -46,13 +46,11 @@ local formatting = null_ls.builtins.formatting
 
 local sources = {
 	lsp_servers = {
-		"bashls",
-		"clangd",
-		"pyright",
-		"rust_analyzer",
-		"tsserver",
-		--"tailwindcss",
-		"nimls",
+		["bashls"] = "bash-language-server",
+		["clangd"] = "clangd",
+		["pyright"] = "pyright-langserver",
+		["rust_analyzer"] = "rust-analyzer",
+		["tsserver"] = "typescript-language-server",
 	},
 	null_ls = {
 		diagnostics.actionlint,
@@ -88,8 +86,10 @@ local all_config = {
 }
 
 local servers = {}
-for _, server in ipairs(sources.lsp_servers) do
-	servers[server] = all_config
+for server, binary in pairs(sources.lsp_servers) do
+	if vim.fn.executable(binary) == 1 then
+		servers[server] = all_config
+	end
 end
 
 servers["lua_ls"] = {
