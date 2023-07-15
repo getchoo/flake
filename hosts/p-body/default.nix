@@ -45,22 +45,13 @@
     }
   ];
 
-  system.stateVersion = "22.11";
+  system.stateVersion = "23.11";
 
-  users.users = let
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOeEbjzzzwf9Qyl0JorokhraNYG4M2hovyAAaA6jPpM7 seth@glados"
-    ];
-  in {
-    root = {inherit openssh;};
-
-    p-body = {
-      extraGroups = ["wheel"];
-      isNormalUser = true;
-      shell = pkgs.bash;
-      passwordFile = config.age.secrets.userPassword.path;
-      inherit openssh;
-    };
+  users.users.p-body = {
+    extraGroups = ["wheel"];
+    isNormalUser = true;
+    shell = pkgs.bash;
+    passwordFile = config.age.secrets.userPassword.path;
   };
 
   zramSwap.enable = true;
