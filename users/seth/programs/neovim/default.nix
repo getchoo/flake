@@ -9,24 +9,12 @@
       codespell
       deadnix
       just
-      llvmPackages_15.clang
-      llvmPackages_15.libclang
       nil
       nodePackages.alex
-      nodePackages.bash-language-server
-      nodePackages.eslint
-      nodePackages.prettier
-      nodePackages.pyright
-      nodePackages.typescript-language-server
-      pylint
-      rust-analyzer
-      rustfmt
       shellcheck
-      shellharden
       statix
       stylua
       sumneko-lua-language-server
-      yapf
     ];
     plugins = with pkgs.vimPlugins; [
       bufferline-nvim
