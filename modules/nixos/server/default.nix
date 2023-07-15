@@ -29,6 +29,7 @@ in {
       };
 
       settings = {
+        allowed-users = [];
         trusted-substituters = [
           "https://getchoo.cachix.org"
           "https://cache.garnix.io"
