@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  nixpkgs,
   pkgs,
   self,
   ...
@@ -46,7 +45,7 @@ in {
     services = {
       hercules-ci-agent = {
         enable = true;
-        package = (import nixpkgs {inherit (pkgs) system;}).hercules-ci-agent;
+        package = pkgs.unstable.hercules-ci-agent;
         settings = {
           binaryCachesPath = config.age.secrets.binaryCache.path;
           clusterJoinTokenPath = config.age.secrets.clusterToken.path;
