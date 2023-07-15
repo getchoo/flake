@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  pkgs,
+  nixpkgs,
   ...
 }: let
   cfg = config.getchoo.server;
@@ -22,16 +22,13 @@ in {
       networking.enable = false;
     };
 
-    environment.systemPackages = [pkgs.cachix];
-
     nix = {
       gc = {
         dates = "*-*-1,5,9,13,17,21,25,29 00:00:00";
-        options = "-d --delete-older-than 2d --max-freed 50G";
+        options = "-d --delete-older-than 2d";
       };
 
       settings = {
-        trusted-users = ["${config.networking.hostName}"];
         trusted-substituters = [
           "https://getchoo.cachix.org"
           "https://cache.garnix.io"
@@ -48,6 +45,8 @@ in {
       };
     };
 
+    nixpkgs.overlays = [(_: prev: {unstable = import nixpkgs {inherit (prev) system;};})];
+
     programs = {
       git.enable = mkDefault true;
       vim.defaultEditor = mkDefault true;
@@ -55,21 +54,6 @@ in {
 
     security = {
       pam.enableSSHAgentAuth = mkDefault true;
-    };
-
-    services = {
-      fail2ban = {
-        enable = true;
-        bantime-increment = {
-          enable = true;
-        };
-        maxretry = 5;
-      };
-
-      openssh = {
-        enable = true;
-        settings.PasswordAuthentication = mkDefault false;
-      };
     };
   };
 }
