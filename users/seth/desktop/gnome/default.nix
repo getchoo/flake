@@ -31,7 +31,7 @@ in {
           favorite-apps = [
             "firefox.desktop"
             "org.gnome.Nautilus.desktop"
-            "discord.desktop"
+            "discord-canary.desktop"
           ];
         };
         "org/gnome/desktop/interface" = {

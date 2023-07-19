@@ -28,7 +28,7 @@ in {
         };
 
         nixpkgs = {
-          overlays = [nur.overlay getchoo.overlays.default];
+          overlays = [nur.overlay getchoo.overlays.default self.overlays.default];
           config.allowUnfree = true;
         };
 
