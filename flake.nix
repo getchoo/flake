@@ -99,7 +99,7 @@
     {
       imports = [
         ./hosts
-        ./modules/flake
+        ./parts
         ./users
         inputs.getchoo.flakeModules.homeConfigurations
       ];

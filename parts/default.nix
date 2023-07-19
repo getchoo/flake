@@ -2,6 +2,7 @@
   imports = [
     ./ci.nix
     ./dev.nix
+    ./overlays
   ];
 
   _module.args.myLib = inputs.getchoo.lib;
