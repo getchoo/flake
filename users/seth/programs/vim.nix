@@ -1,6 +1,7 @@
-_: {
+{pkgs, ...}: {
   programs.vim = {
     enable = true;
+    packageConfigurable = pkgs.vim;
     settings = {
       expandtab = false;
       shiftwidth = 2;
