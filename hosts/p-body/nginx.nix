@@ -1,7 +1,7 @@
 {config, ...}: let
   inherit (config.networking) domain;
 in {
-  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedTCPPorts = [443];
 
   security.acme = {
     acceptTerms = true;
@@ -31,13 +31,6 @@ in {
         addSSL = true;
 
         locations = mkProxy "/" "8080";
-      };
-
-      "git.${domain}" = {
-        enableACME = true;
-        addSSL = true;
-
-        locations = mkProxy "/" "3000";
       };
 
       "grafana.${domain}" = {

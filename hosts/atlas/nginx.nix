@@ -1,5 +1,5 @@
 {config, ...}: {
-  networking.firewall.allowedTCPPorts = [80 443];
+  networking.firewall.allowedTCPPorts = [443];
 
   security.acme = {
     acceptTerms = true;
@@ -17,7 +17,7 @@
     virtualHosts = let
       mkProxy = endpoint: port: {
         "${endpoint}" = {
-          proxyPass = "http://127.0.0.1:${port}";
+          proxyPass = "http://localhost:${port}";
           proxyWebsockets = true;
         };
       };
