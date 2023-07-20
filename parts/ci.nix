@@ -1,5 +1,5 @@
 {
-  inputs,
+  lib,
   myLib,
   self,
   ...
@@ -9,15 +9,15 @@
     "aarch64-linux"
   ];
 
-  ci = sys: myLib.ci ["${sys}"];
-  hm = sys: (ci sys).mkCompatibleHM self.homeConfigurations;
-  hosts = sys: (ci sys).mkCompatibleCfg self.nixosConfigurations;
+  mkChecks = sys: let
+    ci = myLib.ci [sys];
+  in
+    lib.recursiveUpdate
+    (ci.mkCompatibleHM self.homeConfigurations).${sys}
+    (ci.mkCompatibleCfg self.nixosConfigurations);
 in {
   flake = {
-    checks = inputs.nixpkgs.lib.genAttrs ciSystems hosts;
-  };
-
-  perSystem = {system, ...}: {
-    checks = (hm system).${system};
+    checks =
+      lib.genAttrs ciSystems mkChecks;
   };
 }

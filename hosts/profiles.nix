@@ -1,14 +1,12 @@
 {
   inputs,
   self,
-}: let
-  inherit (inputs) getchoo home-manager nixpkgs nixpkgs-stable nur ragenix;
-in {
+}: {
   personal = {
     system = "x86_64-linux";
-    builder = nixpkgs.lib.nixosSystem;
+    builder = inputs.nixpkgs.lib.nixosSystem;
 
-    modules = [
+    modules = with inputs; [
       ragenix.nixosModules.default
       home-manager.nixosModules.home-manager
       nur.nixosModules.nur
@@ -28,7 +26,7 @@ in {
         };
 
         nixpkgs = {
-          overlays = [nur.overlay getchoo.overlays.default self.overlays.default];
+          overlays = with inputs; [nur.overlay getchoo.overlays.default self.overlays.default];
           config.allowUnfree = true;
         };
 
@@ -64,9 +62,9 @@ in {
   };
 
   server = {
-    builder = nixpkgs-stable.lib.nixosSystem;
+    builder = inputs.nixpkgs-stable.lib.nixosSystem;
 
-    modules = [
+    modules = with inputs; [
       ragenix.nixosModules.default
       ../modules/nixos/base
       ../modules/nixos/server

@@ -22,18 +22,15 @@
       };
     };
 
-    devShells = let
-      inherit (pkgs) mkShell;
-    in {
-      default = mkShell {
+    devShells = {
+      default = pkgs.mkShell {
         inherit (self.checks.${system}.pre-commit-check) shellHook;
-        packages = with pkgs;
-        with inputs; [
+        packages = with pkgs; [
           actionlint
           alejandra
           deadnix
           just
-          ragenix.packages.${system}.ragenix
+          inputs.ragenix.packages.${system}.ragenix
           statix
           stylua
         ];
