@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   home-manager.users.seth = {
     home.packages = with pkgs; [
-      discord-canary
+      discord
       iterm2
       spotify
     ];
