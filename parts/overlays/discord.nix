@@ -21,6 +21,8 @@ _: prev: let
   in
     if prev.stdenv.isLinux
     then d'.overrideAttrs (_: {inherit desktopItem;})
+    else if (pname == "discord" && prev.stdenv.isDarwin)
+    then d'
     else d;
 in {
   discord = mkOverride prev.discord;
