@@ -13,7 +13,6 @@ in {
       gc.automatic = mkDefault true;
 
       settings = {
-        auto-optimise-store = true;
         experimental-features = ["nix-command" "flakes" "auto-allocate-uids" "repl-flake"];
         trusted-users = mkDefault ["root" "@wheel"];
       };
