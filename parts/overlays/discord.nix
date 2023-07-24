@@ -19,7 +19,9 @@ _: prev: let
       mimeTypes = ["x-scheme-handler/discord"];
     };
   in
-    d'.overrideAttrs (_: {inherit desktopItem;});
+    if prev.stdenv.isLinux
+    then d'.overrideAttrs (_: {inherit desktopItem;})
+    else d;
 in {
   discord = mkOverride prev.discord;
   discord-canary = mkOverride prev.discord-canary;
