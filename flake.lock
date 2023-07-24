@@ -2,7 +2,7 @@
   "nodes": {
     "agenix": {
       "inputs": {
-        "darwin": "darwin",
+        "darwin": "darwin_2",
         "nixpkgs": [
           "ragenix",
           "nixpkgs"
@@ -53,6 +53,26 @@
       }
     },
     "darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1690100173,
+        "narHash": "sha256-v3DT7u5KlW1ZoulvFQPndbg0gVD0zKGkJmPqGsBVQ3I=",
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "rev": "0f9058e739dbefc676dee557b4b627962268d556",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
+    "darwin_2": {
       "inputs": {
         "nixpkgs": [
           "ragenix",
@@ -476,6 +496,7 @@
     },
     "root": {
       "inputs": {
+        "darwin": "darwin",
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
