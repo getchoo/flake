@@ -7,6 +7,7 @@
   ciSystems = [
     "x86_64-linux"
     "aarch64-linux"
+    "x86_64-darwin"
   ];
 
   mkChecks = sys: let
@@ -14,7 +15,7 @@
   in
     lib.recursiveUpdate
     (ci.mkCompatibleHM self.homeConfigurations).${sys}
-    (ci.mkCompatibleCfg self.nixosConfigurations);
+    (ci.mkCompatibleCfg (self.nixosConfigurations // self.darwinConfigurations));
 in {
   flake = {
     checks =
