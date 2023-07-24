@@ -1,19 +1,13 @@
 {pkgs, ...}: {
-  imports = [
-    ../../users/seth
-  ];
-
   home-manager.users.seth = {
-    imports = [
-      ../../users/seth/programs/firefox.nix
-    ];
-
     home.packages = with pkgs; [
       discord-canary
       iterm2
       spotify
     ];
   };
+
+  getchoo.desktop.homebrew.enable = true;
 
   networking = rec {
     computerName = "caroline";

@@ -71,9 +71,15 @@ in {
     modules = with inputs; [
       common
       home-manager.darwinModules.home-manager
+
+      ../users/seth
       self.darwinModules.getchoo
+
       {
-        getchoo.base.enable = true;
+        getchoo = {
+          base.enable = true;
+          desktop.enable = true;
+        };
         system.stateVersion = 4;
       }
     ];
