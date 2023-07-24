@@ -1,14 +1,24 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: {
-  users.users.seth = {
-    extraGroups = ["wheel"];
-    isNormalUser = true;
-    shell = pkgs.fish;
-    passwordFile = config.age.secrets.sethPassword.path;
-  };
+  users.users.seth = let
+    inherit (pkgs.stdenv) isLinux isDarwin;
+  in
+    lib.recursiveUpdate {
+      shell = pkgs.fish;
+      home = lib.optionalString (isLinux || isDarwin) (
+        if isLinux
+        then "/home/seth"
+        else "/Users/seth"
+      );
+    } (lib.optionalAttrs pkgs.stdenv.isLinux {
+      extraGroups = lib.optional pkgs.stdenv.isLinux "wheel";
+      isNormalUser = true;
+      passwordFile = config.age.secrets.sethPassword.path;
+    });
 
   programs.fish.enable = true;
 
