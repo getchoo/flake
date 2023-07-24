@@ -1,4 +1,8 @@
-_: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   programs.git = {
     enable = true;
 
@@ -15,7 +19,7 @@ _: {
     userName = "seth";
   };
 
-  services.gpg-agent.extraConfig = ''
+  services.gpg-agent.extraConfig = lib.optionalString pkgs.stdenv.isLinux ''
     pinentry-program /run/current-system/sw/bin/pinentry
   '';
 }
