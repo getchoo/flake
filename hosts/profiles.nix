@@ -4,7 +4,7 @@
 }: let
   common = {
     nixpkgs = {
-      overlays = with inputs; [nur.overlay getchoo.overlays.default self.overlays.default];
+      overlays = with inputs; [nur.overlay getchoo.overlays.default];
       config.allowUnfree = true;
     };
 
@@ -55,6 +55,8 @@ in {
             sethPassword.file = "${baseDir}/sethPassword.age";
           };
         };
+
+        nixpkgs.overlays = [self.overlays.default];
 
         getchoo.base.enable = true;
         system.stateVersion = "23.11";
