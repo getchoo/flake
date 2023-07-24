@@ -19,6 +19,10 @@
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-23.05";
+    darwin = {
+      url = "github:LnL7/nix-darwin/";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # this is just to avoid having multiple versions in flake.lock
     flake-compat = {
