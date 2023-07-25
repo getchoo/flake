@@ -12,6 +12,7 @@
           inherit system;
           overlays = with inputs; [nur.overlay getchoo.overlays.default];
         };
+        modules = [{_module.args.osConfig = {};}];
       };
     };
   };

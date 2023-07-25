@@ -1,25 +1,44 @@
 {
-  lib,
+  config,
   pkgs,
+  osConfig,
   ...
 }: {
-  programs.git = {
-    enable = true;
+  programs = {
+    gpg.enable = true;
 
-    extraConfig = {
-      init = {defaultBranch = "main";};
+    git = {
+      enable = true;
+
+      extraConfig = {
+        init = {defaultBranch = "main";};
+      };
+
+      signing = {
+        key = "D31BD0D494BBEE86";
+        signByDefault = true;
+      };
+
+      userEmail = "getchoo@tuta.io";
+      userName = "seth";
     };
 
-    signing = {
-      key = "D31BD0D494BBEE86";
-      signByDefault = true;
+    ssh = {
+      enable = true;
+      package = pkgs.openssh;
     };
-
-    userEmail = "getchoo@tuta.io";
-    userName = "seth";
   };
 
-  services.gpg-agent.extraConfig = lib.optionalString pkgs.stdenv.isLinux ''
-    pinentry-program /run/current-system/sw/bin/pinentry
-  '';
+  services.gpg-agent = {
+    enable = true;
+
+    enableBashIntegration = config.programs.bash.enable;
+    enableFishIntegration = config.programs.fish.enable;
+    enableZshIntegration = config.programs.zsh.enable;
+
+    pinentryFlavor =
+      if osConfig ? programs
+      then osConfig.programs.gnupg.agent.pinentryFlavor or "curses"
+      else "curses";
+  };
 }
