@@ -28,7 +28,7 @@ in {
 
     environment = {
       noXlibs = lib.mkForce false;
-      systemPackages = with pkgs; [pinentry-curses wl-clipboard xclip];
+      systemPackages = with pkgs; [wl-clipboard xclip];
     };
 
     programs = {

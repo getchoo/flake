@@ -11,20 +11,12 @@ in {
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      pinentry-curses
       python311
     ];
 
     programs = {
       git.enable = true;
-
-      gnupg = {
-        agent = {
-          enable = true;
-          pinentryFlavor = lib.mkDefault "curses";
-        };
-      };
-
+      gnupg.agent.enable = true;
       vim.defaultEditor = true;
     };
   };

@@ -13,7 +13,6 @@ in {
     getchoo.desktop.enable = true;
 
     environment = {
-      systemPackages = with pkgs; [pinentry-qt];
       plasma5.excludePackages = with pkgs.libsForQt5; [
         khelpcenter
         plasma-browser-integration
@@ -28,7 +27,5 @@ in {
         useQtScaling = true;
       };
     };
-
-    programs.gnupg.agent.pinentryFlavor = "qt";
   };
 }

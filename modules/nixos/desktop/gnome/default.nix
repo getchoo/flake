@@ -20,8 +20,6 @@ in {
       systemPackages = with pkgs; [
         adw-gtk3
         blackbox-terminal
-        pinentry-gnome
-        pinentry-gnome
       ];
     };
 
@@ -32,7 +30,5 @@ in {
       };
       desktopManager.gnome.enable = true;
     };
-
-    programs.gnupg.agent.pinentryFlavor = "gnome3";
   };
 }
