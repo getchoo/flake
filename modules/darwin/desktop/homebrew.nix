@@ -28,11 +28,10 @@ in {
           inherit name;
           args = {no_quarantine = true;};
         };
-      in
-        mkDefault [
-          "firefox"
-          (lib.recursiveUpdate (noQuarantine "chromium") (skipSha "chromium"))
-        ];
+      in [
+        "firefox"
+        (lib.recursiveUpdate (noQuarantine "chromium") (skipSha "chromium"))
+      ];
     };
   };
 }

@@ -12,6 +12,8 @@
     gpg.enable = true;
   };
 
+  homebrew.casks = ["prismlauncher"];
+
   networking = rec {
     computerName = "caroline";
     hostName = computerName;
