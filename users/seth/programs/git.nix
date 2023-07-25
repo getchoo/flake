@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   osConfig,
   ...
@@ -29,7 +30,7 @@
     };
   };
 
-  services.gpg-agent = {
+  services.gpg-agent = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
 
     enableBashIntegration = config.programs.bash.enable;
