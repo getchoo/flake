@@ -7,7 +7,10 @@
   cfg = config.getchoo.desktop;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.getchoo.desktop.enable = mkEnableOption "base nixos module";
+  options.getchoo.desktop = {
+    enable = mkEnableOption "enable desktop darwin support";
+    gpg.enable = mkEnableOption "enable gpg";
+  };
 
   imports = [
     ./homebrew.nix
@@ -18,5 +21,7 @@ in {
       mkDefault [
         (nerdfonts.override {fonts = ["FiraCode"];})
       ];
+
+    programs.gnupg.agent.enable = cfg.gpg.enable;
   };
 }

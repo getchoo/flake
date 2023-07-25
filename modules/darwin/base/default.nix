@@ -6,7 +6,7 @@
   cfg = config.getchoo.base;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.getchoo.base.enable = mkEnableOption "base nixos module";
+  options.getchoo.base.enable = mkEnableOption "base darwin module";
 
   imports = [
     ./documentation.nix
