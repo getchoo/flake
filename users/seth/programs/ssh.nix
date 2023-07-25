@@ -43,4 +43,6 @@
       "p-body".user = "p-body";
     };
   };
+
+  services.ssh-agent.enable = pkgs.stdenv.isLinux;
 }
