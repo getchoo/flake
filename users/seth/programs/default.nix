@@ -1,7 +1,9 @@
 {pkgs, ...}: {
   imports = [
     ./git.nix
+    ./gpg.nix
     ./neovim
+    ./ssh.nix
     ./vim.nix
   ];
 
