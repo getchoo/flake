@@ -7,7 +7,10 @@
     ];
   };
 
-  getchoo.desktop.homebrew.enable = true;
+  getchoo.desktop = {
+    homebrew.enable = true;
+    gpg.enable = true;
+  };
 
   networking = rec {
     computerName = "caroline";
