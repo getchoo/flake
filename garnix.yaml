@@ -2,6 +2,6 @@ builds:
   exclude: []
   include:
     - "checks.x86_64-linux.*"
-    - "checks.aarch64-linux.*"
-    - "checks.x86_64-darwin.*"
     - "devShells.x86_64-linux.default"
+    - "nixosConfigurations.*"
+    - "homeConfigurations.x86_64-linux.*"
