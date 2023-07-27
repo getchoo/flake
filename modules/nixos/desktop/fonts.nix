@@ -11,9 +11,9 @@ in {
 
   config = mkIf cfg.enable {
     fonts = {
-      enableDefaultFonts = true;
+      enableDefaultPackages = true;
 
-      fonts = with pkgs; [
+      packages = with pkgs; [
         corefonts
         fira-code
         (nerdfonts.override {fonts = ["FiraCode"];})
