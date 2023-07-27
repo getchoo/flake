@@ -1,10 +1,12 @@
 {
   inputs,
   myLib,
+  self,
   ...
 }: {
   perSystem = {system, ...}: let
     inherit (myLib.configs inputs) mkHMUsers;
+    ci = myLib.ci [system];
   in {
     homeConfigurations = mkHMUsers {
       seth = {
@@ -15,5 +17,7 @@
         modules = [{_module.args.osConfig = {};}];
       };
     };
+
+    packages = (ci.mkCompatibleHM self.homeConfigurations).${system};
   };
 }
