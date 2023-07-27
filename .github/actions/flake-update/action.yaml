@@ -25,9 +25,6 @@ runs:
       with:
         commit-msg: ${{ inputs.commit-msg }}
         inputs: ${{ inputs.inputs }}
-        nix-options: "--accept-flake-config"
-        pr-body: |
-          Automated changes by the [update-flake-lock](https://github.com/DeterminateSystems/update-flake-lock) GitHub Action.
         pr-title: ${{ inputs.commit-msg }}
         token: ${{ inputs.github-token }}
 
