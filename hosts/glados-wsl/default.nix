@@ -29,10 +29,7 @@
     interop.includePath = false;
   };
 
-  services = {
-    dbus.apparmor = "disabled";
-    resolved.enable = false;
-  };
+  services.dbus.apparmor = "disabled";
 
   networking.hostName = "glados-wsl";
 
