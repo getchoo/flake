@@ -282,6 +282,26 @@
         "type": "github"
       }
     },
+    "nix-index-database": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1690687539,
+        "narHash": "sha256-Lnwz9XKtshm+5OeWqCbj/3tKuKK+DL5tUTdKSRrKBlY=",
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "rev": "d74b8171153ae35d7d323a9b1ad6c4cf7a995591",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "type": "github"
+      }
+    },
     "nixinate": {
       "inputs": {
         "nixpkgs": [
@@ -504,6 +524,7 @@
         "guzzle_api": "guzzle_api",
         "home-manager": "home-manager",
         "lanzaboote": "lanzaboote",
+        "nix-index-database": "nix-index-database",
         "nixinate": "nixinate",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",

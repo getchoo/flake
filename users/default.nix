@@ -14,7 +14,10 @@
           inherit system;
           overlays = with inputs; [nur.overlay getchoo.overlays.default];
         };
-        modules = [{_module.args.osConfig = {};}];
+        modules = [
+          {_module.args.osConfig = {};}
+          inputs.nix-index-database.hmModules.nix-index
+        ];
       };
     };
 

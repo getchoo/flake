@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  nix-index-database,
   ...
 }: {
   users.users.seth = let
@@ -29,6 +30,7 @@
     imports = [
       ./home.nix
       ./desktop
+      nix-index-database.hmModules.nix-index
     ];
 
     nixpkgs.overlays = config.nixpkgs.overlays;

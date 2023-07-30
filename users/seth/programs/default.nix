@@ -8,7 +8,6 @@
   ];
 
   home.packages = with pkgs; [
-    btop
     fd
     gh
     nix-your-shell
@@ -19,12 +18,16 @@
   ];
 
   programs = {
+    btop.enable = true;
+
     direnv = {
       enable = true;
       nix-direnv = {
         enable = true;
       };
     };
+
+    nix-index-database.comma.enable = true;
   };
 
   xdg = {
