@@ -24,6 +24,7 @@ in {
       element-desktop
       spotify
       steam
+      prismlauncher
     ];
   };
 }
