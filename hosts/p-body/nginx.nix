@@ -21,20 +21,24 @@ in {
           proxyWebsockets = true;
         };
       };
-    in {
-      "api.${domain}" = {
-        enableACME = true;
-        addSSL = true;
 
-        locations = mkProxy "/" "8080";
+      mkVHosts = builtins.mapAttrs (_: v:
+        v
+        // {
+          enableACME = true;
+          # workaround for https://github.com/NixOS/nixpkgs/issues/210807
+          acmeRoot = null;
+          forceSSL = true;
+        });
+    in
+      mkVHosts {
+        "api.${domain}" = {
+          locations = mkProxy "/" "8080";
+        };
+
+        "grafana.${domain}" = {
+          locations = mkProxy "/" "4000";
+        };
       };
-
-      "grafana.${domain}" = {
-        enableACME = true;
-        addSSL = true;
-
-        locations = mkProxy "/" "4000";
-      };
-    };
   };
 }

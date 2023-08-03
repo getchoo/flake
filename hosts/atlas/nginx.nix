@@ -20,20 +20,32 @@
     recommendedTlsSettings = true;
 
     virtualHosts = let
+      inherit (config.networking) domain;
+
       mkProxy = endpoint: port: {
         "${endpoint}" = {
           proxyPass = "http://localhost:${port}";
           proxyWebsockets = true;
         };
       };
-      inherit (config.networking) domain;
-    in {
-      "miniflux.${domain}" = {
-        enableACME = true;
-        addSSL = true;
 
-        locations = mkProxy "/" "7000";
+      mkVHosts = builtins.mapAttrs (_: v:
+        v
+        // {
+          enableACME = true;
+          # workaround for https://github.com/NixOS/nixpkgs/issues/210807
+          acmeRoot = null;
+          forceSSL = true;
+        });
+    in
+      mkVHosts {
+        "miniflux.${domain}" = {
+          locations = mkProxy "/" "7000";
+        };
+
+        "msix.${domain}" = {
+          root = "/var/www/msix";
+        };
       };
-    };
   };
 }
