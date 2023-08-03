@@ -10,6 +10,7 @@ in {
   options.getchoo.server.enable = mkEnableOption "enable server configuration";
 
   imports = [
+    ./acme.nix
     ./secrets.nix
     ./services
   ];
