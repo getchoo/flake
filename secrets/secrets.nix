@@ -8,6 +8,7 @@ let
 in {
   "shared/rootPassword.age".publicKeys = main;
   "shared/sethPassword.age".publicKeys = main;
+  "shared/cloudflareApiKey.age".publicKeys = atlas ++ (builtins.filter (v: !(builtins.elem v main)) p-body);
 
   "hosts/atlas/rootPassword.age".publicKeys = atlas;
   "hosts/atlas/userPassword.age".publicKeys = atlas;

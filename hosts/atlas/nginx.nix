@@ -1,9 +1,14 @@
 {config, ...}: {
+  getchoo.server.acme.enable = true;
   networking.firewall.allowedTCPPorts = [443];
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = "getchoo@tuta.io";
+    defaults = {
+      email = "getchoo@tuta.io";
+      dnsProvider = "cloudflare";
+      credentialsFile = config.age.secrets.cloudflareApiKey.path;
+    };
   };
 
   services.nginx = {

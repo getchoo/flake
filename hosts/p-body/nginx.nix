@@ -1,12 +1,8 @@
 {config, ...}: let
   inherit (config.networking) domain;
 in {
+  getchoo.server.acme.enable = true;
   networking.firewall.allowedTCPPorts = [443];
-
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "getchoo@tuta.io";
-  };
 
   services.nginx = {
     enable = true;

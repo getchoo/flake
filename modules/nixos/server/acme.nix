@@ -12,7 +12,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    age.secrets.cloudflareApiKey = "${self}/secrets/shared/cloudflareApiKey.age";
+    age.secrets.cloudflareApiKey.file = "${self}/secrets/shared/cloudflareApiKey.age";
 
     security.acme = {
       acceptTerms = true;
