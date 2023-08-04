@@ -1,8 +1,14 @@
-{config, ...}: let
+{
+  config,
+  lib,
+  ...
+}: let
   inherit (config.networking) domain;
 in {
-  getchoo.server.acme.enable = true;
-  networking.firewall.allowedTCPPorts = [443];
+  getchoo.server = {
+    acme.enable = true;
+    services.cloudflared.enable = true;
+  };
 
   services.nginx = {
     enable = true;
@@ -12,8 +18,6 @@ in {
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    statusPage = true;
-
     virtualHosts = let
       mkProxy = endpoint: port: {
         "${endpoint}" = {
@@ -22,14 +26,16 @@ in {
         };
       };
 
-      mkVHosts = builtins.mapAttrs (_: v:
-        v
-        // {
+      mkVHosts = let
+        commonSettings = {
           enableACME = true;
           # workaround for https://github.com/NixOS/nixpkgs/issues/210807
           acmeRoot = null;
-          forceSSL = true;
-        });
+
+          addSSL = true;
+        };
+      in
+        builtins.mapAttrs (_: lib.recursiveUpdate commonSettings);
     in
       mkVHosts {
         "api.${domain}" = {
