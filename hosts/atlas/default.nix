@@ -7,7 +7,6 @@
     ./hardware-configuration.nix
     ./miniflux.nix
     ./nginx.nix
-    ./prometheus.nix
   ];
 
   _module.args.nixinate = {
@@ -30,6 +29,7 @@
   networking = {
     domain = "mydadleft.me";
     hostName = "atlas";
+    firewall.allowedTCPPorts = [config.services.prometheus.exporters.node.port];
   };
 
   nix.settings.allowed-users = ["bob"];

@@ -103,8 +103,20 @@ in {
 
           server = {
             enable = true;
-            services.promtail.enable = true;
+            services.promtail = {
+              enable = true;
+              clients = [
+                {
+                  url = "http://p-body:3030/loki/api/v1/push";
+                }
+              ];
+            };
           };
+        };
+
+        services.prometheus.exporters.node = {
+          enable = true;
+          enabledCollectors = ["systemd"];
         };
 
         nix.registry.nixpkgs.flake = nixpkgs-stable;

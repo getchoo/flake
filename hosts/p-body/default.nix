@@ -11,7 +11,7 @@
     ./grafana.nix
     ./loki.nix
     ./nginx.nix
-    ./prometheus.nix
+    ./victoriametrics.nix
   ];
 
   _module.args.nixinate = {
