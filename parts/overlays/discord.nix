@@ -1,6 +1,7 @@
 _: prev: let
   mkOverride = d: let
-    d' = d.override {withOpenASAR = true;};
+    # TODO: re-enable openASAR when gnome wayland decorations work with it
+    d' = d; #.override {withOpenASAR = true;};
     inherit (d') pname;
 
     desktopName =
