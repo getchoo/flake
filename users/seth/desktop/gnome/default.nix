@@ -16,6 +16,7 @@ in {
         appindicator
         blur-my-shell
         caffeine
+        clipboard-history
         gradience
       ]);
 
@@ -27,6 +28,7 @@ in {
           enabled-extensions = [
             "appindicatorsupport@rgcjonas.gmail.com"
             "caffeine@patapon.info"
+            "clipboard-history@alexsaveau.dev"
           ];
           favorite-apps = [
             "firefox.desktop"
