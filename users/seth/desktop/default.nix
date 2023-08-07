@@ -20,7 +20,7 @@ in {
   config.home = mkIf cfg.enable {
     packages = with pkgs; [
       chromium
-      discord-canary
+      discord
       element-desktop
       spotify
       steam
