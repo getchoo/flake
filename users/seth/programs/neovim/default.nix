@@ -24,14 +24,14 @@
       cmp_luasnip
       cmp-path
       editorconfig-nvim
-      # TODO: stop pinning the `legacy` tag
-      # when fidget is rewritten
+      # TODO: don't pin when deprecation notice
+      # is no longer in nixpkgs
       (fidget-nvim.overrideAttrs (_: {
         src = pkgs.fetchFromGitHub {
           owner = "j-hui";
           repo = "fidget.nvim";
-          rev = "90c22e47be057562ee9566bad313ad42d622c1d3";
-          hash = "sha256-ZLe54bRMctXlBo8zH9Qy6HbrkVSlGhPiXg38aAja9C8=";
+          rev = "41f327b53c7977d47aee56f05e0bdbb4b994c5eb";
+          hash = "sha256-v9qARsW8Gozit4Z3+igiemjI467QgRhwM+crqwO9r6U=";
         };
       }))
       gitsigns-nvim
