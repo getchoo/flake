@@ -35,14 +35,12 @@ in {
           "https://getchoo.cachix.org"
           "https://cache.garnix.io"
           "https://nix-community.cachix.org"
-          "https://wurzelpfropf.cachix.org"
         ];
 
         trusted-public-keys = [
           "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="
           "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-          "wurzelpfropf.cachix.org-1:ilZwK5a6wJqVr7Fyrzp4blIEkGK+LJT0QrpWr1qBNq0="
         ];
       };
     };

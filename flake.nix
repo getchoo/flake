@@ -6,13 +6,11 @@
       "https://getchoo.cachix.org" # personal cache
       "https://cache.garnix.io" # garnix cache
       "https://nix-community.cachix.org" # nix-community
-      "https://wurzelpfropf.cachix.org" # ragenix
     ];
     extra-trusted-public-keys = [
       "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="
       "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      "wurzelpfropf.cachix.org-1:ilZwK5a6wJqVr7Fyrzp4blIEkGK+LJT0QrpWr1qBNq0="
     ];
   };
 
@@ -22,6 +20,13 @@
     darwin = {
       url = "github:LnL7/nix-darwin/";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.darwin.follows = "darwin";
+      inputs.home-manager.follows = "home-manager";
     };
 
     deploy-rs = {
@@ -64,6 +69,7 @@
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
       inputs.flake-parts.follows = "flake-parts";
       inputs.flake-utils.follows = "flake-utils";
@@ -100,6 +106,8 @@
 
     ragenix = {
       url = "github:yaxitech/ragenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.agenix.follows = "agenix";
       inputs.flake-utils.follows = "flake-utils";
     };
   };
