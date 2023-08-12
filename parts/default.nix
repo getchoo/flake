@@ -1,5 +1,6 @@
 {inputs, ...}: {
   imports = [
+    ./deploy.nix
     ./dev.nix
     ./overlays
   ];

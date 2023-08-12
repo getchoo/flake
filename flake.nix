@@ -24,6 +24,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
+      inputs.flake-compat.follows = "flake-compat";
+    };
+
     # this is just to avoid having multiple versions in flake.lock
     flake-compat = {
       url = "github:edolstra/flake-compat";
@@ -61,11 +68,6 @@
       inputs.flake-parts.follows = "flake-parts";
       inputs.flake-utils.follows = "flake-utils";
       inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
-    };
-
-    nixinate = {
-      url = "github:MatthewCroughan/nixinate";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-index-database = {

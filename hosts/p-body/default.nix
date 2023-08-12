@@ -14,14 +14,6 @@
     ./victoriametrics.nix
   ];
 
-  _module.args.nixinate = {
-    host = "p-body";
-    sshUser = "root";
-    buildOn = "remote";
-    substituteOnTarget = true;
-    hermetic = false;
-  };
-
   getchoo.server.secrets.enable = true;
 
   networking = {

@@ -48,13 +48,9 @@
     nixosModules.getchoo = import ../modules/nixos;
     darwinModules.getchoo = import ../modules/darwin;
 
-    packages.x86_64-linux.turret = withSystem "x86_64-linux" ({pkgs, ...}:
+    openwrt.turret = withSystem "x86_64-linux" ({pkgs, ...}:
       pkgs.callPackage ./turret {
         inherit (inputs) openwrt-imagebuilder;
       });
-  };
-
-  perSystem = {system, ...}: {
-    apps = (inputs.nixinate.nixinate.${system} self).nixinate;
   };
 }

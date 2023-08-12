@@ -25,15 +25,17 @@
     devShells = {
       default = pkgs.mkShell {
         inherit (self.checks.${system}.pre-commit-check) shellHook;
-        packages = with pkgs; [
-          actionlint
-          alejandra
-          deadnix
-          just
-          inputs.ragenix.packages.${system}.ragenix
-          statix
-          stylua
-        ];
+        packages = with pkgs;
+          [
+            actionlint
+            alejandra
+            deadnix
+            just
+            inputs.ragenix.packages.${system}.ragenix
+            statix
+            stylua
+          ]
+          ++ lib.optional (system == "x86_64-linux") deploy-rs;
       };
     };
 

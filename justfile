@@ -23,7 +23,7 @@ check:
     nix flake check
 
 deploy HOST:
-    nix run .#{{ HOST }}
+    deploy .#{{ HOST }}
 
 deploy-all: (deploy "atlas") (deploy "p-body")
 
