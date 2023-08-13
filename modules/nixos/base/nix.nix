@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  pkgs,
+  inputs,
   ...
 }: let
   cfg = config.getchoo.base.nix-settings;
@@ -15,7 +15,8 @@ in {
   ];
 
   config = let
-    channelPath = "/etc/nix/channels/nixpkgs";
+    channelPath = i: "/etc/nix/channels/${i}";
+    mapInputs = fn: builtins.map fn (builtins.attrNames inputs);
   in
     mkIf cfg.enable {
       nix = {
@@ -30,13 +31,10 @@ in {
           experimental-features = ["nix-command" "flakes" "auto-allocate-uids" "repl-flake"];
         };
 
-        nixPath = [
-          "nixpkgs=${channelPath}"
-        ];
+        nixPath = mapInputs (i: "${i}=${channelPath i}");
       };
 
-      systemd.tmpfiles.rules = [
-        "L+ ${channelPath}     - - - - ${pkgs.path}"
-      ];
+      systemd.tmpfiles.rules =
+        mapInputs (i: "L+ ${channelPath i}     - - - - ${inputs.${i}.outPath}");
     };
 }

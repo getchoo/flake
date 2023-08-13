@@ -9,10 +9,12 @@
     };
 
     nix = {
-      registry = with inputs; {
-        getchoo.flake = getchoo;
-        nixpkgs.flake = nixpkgs;
-      };
+      registry =
+        {
+          n.flake = inputs.nixpkgs;
+        }
+        // (builtins.mapAttrs (_: flake: {inherit flake;})
+          (inputs.nixpkgs.lib.filterAttrs (n: _: n != "nixpkgs") inputs));
 
       settings = {
         trusted-substituters = [
@@ -29,10 +31,13 @@
       };
     };
   };
+
+  specialArgs = inputs // {inherit inputs;};
 in {
   personal = {
     system = "x86_64-linux";
     builder = inputs.nixpkgs.lib.nixosSystem;
+    inherit specialArgs;
 
     modules = with inputs; [
       common
@@ -58,12 +63,11 @@ in {
         system.stateVersion = "23.11";
       }
     ];
-
-    specialArgs = inputs;
   };
 
   personal-darwin = {
     builder = inputs.darwin.lib.darwinSystem;
+    inherit specialArgs;
     modules = with inputs; [
       common
       home-manager.darwinModules.home-manager
@@ -79,12 +83,11 @@ in {
         system.stateVersion = 4;
       }
     ];
-
-    specialArgs = inputs;
   };
 
   server = {
     builder = inputs.nixpkgs-stable.lib.nixosSystem;
+    inherit specialArgs;
 
     modules = with inputs; [
       ragenix.nixosModules.default
@@ -121,7 +124,5 @@ in {
         system.stateVersion = "23.05";
       }
     ];
-
-    specialArgs = inputs;
   };
 }
