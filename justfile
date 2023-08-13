@@ -13,11 +13,11 @@ default:
 
 [linux]
 build:
-    nixos-rebuild build --flake .
+    nixos-rebuild build --verbose --flake .
 
 [macos]
 build:
-    darwin-rebuild --flake .
+    darwin-rebuild --verbose --flake .
 
 check:
     nix flake check
@@ -38,19 +38,19 @@ pre-commit:
 
 [linux]
 switch:
-    sudo nixos-rebuild switch --flake .
+    sudo nixos-rebuild switch --verbose --flake .
 
 [macos]
 switch:
-    darwin-rebuild switch --flake .
+    darwin-rebuild switch --verbose --flake .
 
 [linux]
 test:
-    sudo nixos-rebuild test --flake .
+    sudo nixos-rebuild test --verbose --flake .
 
 [macos]
 test:
-    darwin-rebuild test --flake .
+    darwin-rebuild test --verbose --flake .
 
 update:
     nix flake update
