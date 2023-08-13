@@ -25,7 +25,8 @@ check:
 deploy HOST:
     deploy .#{{ HOST }}
 
-deploy-all: (deploy "atlas") (deploy "p-body")
+deploy-all:
+    deploy
 
 fmt:
     pre-commit run alejandra && pre-commit run stylua
