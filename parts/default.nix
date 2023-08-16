@@ -1,11 +1,10 @@
-{inputs, ...}: {
+_: {
   imports = [
     ./deploy.nix
     ./dev.nix
+    ./lib
     ./overlays
   ];
-
-  _module.args.myLib = inputs.getchoo.lib;
 
   systems = [
     "x86_64-linux"
