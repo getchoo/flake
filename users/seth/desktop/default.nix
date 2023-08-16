@@ -2,10 +2,13 @@
   config,
   lib,
   pkgs,
+  osConfig,
   ...
 }: let
   cfg = config.desktop;
   inherit (lib) mkEnableOption mkIf;
+
+  desktops = ["budgie" "gnome" "plasma"];
 in {
   imports = [
     ./budgie
@@ -15,7 +18,7 @@ in {
     ../programs/firefox.nix
   ];
 
-  options.desktop.enable = mkEnableOption "enable desktop configuration";
+  options.desktop.enable = mkEnableOption "desktop configuration" // {default = osConfig.getchoo.desktop.enable or false;};
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
