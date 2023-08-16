@@ -45,7 +45,7 @@ in {
       home-manager.nixosModules.home-manager
       nur.nixosModules.nur
 
-      self.nixosModules.getchoo
+      self.nixosModules.default
       ../users/seth
 
       {
@@ -59,7 +59,7 @@ in {
           };
         };
 
-        getchoo.base.enable = true;
+        base.enable = true;
         system.stateVersion = "23.11";
       }
     ];
@@ -74,13 +74,11 @@ in {
 
       ../users/seth
       ../users/seth/darwin.nix
-      self.darwinModules.getchoo
+      self.darwinModules.default
 
       {
-        getchoo = {
-          base.enable = true;
-          desktop.enable = true;
-        };
+        base.enable = true;
+        desktop.enable = true;
         system.stateVersion = 4;
       }
     ];
@@ -97,22 +95,20 @@ in {
       ../modules/nixos/features/tailscale.nix
 
       {
-        getchoo = {
-          features.tailscale = {
-            enable = true;
-            ssh.enable = true;
-          };
+        features.tailscale = {
+          enable = true;
+          ssh.enable = true;
+        };
 
-          server = {
+        server = {
+          enable = true;
+          services.promtail = {
             enable = true;
-            services.promtail = {
-              enable = true;
-              clients = [
-                {
-                  url = "http://p-body:3030/loki/api/v1/push";
-                }
-              ];
-            };
+            clients = [
+              {
+                url = "http://p-body:3030/loki/api/v1/push";
+              }
+            ];
           };
         };
 

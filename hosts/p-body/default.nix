@@ -14,7 +14,7 @@
     ./victoriametrics.nix
   ];
 
-  getchoo.server.secrets.enable = true;
+  server.secrets.enable = true;
 
   networking = {
     domain = "mydadleft.me";

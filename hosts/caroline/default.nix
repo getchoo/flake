@@ -1,5 +1,5 @@
 _: {
-  getchoo.desktop = {
+  desktop = {
     homebrew.enable = true;
     gpg.enable = true;
   };

@@ -12,10 +12,8 @@
     wslu
   ];
 
-  getchoo = {
-    base.networking.enable = false;
-    features.tailscale.enable = true;
-  };
+  base.networking.enable = false;
+  features.tailscale.enable = true;
 
   wsl = {
     enable = true;
