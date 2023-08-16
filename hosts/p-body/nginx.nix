@@ -5,7 +5,7 @@
 }: let
   inherit (config.networking) domain;
 in {
-  getchoo.server = {
+  server = {
     acme.enable = true;
     services.cloudflared.enable = true;
   };

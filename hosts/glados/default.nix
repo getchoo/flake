@@ -6,16 +6,14 @@ _: {
     ../../modules/nixos/features/virtualisation.nix
   ];
 
-  getchoo = {
-    desktop.gnome.enable = true;
-    features = {
-      tailscale.enable = true;
-      virtualisation.enable = true;
-    };
-    hardware = {
-      enable = true;
-      nvidia.enable = true;
-    };
+  desktop.gnome.enable = true;
+  features = {
+    tailscale.enable = true;
+    virtualisation.enable = true;
+  };
+  hardware = {
+    enable = true;
+    nvidia.enable = true;
   };
 
   environment.etc."environment".text = ''

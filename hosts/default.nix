@@ -43,8 +43,8 @@
       };
     };
 
-    nixosModules.getchoo = import ../modules/nixos;
-    darwinModules.getchoo = import ../modules/darwin;
+    nixosModules.default = import ../modules/nixos;
+    darwinModules.default = import ../modules/darwin;
 
     openwrt.turret = withSystem "x86_64-linux" ({pkgs, ...}:
       pkgs.callPackage ./turret {

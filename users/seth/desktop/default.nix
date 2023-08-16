@@ -18,9 +18,11 @@ in {
     ../programs/firefox.nix
   ];
 
-  options.desktop.enable = mkEnableOption "desktop configuration" // {default = osConfig.getchoo.desktop.enable or false;};
+  options.desktop.enable = mkEnableOption "desktop configuration" // {default = osConfig.desktop.enable or false;};
 
   config = mkIf cfg.enable {
+    desktop = lib.genAttrs desktops (desktop: {enable = osConfig.desktop.${desktop}.enable or false;});
+
     home.packages = with pkgs; [
       discord
       element-desktop
