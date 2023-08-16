@@ -4,4 +4,4 @@ builds:
     - "checks.x86_64-linux.*"
     - "devShells.x86_64-linux.default"
     - "nixosConfigurations.*"
-    - "packages.x86_64-linux.seth"
+    - "homeConfigurations.seth@x86_64-linux"

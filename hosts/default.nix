@@ -1,23 +1,21 @@
 {
   inputs,
-  myLib,
   self,
   withSystem,
   ...
 }: {
   flake = let
-    inherit (myLib.configs inputs) mkSystems;
-
+    inherit (self.lib.configs) mapSystems;
     profiles = import ./profiles.nix {inherit self inputs;};
   in {
-    darwinConfigurations = mkSystems {
+    darwinConfigurations = mapSystems {
       caroline = {
         system = "x86_64-darwin";
         profile = profiles.personal-darwin;
       };
     };
 
-    nixosConfigurations = mkSystems {
+    nixosConfigurations = mapSystems {
       glados = {
         modules = with inputs; [
           nixos-hardware.nixosModules.common-cpu-amd-pstate

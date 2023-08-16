@@ -73,6 +73,7 @@ in {
       home-manager.darwinModules.home-manager
 
       ../users/seth
+      ../users/seth/darwin.nix
       self.darwinModules.getchoo
 
       {

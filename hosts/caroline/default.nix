@@ -1,12 +1,4 @@
-{pkgs, ...}: {
-  home-manager.users.seth = {
-    home.packages = with pkgs; [
-      discord
-      iterm2
-      spotify
-    ];
-  };
-
+_: {
   getchoo.desktop = {
     homebrew.enable = true;
     gpg.enable = true;
