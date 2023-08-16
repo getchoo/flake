@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.getchoo.desktop.homebrew;
+  cfg = config.desktop.homebrew;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.getchoo.desktop.homebrew.enable = mkEnableOption "enable homebrew support";
+  options.desktop.homebrew.enable = mkEnableOption "enable homebrew support";
 
   config = mkIf cfg.enable {
     homebrew = {

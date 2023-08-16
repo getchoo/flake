@@ -5,10 +5,10 @@
   self,
   ...
 }: let
-  cfg = config.getchoo.server.services.hercules-ci;
+  cfg = config.server.services.hercules-ci;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.getchoo.server.services.hercules-ci = {
+  options.server.services.hercules-ci = {
     enable = mkEnableOption "enable hercules-ci";
     secrets.enable = mkEnableOption "manage secrets for hercules-ci";
   };

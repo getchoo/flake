@@ -5,10 +5,10 @@
   self,
   ...
 }: let
-  cfg = config.getchoo.features.tailscale;
+  cfg = config.features.tailscale;
   inherit (lib) mkDefault mkEnableOption mkIf optionalAttrs;
 in {
-  options.getchoo.features.tailscale = {
+  options.features.tailscale = {
     enable = mkEnableOption "enable support for tailscale";
     ssh.enable = mkEnableOption "enable support for tailscale ssh";
   };

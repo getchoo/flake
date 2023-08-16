@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.getchoo.base.documentation;
+  cfg = config.base.documentation;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.getchoo.base.documentation.enable = mkEnableOption "base module documentation";
+  options.base.documentation.enable = mkEnableOption "base module documentation";
 
   config = mkIf cfg.enable {
     documentation.man.enable = true;

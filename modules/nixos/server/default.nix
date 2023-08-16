@@ -4,10 +4,10 @@
   nixpkgs,
   ...
 }: let
-  cfg = config.getchoo.server;
+  cfg = config.server;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.getchoo.server.enable = mkEnableOption "enable server configuration";
+  options.server.enable = mkEnableOption "enable server configuration";
 
   imports = [
     ./acme.nix
@@ -16,7 +16,7 @@ in {
   ];
 
   config = mkIf cfg.enable {
-    getchoo.base = {
+    base = {
       enable = true;
       documentation.enable = false;
       defaultPackages.enable = false;

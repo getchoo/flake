@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.getchoo.base;
+  cfg = config.base;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.getchoo.base.enable = mkEnableOption "base nixos module";
+  options.base.enable = mkEnableOption "base nixos module";
 
   imports = [
     ./documentation.nix
@@ -21,7 +21,7 @@ in {
   ];
 
   config = mkIf cfg.enable {
-    getchoo.base = {
+    base = {
       defaultPackages.enable = mkDefault true;
       defaultLocale.enable = mkDefault true;
       defaultRoot.enable = mkDefault true;

@@ -4,10 +4,10 @@
   self,
   ...
 }: let
-  cfg = config.getchoo.server.secrets;
+  cfg = config.server.secrets;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.getchoo.server.secrets = {
+  options.server.secrets = {
     enable = mkEnableOption "enable secret management";
   };
 
