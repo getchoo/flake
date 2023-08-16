@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.getchoo.server.services.promtail;
+  cfg = config.server.services.promtail;
   inherit (lib) mkEnableOption mkIf mkOption types;
 in {
-  options.getchoo.server.services.promtail = {
+  options.server.services.promtail = {
     enable = mkEnableOption "enable promtail";
 
     clients = mkOption {

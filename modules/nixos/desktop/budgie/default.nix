@@ -4,13 +4,13 @@
   lib,
   ...
 }: let
-  cfg = config.getchoo.desktop.budgie;
+  cfg = config.desktop.budgie;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.getchoo.desktop.budgie.enable = mkEnableOption "enable budgie";
+  options.desktop.budgie.enable = mkEnableOption "enable budgie";
 
   config = mkIf cfg.enable {
-    getchoo.desktop.enable = true;
+    desktop.enable = true;
 
     services.xserver = {
       displayManager.lightdm.greeters.slick = {

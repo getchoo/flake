@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.getchoo.base.nix-settings;
+  cfg = config.base.nix-settings;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.getchoo.base.nix-settings.enable = mkEnableOption "base nix settings";
+  options.base.nix-settings.enable = mkEnableOption "base nix settings";
 
   config = mkIf cfg.enable {
     nix = {

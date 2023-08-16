@@ -4,7 +4,7 @@
   pkgs,
   ...
 }: let
-  cfg = config.getchoo.desktop;
+  cfg = config.desktop;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
   imports = [
@@ -15,15 +15,13 @@ in {
     ./plasma
   ];
 
-  options.getchoo.desktop.enable = mkEnableOption "desktop module";
+  options.desktop.enable = mkEnableOption "desktop module";
 
   config = mkIf cfg.enable {
-    getchoo = {
-      base.enable = true;
-      desktop = {
-        audio.enable = mkDefault true;
-        fonts.enable = mkDefault true;
-      };
+    base.enable = true;
+    desktop = {
+      audio.enable = mkDefault true;
+      fonts.enable = mkDefault true;
     };
 
     environment = {

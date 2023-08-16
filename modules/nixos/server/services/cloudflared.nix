@@ -4,10 +4,10 @@
   self,
   ...
 }: let
-  cfg = config.getchoo.server.services.cloudflared;
+  cfg = config.server.services.cloudflared;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.getchoo.server.services.cloudflared = {
+  options.server.services.cloudflared = {
     enable = mkEnableOption "cloudflared";
   };
 

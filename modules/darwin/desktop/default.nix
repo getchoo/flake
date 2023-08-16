@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.getchoo.desktop;
+  cfg = config.desktop;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.getchoo.desktop = {
+  options.desktop = {
     enable = mkEnableOption "enable desktop darwin support";
     gpg.enable = mkEnableOption "enable gpg";
   };

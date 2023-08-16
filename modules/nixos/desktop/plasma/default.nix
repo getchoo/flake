@@ -4,13 +4,13 @@
   pkgs,
   ...
 }: let
-  cfg = config.getchoo.desktop.plasma;
+  cfg = config.desktop.plasma;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.getchoo.desktop.plasma.enable = mkEnableOption "enable plasma";
+  options.desktop.plasma.enable = mkEnableOption "enable plasma";
 
   config = mkIf cfg.enable {
-    getchoo.desktop.enable = true;
+    desktop.enable = true;
 
     environment = {
       plasma5.excludePackages = with pkgs.libsForQt5; [

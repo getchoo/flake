@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.getchoo.base.defaultPackages;
+  cfg = config.base.defaultPackages;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.getchoo.base.defaultPackages.enable = mkEnableOption "base module default packages";
+  options.base.defaultPackages.enable = mkEnableOption "base module default packages";
 
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [

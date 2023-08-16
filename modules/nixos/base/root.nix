@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.getchoo.base.defaultRoot;
+  cfg = config.base.defaultRoot;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.getchoo.base.defaultRoot.enable = mkEnableOption "enable default root user";
+  options.base.defaultRoot.enable = mkEnableOption "default root user";
 
   config = mkIf cfg.enable {
     users.users.root = {

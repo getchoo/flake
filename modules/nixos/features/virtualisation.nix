@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.getchoo.features.virtualisation;
+  cfg = config.features.virtualisation;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.getchoo.features.virtualisation.enable = mkEnableOption "enable podman";
+  options.features.virtualisation.enable = mkEnableOption "enable podman";
 
   config.virtualisation = mkIf cfg.enable {
     podman = {

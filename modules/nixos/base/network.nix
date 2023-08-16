@@ -3,10 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.getchoo.base.networking;
+  cfg = config.base.networking;
   inherit (lib) mkEnableOption mkIf;
 in {
-  options.getchoo.base.networking.enable = mkEnableOption "enable networking";
+  options.base.networking.enable = mkEnableOption "networking";
 
   config = mkIf cfg.enable {
     networking.networkmanager = {
