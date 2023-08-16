@@ -18,13 +18,6 @@ _: {
     };
   };
 
-  home-manager.users.seth = {
-    desktop = {
-      enable = true;
-      gnome.enable = true;
-    };
-  };
-
   environment.etc."environment".text = ''
     LIBVA_DRIVER_NAME=vdpau
   '';
