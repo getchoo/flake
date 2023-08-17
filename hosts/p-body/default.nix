@@ -14,7 +14,7 @@
     ./victoriametrics.nix
   ];
 
-  server.secrets.enable = true;
+  boot.supportedFilesystems = ["btrfs"];
 
   networking = {
     domain = "mydadleft.me";

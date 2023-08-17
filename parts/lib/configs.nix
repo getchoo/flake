@@ -3,13 +3,9 @@
   self,
   ...
 }: let
-  inherit (builtins) attrNames elemAt map;
-  inherit (inputs.nixpkgs.lib) flatten genAttrs optional splitString;
-
-  archs = ["x86_64" "aarch64"];
-  os' = ["linux" "darwin"];
-  mkSystems = systems: flatten (map (sys: map (arch: ["${arch}-${sys}" "${arch}-${sys}"]) archs) systems);
-  systems = mkSystems os';
+  inherit (builtins) attrNames mapAttrs;
+  inherit (inputs) nixpkgs home-manager;
+  inherit (nixpkgs.lib) genAttrs optional;
 
   mkSystemCfg = name: {
     profile,
@@ -27,40 +23,34 @@
           else modules ++ profile.modules
         );
     };
+
+  mkHMCfg = name: {
+    nixpkgs ? nixpkgs,
+    pkgs ? import nixpkgs {system = "x86_64-linux";},
+    extraSpecialArgs ? inputs,
+    modules ? [],
+  }:
+    home-manager.lib.homeManagerConfiguration {
+      inherit extraSpecialArgs pkgs;
+
+      modules =
+        [
+          self.homeManagerModules.${name}
+          ../../users/${name}/home.nix
+
+          {
+            _module.args.osConfig = {};
+            programs.home-manager.enable = true;
+          }
+        ]
+        ++ optional pkgs.stdenv.isDarwin ../../users/${name}/darwin.nix
+        ++ modules;
+    };
 in {
-  inherit mkSystemCfg;
-  mapSystems = builtins.mapAttrs mkSystemCfg;
+  inherit mkHMCfg mkSystemCfg;
+  mapHMUsers = mapAttrs mkHMCfg;
+  mapSystems = mapAttrs mkSystemCfg;
 
-  genHMCfgs = users: let
-    names = flatten (map (user: map (system: "${user}@${system}") systems) (attrNames users));
-  in
-    genAttrs names (name: let
-      getPart = elemAt (splitString "@" name);
-      username = getPart 0;
-      system = getPart 1;
-    in
-      inputs.home-manager.lib.homeManagerConfiguration rec {
-        pkgs = import (users.${username}.nixpkgs or inputs.nixpkgs) (
-          {inherit system;} // users.${username}.nixpkgsArgs or {}
-        );
-
-        extraSpecialArgs = users.${username}.extraSpecialArgs or inputs;
-
-        modules =
-          [
-            self.homeManagerModules.${username}
-            {
-              _module.args.osConfig = {};
-              programs.home-manager.enable = true;
-            }
-            ../../users/${username}/home.nix
-          ]
-          ++ optional pkgs.stdenv.isDarwin ../../users/${username}/darwin.nix
-          ++ users.${username}.modules or [];
-      });
-
-  genHMModules = users: let
-    names = attrNames users;
-  in
-    genAttrs names (name: import ../../users/${name}/module.nix);
+  genHMModules = users:
+    genAttrs (attrNames users) (name: import ../../users/${name}/module.nix);
 }
