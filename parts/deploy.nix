@@ -3,12 +3,9 @@
   lib,
   ...
 }: let
-  systems = ["atlas" "p-body"];
+  machines = ["atlas" "p-body"];
 
-  deployedSystems =
-    lib.filterAttrs
-    (n: _: builtins.elem n systems)
-    self.nixosConfigurations;
+  deployedSystems = lib.genAttrs machines (m: self.nixosConfigurations.${m});
 in {
   flake.deploy = {
     remoteBuild = true;
