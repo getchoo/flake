@@ -102,13 +102,21 @@ in {
 
         server = {
           enable = true;
-          services.promtail = {
-            enable = true;
-            clients = [
-              {
-                url = "http://p-body:3030/loki/api/v1/push";
-              }
-            ];
+          secrets.enable = true;
+          services = {
+            hercules-ci = {
+              enable = true;
+              secrets.enable = true;
+            };
+
+            promtail = {
+              enable = true;
+              clients = [
+                {
+                  url = "http://p-body:3030/loki/api/v1/push";
+                }
+              ];
+            };
           };
         };
 

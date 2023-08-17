@@ -62,6 +62,19 @@
       inputs.pre-commit-hooks.follows = "pre-commit-hooks";
     };
 
+    hercules-ci-agent = {
+      url = "github:hercules-ci/hercules-ci-agent";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
+    hercules-ci-effects = {
+      url = "github:hercules-ci/hercules-ci-effects";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.hercules-ci-agent.follows = "hercules-ci-agent";
+      inputs.flake-parts.follows = "flake-parts";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

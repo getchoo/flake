@@ -16,8 +16,6 @@
     tmp.cleanOnBoot = true;
   };
 
-  server.secrets.enable = true;
-
   networking = {
     domain = "mydadleft.me";
     hostName = "atlas";
