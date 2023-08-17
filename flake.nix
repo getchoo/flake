@@ -112,15 +112,21 @@
     };
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake
+  outputs = {
+    flake-parts,
+    getchoo,
+    pre-commit-hooks,
+    ...
+  } @ inputs:
+    flake-parts.lib.mkFlake
     {inherit inputs;}
     {
       imports = [
         ./hosts
         ./parts
         ./users
-        inputs.getchoo.flakeModules.homeConfigurations
+        getchoo.flakeModules.homeConfigurations
+        pre-commit-hooks.flakeModule
       ];
     };
 }

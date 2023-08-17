@@ -1,41 +1,41 @@
 {
   inputs,
-  self,
+  lib,
   ...
-}: {
+}: let
+  inherit (inputs) ragenix;
+in {
   perSystem = {
+    config,
     pkgs,
     system,
     ...
   }: {
-    checks = {
-      pre-commit-check = inputs.pre-commit-hooks.lib.${system}.run {
-        src = self;
-        hooks = {
-          actionlint.enable = true;
-          alejandra.enable = true;
-          deadnix.enable = true;
-          nil.enable = true;
-          statix.enable = true;
-          stylua.enable = true;
-        };
+    pre-commit = {
+      settings.hooks = {
+        actionlint.enable = true;
+        alejandra.enable = true;
+        deadnix.enable = true;
+        nil.enable = true;
+        statix.enable = true;
+        stylua.enable = true;
       };
     };
 
     devShells = {
       default = pkgs.mkShell {
-        inherit (self.checks.${system}.pre-commit-check) shellHook;
+        shellHook = config.pre-commit.installationScript;
         packages = with pkgs;
           [
             actionlint
             alejandra
             deadnix
             just
-            inputs.ragenix.packages.${system}.ragenix
+            ragenix.packages.${system}.ragenix
             statix
             stylua
           ]
-          ++ lib.optional (system == "x86_64-linux") deploy-rs;
+          ++ lib.optional (system == "x86_64-linux") pkgs.deploy-rs;
       };
     };
 
