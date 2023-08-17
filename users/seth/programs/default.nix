@@ -7,7 +7,7 @@
   cfg = config.getchoo.programs.defaultPrograms;
   inherit (lib) mkDefault mkEnableOption mkIf;
 in {
-  options.getchoo.programs.defaultPrograms.enable = mkEnableOption "default programs" // {enable = true;};
+  options.getchoo.programs.defaultPrograms.enable = mkEnableOption "default programs" // {default = true;};
 
   imports = [
     ./chromium.nix
@@ -46,7 +46,7 @@ in {
       {
         enable = mkDefault true;
       }
-      // (mkIf cfg.programs.btop.enable {
+      // (mkIf config.programs.btop.enable {
         configFile."btop/themes/catppuccin_mocha.theme".source =
           pkgs.fetchFromGitHub {
             owner = "catppuccin";
