@@ -4,8 +4,8 @@
   pkgs,
   ...
 }: let
-  cfg = config.desktop.budgie;
-  inherit (lib) mkEnableOption mkIf;
+  cfg = config.getchoo.desktop.budgie;
+  inherit (lib) mkIf;
   fromYaml = file: let
     json = with pkgs;
       runCommand "converted.json" {} ''
@@ -14,8 +14,6 @@
   in
     with builtins; fromJSON (readFile json);
 in {
-  options.desktop.budgie.enable = mkEnableOption "enable budgie";
-
   config = mkIf cfg.enable {
     programs.alacritty = {
       enable = true;

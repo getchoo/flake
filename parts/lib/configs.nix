@@ -1,4 +1,8 @@
-{inputs, ...}: let
+{
+  inputs,
+  self,
+  ...
+}: let
   inherit (builtins) attrNames elemAt map;
   inherit (inputs.nixpkgs.lib) flatten genAttrs optional splitString;
 
@@ -44,6 +48,7 @@ in {
 
         modules =
           [
+            self.homeManagerModules.${username}
             {
               _module.args.osConfig = {};
               programs.home-manager.enable = true;
@@ -53,4 +58,9 @@ in {
           ++ optional pkgs.stdenv.isDarwin ../../users/${username}/darwin.nix
           ++ users.${username}.modules or [];
       });
+
+  genHMModules = users: let
+    names = attrNames users;
+  in
+    genAttrs names (name: import ../../users/${name}/module.nix);
 }

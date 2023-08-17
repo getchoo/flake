@@ -3,11 +3,6 @@
   pkgs,
   ...
 }: {
-  imports = [
-    ./programs
-    ./shell
-  ];
-
   home = let
     username = "seth";
     inherit (pkgs.stdenv) isLinux isDarwin;

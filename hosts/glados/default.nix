@@ -7,10 +7,12 @@ _: {
   ];
 
   desktop.gnome.enable = true;
+
   features = {
     tailscale.enable = true;
     virtualisation.enable = true;
   };
+
   hardware = {
     enable = true;
     nvidia.enable = true;

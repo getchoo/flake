@@ -1,27 +1,29 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }: let
-  cfg = config.desktop;
-  inherit (lib) mkIf;
+  cfg = config.getchoo.programs.mangohud;
+  inherit (lib) mkEnableOption mkIf;
 in {
-  config = mkIf cfg.enable {
-    home.packages = with pkgs; [mangohud];
+  options.getchoo.programs.mangohud.enable =
+    mkEnableOption "mangohud"
+    // {default = config.getchoo.desktop.enable;};
 
-    xdg.configFile."MangoHud/MangoHud.conf" = {
-      text = ''
-        legacy_layout=false
-        cpu_stats
-        cpu_temp
-        gpu_stats
-        gpu_temp
-        fps
-        frametime
-        media_player
-        media_player_name = spotify
-      '';
+  config = mkIf cfg.enable {
+    programs.mangohud = {
+      enable = true;
+      settings = {
+        legacy_layout = false;
+        cpu_stats = true;
+        cpu_temp = true;
+        gpu_stats = true;
+        gpu_temp = true;
+        fps = true;
+        frametime = true;
+        media_player = true;
+        media_player_name = "spotify";
+      };
     };
   };
 }

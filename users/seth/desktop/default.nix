@@ -5,24 +5,27 @@
   osConfig,
   ...
 }: let
-  cfg = config.desktop;
-  inherit (lib) mkEnableOption mkIf;
-
+  cfg = config.getchoo.desktop;
   desktops = ["budgie" "gnome" "plasma"];
+  inherit (lib) mkEnableOption mkIf;
 in {
   imports = [
     ./budgie
     ./gnome
     ./plasma
-    ../programs/mangohud.nix
-    ../programs/firefox.nix
   ];
 
-  options.desktop.enable = mkEnableOption "desktop configuration" // {default = osConfig.desktop.enable or false;};
+  options.getchoo.desktop =
+    {
+      enable = mkEnableOption "desktop configuration" // {default = osConfig.desktop.enable or false;};
+    }
+    // lib.genAttrs desktops (desktop: {
+      enable =
+        mkEnableOption desktop
+        // {default = osConfig.desktop.${desktop}.enable or false;};
+    });
 
   config = mkIf cfg.enable {
-    desktop = lib.genAttrs desktops (desktop: {enable = osConfig.desktop.${desktop}.enable or false;});
-
     home.packages = with pkgs; [
       discord
       element-desktop
@@ -31,20 +34,10 @@ in {
       prismlauncher
     ];
 
-    programs = {
-      chromium = {
-        enable = true;
-        # hw accel support
-        commandLineArgs = [
-          "--ignore-gpu-blocklist"
-          "--enable-gpu-rasterization"
-          "--enable-gpu-compositing"
-          "--enable-native-gpu-memory-buffers"
-          "--enable-zero-copy"
-          "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder,CanvasOopRasterization,RawDraw,WebRTCPipeWireCapturer,Vulkan,WaylandWindowDecorations,WebUIDarkMode"
-          "--force-dark-mode"
-        ];
-      };
+    getchoo.programs = {
+      chromium.enable = true;
+      firefox.enable = true;
+      mangohud.enable = true;
     };
   };
 }

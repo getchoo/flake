@@ -29,7 +29,7 @@
   home-manager.users.seth = {
     imports = [
       ./home.nix
-      ./desktop
+      ./module.nix
       nix-index-database.hmModules.nix-index
     ];
 
