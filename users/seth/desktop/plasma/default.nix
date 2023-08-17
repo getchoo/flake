@@ -4,11 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.desktop.plasma;
-  inherit (lib) mkEnableOption mkIf;
+  cfg = config.getchoo.desktop.plasma;
+  inherit (lib) mkIf;
 in {
-  options.desktop.plasma.enable = mkEnableOption "enable plasma";
-
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
       catppuccin-cursors

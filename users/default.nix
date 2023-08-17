@@ -2,18 +2,22 @@
   inputs,
   self,
   ...
-}: {
-  flake.homeConfigurations = let
-    users = {
-      seth = {
-        nixpkgsArgs = {
-          overlays = with inputs; [nur.overlay getchoo.overlays.default];
-        };
-        modules = [
-          inputs.nix-index-database.hmModules.nix-index
-        ];
+}: let
+  inherit (self.lib.configs) genHMCfgs genHMModules;
+
+  users = {
+    seth = {
+      nixpkgsArgs = {
+        overlays = with inputs; [nur.overlay getchoo.overlays.default];
       };
+      modules = [
+        inputs.nix-index-database.hmModules.nix-index
+      ];
     };
-  in
-    self.lib.configs.genHMCfgs users;
+  };
+in {
+  flake = {
+    homeConfigurations = genHMCfgs users;
+    homeManagerModules = genHMModules users;
+  };
 }

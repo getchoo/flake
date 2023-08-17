@@ -4,11 +4,9 @@
   pkgs,
   ...
 }: let
-  cfg = config.desktop.gnome;
-  inherit (lib) mkEnableOption mkIf;
+  cfg = config.getchoo.desktop.gnome;
+  inherit (lib) mkIf;
 in {
-  options.desktop.gnome.enable = mkEnableOption "enable gnome";
-
   config = mkIf cfg.enable {
     home.packages = with pkgs;
       [adw-gtk3]

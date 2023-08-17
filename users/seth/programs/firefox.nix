@@ -4,19 +4,23 @@
   pkgs,
   ...
 }: let
-  cfg = config.desktop;
-  inherit (lib) mkIf;
+  cfg = config.getchoo.programs.firefox;
+  inherit (lib) mkEnableOption mkIf;
 in {
-  config.programs.firefox = mkIf cfg.enable {
-    enable = true;
-    profiles.arkenfox = {
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        bitwarden
-        floccus
-        private-relay
-        ublock-origin
-      ];
-      isDefault = true;
+  options.getchoo.programs.firefox.enable = mkEnableOption "firefox" // {default = config.getchoo.desktop.enable;};
+
+  config = mkIf cfg.enable {
+    programs.firefox = {
+      enable = true;
+      profiles.arkenfox = {
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          bitwarden
+          floccus
+          private-relay
+          ublock-origin
+        ];
+        isDefault = true;
+      };
     };
   };
 }
