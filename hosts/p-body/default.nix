@@ -1,12 +1,10 @@
 {
   config,
   guzzle_api,
-  modulesPath,
   pkgs,
   ...
 }: {
   imports = [
-    (modulesPath + "/virtualisation/digital-ocean-image.nix")
     ./buildMachines.nix
     ./grafana.nix
     ./loki.nix
@@ -14,7 +12,14 @@
     ./victoriametrics.nix
   ];
 
-  boot.supportedFilesystems = ["btrfs"];
+  boot = {
+    loader.grub = {
+      enable = true;
+      efiSupport = false;
+    };
+
+    supportedFilesystems = ["btrfs"];
+  };
 
   networking = {
     domain = "mydadleft.me";
@@ -27,6 +32,26 @@
       url = "https://api." + config.networking.domain;
       port = "8080";
       package = guzzle_api.packages.x86_64-linux.guzzle-api-server;
+    };
+  };
+
+  systemd.network = {
+    enable = true;
+    networks."10-wan" = {
+      matchConfig.name = "ens3";
+      networkConfig.DHCP = "no";
+      address = [
+        "something/32"
+      ];
+      routes = [
+        {routeConfig = {Destination = "something";};}
+        {
+          routeConfig = {
+            Gateway = "something";
+            GatewayOnLink = true;
+          };
+        }
+      ];
     };
   };
 
