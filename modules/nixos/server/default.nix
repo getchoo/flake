@@ -30,7 +30,7 @@ in {
       };
 
       settings = {
-        allowed-users = [];
+        allowed-users = [config.networking.hostName];
         trusted-substituters = [
           "https://getchoo.cachix.org"
           "https://nix-community.cachix.org"

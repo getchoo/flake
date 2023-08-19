@@ -22,6 +22,6 @@ in {
   };
 
   nix.settings = {
-    trusted-users = mkDefault ["root" "@wheel"];
+    trusted-users = ["root" "@wheel"];
   };
 }
