@@ -18,21 +18,22 @@ in {
     inherit ciSystems;
 
     onPush.default = let
-      inherit (builtins) elem seq;
+      inherit (builtins) elem;
       inherit (lib) filterAttrs mapAttrs mkForce;
 
-      findCompatible = filterAttrs (s: _: elem s ciSystems);
+      #findCompatible = filterAttrs (s: _: elem s ciSystems);
       findCompatible' = filterAttrs (_: v: elem v.pkgs.system ciSystems);
       findSystem = system: filterAttrs (s: _: s == system);
-      #buildCfgs = mapAttrs (_: v: v.config.system.build.toplevel);
-      evalCfgs = mapAttrs (_: v: seq v.config.system.build.toplevel v.pkgs.emptyFile);
+      buildCfgs = mapAttrs (_: v: v.config.system.build.toplevel);
+      buildHMUsers = mapAttrs (_: mapAttrs (_: v: v.activationPackage));
+      #evalCfgs = mapAttrs (_: v: seq v.config.system.build.toplevel v.pkgs.emptyFile);
     in
       mkForce {
         outputs = {
-          checks = findCompatible self.checks;
+          checks = findSystem "x86_64-linux" self.checks;
           devShells = findSystem "x86_64-linux" self.devShells;
-          homeConfigurations = findSystem "x86_64-linux" self.homeConfigurations;
-          nixosConfigurations = evalCfgs (findCompatible' self.nixosConfigurations);
+          homeConfigurations = buildHMUsers (findSystem "x86_64-linux" self.homeConfigurations);
+          nixosConfigurations = buildCfgs (findCompatible' self.nixosConfigurations);
         };
       };
 
