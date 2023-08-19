@@ -4,7 +4,7 @@ let
   ];
 
   atlas = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBA861lnShM2ejpzn9arzhpw33I4XdtULfZWhMp/plvL root@atlas"] ++ main;
-  p-body = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAVieG9wj00Cz0Co7QYNkoTgfO+B8EO5vlZdfMvCHD76 root@p-body"] ++ main;
+  p-body = ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKkwHacWg/H62hF2XrqdkICtR4ClDMH6v4fe9/ilHkSQ root@nixos"] ++ main;
 in {
   "shared/rootPassword.age".publicKeys = main;
   "shared/sethPassword.age".publicKeys = main;
