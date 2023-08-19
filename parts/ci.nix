@@ -21,24 +21,28 @@ in {
       inherit (builtins) elem;
       inherit (lib) filterAttrs mapAttrs mkForce;
 
-      #findCompatible = filterAttrs (s: _: elem s ciSystems);
-      findCompatible' = filterAttrs (_: v: elem v.pkgs.system ciSystems);
-      findSystem = system: filterAttrs (s: _: s == system);
+      amd64 = ["x86-64-linux"];
+
+      findCompatible = system: filterAttrs (s: _: elem s system);
+      findCompatibleCfgs = system: filterAttrs (_: v: elem v.pkgs.system system);
       buildCfgs = mapAttrs (_: v: v.config.system.build.toplevel);
       buildHMUsers = mapAttrs (_: mapAttrs (_: v: v.activationPackage));
       #evalCfgs = mapAttrs (_: v: seq v.config.system.build.toplevel v.pkgs.emptyFile);
     in
       mkForce {
         outputs = {
-          checks = findSystem "x86_64-linux" self.checks;
-          devShells = findSystem "x86_64-linux" self.devShells;
-          homeConfigurations = buildHMUsers (findSystem "x86_64-linux" self.homeConfigurations);
-          nixosConfigurations = buildCfgs (findCompatible' self.nixosConfigurations);
+          checks = findCompatible amd64 self.checks;
+          devShells = findCompatible amd64 self.devShells;
+          homeConfigurations = buildHMUsers (findCompatible amd64 self.homeConfigurations);
+          nixosConfigurations = buildCfgs (findCompatibleCfgs self.nixosConfigurations);
         };
       };
 
     onSchedule = let
-      inherit (lib) mkForce mapAttrs optionalAttrs;
+      when = {
+        hour = [0];
+        minute = 0;
+      };
 
       mkUpdateEffect = inputs: pullRequestTitle: let
         cfg = config.hercules-ci.flake-update;
@@ -53,35 +57,22 @@ in {
             inherit pullRequestTitle inputs;
             inherit (cfg) updateBranch forgeType createPullRequest pullRequestBody;
           });
+    in {
+      nixpkgs-update = {
+        inherit when;
 
-      mkUpdates = mapAttrs (n: {
-        inputs ? [],
-        dayOfMonth ? [],
-        msg ? "all",
-      }:
-        mkForce {
-          when =
-            {
-              hour = [0];
-              minute = 0;
-            }
-            // optionalAttrs (dayOfMonth != []) {inherit dayOfMonth;};
-
-          outputs = {
-            effects.${n} = mkUpdateEffect inputs "flake: update ${msg} inputs";
-          };
-        });
-    in
-      mkUpdates {
-        nixpkgs-update = {
-          inputs = ["nixpkgs" "nixpkgs-stable"];
-          msg = "nixpkgs";
-        };
-
-        flake-update = {
-          dayOfMonth = [1 8 15 22 29];
-          msg = "all";
+        outputs.effects = {
+          update = mkUpdateEffect ["nixpkgs" "nixpkgs-stable"] "flake: update nixpkgs inputs";
         };
       };
+
+      flake-update = {
+        when = when // {dayOfMonth = [1 8 15 22 29];};
+
+        outputs.effects = {
+          update = mkUpdateEffect [] "flake: update all inputs";
+        };
+      };
+    };
   };
 }
