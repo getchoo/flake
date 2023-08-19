@@ -4,12 +4,10 @@
   nixConfig = {
     extra-substituters = [
       "https://getchoo.cachix.org" # personal cache
-      "https://cache.garnix.io" # garnix cache
       "https://nix-community.cachix.org" # nix-community
     ];
     extra-trusted-public-keys = [
       "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="
-      "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
     ];
   };
