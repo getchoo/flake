@@ -58,7 +58,6 @@
   ];
 
   users.users.p-body = {
-    extraGroups = ["wheel"];
     isNormalUser = true;
     shell = pkgs.bash;
     passwordFile = config.age.secrets.userPassword.path;
