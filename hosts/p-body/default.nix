@@ -7,6 +7,7 @@
   imports = [
     ./buildMachines.nix
     ./grafana.nix
+    ./hardware-configuration.nix
     ./loki.nix
     ./nginx.nix
     ./victoriametrics.nix
@@ -15,7 +16,7 @@
   boot = {
     loader.grub = {
       enable = true;
-      efiSupport = false;
+      device = "/dev/sda";
     };
 
     supportedFilesystems = ["btrfs"];
@@ -38,19 +39,13 @@
   systemd.network = {
     enable = true;
     networks."10-wan" = {
-      matchConfig.name = "ens3";
-      networkConfig.DHCP = "no";
+      matchConfig.Name = "enp1s0";
+      networkConfig.DHCP = "ipv4";
       address = [
-        "something/32"
+        "2a01:4ff:f0:eb52::1/64"
       ];
       routes = [
-        {routeConfig = {Destination = "something";};}
-        {
-          routeConfig = {
-            Gateway = "something";
-            GatewayOnLink = true;
-          };
-        }
+        {routeConfig.Gateway = "fe80::1";}
       ];
     };
   };
