@@ -2,7 +2,7 @@
 
 [![made with neovim](https://img.shields.io/static/v1?label=made%20with&message=neovim&color=00b952&style=flat-square&logo=neovim)](https://neovim.io/)
 [![nixos unstable](https://img.shields.io/static/v1?label=NixOS&message=unstable&color=5277c3&style=flat-square&logo=nixos)](https://nixos.org/)
-[![built with garnix](https://img.shields.io/badge/built_with-garnix-blue?style=flat-square&logo=nixos&logoColor=00000&labelColor=262626&link=https%3A%2F%2Fgarnix.io)](https://garnix.io)
+[![hercules-ci build status](https://img.shields.io/badge/dynamic/json?label=hercules-ci%20builds&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fgetchoo%2Fflake%2Fcommits%2Fmain%2Fstatus&color=8f97cb&style=flat-square&logo=github)](https://hercules-ci.com/github/getchoo/flake)
 
 greasy taco i love
 
@@ -11,14 +11,15 @@ greasy taco i love
 i like to have a few services, including:
 
 - [grafana](https://grafana.com/)
+- [hercules-ci](https://hercules-ci.com/)
 - [miniflux](https://miniflux.app/)
-- [prometheus](https://prometheus.io/)
+- [victoria metrics](https://victoriametrics.com/)
 
 there are also some amazing tools i use to make/manage this flake that i would highly recommend checking out:
 
 - [home-manager](https://github.com/nix-community/home-manager)
+- [deploy-rs](https://github.com/serokell/deploy-rs)
 - [lanzaboote](https://github.com/nix-community/lanzaboote)
-- [nixinate](https://github.com/MatthewCroughan/nixinate)
 - [nixos-wsl](https://github.com/nix-community/nixos-wsl)
 - [nix-openwrt-imagebuilder](https://github.com/astro/nix-openwrt-imagebuilder)
 - [flake-parts](https://github.com/hercules-ci/flake-parts)
@@ -36,6 +37,10 @@ my main desktop
 
 my main desktop, but the windows install :p
 
+### caroline
+
+my macbook air
+
 ### turret
 
 my netgear wac104 router, using [nix-openwrt-imagebuilder](https://github.com/astro/nix-openwrt-imagebuilder) to build reproducible, customized images
@@ -46,7 +51,7 @@ my ampere arm server from oracle, services my miniflux instance.
 
 ### p-body
 
-my amd64 server from digital ocean, general host for services.
+my amd64 server from hetzner, general service runner.
 
 ## fun screenshots
 
