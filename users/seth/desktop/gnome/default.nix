@@ -9,7 +9,10 @@
 in {
   config = mkIf cfg.enable {
     home.packages = with pkgs;
-      [adw-gtk3]
+      [
+        adw-gtk3
+        tuba
+      ]
       ++ (with pkgs.gnomeExtensions; [
         appindicator
         blur-my-shell
