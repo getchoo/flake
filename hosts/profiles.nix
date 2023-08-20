@@ -71,13 +71,18 @@ in {
       home-manager.darwinModules.home-manager
 
       ../users/seth
-      ../users/seth/darwin.nix
       self.darwinModules.default
 
       {
         base.enable = true;
         desktop.enable = true;
         system.stateVersion = 4;
+
+        home-manager.users.seth = {
+          imports = [
+            ../users/seth/darwin.nix
+          ];
+        };
       }
     ];
   };

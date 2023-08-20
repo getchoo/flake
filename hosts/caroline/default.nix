@@ -4,7 +4,7 @@ _: {
     gpg.enable = true;
   };
 
-  homebrew.casks = ["arc" "prismlauncher"];
+  homebrew.casks = ["arc"];
 
   networking = rec {
     computerName = "caroline";
