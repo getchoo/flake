@@ -30,6 +30,11 @@ _: {
     abrmd.enable = true;
   };
 
+  services = {
+    flatpak.enable = true;
+    fwupd.enable = true;
+  };
+
   zramSwap = {
     enable = true;
     algorithm = "zstd";
