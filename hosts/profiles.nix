@@ -82,6 +82,8 @@ in {
           imports = [
             ../users/seth/darwin.nix
           ];
+
+          getchoo.desktop.enable = false;
         };
       }
     ];
