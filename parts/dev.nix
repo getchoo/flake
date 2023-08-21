@@ -30,12 +30,12 @@ in {
             actionlint
             alejandra
             deadnix
+            deploy-rs
             just
-            ragenix.packages.${system}.ragenix
             statix
             stylua
           ]
-          ++ lib.optional (system == "x86_64-linux") pkgs.deploy-rs;
+          ++ lib.optional pkgs.stdenv.isLinux ragenix.packages.${system}.ragenix;
       };
     };
 
