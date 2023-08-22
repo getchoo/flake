@@ -35,6 +35,8 @@ _: {
     fwupd.enable = true;
   };
 
+  systemd.services."prepare-kexec".wantedBy = ["multi-user.target"];
+
   zramSwap = {
     enable = true;
     algorithm = "zstd";
