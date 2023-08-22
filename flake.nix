@@ -52,6 +52,9 @@
       url = "github:getchoo/nix-exprs";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
+      inputs.effects.follows = "hercules-ci-effects";
+      inputs.parts.follows = "flake-parts";
+      inputs.hercules-ci-agent.follows = "hercules-ci-agent";
     };
 
     guzzle_api = {
