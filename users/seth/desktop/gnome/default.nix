@@ -16,6 +16,7 @@ in {
       ++ (with pkgs.gnomeExtensions; [
         appindicator
         blur-my-shell
+        burn-my-windows
         caffeine
         clipboard-history
         gradience
