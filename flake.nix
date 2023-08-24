@@ -3,8 +3,8 @@
 
   nixConfig = {
     extra-substituters = [
-      "https://getchoo.cachix.org" # personal cache
-      "https://nix-community.cachix.org" # nix-community
+      "https://getchoo.cachix.org"
+      "https://nix-community.cachix.org"
     ];
     extra-trusted-public-keys = [
       "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="
