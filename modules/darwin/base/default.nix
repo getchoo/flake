@@ -9,8 +9,7 @@ in {
   options.base.enable = mkEnableOption "base darwin module";
 
   imports = [
-    ./documentation.nix
-    ./locale.nix
+    ../../shared
     ./nix.nix
     ./packages.nix
   ];

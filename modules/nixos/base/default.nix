@@ -9,10 +9,10 @@ in {
   options.base.enable = mkEnableOption "base nixos module";
 
   imports = [
+    ../../shared
     ./documentation.nix
     ./locale.nix
     ./network.nix
-    ./nix.nix
     ./packages.nix
     ./root.nix
     ./security.nix

@@ -5,19 +5,17 @@
   ...
 }: let
   cfg = config.base.documentation;
-  inherit (lib) mkEnableOption mkIf;
+  inherit (lib) mkIf;
 in {
-  options.base.documentation.enable = mkEnableOption "base module documentation";
-
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [man-pages man-pages-posix];
     documentation = {
-      dev.enable = true;
       man = {
-        enable = true;
         generateCaches = true;
         man-db.enable = true;
       };
+
+      dev.enable = true;
     };
   };
 }
