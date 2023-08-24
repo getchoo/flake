@@ -3,9 +3,13 @@
   lib,
   ...
 }: let
-  targets = ["atlas" "p-body"];
+  inherit (builtins) elem;
+  inherit (lib) filterAttrs;
+  inherit (self) darwinConfigurations nixosConfigurations;
 
-  targets' = lib.filterAttrs (n: _: builtins.elem n targets) self.nixosConfigurations;
+  targets = ["atlas" "p-body" "caroline"];
+
+  targets' = filterAttrs (n: _: elem n targets) (nixosConfigurations // darwinConfigurations);
 in {
   flake.deploy = {
     remoteBuild = true;
