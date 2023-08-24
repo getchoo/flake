@@ -1,23 +1,18 @@
 {
   config,
   lib,
+  inputs,
   ...
 }: let
+  inherit (builtins) attrNames map;
+  inherit (lib) mkIf;
   cfg = config.base.nix-settings;
-  inherit (lib) mkDefault mkEnableOption mkIf;
+
+  channelPath = i: "${inputs.${i}.outPath}";
+
+  mapInputs = fn: map fn (attrNames inputs);
 in {
-  options.base.nix-settings.enable = mkEnableOption "base nix settings";
-
   config = mkIf cfg.enable {
-    nix = {
-      gc.automatic = mkDefault true;
-
-      settings = {
-        experimental-features = ["nix-command" "flakes" "auto-allocate-uids" "repl-flake"];
-        trusted-users = mkDefault ["root" "@wheel"];
-      };
-    };
-
-    services.nix-daemon.enable = true;
+    nix.nixPath = mapInputs (i: "${i}=${channelPath i}");
   };
 }
