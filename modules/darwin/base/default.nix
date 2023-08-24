@@ -21,5 +21,7 @@ in {
       documentation.enable = mkDefault true;
       nix-settings.enable = mkDefault true;
     };
+
+    services.nix-daemon.enable = true;
   };
 }
