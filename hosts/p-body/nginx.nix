@@ -1,9 +1,10 @@
 {
   config,
-  lib,
+  self,
   ...
 }: let
   inherit (config.networking) domain;
+  inherit (self.lib.utils.nginx) mkProxy mkVHosts;
 in {
   server = {
     acme.enable = true;
@@ -18,33 +19,14 @@ in {
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    virtualHosts = let
-      mkProxy = endpoint: port: {
-        "${endpoint}" = {
-          proxyPass = "http://localhost:${port}";
-          proxyWebsockets = true;
-        };
+    virtualHosts = mkVHosts {
+      "api.${domain}" = {
+        locations = mkProxy "/" "8080";
       };
 
-      mkVHosts = let
-        commonSettings = {
-          enableACME = true;
-          # workaround for https://github.com/NixOS/nixpkgs/issues/210807
-          acmeRoot = null;
-
-          addSSL = true;
-        };
-      in
-        builtins.mapAttrs (_: lib.recursiveUpdate commonSettings);
-    in
-      mkVHosts {
-        "api.${domain}" = {
-          locations = mkProxy "/" "8080";
-        };
-
-        "grafana.${domain}" = {
-          locations = mkProxy "/" "4000";
-        };
+      "grafana.${domain}" = {
+        locations = mkProxy "/" "4000";
       };
+    };
   };
 }
