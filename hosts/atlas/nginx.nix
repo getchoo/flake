@@ -1,9 +1,10 @@
 {
   config,
-  lib,
+  self,
   ...
 }: let
   inherit (config.networking) domain;
+  inherit (self.lib.utils.nginx) mkVHosts mkProxy;
 in {
   server = {
     acme.enable = true;
@@ -18,33 +19,14 @@ in {
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    virtualHosts = let
-      mkProxy = endpoint: port: {
-        "${endpoint}" = {
-          proxyPass = "http://localhost:${port}";
-          proxyWebsockets = true;
-        };
+    virtualHosts = mkVHosts {
+      "miniflux.${domain}" = {
+        locations = mkProxy "/" "7000";
       };
 
-      mkVHosts = let
-        commonSettings = {
-          enableACME = true;
-          # workaround for https://github.com/NixOS/nixpkgs/issues/210807
-          acmeRoot = null;
-
-          addSSL = true;
-        };
-      in
-        builtins.mapAttrs (_: lib.recursiveUpdate commonSettings);
-    in
-      mkVHosts {
-        "miniflux.${domain}" = {
-          locations = mkProxy "/" "7000";
-        };
-
-        "msix.${domain}" = {
-          root = "/var/www/msix";
-        };
+      "msix.${domain}" = {
+        root = "/var/www/msix";
       };
+    };
   };
 }

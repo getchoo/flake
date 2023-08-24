@@ -1,9 +1,13 @@
 {inputs, ...}: let
-  deployPkgs = pkgs:
-    import pkgs.path {
+  inherit (builtins) mapAttrs;
+  inherit (inputs) deploy-rs;
+in {
+  mkDeployNodes = mapAttrs (_: system: let
+    inherit (system) pkgs;
+    deployPkgs = import pkgs.path {
       inherit (pkgs) system;
       overlays = [
-        inputs.deploy-rs.overlay
+        deploy-rs.overlay
         (_: prev: {
           deploy-rs = {
             inherit (pkgs) deploy-rs;
@@ -12,16 +16,14 @@
         })
       ];
     };
-in {
-  mkDeployNodes = builtins.mapAttrs (_: system: let
-    inherit (deployPkgs system.pkgs) deploy-rs;
+
     type =
-      if system.pkgs.stdenv.isLinux
+      if pkgs.stdenv.isLinux
       then "nixos"
       else "darwin";
   in {
     sshUser = "root";
     hostname = system.config.networking.hostName;
-    profiles.system.path = deploy-rs.lib.activate.${type} system;
+    profiles.system.path = deployPkgs.deploy-rs.lib.activate.${type} system;
   });
 }

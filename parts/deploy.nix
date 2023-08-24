@@ -14,6 +14,6 @@ in {
   flake.deploy = {
     remoteBuild = true;
     fastConnection = true;
-    nodes = self.lib.utils.mkDeployNodes targets';
+    nodes = self.lib.utils.deploy.mkDeployNodes targets';
   };
 }
