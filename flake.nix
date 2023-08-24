@@ -20,21 +20,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # this is just to avoid having multiple versions in flake.lock
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.darwin.follows = "darwin";
-      inputs.home-manager.follows = "home-manager";
+      inputs.home-manager.follows = "hm";
     };
 
-    deploy-rs = {
+    deploy = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
       inputs.flake-compat.follows = "flake-compat";
     };
 
-    # this is just to avoid having multiple versions in flake.lock
+    # ditto
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
@@ -43,7 +44,7 @@
     # ditto
     flake-utils.url = "github:numtide/flake-utils";
 
-    flake-parts = {
+    parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
@@ -52,31 +53,32 @@
       url = "github:getchoo/nix-exprs";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
-      inputs.effects.follows = "hercules-ci-effects";
-      inputs.parts.follows = "flake-parts";
+      inputs.effects.follows = "effects";
+      inputs.parts.follows = "parts";
       inputs.hercules-ci-agent.follows = "hercules-ci-agent";
     };
 
     guzzle_api = {
       url = "github:getchoo/guzzle_api";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit-hooks.follows = "pre-commit-hooks";
+      inputs.pre-commit-hooks.follows = "pre-commit";
     };
 
+    # ditto
     hercules-ci-agent = {
       url = "github:hercules-ci/hercules-ci-agent";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "flake-parts";
+      inputs.flake-parts.follows = "parts";
     };
 
-    hercules-ci-effects = {
+    effects = {
       url = "github:hercules-ci/hercules-ci-effects";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.hercules-ci-agent.follows = "hercules-ci-agent";
-      inputs.flake-parts.follows = "flake-parts";
+      inputs.flake-parts.follows = "parts";
     };
 
-    home-manager = {
+    hm = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -85,9 +87,9 @@
       url = "github:nix-community/lanzaboote";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-compat.follows = "flake-compat";
-      inputs.flake-parts.follows = "flake-parts";
+      inputs.flake-parts.follows = "parts";
       inputs.flake-utils.follows = "flake-utils";
-      inputs.pre-commit-hooks-nix.follows = "pre-commit-hooks";
+      inputs.pre-commit-hooks-nix.follows = "pre-commit";
     };
 
     nix-index-database = {
@@ -110,7 +112,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    pre-commit-hooks = {
+    pre-commit = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
@@ -127,20 +129,19 @@
   };
 
   outputs = {
-    flake-parts,
     getchoo,
-    pre-commit-hooks,
+    parts,
+    pre-commit,
     ...
   } @ inputs:
-    flake-parts.lib.mkFlake
-    {inherit inputs;}
-    {
+    parts.lib.mkFlake {inherit inputs;} {
       imports = [
+        pre-commit.flakeModule
+        getchoo.flakeModules.homeConfigurations
+
         ./hosts
         ./parts
         ./users
-        getchoo.flakeModules.homeConfigurations
-        pre-commit-hooks.flakeModule
       ];
     };
 }

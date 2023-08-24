@@ -1,13 +1,13 @@
 {inputs, ...}: let
   inherit (builtins) mapAttrs;
-  inherit (inputs) deploy-rs;
+  inherit (inputs) deploy;
 in {
   mkDeployNodes = mapAttrs (_: system: let
     inherit (system) pkgs;
     deployPkgs = import pkgs.path {
       inherit (pkgs) system;
       overlays = [
-        deploy-rs.overlay
+        deploy.overlay
         (_: prev: {
           deploy-rs = {
             inherit (pkgs) deploy-rs;

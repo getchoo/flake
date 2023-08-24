@@ -4,7 +4,7 @@
   ...
 }: let
   inherit (builtins) attrNames mapAttrs;
-  inherit (inputs) nixpkgs home-manager;
+  inherit (inputs) nixpkgs hm;
   inherit (nixpkgs.lib) genAttrs optional;
 
   mkSystemCfg = name: {
@@ -30,7 +30,7 @@
     extraSpecialArgs ? inputs,
     modules ? [],
   }:
-    home-manager.lib.homeManagerConfiguration {
+    hm.lib.homeManagerConfiguration {
       inherit extraSpecialArgs pkgs;
 
       modules =

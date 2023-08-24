@@ -11,7 +11,7 @@ in {
 
     modules = with inputs; [
       ragenix.nixosModules.default
-      home-manager.nixosModules.home-manager
+      hm.nixosModules.home-manager
       nur.nixosModules.nur
 
       self.nixosModules.default
@@ -38,7 +38,7 @@ in {
     builder = inputs.darwin.lib.darwinSystem;
     inherit specialArgs;
     modules = with inputs; [
-      home-manager.darwinModules.home-manager
+      hm.darwinModules.home-manager
 
       ../users/seth
       self.darwinModules.default

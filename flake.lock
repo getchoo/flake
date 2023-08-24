@@ -6,7 +6,7 @@
           "darwin"
         ],
         "home-manager": [
-          "home-manager"
+          "hm"
         ],
         "nixpkgs": [
           "nixpkgs"
@@ -76,7 +76,7 @@
         "type": "github"
       }
     },
-    "deploy-rs": {
+    "deploy": {
       "inputs": {
         "flake-compat": [
           "flake-compat"
@@ -99,6 +99,32 @@
       "original": {
         "owner": "serokell",
         "repo": "deploy-rs",
+        "type": "github"
+      }
+    },
+    "effects": {
+      "inputs": {
+        "flake-parts": [
+          "parts"
+        ],
+        "hercules-ci-agent": [
+          "hercules-ci-agent"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1689397210,
+        "narHash": "sha256-fVxZnqxMbsDkB4GzGAs/B41K0wt/e+B/fLxmTFF/S20=",
+        "owner": "hercules-ci",
+        "repo": "hercules-ci-effects",
+        "rev": "0a63bfa3f00a3775ea3a6722b247880f1ffe91ce",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "hercules-ci-effects",
         "type": "github"
       }
     },
@@ -134,26 +160,6 @@
         "type": "github"
       }
     },
-    "flake-parts": {
-      "inputs": {
-        "nixpkgs-lib": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1690933134,
-        "narHash": "sha256-ab989mN63fQZBFrkk4Q8bYxQCktuHmBIBqUG1jl6/FQ=",
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "rev": "59cf3f1447cfc75087e7273b04b31e689a8599fb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "flake-parts",
-        "type": "github"
-      }
-    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -175,7 +181,7 @@
     "getchoo": {
       "inputs": {
         "effects": [
-          "hercules-ci-effects"
+          "effects"
         ],
         "flake-compat": [
           "flake-compat"
@@ -187,7 +193,7 @@
           "nixpkgs"
         ],
         "parts": [
-          "flake-parts"
+          "parts"
         ]
       },
       "locked": {
@@ -207,7 +213,7 @@
     "gitignore": {
       "inputs": {
         "nixpkgs": [
-          "pre-commit-hooks",
+          "pre-commit",
           "nixpkgs"
         ]
       },
@@ -231,7 +237,7 @@
           "nixpkgs"
         ],
         "pre-commit-hooks": [
-          "pre-commit-hooks"
+          "pre-commit"
         ]
       },
       "locked": {
@@ -267,7 +273,7 @@
     "hercules-ci-agent": {
       "inputs": {
         "flake-parts": [
-          "flake-parts"
+          "parts"
         ],
         "haskell-flake": "haskell-flake",
         "nixpkgs": [
@@ -288,44 +294,18 @@
         "type": "github"
       }
     },
-    "hercules-ci-effects": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "hercules-ci-agent": [
-          "hercules-ci-agent"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1689397210,
-        "narHash": "sha256-fVxZnqxMbsDkB4GzGAs/B41K0wt/e+B/fLxmTFF/S20=",
-        "owner": "hercules-ci",
-        "repo": "hercules-ci-effects",
-        "rev": "0a63bfa3f00a3775ea3a6722b247880f1ffe91ce",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "hercules-ci-effects",
-        "type": "github"
-      }
-    },
-    "home-manager": {
+    "hm": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1692503956,
-        "narHash": "sha256-MOA6FKc1YgfGP3ESnjSYfsyJ1BXlwV5pGlY/u5XdJfY=",
+        "lastModified": 1692763155,
+        "narHash": "sha256-qMrGKZ8c/q/mHO3ZdrcBPwiVVXPLLgXjY98Ejqb5kAA=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "958c06303f43cf0625694326b7f7e5475b1a2d5c",
+        "rev": "6a20e40acaebf067da682661aa67da8b36812606",
         "type": "github"
       },
       "original": {
@@ -340,7 +320,7 @@
           "flake-compat"
         ],
         "flake-parts": [
-          "flake-parts"
+          "parts"
         ],
         "flake-utils": [
           "flake-utils"
@@ -349,7 +329,7 @@
           "nixpkgs"
         ],
         "pre-commit-hooks-nix": [
-          "pre-commit-hooks"
+          "pre-commit"
         ]
       },
       "locked": {
@@ -492,7 +472,27 @@
         "type": "github"
       }
     },
-    "pre-commit-hooks": {
+    "parts": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1690933134,
+        "narHash": "sha256-ab989mN63fQZBFrkk4Q8bYxQCktuHmBIBqUG1jl6/FQ=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "59cf3f1447cfc75087e7273b04b31e689a8599fb",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "type": "github"
+      }
+    },
+    "pre-commit": {
       "inputs": {
         "flake-compat": [
           "flake-compat"
@@ -554,15 +554,14 @@
       "inputs": {
         "agenix": "agenix",
         "darwin": "darwin",
-        "deploy-rs": "deploy-rs",
+        "deploy": "deploy",
+        "effects": "effects",
         "flake-compat": "flake-compat",
-        "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
         "getchoo": "getchoo",
         "guzzle_api": "guzzle_api",
         "hercules-ci-agent": "hercules-ci-agent",
-        "hercules-ci-effects": "hercules-ci-effects",
-        "home-manager": "home-manager",
+        "hm": "hm",
         "lanzaboote": "lanzaboote",
         "nix-index-database": "nix-index-database",
         "nixos-hardware": "nixos-hardware",
@@ -571,7 +570,8 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
         "openwrt-imagebuilder": "openwrt-imagebuilder",
-        "pre-commit-hooks": "pre-commit-hooks",
+        "parts": "parts",
+        "pre-commit": "pre-commit",
         "ragenix": "ragenix"
       }
     },

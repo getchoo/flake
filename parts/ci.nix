@@ -11,7 +11,7 @@
   ];
 in {
   imports = [
-    inputs.hercules-ci-effects.flakeModule
+    inputs.effects.flakeModule
   ];
 
   herculesCI = {lib, ...} @ herculesCI: {
