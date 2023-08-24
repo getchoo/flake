@@ -2,34 +2,6 @@
   inputs,
   self,
 }: let
-  common = {
-    nixpkgs = {
-      overlays = with inputs; [nur.overlay getchoo.overlays.default self.overlays.default];
-      config.allowUnfree = true;
-    };
-
-    nix = {
-      registry =
-        {
-          n.flake = inputs.nixpkgs;
-        }
-        // (builtins.mapAttrs (_: flake: {inherit flake;})
-          (inputs.nixpkgs.lib.filterAttrs (n: _: n != "nixpkgs") inputs));
-
-      settings = {
-        trusted-substituters = [
-          "https://getchoo.cachix.org"
-          "https://nix-community.cachix.org"
-        ];
-
-        trusted-public-keys = [
-          "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        ];
-      };
-    };
-  };
-
   specialArgs = inputs // {inherit inputs;};
 in {
   personal = {
@@ -38,7 +10,6 @@ in {
     inherit specialArgs;
 
     modules = with inputs; [
-      common
       ragenix.nixosModules.default
       home-manager.nixosModules.home-manager
       nur.nixosModules.nur
@@ -67,7 +38,6 @@ in {
     builder = inputs.darwin.lib.darwinSystem;
     inherit specialArgs;
     modules = with inputs; [
-      common
       home-manager.darwinModules.home-manager
 
       ../users/seth
@@ -130,7 +100,7 @@ in {
           enabledCollectors = ["systemd"];
         };
 
-        nix.registry.nixpkgs.flake = nixpkgs-stable;
+        nix.registry.n.flake = nixpkgs-stable;
         system.stateVersion = "23.05";
       }
     ];

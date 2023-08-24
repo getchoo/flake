@@ -29,18 +29,7 @@ in {
         options = "-d --delete-older-than 2d";
       };
 
-      settings = {
-        allowed-users = [config.networking.hostName];
-        trusted-substituters = [
-          "https://getchoo.cachix.org"
-          "https://nix-community.cachix.org"
-        ];
-
-        trusted-public-keys = [
-          "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        ];
-      };
+      settings.allowed-users = [config.networking.hostName];
     };
 
     nixpkgs.overlays = [(_: prev: {unstable = import nixpkgs {inherit (prev) system;};})];

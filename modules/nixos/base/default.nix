@@ -13,6 +13,7 @@ in {
     ./documentation.nix
     ./locale.nix
     ./network.nix
+    ./nix.nix
     ./packages.nix
     ./root.nix
     ./security.nix
