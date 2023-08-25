@@ -9,6 +9,7 @@ in {
   options.hardware.enable = mkEnableOption "hardware module";
 
   imports = [
+    ./ssd.nix
     ./nvidia.nix
   ];
 
