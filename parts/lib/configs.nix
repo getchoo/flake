@@ -3,9 +3,9 @@
   self,
   ...
 }: let
-  inherit (builtins) attrNames mapAttrs;
+  inherit (builtins) attrNames elemAt mapAttrs;
   inherit (inputs) nixpkgs hm;
-  inherit (nixpkgs.lib) genAttrs optional;
+  inherit (nixpkgs.lib) genAttrs optional splitString zipAttrs;
 
   mkSystemCfg = name: {
     profile,
@@ -25,7 +25,6 @@
     };
 
   mkHMCfg = name: {
-    nixpkgs ? nixpkgs,
     pkgs ? import nixpkgs {system = "x86_64-linux";},
     extraSpecialArgs ? inputs,
     modules ? [],
@@ -46,9 +45,22 @@
         ++ optional pkgs.stdenv.isDarwin ../../users/${name}/darwin.nix
         ++ modules;
     };
+
+  genHMUsersForSys = users: system: let
+    users' = users system;
+    formattedUsers = map (u: "${u}@${system}") (attrNames users');
+  in
+    genAttrs formattedUsers (user: let
+      name = elemAt (splitString "@" user) 0;
+    in
+      mkHMCfg name users'.${name});
 in {
   inherit mkHMCfg mkSystemCfg;
-  mapHMUsers = mapAttrs mkHMCfg;
+  genHMUsers = users: systems: let
+    zipped = zipAttrs (map (genHMUsersForSys users) systems);
+  in
+    mapAttrs (_: v: elemAt v 0) zipped; # why do i need to do this??? ..i'm tired
+
   mapSystems = mapAttrs mkSystemCfg;
 
   genHMModules = users:

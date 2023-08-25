@@ -128,7 +128,6 @@
   };
 
   outputs = {
-    getchoo,
     parts,
     pre-commit,
     ...
@@ -136,7 +135,6 @@
     parts.lib.mkFlake {inherit inputs;} {
       imports = [
         pre-commit.flakeModule
-        getchoo.flakeModules.homeConfigurations
 
         ./hosts
         ./parts
