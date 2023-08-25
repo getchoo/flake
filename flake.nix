@@ -104,7 +104,6 @@
       inputs.flake-utils.follows = "flake-utils";
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
     nur.url = "github:nix-community/NUR";
 
     openwrt-imagebuilder = {

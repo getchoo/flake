@@ -18,9 +18,6 @@
     nixosConfigurations = mapSystems {
       glados = {
         modules = with inputs; [
-          nixos-hardware.nixosModules.common-cpu-amd-pstate
-          nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
-          nixos-hardware.nixosModules.common-pc-ssd
           lanzaboote.nixosModules.lanzaboote
         ];
         profile = profiles.personal;
