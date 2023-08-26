@@ -3,9 +3,9 @@
   self,
   ...
 }: let
-  inherit (builtins) attrNames elemAt mapAttrs zipAttrsWith;
+  inherit (builtins) attrNames mapAttrs;
   inherit (inputs) nixpkgs hm;
-  inherit (nixpkgs.lib) genAttrs optional splitString;
+  inherit (nixpkgs.lib) genAttrs optional;
 
   mkSystemCfg = name: {
     profile,
@@ -45,18 +45,9 @@
         ++ optional pkgs.stdenv.isDarwin ../../users/${name}/darwin.nix
         ++ modules;
     };
-
-  genHMUsersForSys = users: system: let
-    users' = users system;
-    formattedUsers = map (u: "${u}@${system}") (attrNames users');
-  in
-    genAttrs formattedUsers (user: let
-      name = elemAt (splitString "@" user) 0;
-    in
-      mkHMCfg name users'.${name});
 in {
   inherit mkHMCfg mkSystemCfg;
-  genHMUsers = users: systems: zipAttrsWith (_: v: elemAt v 0) (map (genHMUsersForSys users) systems);
+  mapHMUsers = mapAttrs mkHMCfg;
 
   mapSystems = mapAttrs mkSystemCfg;
 
