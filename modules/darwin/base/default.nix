@@ -22,6 +22,11 @@ in {
       nix-settings.enable = mkDefault true;
     };
 
+    programs = {
+      bash.enable = true;
+      zsh.enable = true;
+    };
+
     services.nix-daemon.enable = true;
   };
 }
