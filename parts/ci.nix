@@ -62,7 +62,7 @@ in {
         inherit when;
 
         outputs.effects = {
-          update = mkUpdateEffect ["nixpkgs" "nixpkgs-stable"] "flake: update nixpkgs inputs";
+          nixpkgs-update = mkUpdateEffect ["nixpkgs" "nixpkgs-stable"] "flake: update nixpkgs inputs";
         };
       };
 
@@ -70,7 +70,7 @@ in {
         when = when // {dayOfMonth = [1 8 15 22 29];};
 
         outputs.effects = {
-          update = mkUpdateEffect [] "flake: update all inputs";
+          flake-update = mkUpdateEffect [] "flake: update all inputs";
         };
       };
     };
