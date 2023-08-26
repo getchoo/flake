@@ -4,7 +4,7 @@
   ...
 }: let
   inherit (self.lib.configs) genHMModules mapHMUsers;
-  inherit (inputs) getchoo nixpkgs nix-index-database nur;
+  inherit (inputs) arkenfox getchoo nixpkgs nix-index-database nur;
 
   users = let
     seth = system: {
@@ -15,6 +15,7 @@
 
       modules = [
         nix-index-database.hmModules.nix-index
+        arkenfox.hmModules.arkenfox
       ];
     };
   in {

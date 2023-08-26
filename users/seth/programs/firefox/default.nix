@@ -9,6 +9,10 @@
 in {
   options.getchoo.programs.firefox.enable = mkEnableOption "firefox" // {default = config.getchoo.desktop.enable;};
 
+  imports = [
+    ./arkenfox.nix
+  ];
+
   config = mkIf cfg.enable {
     programs.firefox = {
       enable = true;
@@ -19,7 +23,18 @@ in {
           private-relay
           ublock-origin
         ];
+
         isDefault = true;
+
+        settings = {
+          "extensions.pocket.enabled" = false;
+          "identity.fxaccounts.enabled" = false;
+
+          "gfx.webrender.all" = true;
+          "fission.autostart" = true;
+
+          "media.ffmpeg.vaapi.enabled" = true;
+        };
       };
     };
   };

@@ -26,6 +26,35 @@
         "type": "github"
       }
     },
+    "arkenfox": {
+      "inputs": {
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "pre-commit": [
+          "pre-commit"
+        ]
+      },
+      "locked": {
+        "lastModified": 1691919538,
+        "narHash": "sha256-Er7hGXFZit1VLy8yfEaTCfx0p6RqfMrK+GGT0tixWQM=",
+        "owner": "dwarfmaster",
+        "repo": "arkenfox-nixos",
+        "rev": "9183705626ae64a61f489ffa199d4f825eeaa5fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dwarfmaster",
+        "repo": "arkenfox-nixos",
+        "type": "github"
+      }
+    },
     "crane": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -538,6 +567,7 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
+        "arkenfox": "arkenfox",
         "darwin": "darwin",
         "deploy": "deploy",
         "effects": "effects",

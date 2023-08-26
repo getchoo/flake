@@ -28,6 +28,14 @@
       inputs.home-manager.follows = "hm";
     };
 
+    arkenfox = {
+      url = "github:dwarfmaster/arkenfox-nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.pre-commit.follows = "pre-commit";
+      inputs.flake-utils.follows = "flake-utils";
+    };
+
     deploy = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";

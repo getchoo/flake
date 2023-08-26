@@ -11,7 +11,7 @@ in {
 
   imports = [
     ./chromium.nix
-    ./firefox.nix
+    ./firefox
     ./git.nix
     ./gpg.nix
     ./mangohud.nix

@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  arkenfox,
   nix-index-database,
   ...
 }: {
@@ -30,6 +31,7 @@
     imports = [
       ./home.nix
       ./module.nix
+      arkenfox.hmModules.arkenfox
       nix-index-database.hmModules.nix-index
     ];
 
