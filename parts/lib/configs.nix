@@ -3,9 +3,9 @@
   self,
   ...
 }: let
-  inherit (builtins) attrNames elemAt mapAttrs;
+  inherit (builtins) attrNames elemAt mapAttrs zipAttrsWith;
   inherit (inputs) nixpkgs hm;
-  inherit (nixpkgs.lib) genAttrs optional splitString zipAttrs;
+  inherit (nixpkgs.lib) genAttrs optional splitString;
 
   mkSystemCfg = name: {
     profile,
@@ -56,10 +56,7 @@
       mkHMCfg name users'.${name});
 in {
   inherit mkHMCfg mkSystemCfg;
-  genHMUsers = users: systems: let
-    zipped = zipAttrs (map (genHMUsersForSys users) systems);
-  in
-    mapAttrs (_: v: elemAt v 0) zipped; # why do i need to do this??? ..i'm tired
+  genHMUsers = users: systems: zipAttrsWith (_: v: elemAt v 0) (map (genHMUsersForSys users) systems);
 
   mapSystems = mapAttrs mkSystemCfg;
 
