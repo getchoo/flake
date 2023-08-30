@@ -1,8 +1,8 @@
 {
   config,
   lib,
-  pkgs,
   self,
+  unstable,
   ...
 }: let
   cfg = config.server.services.hercules-ci;
@@ -45,7 +45,7 @@ in {
     services = {
       hercules-ci-agent = {
         enable = true;
-        package = pkgs.unstable.hercules-ci-agent;
+        package = unstable.hercules-ci-agent;
         settings = {
           binaryCachesPath = config.age.secrets.binaryCache.path;
           clusterJoinTokenPath = config.age.secrets.clusterToken.path;

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   nixpkgs,
   ...
 }: let
@@ -16,6 +17,8 @@ in {
   ];
 
   config = mkIf cfg.enable {
+    _module.args.unstable = nixpkgs.legacyPackages.${pkgs.system};
+
     base = {
       enable = true;
       documentation.enable = false;
@@ -31,8 +34,6 @@ in {
 
       settings.allowed-users = [config.networking.hostName];
     };
-
-    nixpkgs.overlays = [(_: prev: {unstable = import nixpkgs {inherit (prev) system;};})];
 
     programs = {
       git.enable = mkDefault true;
