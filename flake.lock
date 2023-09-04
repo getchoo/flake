@@ -42,11 +42,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1691919538,
-        "narHash": "sha256-Er7hGXFZit1VLy8yfEaTCfx0p6RqfMrK+GGT0tixWQM=",
+        "lastModified": 1693814299,
+        "narHash": "sha256-DdmhEwIkd/t8vb7i2HS+M/rzcgSsxufC0F7LCDh0F/I=",
         "owner": "dwarfmaster",
         "repo": "arkenfox-nixos",
-        "rev": "9183705626ae64a61f489ffa199d4f825eeaa5fe",
+        "rev": "64bfb7623798d17c0ea0541f7f1488975ab4ff73",
         "type": "github"
       },
       "original": {

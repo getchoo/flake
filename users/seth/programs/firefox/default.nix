@@ -27,13 +27,18 @@ in {
         isDefault = true;
 
         settings = {
+          # disable firefox accounts & pocket
           "extensions.pocket.enabled" = false;
           "identity.fxaccounts.enabled" = false;
 
           "gfx.webrender.all" = true;
           "fission.autostart" = true;
 
+          # hw accel
           "media.ffmpeg.vaapi.enabled" = true;
+
+          # widevine drm
+          "media.gmp-widevinecdm.enabled" = true;
         };
       };
     };

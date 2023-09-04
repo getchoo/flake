@@ -11,10 +11,10 @@ in {
   options.getchoo.programs.firefox.arkenfoxConfig.enable =
     mkEnableOption "default arkenfox config" // {default = true;};
 
-  config.programs.firefox = mkIf cfg.enable {
+  config.programs.firefox = mkIf (cfg.enable && cfg.arkenfoxConfig.enable) {
     arkenfox = {
       enable = true;
-      version = "115.0";
+      version = "115.1";
     };
 
     profiles.arkenfox.arkenfox =
@@ -24,19 +24,8 @@ in {
         # enable safe browsing
         "0400"."0403"."browser.safebrowsing.downloads.remote.enabled".value = true;
 
-        "0800"."0801"."keyword.enabled".value = true;
-
         # fix hulu
         "1200"."1201"."security.ssl.require_safe_negotiation".value = false;
-
-        # enable drm
-        "2000" = {
-          "2021"."media.gmp-widevinecdm.enabled" = {
-            enable = true;
-            value = true;
-          };
-          "2022"."media.eme.enabled".value = true;
-        };
 
         "2600"."2651"."browser.download.useDownloadDir" = {
           enable = true;
@@ -46,7 +35,17 @@ in {
         # disable rfp letterboxing
         "4500"."4504"."privacy.resistFingerprinting.letterboxing".value = false;
 
-        "5000"."5003"."signon.rememberSignons".enable = true;
+        "5000" = {
+          "5003"."signon.rememberSignons".enable = true;
+          # enable search autocomplete
+          "5021"."keyword.enabled".value = true;
+        };
+
+        # enable drm
+        "5500"."5508"."media.eme.enabled" = {
+          enable = true;
+          value = true;
+        };
       } (enableSections [
         "0100"
         "0200"
