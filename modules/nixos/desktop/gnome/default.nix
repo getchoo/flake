@@ -16,6 +16,11 @@ in {
       gnome.excludePackages = with pkgs; [
         gnome-tour
       ];
+
+      sessionVariables = {
+        NIXOS_OZONE_WL = "1";
+      };
+
       systemPackages = with pkgs; [
         adw-gtk3
         blackbox-terminal
