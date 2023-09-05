@@ -14,5 +14,4 @@ cmd("filetype plugin indent on")
 opt.termguicolors = true
 
 require("getchoo.keybinds")
-require("getchoo.filetypes")
 require("getchoo.plugins")
