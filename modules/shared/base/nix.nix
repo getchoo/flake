@@ -24,15 +24,8 @@ in {
         auto-optimise-store = isLinux;
         experimental-features = ["nix-command" "flakes" "auto-allocate-uids" "repl-flake"];
 
-        trusted-substituters = [
-          "https://getchoo.cachix.org"
-          "https://nix-community.cachix.org"
-        ];
-
-        trusted-public-keys = [
-          "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="
-          "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        ];
+        trusted-substituters = ["https://cache.garnix.io"];
+        trusted-public-keys = ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
       };
 
       gc = {
