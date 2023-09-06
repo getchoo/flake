@@ -60,7 +60,8 @@
     guzzle_api = {
       url = "github:getchoo/guzzle_api";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit-hooks.follows = "pre-commit";
+      inputs.parts.follows = "parts";
+      inputs.pre-commit.follows = "pre-commit";
     };
 
     hm = {
