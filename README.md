@@ -2,28 +2,10 @@
 
 [![made with neovim](https://img.shields.io/static/v1?label=made%20with&message=neovim&color=00b952&style=flat-square&logo=neovim)](https://neovim.io/)
 [![nixos unstable](https://img.shields.io/static/v1?label=NixOS&message=unstable&color=5277c3&style=flat-square&logo=nixos)](https://nixos.org/)
-[![hercules-ci build status](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Frepos%2Fgetchoo%2Fflake%2Fcommits%2Fmain%2Fstatus&query=state&style=flat-square&logo=github&label=hercules-ci%20builds&color=%238F97CB)](https://hercules-ci.com/)
+[![built with garnix](https://img.shields.io/endpoint?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fgetchoo%2Fflake%3Fbranch%3Dmain)](https://garnix.io)
+
 
 greasy taco i love
-
-## cool stuff in here
-
-i like to have a few services, including:
-
-- [grafana](https://grafana.com/)
-- [hercules-ci](https://hercules-ci.com/)
-- [miniflux](https://miniflux.app/)
-- [victoria metrics](https://victoriametrics.com/)
-
-there are also some amazing tools i use to make/manage this flake that i would highly recommend checking out:
-
-- [home-manager](https://github.com/nix-community/home-manager)
-- [deploy-rs](https://github.com/serokell/deploy-rs)
-- [lanzaboote](https://github.com/nix-community/lanzaboote)
-- [nixos-wsl](https://github.com/nix-community/nixos-wsl)
-- [nix-openwrt-imagebuilder](https://github.com/astro/nix-openwrt-imagebuilder)
-- [flake-parts](https://github.com/hercules-ci/flake-parts)
-- [ragenix](https://github.com/yaxitech/ragenix)
 
 ## my machines
 
@@ -49,9 +31,19 @@ my netgear wac104 router, using [nix-openwrt-imagebuilder](https://github.com/as
 
 my ampere arm server from oracle, services my miniflux instance.
 
-### p-body
+## special thanks
 
-my amd64 server from hetzner, general service runner.
+there are some amazing tools i use to make/manage this flake that i would highly recommend checking out:
+
+- [garnix](https://garnix.io)
+- [home-manager](https://github.com/nix-community/home-manager)
+- [deploy-rs](https://github.com/serokell/deploy-rs)
+- [lanzaboote](https://github.com/nix-community/lanzaboote)
+- [nixos-wsl](https://github.com/nix-community/nixos-wsl)
+- [nix-openwrt-imagebuilder](https://github.com/astro/nix-openwrt-imagebuilder)
+- [flake-parts](https://github.com/hercules-ci/flake-parts)
+- [ragenix](https://github.com/yaxitech/ragenix)
+
 
 ## fun screenshots
 

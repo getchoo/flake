@@ -47,7 +47,6 @@ in {
 
         # servers
         "atlas".user = "atlas";
-        "p-body".user = "p-body";
       };
     };
 

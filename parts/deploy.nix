@@ -7,7 +7,7 @@
   inherit (lib) filterAttrs;
   inherit (self) darwinConfigurations nixosConfigurations;
 
-  targets = ["atlas" "p-body"];
+  targets = ["atlas"];
 
   targets' = filterAttrs (n: _: elem n targets) (nixosConfigurations // darwinConfigurations);
 in {
