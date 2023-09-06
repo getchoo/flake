@@ -29,7 +29,7 @@
       };
 
       atlas = {
-        modules = [inputs.guzzle_api.nixosModules.guzzle_api];
+        modules = [inputs.guzzle_api.nixosModules.default];
         system = "aarch64-linux";
         profile = profiles.server;
       };

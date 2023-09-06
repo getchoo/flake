@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  guzzle_api,
   ...
 }: {
   imports = [
@@ -24,9 +23,12 @@
   services = {
     guzzle-api = {
       enable = true;
-      url = "https://api." + config.networking.domain;
-      port = "8080";
-      package = guzzle_api.packages.x86_64-linux.guzzle-api-server;
+      domain = "api.${config.networking.domain}";
+      nginx = {
+        enableACME = true;
+        acmeRoot = null;
+        addSSL = true;
+      };
     };
   };
 
