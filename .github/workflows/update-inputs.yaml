@@ -1,9 +1,9 @@
-name: update all inputs
+name: update all flake inputs
 
 on:
-  #schedule:
-  #  # run every saturday
-  #  - cron: "0 0 * * 6"
+  schedule:
+    # run every saturday
+    - cron: "0 0 * * 6"
   workflow_dispatch:
 
 permissions:
@@ -11,13 +11,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  update-lock:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - uses: ./.github/actions/flake-update
-        with:
-          commit-msg: "flake: update all inputs"
-          github-token: ${{ github.token }}
+  update:
+    uses: ./.github/workflows/update-lock.yaml
+    with:
+      commit-msg: "flake: update all inputs"

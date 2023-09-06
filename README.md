@@ -4,7 +4,6 @@
 [![nixos unstable](https://img.shields.io/static/v1?label=NixOS&message=unstable&color=5277c3&style=flat-square&logo=nixos)](https://nixos.org/)
 [![built with garnix](https://img.shields.io/endpoint?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fgetchoo%2Fflake%3Fbranch%3Dmain)](https://garnix.io)
 
-
 greasy taco i love
 
 ## my machines
@@ -43,7 +42,6 @@ there are some amazing tools i use to make/manage this flake that i would highly
 - [nix-openwrt-imagebuilder](https://github.com/astro/nix-openwrt-imagebuilder)
 - [flake-parts](https://github.com/hercules-ci/flake-parts)
 - [ragenix](https://github.com/yaxitech/ragenix)
-
 
 ## fun screenshots
 
