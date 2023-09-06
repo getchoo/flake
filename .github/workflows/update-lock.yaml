@@ -1,0 +1,37 @@
+name: update flake lock
+
+on:
+  workflow_call:
+    inputs:
+      commit-msg:
+        description: summary for lockfile commit
+        required: true
+        type: string
+      inputs:
+        description: flake inputs to update
+        required: false
+        default: ""
+        type: string
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+
+      - name: update lockfile
+        uses: DeterminateSystems/update-flake-lock@v20
+        id: update
+        with:
+          commit-msg: ${{ inputs.commit-msg }}
+          inputs: ${{ inputs.inputs }}
+          pr-title: ${{ inputs.commit-msg }}
+          token: ${{ github.token }}
+
+      - name: enable auto-merge
+        shell: bash
+        run: gh pr merge --auto --rebase "$PR_ID"
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          PR_ID: ${{ steps.update.outputs.pull-request-number }}
