@@ -2,14 +2,8 @@
   description = "getchoo's flake for system configurations";
 
   nixConfig = {
-    extra-substituters = [
-      "https://getchoo.cachix.org"
-      "https://nix-community.cachix.org"
-    ];
-    extra-trusted-public-keys = [
-      "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
+    extra-substituters = ["https://cache.garnix.io"];
+    extra-trusted-public-keys = ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
   };
 
   inputs = {
@@ -60,30 +54,13 @@
     getchoo = {
       url = "github:getchoo/nix-exprs";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.effects.follows = "effects";
       inputs.parts.follows = "parts";
-      inputs.hercules-ci-agent.follows = "hercules-ci-agent";
     };
 
     guzzle_api = {
       url = "github:getchoo/guzzle_api";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks.follows = "pre-commit";
-    };
-
-    # ditto
-    hercules-ci-agent = {
-      url = "github:hercules-ci/hercules-ci-agent";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-parts.follows = "parts";
-    };
-
-    effects = {
-      url = "github:hercules-ci/hercules-ci-effects";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.hercules-ci-agent.follows = "hercules-ci-agent";
-      inputs.flake-parts.follows = "parts";
     };
 
     hm = {

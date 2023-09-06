@@ -29,13 +29,8 @@
       };
 
       atlas = {
-        system = "aarch64-linux";
-        profile = profiles.server;
-      };
-
-      p-body = {
         modules = [inputs.guzzle_api.nixosModules.guzzle_api];
-        system = "x86_64-linux";
+        system = "aarch64-linux";
         profile = profiles.server;
       };
     };

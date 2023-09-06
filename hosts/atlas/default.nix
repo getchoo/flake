@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  guzzle_api,
   ...
 }: {
   imports = [
@@ -18,22 +19,21 @@
   networking = {
     domain = "mydadleft.me";
     hostName = "atlas";
-    firewall.allowedTCPPorts = [config.services.prometheus.exporters.node.port];
   };
 
-  nix.settings.allowed-users = ["bob"];
-
-  users.users = {
-    atlas = {
-      isNormalUser = true;
-      shell = pkgs.bash;
-      passwordFile = config.age.secrets.userPassword.path;
+  services = {
+    guzzle-api = {
+      enable = true;
+      url = "https://api." + config.networking.domain;
+      port = "8080";
+      package = guzzle_api.packages.x86_64-linux.guzzle-api-server;
     };
+  };
 
-    bob = {
-      isNormalUser = true;
-      shell = pkgs.bash;
-    };
+  users.users.atlas = {
+    isNormalUser = true;
+    shell = pkgs.bash;
+    passwordFile = config.age.secrets.userPassword.path;
   };
 
   zramSwap.enable = true;
