@@ -78,26 +78,6 @@ in {
         server = {
           enable = true;
           secrets.enable = true;
-          services = {
-            hercules-ci = {
-              enable = true;
-              secrets.enable = true;
-            };
-
-            promtail = {
-              enable = true;
-              clients = [
-                {
-                  url = "http://p-body:3030/loki/api/v1/push";
-                }
-              ];
-            };
-          };
-        };
-
-        services.prometheus.exporters.node = {
-          enable = true;
-          enabledCollectors = ["systemd"];
         };
 
         nix.registry.n.flake = nixpkgs-stable;
