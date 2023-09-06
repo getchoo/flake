@@ -6,7 +6,7 @@ opt.tabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = false
 opt.smartindent = true
-opt.wrap = false
+opt.wrap = true
 
 -- appearance
 opt.syntax = "on"

@@ -5,9 +5,20 @@ local set = function(mode, key, vimcmd)
 	vim.keymap.set(mode, key, vimcmd, opts)
 end
 
-set("n", "<leader>t", function()
-	vim.cmd("NvimTreeToggle")
-end)
+if pcall(require, "neo-tree.command") then
+	set("n", "<leader>t", function()
+		require("neo-tree.command").execute({
+			toggle = true,
+			dir = vim.loop.cwd(),
+		})
+	end)
+end
+
+if pcall(require, "flash") then
+	set({ "n", "o", "x" }, "s", function()
+		require("flash").jump()
+	end)
+end
 
 for i = 1, 9 do
 	set("n", "<leader>" .. i, function()

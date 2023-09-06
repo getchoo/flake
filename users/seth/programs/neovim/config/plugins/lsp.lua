@@ -31,10 +31,13 @@ require("cmp").setup({
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
-		{ name = "path" },
+		{ name = "async_path" },
 		{ name = "buffer" },
 	}),
 })
+
+---- gitsigns
+require("gitsigns").setup()
 
 ---- fidget
 require("fidget").setup()
@@ -48,6 +51,8 @@ local sources = {
 	lsp_servers = {
 		["bashls"] = "bash-language-server",
 		["clangd"] = "clangd",
+		["eslint"] = "eslint",
+		["nil_ls"] = "nil",
 		["pyright"] = "pyright-langserver",
 		["rust_analyzer"] = "rust-analyzer",
 		["tsserver"] = "typescript-language-server",
@@ -57,7 +62,6 @@ local sources = {
 		diagnostics.alex,
 		diagnostics.codespell,
 		diagnostics.deadnix,
-		diagnostics.eslint,
 		diagnostics.pylint,
 		diagnostics.shellcheck,
 		diagnostics.statix,
@@ -109,20 +113,6 @@ servers["lua_ls"] = {
 	},
 }
 
-servers["nil_ls"] = {
-	capabilities = capabilities,
-	settings = {
-		["nil"] = {
-			nix = {
-				flake = {
-					autoArchive = false,
-					autoEvalInputs = false,
-				},
-			},
-		},
-	},
-}
-
 for server, settings in pairs(servers) do
 	require("lspconfig")[server].setup(settings)
 end
@@ -152,9 +142,28 @@ local formatting_on_attach = function(client, bufnr)
 	end
 end
 
+require("mini.comment").setup({
+	options = {
+		custom_commentstring = function()
+			return require("ts_context_commentstring.internal").calculate_commentstring()
+				or vim.bo.context_commentstring
+		end,
+	},
+})
+
 require("null-ls").setup({
 	on_attach = formatting_on_attach,
 	sources = sources.null_ls,
+})
+
+require("nvim-treesitter.configs").setup({
+	auto_install = false,
+	highlight = { enable = true },
+	indent = { enable = true },
+	context_commentstring = {
+		enable = true,
+		enable_autocmd = false,
+	},
 })
 
 ---- trouble

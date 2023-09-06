@@ -1,8 +1,3 @@
----- autopairs
-require("nvim-autopairs").setup({
-	disable_filetype = { "TeleScopePrompt" },
-})
-
 ---- catppuccin
 local compile_path = vim.fn.stdpath("cache") .. "/catppuccin-nvim"
 vim.fn.mkdir(compile_path, "p")
@@ -12,14 +7,13 @@ require("catppuccin").setup({
 	compile_path = compile_path,
 	flavour = "mocha", -- mocha, macchiato, frappe, latte
 	integrations = {
-		barbar = true,
 		cmp = true,
+		flash = true,
 		gitsigns = true,
-		leap = true,
 		native_lsp = {
 			enabled = true,
 		},
-		nvimtree = true,
+		neotree = true,
 		treesitter_context = true,
 		treesitter = true,
 		telescope = true,
@@ -38,29 +32,76 @@ require("bufferline").setup({
 		mode = "buffers",
 		numbers = "ordinal",
 		separator_style = "slant",
+		offsets = {
+			{
+				filetype = "neo-tree",
+				text = "neo-tree",
+				highlight = "Directory",
+				text_align = "left",
+			},
+		},
 	},
 })
 
 ---- gitsigns
 require("gitsigns").setup()
 
----- leap
-require("leap").add_default_mappings()
+---- indent-blankline.nvim
+require("indent_blankline").setup({
+	filetype_exclude = {
+		"help",
+		"neo-tree",
+		"Trouble",
+		"lazy",
+		"mason",
+		"notify",
+		"toggleterm",
+	},
+	show_trailing_blankline_indent = false,
+	show_current_context = false,
+})
 
 ---- lualine
 require("lualine").setup({
 	options = {
 		theme = "catppuccin",
 	},
-	extensions = { "nvim-tree" },
+	extensions = { "neo-tree", "trouble" },
+})
+
+---- mini.nvim
+require("mini.pairs").setup({})
+require("mini.indentscope").setup({
+	options = { try_as_border = true },
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = {
+		"help",
+		"neo-tree",
+		"Trouble",
+		"lazy",
+		"mason",
+		"notify",
+		"toggleterm",
+	},
+	callback = function()
+		vim.b.miniindentscope_disable = true
+	end,
 })
 
 ---- nvim-tree
-require("nvim-tree").setup()
+require("neo-tree").setup({
+	sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+	open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "Outline" },
+	filesystem = {
+		bind_to_cwd = false,
+		follow_current_file = { enabled = true },
+		use_libuv_file_watcher = true,
+	},
+})
 
----- treesitter
-require("nvim-treesitter.configs").setup({
-	auto_install = false,
-	highlight = { enable = true },
-	indent = { enable = true },
+---- which-key
+require("which-key").setup({
+	plugins = { spelling = true },
 })
