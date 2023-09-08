@@ -2,6 +2,7 @@ alias b := build
 alias c := check
 alias d := deploy
 alias da := deploy-all
+alias dr := dry-run
 alias f := fmt
 alias l := lint
 alias p := pre-commit
@@ -17,7 +18,7 @@ build:
 
 [macos]
 build:
-    darwin-rebuild --verbose --flake .
+    darwin-rebuild build --verbose --flake .
 
 check:
     nix flake check
@@ -27,6 +28,14 @@ deploy HOST:
 
 deploy-all:
     deploy
+
+[linux]
+dry-run:
+    nixos-rebuild dry-run --verbose --flake .
+
+[macos]
+dry-run:
+    darwin-rebuild dry-run --verbose --flake .
 
 fmt:
     pre-commit run alejandra && pre-commit run stylua
