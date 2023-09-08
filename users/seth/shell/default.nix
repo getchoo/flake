@@ -28,7 +28,7 @@ in {
       };
     };
 
-    exa = {
+    eza = {
       enable = true;
       enableAliases = true;
       icons = true;
