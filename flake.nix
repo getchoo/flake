@@ -14,14 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # this is just to avoid having multiple versions in flake.lock
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.darwin.follows = "darwin";
-      inputs.home-manager.follows = "hm";
-    };
-
     arkenfox = {
       url = "github:dwarfmaster/arkenfox-nixos";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,30 +22,12 @@
       inputs.flake-utils.follows = "flake-utils";
     };
 
-    # ditto
-    crane = {
-      url = "github:ipetkov/crane";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-compat.follows = "flake-compat";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
-
     deploy = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
       inputs.flake-compat.follows = "flake-compat";
     };
-
-    # ditto
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
-
-    # ditto
-    flake-utils.url = "github:numtide/flake-utils";
 
     parts = {
       url = "github:hercules-ci/flake-parts";
@@ -125,7 +99,32 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    # ditto
+    # ------------------------------
+    # -- these are just to avoid having multiple versions in flake.lock
+    # ------------------------------
+
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.darwin.follows = "darwin";
+      inputs.home-manager.follows = "hm";
+    };
+
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
+
+    flake-utils.url = "github:numtide/flake-utils";
+
+    crane = {
+      url = "github:ipetkov/crane";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-compat.follows = "flake-compat";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
+
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
