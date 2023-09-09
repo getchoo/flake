@@ -14,9 +14,6 @@ in {
         tuba
       ]
       ++ (with pkgs.gnomeExtensions; [
-        appindicator
-        blur-my-shell
-        burn-my-windows
         caffeine
         clipboard-history
         gradience
@@ -27,17 +24,20 @@ in {
       settings = {
         "org/gnome/shell" = {
           disable-user-extensions = false;
+
           enabled-extensions = [
             "appindicatorsupport@rgcjonas.gmail.com"
             "caffeine@patapon.info"
             "clipboard-history@alexsaveau.dev"
           ];
+
           favorite-apps = [
             "firefox.desktop"
             "org.gnome.Nautilus.desktop"
             "discord.desktop"
           ];
         };
+
         "org/gnome/desktop/interface" = {
           color-scheme = "prefer-dark";
           font-antialiasing = ''rgba'';
@@ -45,21 +45,21 @@ in {
           document-font-name = ''Noto Sans 11'';
           monospace-font-name = ''FiraCode Nerd Font 10'';
         };
+
         "org/gnome/desktop/peripherals/mouse" = {
           accel-profile = ''flat'';
         };
+
         "org/gnome/desktop/wm/preferences" = {
           titlebar-font = ''Noto Sans Bold 11'';
         };
-        "org/gnome/desktop/wm/keybindings" = {
-          switch-windows = ["<Alt>Tab"];
-          switch-windows-backward = ["<Shift><Alt>Tab"];
-        };
+
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
           name = "blackbox";
           command = "blackbox";
           binding = "<Control><Alt>t";
         };
+
         "com/raggesilver/BlackBox" = {
           font = ''FiraCode Nerd Font 12'';
           theme-dark = ''Catppuccin-Mocha'';
