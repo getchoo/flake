@@ -13,9 +13,14 @@ in {
       gh = {
         enable = true;
         settings = {
-          git_protocol = "ssh";
+          git_protocol = "https";
           editor = "nvim";
           prompt = "enabled";
+        };
+
+        gitCredentialHelper = {
+          enable = true;
+          hosts = ["https://github.com" "https://github.example.com"];
         };
       };
 

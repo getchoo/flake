@@ -18,11 +18,6 @@ in {
         sshDir = "${config.home.homeDirectory}/.ssh";
       in {
         # git forges
-        "github.com" = {
-          identityFile = "${sshDir}/github";
-          user = "git";
-        };
-
         "codeberg.org" = {
           identityFile = "${sshDir}/codeberg";
           user = "git";
