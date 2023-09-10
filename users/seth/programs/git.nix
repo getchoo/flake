@@ -27,6 +27,13 @@ in {
       git = {
         enable = true;
 
+        delta = {
+          enable = true;
+          options = {
+            syntax-theme = "catppuccin";
+          };
+        };
+
         extraConfig = {
           init = {defaultBranch = "main";};
         };
