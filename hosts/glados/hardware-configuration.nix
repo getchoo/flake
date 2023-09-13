@@ -11,44 +11,51 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot = {
+    extraModulePackages = [];
+    kernelModules = ["kvm-amd"];
 
-  fileSystems."/" = {
-    device = "/dev/mapper/cryptroot";
-    fsType = "btrfs";
-    options = ["subvol=root" "compress=zstd" "noatime"];
+    initrd = {
+      availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
+      kernelModules = [];
+
+      luks.devices."cryptroot" = {
+        device = "/dev/disk/by-uuid/bbbc1f37-53f5-4776-a70e-f2779179de50";
+        allowDiscards = true;
+        crypttabExtraOpts = ["tpm2-device=auto"];
+      };
+    };
   };
 
-  boot.initrd.luks.devices."cryptroot" = {
-    device = "/dev/disk/by-uuid/bbbc1f37-53f5-4776-a70e-f2779179de50";
-    allowDiscards = true;
-    crypttabExtraOpts = ["tpm2-device=auto"];
-  };
+  fileSystems = {
+    "/" = {
+      device = "/dev/mapper/cryptroot";
+      fsType = "btrfs";
+      options = ["subvol=root" "compress=zstd" "noatime"];
+    };
 
-  fileSystems."/var/log" = {
-    device = "/dev/mapper/cryptroot";
-    fsType = "btrfs";
-    options = ["subvol=var_log" "compress=zstd" "noatime"];
-  };
+    "/var/log" = {
+      device = "/dev/mapper/cryptroot";
+      fsType = "btrfs";
+      options = ["subvol=var_log" "compress=zstd" "noatime"];
+    };
 
-  fileSystems."/nix" = {
-    device = "/dev/mapper/cryptroot";
-    fsType = "btrfs";
-    options = ["subvol=nix" "compress=zstd" "noatime" "nodatacow"];
-  };
+    "/nix" = {
+      device = "/dev/mapper/cryptroot";
+      fsType = "btrfs";
+      options = ["subvol=nix" "compress=zstd" "noatime" "nodatacow"];
+    };
 
-  fileSystems."/home" = {
-    device = "/dev/mapper/cryptroot";
-    fsType = "btrfs";
-    options = ["subvol=home" "compress=zstd" "noatime"];
-  };
+    "/home" = {
+      device = "/dev/mapper/cryptroot";
+      fsType = "btrfs";
+      options = ["subvol=home" "compress=zstd" "noatime"];
+    };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/B95B-9412";
-    fsType = "vfat";
+    "/boot" = {
+      device = "/dev/disk/by-uuid/B95B-9412";
+      fsType = "vfat";
+    };
   };
 
   swapDevices = [];
