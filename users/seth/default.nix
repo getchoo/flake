@@ -24,8 +24,10 @@
 
   programs.fish.enable = true;
 
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+  };
 
   home-manager.users.seth = {
     imports = [
