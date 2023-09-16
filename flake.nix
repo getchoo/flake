@@ -129,6 +129,7 @@
         pre-commit.flakeModule
 
         ./hosts
+        ./modules
         ./parts
         ./users
       ];

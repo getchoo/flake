@@ -35,9 +35,6 @@
       };
     };
 
-    nixosModules.default = import ../modules/nixos;
-    darwinModules.default = import ../modules/darwin;
-
     openwrtConfigurations.turret = withSystem "x86_64-linux" ({pkgs, ...}:
       pkgs.callPackage ./turret {
         inherit (inputs) openwrt-imagebuilder;
