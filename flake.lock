@@ -104,32 +104,6 @@
         "type": "github"
       }
     },
-    "deploy": {
-      "inputs": {
-        "flake-compat": [
-          "flake-compat"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": [
-          "flake-utils"
-        ]
-      },
-      "locked": {
-        "lastModified": 1694513707,
-        "narHash": "sha256-wE5kHco3+FQjc+MwTPwLVqYz4hM7uno2CgXDXUFMCpc=",
-        "owner": "serokell",
-        "repo": "deploy-rs",
-        "rev": "31c32fb2959103a796e07bbe47e0a5e287c343a8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "serokell",
-        "repo": "deploy-rs",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -312,6 +286,26 @@
         "type": "github"
       }
     },
+    "nixinate": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1688141737,
+        "narHash": "sha256-qHrNMYWukOKmKVf6wXOGKj1xxUnOGjvTRbt/PLLXuBE=",
+        "owner": "MatthewCroughan",
+        "repo": "nixinate",
+        "rev": "7902ae845e6cc5bd450e510cdf5e009a6e4a44d9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MatthewCroughan",
+        "repo": "nixinate",
+        "type": "github"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": [
@@ -491,7 +485,6 @@
         "arkenfox": "arkenfox",
         "crane": "crane",
         "darwin": "darwin",
-        "deploy": "deploy",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "getchoo": "getchoo",
@@ -499,6 +492,7 @@
         "hm": "hm",
         "lanzaboote": "lanzaboote",
         "nix-index-database": "nix-index-database",
+        "nixinate": "nixinate",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",

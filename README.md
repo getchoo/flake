@@ -36,7 +36,7 @@ there are some amazing tools i use to make/manage this flake that i would highly
 
 - [garnix](https://garnix.io)
 - [home-manager](https://github.com/nix-community/home-manager)
-- [deploy-rs](https://github.com/serokell/deploy-rs)
+- [nixinate](https://github.com/MatthewCroughan/nixinate)
 - [lanzaboote](https://github.com/nix-community/lanzaboote)
 - [nixos-wsl](https://github.com/nix-community/nixos-wsl)
 - [nix-openwrt-imagebuilder](https://github.com/astro/nix-openwrt-imagebuilder)

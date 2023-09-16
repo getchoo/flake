@@ -43,4 +43,8 @@
         inherit (inputs) openwrt-imagebuilder;
       });
   };
+
+  perSystem = {system, ...}: {
+    apps = (inputs.nixinate.nixinate.${system} self).nixinate;
+  };
 }

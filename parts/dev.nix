@@ -30,7 +30,6 @@ in {
             actionlint
             alejandra
             deadnix
-            deploy-rs
             just
             statix
             stylua

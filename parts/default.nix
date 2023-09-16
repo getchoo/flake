@@ -1,6 +1,5 @@
 _: {
   imports = [
-    ./deploy.nix
     ./dev.nix
     ./lib
     ./overlays

@@ -9,6 +9,14 @@
     ./nginx.nix
   ];
 
+  _module.args.nixinate = {
+    host = "atlas";
+    sshUser = "root";
+    buildOn = "remote";
+    substituteOnTarget = true;
+    hermetic = true;
+  };
+
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;

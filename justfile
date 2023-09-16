@@ -24,10 +24,9 @@ check:
     nix flake check
 
 deploy HOST:
-    deploy .#{{ HOST }}
+    nix run .#{{ HOST }}
 
-deploy-all:
-    deploy
+deploy-all: (deploy "atlas")
 
 [linux]
 dry-run:
