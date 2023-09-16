@@ -1,14 +1,8 @@
-{
-  inputs,
-  lib,
-  ...
-}: let
-  inherit (inputs) ragenix;
-in {
+{lib, ...}: {
   perSystem = {
-    config,
     pkgs,
-    system,
+    config,
+    inputs',
     ...
   }: {
     pre-commit = {
@@ -34,7 +28,7 @@ in {
             statix
             stylua
           ]
-          ++ lib.optional pkgs.stdenv.isLinux ragenix.packages.${system}.ragenix;
+          ++ lib.optional stdenv.isLinux inputs'.agenix.packages.agenix;
       };
     };
 

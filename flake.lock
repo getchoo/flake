@@ -58,15 +58,19 @@
     "crane": {
       "inputs": {
         "flake-compat": [
+          "lanzaboote",
           "flake-compat"
         ],
         "flake-utils": [
+          "lanzaboote",
           "flake-utils"
         ],
         "nixpkgs": [
+          "lanzaboote",
           "nixpkgs"
         ],
         "rust-overlay": [
+          "lanzaboote",
           "rust-overlay"
         ]
       },
@@ -230,9 +234,7 @@
     },
     "lanzaboote": {
       "inputs": {
-        "crane": [
-          "crane"
-        ],
+        "crane": "crane",
         "flake-compat": [
           "flake-compat"
         ],
@@ -248,9 +250,7 @@
         "pre-commit-hooks-nix": [
           "pre-commit"
         ],
-        "rust-overlay": [
-          "rust-overlay"
-        ]
+        "rust-overlay": "rust-overlay"
       },
       "locked": {
         "lastModified": 1694697985,
@@ -447,43 +447,10 @@
         "type": "github"
       }
     },
-    "ragenix": {
-      "inputs": {
-        "agenix": [
-          "agenix"
-        ],
-        "crane": [
-          "crane"
-        ],
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "rust-overlay": [
-          "rust-overlay"
-        ]
-      },
-      "locked": {
-        "lastModified": 1682237245,
-        "narHash": "sha256-xbBR7LNK+d5Yi/D6FXQGc1R6u2VV2nwr/Df5iaEbOEQ=",
-        "owner": "yaxitech",
-        "repo": "ragenix",
-        "rev": "281f68c3d477904f79ff1cd5807a8c226cd80a50",
-        "type": "github"
-      },
-      "original": {
-        "owner": "yaxitech",
-        "repo": "ragenix",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "agenix": "agenix",
         "arkenfox": "arkenfox",
-        "crane": "crane",
         "darwin": "darwin",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
@@ -499,17 +466,17 @@
         "nur": "nur",
         "openwrt-imagebuilder": "openwrt-imagebuilder",
         "parts": "parts",
-        "pre-commit": "pre-commit",
-        "ragenix": "ragenix",
-        "rust-overlay": "rust-overlay"
+        "pre-commit": "pre-commit"
       }
     },
     "rust-overlay": {
       "inputs": {
         "flake-utils": [
+          "lanzaboote",
           "flake-utils"
         ],
         "nixpkgs": [
+          "lanzaboote",
           "nixpkgs"
         ]
       },

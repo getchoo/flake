@@ -19,6 +19,15 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        darwin.follows = "darwin";
+        home-manager.follows = "hm";
+      };
+    };
+
     arkenfox = {
       url = "github:dwarfmaster/arkenfox-nixos";
       inputs = {
@@ -55,12 +64,10 @@
       url = "github:nix-community/lanzaboote";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        crane.follows = "crane";
         flake-compat.follows = "flake-compat";
         flake-parts.follows = "parts";
         flake-utils.follows = "flake-utils";
         pre-commit-hooks-nix.follows = "pre-commit";
-        rust-overlay.follows = "rust-overlay";
       };
     };
 
@@ -100,17 +107,6 @@
       };
     };
 
-    ragenix = {
-      url = "github:yaxitech/ragenix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        agenix.follows = "agenix";
-        crane.follows = "crane";
-        flake-utils.follows = "flake-utils";
-        rust-overlay.follows = "rust-overlay";
-      };
-    };
-
     # ------------------------------
     # -- these are just to avoid having multiple versions in flake.lock
     # ------------------------------
@@ -121,33 +117,6 @@
     };
 
     flake-utils.url = "github:numtide/flake-utils";
-
-    agenix = {
-      url = "github:ryantm/agenix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        darwin.follows = "darwin";
-        home-manager.follows = "hm";
-      };
-    };
-
-    crane = {
-      url = "github:ipetkov/crane";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "flake-compat";
-        flake-utils.follows = "flake-utils";
-        rust-overlay.follows = "rust-overlay";
-      };
-    };
-
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-      };
-    };
   };
 
   outputs = {

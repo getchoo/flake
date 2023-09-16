@@ -10,7 +10,7 @@ in {
     inherit specialArgs;
 
     modules = with inputs; [
-      ragenix.nixosModules.default
+      agenix.nixosModules.default
       hm.nixosModules.home-manager
       nur.nixosModules.nur
 
@@ -64,7 +64,7 @@ in {
     inherit specialArgs;
 
     modules = with inputs; [
-      ragenix.nixosModules.default
+      agenix.nixosModules.default
       ../modules/nixos/base
       ../modules/nixos/server
       ../modules/nixos/features/tailscale.nix
