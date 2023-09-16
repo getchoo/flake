@@ -19,7 +19,7 @@
     } (lib.optionalAttrs pkgs.stdenv.isLinux {
       extraGroups = lib.optional pkgs.stdenv.isLinux "wheel";
       isNormalUser = true;
-      passwordFile = config.age.secrets.sethPassword.path;
+      hashedPasswordFile = config.age.secrets.sethPassword.path;
     });
 
   programs.fish.enable = true;
