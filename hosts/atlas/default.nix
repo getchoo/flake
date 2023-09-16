@@ -14,7 +14,7 @@
     sshUser = "root";
     buildOn = "remote";
     substituteOnTarget = true;
-    hermetic = true;
+    hermetic = false;
   };
 
   boot = {
