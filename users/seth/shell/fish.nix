@@ -35,6 +35,10 @@
       last_history_item.body = "echo $history[1]";
     };
 
+    shellAbbrs = {
+      nixgc = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
+    };
+
     plugins = let
       mkFishPlugins = builtins.map (plugin: {
         name = plugin;
