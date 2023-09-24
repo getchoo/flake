@@ -7,6 +7,7 @@ alias f := fmt
 alias l := lint
 alias p := pre-commit
 alias sw := switch
+alias sd := switch-and-deploy
 alias t := test
 
 default:
@@ -37,10 +38,14 @@ dry-run:
     darwin-rebuild dry-run --verbose --flake .
 
 fmt:
-    pre-commit run alejandra && pre-commit run stylua
+    for fmt in "alejandra" "stylua"; do \
+      pre-commit run "$fmt"; \
+    done
 
 lint:
-    pre-commit run statix && pre-commit run deadnix
+    for linter in "nil" "statix" "deadnix"; do \
+      pre-commit run "$linter"; \
+    done
 
 pre-commit:
     pre-commit run
@@ -52,6 +57,8 @@ switch:
 [macos]
 switch:
     darwin-rebuild switch --verbose --flake .
+
+switch-and-deploy: switch deploy-all
 
 [linux]
 test:
