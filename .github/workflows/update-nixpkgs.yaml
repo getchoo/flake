@@ -14,5 +14,5 @@ jobs:
   update:
     uses: ./.github/workflows/update-lock.yaml
     with:
-      commit-msg: "flake: update nixpkgs inputs"
+      commit-msg: "flake: update nixpkgs"
       inputs: "nixpkgs nixpkgs-stable"
