@@ -199,11 +199,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1695527163,
-        "narHash": "sha256-kaOPTLmAqFLeRZpb7GtyHZTb6JGke1q6X4nKLPXkltc=",
+        "lastModified": 1695892753,
+        "narHash": "sha256-UUP5+b6Mg/yvwSswTH4OjeVqNTmL7VPm3Mv+BPDxS5o=",
         "owner": "getchoo",
         "repo": "guzzle_api",
-        "rev": "b7669b106d397f4823ef8cf52496053d624f0d7c",
+        "rev": "9c0e78b1b9a363dc2221a4d1861e33ced38744fe",
         "type": "github"
       },
       "original": {
