@@ -212,6 +212,26 @@
         "type": "github"
       }
     },
+    "haumea": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1693916916,
+        "narHash": "sha256-DxyrN17DER9VjpqbNj4huuJb6nTUg+NBga3Ttgtq6KU=",
+        "owner": "nix-community",
+        "repo": "haumea",
+        "rev": "abddd99c5e049215870f2d05d47c0ea52e176345",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "haumea",
+        "type": "github"
+      }
+    },
     "hm": {
       "inputs": {
         "nixpkgs": [
@@ -456,6 +476,7 @@
         "flake-utils": "flake-utils",
         "getchoo": "getchoo",
         "guzzle_api": "guzzle_api",
+        "haumea": "haumea",
         "hm": "hm",
         "lanzaboote": "lanzaboote",
         "nix-index-database": "nix-index-database",

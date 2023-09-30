@@ -55,6 +55,11 @@
       };
     };
 
+    haumea = {
+      url = "github:nix-community/haumea";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hm = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -119,19 +124,17 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = {
-    parts,
-    pre-commit,
-    ...
-  } @ inputs:
-    parts.lib.mkFlake {inherit inputs;} {
-      imports = [
-        pre-commit.flakeModule
+  outputs = {haumea, ...} @ inputs:
+    haumea.lib.load {
+      src = ./src;
+      inputs =
+        (removeAttrs inputs ["self"])
+        // (with inputs; {
+          self' = self;
+          inherit inputs;
+          inherit (nixpkgs) lib;
+        });
 
-        ./hosts
-        ./modules
-        ./parts
-        ./users
-      ];
+      transformer = haumea.lib.transformers.liftDefault;
     };
 }
