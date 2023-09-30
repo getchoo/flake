@@ -1,25 +1,19 @@
 {
+  lib,
+  config,
   inputs,
   self,
   ...
 }: let
   inherit (self.lib.configs) genHMModules mapHMUsers;
-  inherit (inputs) arkenfox getchoo nixpkgs nix-index-database nur;
+  pkgsFor = lib.genAttrs config.systems (system:
+    import inputs.nixpkgs {
+      inherit system;
+      overlays = with inputs; [nur.overlay getchoo.overlays.default];
+    });
 
-  users = let
-    seth = system: {
-      pkgs = import nixpkgs {
-        inherit system;
-        overlays = [nur.overlay getchoo.overlays.default];
-      };
-
-      modules = [
-        nix-index-database.hmModules.nix-index
-        arkenfox.hmModules.arkenfox
-      ];
-    };
-  in {
-    seth = seth "x86_64-linux";
+  users = {
+    seth = {pkgs = pkgsFor."x86_64-linux";};
   };
 in {
   flake = {

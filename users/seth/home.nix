@@ -1,8 +1,18 @@
 {
   lib,
   pkgs,
+  arkenfox,
+  nix-index-database,
   ...
 }: {
+  imports = [
+    ./desktop
+    ./programs
+    ./shell
+    arkenfox.hmModules.arkenfox
+    nix-index-database.hmModules.nix-index
+  ];
+
   home = let
     username = "seth";
     inherit (pkgs.stdenv) isLinux isDarwin;

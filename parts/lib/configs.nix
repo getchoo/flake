@@ -1,11 +1,7 @@
-{
-  inputs,
-  self,
-  ...
-}: let
-  inherit (builtins) attrNames mapAttrs;
+{inputs, ...}: let
+  inherit (builtins) mapAttrs;
   inherit (inputs) nixpkgs hm;
-  inherit (nixpkgs.lib) genAttrs optional;
+  inherit (nixpkgs.lib) optional;
 
   mkSystemCfg = name: {
     profile,
@@ -25,16 +21,20 @@
     };
 
   mkHMCfg = name: {
-    pkgs ? import nixpkgs {system = "x86_64-linux";},
+    pkgs ? nixpkgs.legacyPackages."x86_64-linux",
     extraSpecialArgs ? inputs,
     modules ? [],
   }:
     hm.lib.homeManagerConfiguration {
-      inherit extraSpecialArgs pkgs;
+      inherit pkgs;
+
+      extraSpecialArgs =
+        if extraSpecialArgs == inputs
+        then extraSpecialArgs
+        else extraSpecialArgs ++ inputs;
 
       modules =
         [
-          self.homeManagerModules.${name}
           ../../users/${name}/home.nix
 
           {
@@ -47,10 +47,7 @@
     };
 in {
   inherit mkHMCfg mkSystemCfg;
+
   mapHMUsers = mapAttrs mkHMCfg;
-
   mapSystems = mapAttrs mkSystemCfg;
-
-  genHMModules = users:
-    genAttrs (attrNames users) (name: import ../../users/${name}/module.nix);
 }

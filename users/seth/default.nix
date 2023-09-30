@@ -2,8 +2,6 @@
   config,
   lib,
   pkgs,
-  arkenfox,
-  nix-index-database,
   ...
 }: {
   users.users.seth = let
@@ -32,9 +30,6 @@
   home-manager.users.seth = {
     imports = [
       ./home.nix
-      ./module.nix
-      arkenfox.hmModules.arkenfox
-      nix-index-database.hmModules.nix-index
     ];
 
     nixpkgs.overlays = config.nixpkgs.overlays;
