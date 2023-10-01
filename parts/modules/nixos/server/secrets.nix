@@ -12,7 +12,7 @@ in {
   };
 
   config.age = let
-    baseDir = "${self}/secrets/hosts/${config.networking.hostName}";
+    baseDir = "${self}/parts/secrets/systems/${config.networking.hostName}";
   in
     mkIf cfg.enable {
       identityPaths = ["/etc/age/key"];

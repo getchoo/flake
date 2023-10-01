@@ -15,7 +15,7 @@ in {
 
   config = mkIf cfg.enable {
     age.secrets = let
-      baseDir = "${self}/secrets/hosts/${config.networking.hostName}";
+      baseDir = "${self}/parts/secrets/systems/${config.networking.hostName}";
     in
       mkIf cfg.ssh.enable {
         tailscaleAuthKey.file = "${baseDir}/tailscaleAuthKey.age";

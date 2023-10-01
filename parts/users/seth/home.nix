@@ -3,6 +3,8 @@
   pkgs,
   ...
 }: {
+  imports = [./.];
+
   home = let
     username = "seth";
     inherit (pkgs.stdenv) isLinux isDarwin;
@@ -14,7 +16,5 @@
       then "/home/${username}"
       else "/Users/${username}"
     );
-
-    stateVersion = "23.11";
   };
 }

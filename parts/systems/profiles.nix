@@ -1,8 +1,9 @@
 {
   inputs,
   self,
+  ...
 }: let
-  specialArgs = inputs // {inherit inputs;};
+  specialArgs = {inherit inputs self;};
 in {
   personal = {
     system = "x86_64-linux";
@@ -13,15 +14,15 @@ in {
       agenix.nixosModules.default
       hm.nixosModules.home-manager
       nur.nixosModules.nur
-
       self.nixosModules.default
-      ../users/seth
+
+      ../users/seth/system.nix
 
       {
         age = {
           identityPaths = ["/etc/age/key"];
           secrets = let
-            baseDir = "${self}/secrets/shared";
+            baseDir = "${self}/parts/secrets/shared";
           in {
             rootPassword.file = "${baseDir}/rootPassword.age";
             sethPassword.file = "${baseDir}/sethPassword.age";
@@ -30,6 +31,12 @@ in {
 
         base.enable = true;
         system.stateVersion = "23.11";
+
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          extraSpecialArgs = specialArgs;
+        };
       }
     ];
   };
@@ -39,21 +46,27 @@ in {
     inherit specialArgs;
     modules = with inputs; [
       hm.darwinModules.home-manager
-
-      ../users/seth
       self.darwinModules.default
+
+      ../users/seth/system.nix
 
       {
         base.enable = true;
         desktop.enable = true;
         system.stateVersion = 4;
 
-        home-manager.users.seth = {
-          imports = [
-            ../users/seth/darwin.nix
-          ];
+        home-manager = {
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          extraSpecialArgs = specialArgs;
 
-          getchoo.desktop.enable = false;
+          users.seth = {
+            imports = [
+              ../users/seth/darwin.nix
+            ];
+
+            getchoo.desktop.enable = false;
+          };
         };
       }
     ];
