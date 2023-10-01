@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  nixpkgs,
+  inputs,
   ...
 }: let
   cfg = config.server;
@@ -17,7 +17,7 @@ in {
   ];
 
   config = mkIf cfg.enable {
-    _module.args.unstable = nixpkgs.legacyPackages.${pkgs.system};
+    _module.args.unstable = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 
     base = {
       enable = true;

@@ -5,7 +5,7 @@
 }: {
   config = {
     age.secrets = {
-      miniflux.file = "${self}/secrets/hosts/${config.networking.hostName}/miniflux.age";
+      miniflux.file = "${self}/parts/secrets/systems/${config.networking.hostName}/miniflux.age";
     };
 
     services.miniflux = {

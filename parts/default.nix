@@ -1,8 +1,11 @@
-_: {
+{
   imports = [
-    ./dev.nix
     ./lib
+    ./modules
     ./overlays
+    ./systems
+    ./users
+    ./dev.nix
   ];
 
   systems = [

@@ -119,19 +119,8 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = {
-    parts,
-    pre-commit,
-    ...
-  } @ inputs:
+  outputs = {parts, ...} @ inputs:
     parts.lib.mkFlake {inherit inputs;} {
-      imports = [
-        pre-commit.flakeModule
-
-        ./hosts
-        ./modules
-        ./parts
-        ./users
-      ];
+      imports = [./parts];
     };
 }
