@@ -14,7 +14,7 @@ in {
   config.programs.firefox = mkIf (cfg.enable && cfg.arkenfoxConfig.enable) {
     arkenfox = {
       enable = true;
-      version = "115.1";
+      version = "117.0";
     };
 
     profiles.arkenfox.arkenfox =
