@@ -47,18 +47,25 @@ require("bufferline").setup({
 require("gitsigns").setup()
 
 ---- indent-blankline.nvim
-require("indent_blankline").setup({
-	filetype_exclude = {
-		"help",
-		"neo-tree",
-		"Trouble",
-		"lazy",
-		"mason",
-		"notify",
-		"toggleterm",
+require("ibl").setup({
+	exclude = {
+		filetype = {
+			"help",
+			"neo-tree",
+			"Trouble",
+			"lazy",
+			"mason",
+			"notify",
+			"toggleterm",
+		},
 	},
-	show_trailing_blankline_indent = false,
-	show_current_context = false,
+
+	indent = {
+		char = "│",
+		tab_char = "│",
+	},
+
+	scope = { enabled = false },
 })
 
 ---- lualine
