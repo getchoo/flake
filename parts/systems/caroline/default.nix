@@ -4,7 +4,7 @@ _: {
     gpg.enable = true;
   };
 
-  homebrew.casks = ["arc"];
+  homebrew.casks = ["altserver"];
 
   networking = rec {
     computerName = "caroline";
