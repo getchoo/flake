@@ -29,7 +29,6 @@ in {
           args = {no_quarantine = true;};
         };
       in [
-        "firefox"
         (lib.recursiveUpdate (noQuarantine "chromium") (skipSha "chromium"))
       ];
     };
