@@ -40,10 +40,7 @@
 
     getchoo = {
       url = "github:getchoo/nix-exprs";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        parts.follows = "parts";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     guzzle_api = {
