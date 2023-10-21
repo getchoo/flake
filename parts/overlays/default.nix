@@ -3,6 +3,5 @@
     (import ./btop.nix)
     (import ./discord.nix)
     (import ./fish.nix)
-    (import ./neovim.nix)
   ];
 }

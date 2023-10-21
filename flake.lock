@@ -150,6 +150,37 @@
         "type": "github"
       }
     },
+    "getchvim": {
+      "inputs": {
+        "neovim": "neovim",
+        "neovim-nix": "neovim-nix",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "parts": [
+          "parts"
+        ],
+        "pre-commit": [
+          "pre-commit"
+        ],
+        "utils": [
+          "flake-utils"
+        ]
+      },
+      "locked": {
+        "lastModified": 1697926294,
+        "narHash": "sha256-MzHRLhL2L4Su7rthqkdupxooETN3dq9waEmXSw4kKWQ=",
+        "owner": "getchoo",
+        "repo": "getchvim",
+        "rev": "ca59ebcf3dd17153b90a0ceca86af14db941ac3c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getchoo",
+        "repo": "getchvim",
+        "type": "github"
+      }
+    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -248,6 +279,83 @@
       "original": {
         "owner": "nix-community",
         "repo": "lanzaboote",
+        "type": "github"
+      }
+    },
+    "lazy-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1678889456,
+        "narHash": "sha256-R+sfPOuWfwbrNXUiKQcb8MHYqK+o5Pw8gkEaYaidqp0=",
+        "owner": "folke",
+        "repo": "lazy.nvim",
+        "rev": "6b55862d2d264f0b48e0b9e42cc2d14f136bed55",
+        "type": "github"
+      },
+      "original": {
+        "owner": "folke",
+        "repo": "lazy.nvim",
+        "type": "github"
+      }
+    },
+    "neovim": {
+      "inputs": {
+        "flake-utils": [
+          "getchvim",
+          "utils"
+        ],
+        "nixpkgs": [
+          "getchvim",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "contrib",
+        "lastModified": 1697918051,
+        "narHash": "sha256-fMlw0rw3sO5GsjQVowSo79fSnZQAMT+w1gAkuKuNxw0=",
+        "owner": "neovim",
+        "repo": "neovim",
+        "rev": "3a3e0251267a99eec6cfb2a058f9e992d01107fd",
+        "type": "github"
+      },
+      "original": {
+        "dir": "contrib",
+        "owner": "neovim",
+        "repo": "neovim",
+        "type": "github"
+      }
+    },
+    "neovim-nix": {
+      "inputs": {
+        "flake-parts": [
+          "getchvim",
+          "parts"
+        ],
+        "lazy-nvim": "lazy-nvim",
+        "neovim": [
+          "getchvim",
+          "neovim"
+        ],
+        "nixpkgs": [
+          "getchvim",
+          "nixpkgs"
+        ],
+        "pre-commit-nix": [
+          "getchvim",
+          "pre-commit"
+        ]
+      },
+      "locked": {
+        "lastModified": 1690613475,
+        "narHash": "sha256-DyhvApZb/NBZ92dBgr0deJi4XQZ6lppIc92aDGrj8OY=",
+        "owner": "willruggiano",
+        "repo": "neovim.nix",
+        "rev": "b9ba181c5e20287aeeda4203e02c73f2cff370c4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "willruggiano",
+        "repo": "neovim.nix",
         "type": "github"
       }
     },
@@ -440,6 +548,7 @@
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
         "getchoo": "getchoo",
+        "getchvim": "getchvim",
         "guzzle_api": "guzzle_api",
         "hm": "hm",
         "lanzaboote": "lanzaboote",

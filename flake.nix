@@ -43,6 +43,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    getchvim = {
+      url = "github:getchoo/getchvim";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        parts.follows = "parts";
+        pre-commit.follows = "pre-commit";
+        utils.follows = "flake-utils";
+      };
+    };
+
     guzzle_api = {
       url = "github:getchoo/guzzle_api";
       inputs = {
