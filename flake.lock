@@ -55,6 +55,29 @@
         "type": "github"
       }
     },
+    "catppuccin": {
+      "inputs": {
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1698002908,
+        "narHash": "sha256-Bge0FHsAQx1SQZyzpFl0EdgLC/RaYEToU2YVUMDlFvw=",
+        "owner": "Stonks3141",
+        "repo": "ctp-nix",
+        "rev": "5713b478b10c5ef703fd921d96ca6a3057c457b5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Stonks3141",
+        "repo": "ctp-nix",
+        "type": "github"
+      }
+    },
     "crane": {
       "inputs": {
         "nixpkgs": [
@@ -544,6 +567,7 @@
       "inputs": {
         "agenix": "agenix",
         "arkenfox": "arkenfox",
+        "catppuccin": "catppuccin",
         "darwin": "darwin",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",

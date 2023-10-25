@@ -4,6 +4,7 @@
     ./programs
     ./shell
     arkenfox.hmModules.arkenfox
+    catppuccin.homeManagerModules.catppuccin
     nix-index-database.hmModules.nix-index
   ];
 
