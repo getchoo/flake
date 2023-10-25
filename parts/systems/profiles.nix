@@ -12,6 +12,7 @@ in {
 
     modules = with inputs; [
       agenix.nixosModules.default
+      catppuccin.nixosModules.catppuccin
       hm.nixosModules.home-manager
       nur.nixosModules.nur
       self.nixosModules.default

@@ -29,8 +29,13 @@ in {
       restic
     ];
 
+    catppuccin.flavour = mkDefault "mocha";
+
     programs = {
-      btop.enable = mkDefault true;
+      btop = {
+        enable = mkDefault true;
+        catppuccin.enable = mkDefault true;
+      };
 
       direnv = {
         enable = mkDefault true;
@@ -42,19 +47,6 @@ in {
       nix-index-database.comma.enable = mkDefault true;
     };
 
-    xdg =
-      {
-        enable = mkDefault true;
-      }
-      // (mkIf config.programs.btop.enable {
-        configFile."btop/themes/catppuccin_mocha.theme".source =
-          pkgs.fetchFromGitHub {
-            owner = "catppuccin";
-            repo = "btop";
-            rev = "ecb8562bb6181bb9f2285c360bbafeb383249ec3";
-            sha256 = "sha256-ovVtupO5jWUw6cwA3xEzRe1juUB8ykfarMRVTglx3mk=";
-          }
-          + "/catppuccin_mocha.theme";
-      });
+    xdg.enable = mkDefault true;
   };
 }

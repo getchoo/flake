@@ -38,6 +38,14 @@
       };
     };
 
+    catppuccin = {
+      url = "github:Stonks3141/ctp-nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-compat.follows = "flake-compat";
+      };
+    };
+
     getchoo = {
       url = "github:getchoo/nix-exprs";
       inputs.nixpkgs.follows = "nixpkgs";
