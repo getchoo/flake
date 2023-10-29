@@ -11,11 +11,13 @@ in {
     home.packages = with pkgs;
       [
         adw-gtk3
+        papirus-icon-theme
         tuba
       ]
       ++ (with pkgs.gnomeExtensions; [
+        blur-my-shell
+        burn-my-windows
         caffeine
-        clipboard-history
         gradience
       ]);
 
@@ -26,9 +28,7 @@ in {
           disable-user-extensions = false;
 
           enabled-extensions = [
-            "appindicatorsupport@rgcjonas.gmail.com"
             "caffeine@patapon.info"
-            "clipboard-history@alexsaveau.dev"
           ];
 
           favorite-apps = [
@@ -40,9 +40,10 @@ in {
 
         "org/gnome/desktop/interface" = {
           color-scheme = "prefer-dark";
+          document-font-name = ''Noto Sans 11'';
           font-antialiasing = ''rgba'';
           font-name = ''Noto Sans 11'';
-          document-font-name = ''Noto Sans 11'';
+          icon-theme = ''Papirus-Dark'';
           monospace-font-name = ''FiraCode Nerd Font 10'';
         };
 
