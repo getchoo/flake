@@ -2,8 +2,8 @@
   description = "getchoo's flake for system configurations";
 
   nixConfig = {
-    extra-substituters = ["https://cache.garnix.io"];
-    extra-trusted-public-keys = ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
+    extra-substituters = ["https://getchoo.cachix.org"];
+    extra-trusted-public-keys = ["getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="];
   };
 
   inputs = {
@@ -140,12 +140,14 @@
     parts.lib.mkFlake {inherit inputs;} {
       imports = [
         inputs.pre-commit.flakeModule
+        inputs.getchoo.flakeModules.githubWorkflowGenerator
 
         ./modules
         ./overlay
         ./systems
         ./users
         ./dev.nix
+        ./workflow.nix
       ];
 
       systems = [

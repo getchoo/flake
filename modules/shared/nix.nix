@@ -19,8 +19,8 @@
       auto-optimise-store = pkgs.stdenv.isLinux;
       experimental-features = lib.mkDefault ["nix-command" "flakes" "auto-allocate-uids" "repl-flake"];
 
-      trusted-substituters = lib.mkDefault ["https://cache.garnix.io"];
-      trusted-public-keys = lib.mkDefault ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
+      trusted-substituters = lib.mkDefault ["https://getchoo.cachix.org"];
+      trusted-public-keys = lib.mkDefault ["getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="];
       nix-path = config.nix.nixPath;
     };
 
