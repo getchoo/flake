@@ -48,13 +48,13 @@ in {
           sleep 2
 
           # check if we are already authenticated to tailscale
-          status="$(${lib.getExe pkgs.tailscale} status -json | ${lib.getExe pkgs.jq}/bin/jq -r .BackendState)"
+          status="$(${lib.getExe pkgs.tailscale} status -json | ${lib.getExe pkgs.jq} -r .BackendState)"
           if [ $status = "Running" ]; then # if so, then do nothing
             exit 0
           fi
 
           # otherwise authenticate with tailscale
-          ${lib.getExe pkgs.tailscale}/bin/tailscale up --ssh \
+          ${lib.getExe pkgs.tailscale} up --ssh \
             --auth-key "file:${config.age.secrets.tailscaleAuthKey.path}"
         '';
       };
