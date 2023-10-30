@@ -12,6 +12,10 @@ on:
         required: false
         default: ""
         type: string
+    secrets:
+      token:
+        description: PAT for creating creating/merging the PR
+        required: true
 
 jobs:
   update:
@@ -27,11 +31,11 @@ jobs:
           commit-msg: ${{ inputs.commit-msg }}
           inputs: ${{ inputs.inputs }}
           pr-title: ${{ inputs.commit-msg }}
-          token: ${{ github.token }}
+          token: ${{ secrets.token }}
 
       - name: enable auto-merge
         shell: bash
         run: gh pr merge --auto --rebase "$PR_ID"
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.token }}
           PR_ID: ${{ steps.update.outputs.pull-request-number }}
