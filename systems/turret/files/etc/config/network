@@ -26,4 +26,5 @@ config interface 'lan'
 config interface 'wan'
 	option device 'lan1'
 	option proto 'dhcp'
+	option type 'bridge'
 

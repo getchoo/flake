@@ -3,36 +3,30 @@
   openwrt-imagebuilder,
   ...
 }: let
-  inherit (pkgs) runCommand;
-  inherit (pkgs.stdenv) mkDerivation;
-  inherit (openwrt-imagebuilder.lib) build profiles;
-  wrtProfiles = profiles {
+  wrtProfiles = openwrt-imagebuilder.lib.profiles {
     inherit pkgs;
     release = "22.03.3";
   };
-  config = mkDerivation {
-    name = "openwrt-config-files";
-    src = ./files;
-    installPhase = ''
-      mkdir -p $out
-      cp -r * $out/
-    '';
-  };
+
   image =
     wrtProfiles.identifyProfile "netgear_wac104"
     // {
       packages = ["https-dns-proxy"];
 
-      files = runCommand "image-files" {} ''
+      files = pkgs.runCommand "image-files" {} ''
         mkdir -p $out/etc/uci-defaults
+
         cat > $out/etc/uci-defaults/99-custom <<EOF
         uci -q batch << EOI
         set system.@system[0].hostname='turret'
         commit
         EOI
         EOF
-        cp -fr ${config}/etc/* $out/etc/
+
+        # copy custom files
+        cp -fr ${./files}/* $out/
+        chmod 0644 $out/etc/{config,dropbear}/*
       '';
     };
 in
-  build image
+  openwrt-imagebuilder.lib.build image
