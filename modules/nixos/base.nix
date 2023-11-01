@@ -2,20 +2,9 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }: let
   inherit (lib) mkDefault;
-  channelPath = i: "/etc/nix/channels/${i}";
-
-  mapInputs = fn: map fn (builtins.filter (n: n != "self") (builtins.attrNames inputs));
-
-  # yes this is a bad way to detect which option should be used (or exists)
-  # but i'm lazy. please do not copy this
-  passwordFile =
-    if lib.versionAtLeast config.system.stateVersion "23.11"
-    then "hashedPasswordFile"
-    else "passwordFile";
 in {
   imports = [
     ../shared
@@ -42,7 +31,7 @@ in {
   };
 
   nix = {
-    nixPath = mapInputs (i: "${i}=${channelPath i}");
+    channel.enable = mkDefault false;
     gc.dates = mkDefault "weekly";
     settings.trusted-users = ["root" "@wheel"];
   };
@@ -86,14 +75,18 @@ in {
     '';
   };
 
-  systemd.tmpfiles.rules =
-    mapInputs (i: "L+ ${channelPath i}     - - - - ${inputs.${i}.outPath}");
-
   users = {
     defaultUserShell = pkgs.bash;
     mutableUsers = false;
 
-    users.root = {
+    users.root = let
+      # yes this is a bad way to detect which option should be used (or exists)
+      # but i'm lazy. please do not copy this
+      passwordFile =
+        if lib.versionAtLeast config.system.stateVersion "23.11"
+        then "hashedPasswordFile"
+        else "passwordFile";
+    in {
       home = mkDefault "/root";
       uid = mkDefault config.ids.uids.root;
       group = mkDefault "root";

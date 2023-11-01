@@ -5,12 +5,14 @@
   ...
 }: {
   nix = {
-    registry =
-      {
-        n.flake = lib.mkDefault inputs.nixpkgs;
-      }
-      // (builtins.mapAttrs (_: flake: {inherit flake;})
-        (lib.filterAttrs (n: _: n != "nixpkgs") inputs));
+    registry = {
+      n.flake = lib.mkDefault inputs.nixpkgs;
+      self.flake = inputs.self;
+    };
+
+    nixPath = [
+      "nixpkgs=${inputs.nixpkgs.outPath}"
+    ];
 
     settings = {
       auto-optimise-store = pkgs.stdenv.isLinux;
