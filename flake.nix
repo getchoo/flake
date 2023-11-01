@@ -57,7 +57,6 @@
         nixpkgs.follows = "nixpkgs";
         parts.follows = "parts";
         pre-commit.follows = "pre-commit";
-        utils.follows = "flake-utils";
       };
     };
 
