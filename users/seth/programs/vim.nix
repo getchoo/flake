@@ -19,8 +19,8 @@ in {
       set packpath^=${dataHome}/vim,${configHome}/vim
       set packpath+=${configHome}/vim/after,${dataHome}/vim/after
 
-      let g:netrw_home = ${dataHome}."/vim"
-      call mkdir(${dataHome}."/vim/spell", 'p')
+      let g:netrw_home = "${dataHome}/vim"
+      call mkdir("${dataHome}/vim/spell", 'p')
 
       set backupdir=${stateHome}/vim/backup | call mkdir(&backupdir, 'p')
       set directory=${stateHome}/vim/swap   | call mkdir(&directory, 'p')
