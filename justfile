@@ -11,7 +11,8 @@ alias u := update
 alias ui := update-input
 
 rebuildArgs := "--verbose"
-rebuild := if os() == "macos" { "darwin-rebuild" } else { "nixos-rebuild" }
+rebuild := if os() == "macos" {"darwin-rebuild"} else {"nixos-rebuild"}
+asRoot := if os() == "linux" {"true"} else {"false"}
 
 default:
     @just --choose
@@ -19,14 +20,8 @@ default:
 [linux]
 [macos]
 [private]
-rebuild subcmd:
-    {{ rebuild }} {{ subcmd }} {{ rebuildArgs }} --flake .
-
-[linux]
-[macos]
-[private]
-rebuildRoot subcmd:
-    {{ if os() == "macos" { "" } else { "sudo " } }} {{ rebuild }} {{ subcmd }} {{ rebuildArgs }} --flake .
+rebuild subcmd root="false":
+    {{ if root == "true" {"sudo "} else {""} }}{{rebuild}} {{subcmd}} {{rebuildArgs}} --flake .
 
 [linux]
 [macos]
@@ -52,14 +47,14 @@ pre-commit:
 [linux]
 [macos]
 switch:
-    just rebuildRoot switch
+    just rebuild switch {{asRoot}}
 
 switch-and-deploy: switch deploy-all
 
 [linux]
 [macos]
 test:
-    just rebuildRoot test
+    just rebuild test {{asRoot}}
 
 update:
     nix flake update
