@@ -9,15 +9,16 @@
   basic nixosSystem/darwinSystem wrapper; can override
   the exact builder by supplying an argument
   */
-  mapSystems = builder:
-    lib.mapAttrs (name: args:
-      (args.builder or builder) (
-        (lib.filterAttrs (n: _: n != "builder") args) # use builder but don't include it in output
-        // {
-          modules = args.modules ++ [./${name}];
-          specialArgs = {inherit inputs self;};
-        }
-      ));
+  toSystem = builder: name: args:
+    (args.builder or builder) (
+      (builtins.removeAttrs args ["builder"])
+      // {
+        modules = args.modules ++ [./${name}];
+        specialArgs = {inherit inputs self;};
+      }
+    );
+
+  mapSystems = builder: lib.mapAttrs (toSystem builder);
 
   mapDarwin = mapSystems inputs.darwin.lib.darwinSystem;
   mapNixOS = mapSystems inputs.nixpkgs.lib.nixosSystem;

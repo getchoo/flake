@@ -10,6 +10,7 @@ _: prev: let
       else "Discord";
 
     flags = "--enable-gpu-rasterization --enable-zero-copy --enable-gpu-compositing --enable-native-gpu-memory-buffers --enable-oop-rasterization --enable-features=UseSkiaRenderer,WaylandWindowDecorations";
+
     desktopItem = prev.makeDesktopItem {
       name = pname;
       exec = "${builtins.replaceStrings [" "] [""] desktopName} ${flags}";
@@ -22,9 +23,7 @@ _: prev: let
   in
     if prev.stdenv.isLinux
     then d'.overrideAttrs (_: {inherit desktopItem;})
-    else if (pname == "discord" && prev.stdenv.isDarwin)
-    then d'
-    else d;
+    else d';
 in {
   discord = mkOverride prev.discord;
   discord-canary = mkOverride prev.discord-canary;

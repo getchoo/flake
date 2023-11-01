@@ -4,9 +4,9 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.services.xserver.desktopManager.gnome or {enable = false;};
+  enable = osConfig.services.xserver.desktopManager.gnome.enable or false;
 in {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf enable {
     home.packages = with pkgs;
       [
         adw-gtk3

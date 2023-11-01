@@ -1,17 +1,18 @@
 {
+  config,
   pkgs,
   inputs,
   ...
 }: {
   imports = [./.];
 
-  home = rec {
+  home = {
     username = "seth";
     homeDirectory =
       if pkgs.stdenv.isDarwin
-      then "/Users/${username}"
-      else "/home/${username}";
+      then "/Users/${config.home.username}"
+      else "/home/${config.home.username}";
   };
 
-  nixpkgs.overlays = with inputs; [nur.overlay getchoo.overlays.default];
+  nixpkgs.overlays = with inputs; [nur.overlay getchoo.overlays.default self.overlays.default];
 }

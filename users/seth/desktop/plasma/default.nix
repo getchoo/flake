@@ -5,10 +5,10 @@
   osConfig,
   ...
 }: let
-  cfg = osConfig.services.xserver.desktopManager.plasma5 or {enable = false;};
+  enable = osConfig.services.xserver.desktopManager.plasma5.enable or false;
   themeDir = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}";
 in {
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf enable {
     home.packages = with pkgs; [
       catppuccin-cursors
       (catppuccin-kde.override
