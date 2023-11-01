@@ -11,7 +11,7 @@
   fonts = {
     enableDefaultPackages = lib.mkDefault true;
 
-    packages = lib.mkDefault (with pkgs; [
+    packages = with pkgs; [
       corefonts
       fira-code
       (nerdfonts.override {fonts = ["FiraCode"];})
@@ -19,7 +19,7 @@
       noto-fonts-extra
       noto-fonts-emoji
       noto-fonts-cjk-sans
-    ]);
+    ];
 
     fontconfig = {
       enable = lib.mkDefault true;
