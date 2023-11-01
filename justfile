@@ -26,7 +26,7 @@ rebuild subcmd root="false":
 [linux]
 [macos]
 build:
-    just rebuild build
+    @just rebuild build
 
 check:
     nix flake check
@@ -39,7 +39,7 @@ deploy-all: (deploy "atlas")
 [linux]
 [macos]
 dry-run:
-    rebuild dry-run
+    @just rebuild dry-run
 
 pre-commit:
     pre-commit run
@@ -47,14 +47,14 @@ pre-commit:
 [linux]
 [macos]
 switch:
-    just rebuild switch {{asRoot}}
+    @just rebuild switch {{asRoot}}
 
 switch-and-deploy: switch deploy-all
 
 [linux]
 [macos]
 test:
-    just rebuild test {{asRoot}}
+    @just rebuild test {{asRoot}}
 
 update:
     nix flake update
