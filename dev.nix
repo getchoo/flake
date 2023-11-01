@@ -1,13 +1,6 @@
 {
-  lib,
-  inputs,
-  ...
-}: {
-  imports = [
-    inputs.pre-commit.flakeModule
-  ];
-
   perSystem = {
+    lib,
     pkgs,
     config,
     inputs',

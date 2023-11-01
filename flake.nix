@@ -137,6 +137,8 @@
   outputs = {parts, ...} @ inputs:
     parts.lib.mkFlake {inherit inputs;} {
       imports = [
+        inputs.pre-commit.flakeModule
+
         ./modules
         ./overlays
         ./systems
