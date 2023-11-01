@@ -24,6 +24,7 @@
             actionlint
             alejandra
             deadnix
+            fzf
             just
             nil
             statix

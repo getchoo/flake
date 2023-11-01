@@ -3,74 +3,69 @@ alias c := check
 alias d := deploy
 alias da := deploy-all
 alias dr := dry-run
-alias f := fmt
-alias l := lint
 alias p := pre-commit
 alias sw := switch
 alias sd := switch-and-deploy
 alias t := test
+alias u := update
+alias ui := update-input
+
+rebuildArgs := "--verbose"
+rebuild := if os() == "darwin" { "darwin-rebuild" } else { "nixos-rebuild" }
 
 default:
     @just --choose
 
 [linux]
-build:
-    nixos-rebuild build --verbose --flake .
+[macos]
+[private]
+rebuild subcmd:
+    {{ rebuild }} {{ subcmd }} {{ rebuildArgs }} --flake .
 
+[linux]
+[macos]
+[private]
+rebuildRoot subcmd:
+    {{ if os() == "macos" { "" } else { "sudo " } }} {{ rebuild }} {{ subcmd }} {{ rebuildArgs }} --flake .
+
+[linux]
 [macos]
 build:
-    darwin-rebuild build --verbose --flake .
+    just rebuild build
 
 check:
     nix flake check
 
-deploy HOST:
-    nix run .#{{ HOST }}
+deploy host:
+    nix run .#{{ host }}
 
 deploy-all: (deploy "atlas")
 
 [linux]
-dry-run:
-    nixos-rebuild dry-run --verbose --flake .
-
 [macos]
 dry-run:
-    darwin-rebuild dry-run --verbose --flake .
-
-fmt:
-    for fmt in "alejandra" "stylua"; do \
-      pre-commit run "$fmt"; \
-    done
-
-lint:
-    for linter in "nil" "statix" "deadnix"; do \
-      pre-commit run "$linter"; \
-    done
+    rebuild dry-run
 
 pre-commit:
     pre-commit run
 
 [linux]
-switch:
-    sudo nixos-rebuild switch --verbose --flake .
-
 [macos]
 switch:
-    darwin-rebuild switch --verbose --flake .
+    just rebuildRoot switch
 
 switch-and-deploy: switch deploy-all
 
 [linux]
-test:
-    sudo nixos-rebuild test --verbose --flake .
-
 [macos]
 test:
-    darwin-rebuild test --verbose --flake .
+    just rebuildRoot test
 
 update:
     nix flake update
 
-update-nixpkgs:
+update-input input:
     nix flake lock \
-    	--update-input nixpkgs --update-input nixpkgs-stable
+      --update-input {{ input }} \
+      --commit-lock-file \
+      --commit-lockfile-summary "flake: update {{ input }}"
