@@ -11,7 +11,7 @@ alias u := update
 alias ui := update-input
 
 rebuildArgs := "--verbose"
-rebuild := if os() == "darwin" { "darwin-rebuild" } else { "nixos-rebuild" }
+rebuild := if os() == "macos" { "darwin-rebuild" } else { "nixos-rebuild" }
 
 default:
     @just --choose
