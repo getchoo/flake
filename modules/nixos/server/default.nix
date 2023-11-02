@@ -39,6 +39,4 @@
 
     settings.allowed-users = [config.networking.hostName];
   };
-
-  security.sudo.enable = lib.mkDefault false;
 }
