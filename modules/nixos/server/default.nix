@@ -35,5 +35,5 @@
     settings.allowed-users = [config.networking.hostName];
   };
 
-  security.pam.enableSSHAgentAuth = true;
+  security.sudo.enable = lib.mkDefault false;
 }
