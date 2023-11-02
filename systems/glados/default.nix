@@ -6,8 +6,6 @@
   imports = [
     ./boot.nix
     ./hardware-configuration.nix
-    ../../modules/nixos/features/tailscale.nix
-    ../../modules/nixos/features/virtualisation.nix
     self.nixosModules.desktop
     self.nixosModules.gnome
   ];
@@ -48,17 +46,20 @@
     fwupd.enable = true;
   };
 
-  systemd = {
-    services."prepare-kexec".wantedBy = ["multi-user.target"];
-    tmpfiles.rules = let
-      nproc = 12;
-    in
-      builtins.map
-      (n: "w /sys/devices/system/cpu/cpu${builtins.toString n}/cpufreq/energy_performance_preference - - - - ${"balance_performance"}")
-      (lib.range 0 (nproc - 1));
-  };
+  # set energy preference for pstate driver
+  systemd.tmpfiles.rules = let
+    nproc = 12;
+  in
+    builtins.map
+    (n: "w /sys/devices/system/cpu/cpu${builtins.toString n}/cpufreq/energy_performance_preference - - - - ${"balance_performance"}")
+    (lib.range 0 (nproc - 1));
 
   powerManagement.cpuFreqGovernor = "powersave";
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+  };
 
   zramSwap = {
     enable = true;

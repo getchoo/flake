@@ -1,5 +1,10 @@
 {
-  homebrew.casks = ["altserver"];
+  homebrew.casks = [
+    "altserver"
+    "discord"
+    "spotify"
+    "prismlauncher"
+  ];
 
   networking = rec {
     computerName = "caroline";

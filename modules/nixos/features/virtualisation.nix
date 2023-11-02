@@ -5,17 +5,19 @@
   ...
 }: let
   cfg = config.features.virtualisation;
-  inherit (lib) mkEnableOption mkIf;
 in {
-  options.features.virtualisation.enable = mkEnableOption "enable podman";
+  options.features.virtualisation = {
+    enable = lib.mkEnableOption "enable podman";
+  };
 
-  config.virtualisation = mkIf cfg.enable {
+  config.virtualisation = lib.mkIf cfg.enable {
     podman = {
       enable = true;
-      enableNvidia = true;
+      enableNvidia = lib.mkDefault (config.hardware.nvidia.enable or false);
       extraPackages = with pkgs; [podman-compose];
       autoPrune.enable = true;
     };
+
     oci-containers.backend = "podman";
   };
 }

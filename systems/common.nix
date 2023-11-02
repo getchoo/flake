@@ -24,6 +24,7 @@ in {
     ++ [
       self.nixosModules.default
       self.nixosModules.hardware
+      self.nixosModules.features
 
       hmSetup
 
@@ -50,10 +51,6 @@ in {
     hmSetup
 
     {
-      home-manager.users.seth = {
-        desktop.enable = true;
-      };
-
       system.stateVersion = 4;
     }
   ];
@@ -61,9 +58,9 @@ in {
   server = [
     inputs.agenix.nixosModules.default
     self.nixosModules.default
+    self.nixosModules.features
     self.nixosModules.server
     self.nixosModules.services
-    ../modules/nixos/features/tailscale.nix
 
     {
       features.tailscale = {

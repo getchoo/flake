@@ -5,18 +5,16 @@
   ...
 }: let
   cfg = config.features.tailscale;
-  inherit (lib) mkDefault mkEnableOption mkIf optionalAttrs;
-
-  baseDir = ../../../secrets/systems/${config.networking.hostName};
+  secretsDir = ../../../secrets/systems/${config.networking.hostName};
 in {
   options.features.tailscale = {
-    enable = mkEnableOption "enable support for tailscale";
-    ssh.enable = mkEnableOption "enable support for tailscale ssh";
+    enable = lib.mkEnableOption "enable support for tailscale";
+    ssh.enable = lib.mkEnableOption "enable support for tailscale ssh";
   };
 
-  config = mkIf cfg.enable {
-    age.secrets = mkIf cfg.ssh.enable {
-      tailscaleAuthKey.file = "${baseDir}/tailscaleAuthKey.age";
+  config = lib.mkIf cfg.enable {
+    age.secrets = lib.mkIf cfg.ssh.enable {
+      tailscaleAuthKey.file = "${secretsDir}/tailscaleAuthKey.age";
     };
 
     networking.firewall =
@@ -24,16 +22,14 @@ in {
         allowedUDPPorts = [config.services.tailscale.port];
         trustedInterfaces = ["tailscale0"];
       }
-      // optionalAttrs cfg.ssh.enable {
+      // lib.optionalAttrs cfg.ssh.enable {
         allowedTCPPorts = [22];
       };
 
-    services = {
-      tailscale.enable = mkDefault true;
-    };
+    services.tailscale.enable = true;
 
     # https://tailscale.com/kb/1096/nixos-minecraft/
-    systemd.services = mkIf cfg.ssh.enable {
+    systemd.services = lib.mkIf cfg.ssh.enable {
       tailscale-autoconnect = {
         description = "Automatic connection to Tailscale";
 

@@ -24,9 +24,9 @@
     imports =
       [
         ./.
-        ./desktop
       ]
       ++ lib.optionals pkgs.stdenv.isLinux [
+        ./desktop
         ./programs/chromium.nix
         ./programs/firefox
         ./programs/mangohud.nix

@@ -23,6 +23,7 @@
 
     casks = [
       "chromium"
+      "iterm2"
     ];
   };
 
