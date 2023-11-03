@@ -1,12 +1,36 @@
+# part of this is from catppuccin's starship port
+
+#  MIT License
+#  
+#  Copyright (c) 2021 Catppuccin
+#  
+#  Permission is hereby granted, free of charge, to any person obtaining a copy
+#  of this software and associated documentation files (the "Software"), to deal
+#  in the Software without restriction, including without limitation the rights
+#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#  copies of the Software, and to permit persons to whom the Software is
+#  furnished to do so, subject to the following conditions:
+#  
+#  The above copyright notice and this permission notice shall be included in all
+#  copies or substantial portions of the Software.
+#  
+#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#  SOFTWARE.
+
 [aws]
 symbol = "  "
-
-[bun]
-format = "via [$symbol]($style)"
 
 [buf]
 format = "via [$symbol]($style)"
 symbol = " "
+
+[bun]
+format = "via [$symbol]($style)"
 
 [c]
 symbol = " "
@@ -30,11 +54,11 @@ format = "via [$symbol]($style)"
 format = "via [$symbol]($style)"
 symbol = " "
 
-[directory]
-read_only = " "
-
 [deno]
 format = "via [$symbol]($style)"
+
+[directory]
+read_only = " "
 
 [docker_context]
 symbol = " "
@@ -43,18 +67,18 @@ symbol = " "
 format = "[$symbol(🎯 $tfm )]($style)"
 
 [elixir]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 symbol = " "
 
 [elm]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 symbol = " "
 
 [erlang]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [fennel]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [fossil_branch]
 symbol = " "
@@ -63,11 +87,11 @@ symbol = " "
 symbol = " "
 
 [golang]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 symbol = " "
 
 [gradle]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [guix_shell]
 symbol = " "
@@ -76,11 +100,11 @@ symbol = " "
 symbol = " "
 
 [haxe]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 symbol = "⌘ "
 
 [helm]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [hg_branch]
 symbol = " "
@@ -89,39 +113,39 @@ symbol = " "
 symbol = " "
 
 [julia]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 symbol = " "
 
 [kotlin]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [lua]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 symbol = " "
 
 [memory_usage]
 symbol = " "
 
 [meson]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 symbol = "喝 "
 
 [nim]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 symbol = " "
 
 [nix_shell]
 symbol = " "
 
 [nodejs]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 symbol = " "
 
 [ocaml]
-format = 'via [$symbol(\($switch_indicator$switch_name\) )]($style)'
+format = "via [$symbol(\\($switch_indicator$switch_name\\) )]($style)"
 
 [opa]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [os.symbols]
 Alpine = " "
@@ -148,57 +172,85 @@ Mint = " "
 NetBSD = " "
 NixOS = " "
 OpenBSD = " "
-openSUSE = " "
 OracleLinux = " "
 Pop = " "
 Raspbian = " "
-Redhat = " "
 RedHatEnterprise = " "
+Redhat = " "
 Redox = " "
-Solus = "ﴱ "
 SUSE = " "
+Solus = "ﴱ "
 Ubuntu = " "
 Unknown = " "
 Windows = " "
+openSUSE = " "
 
 [package]
 symbol = " "
 
+[palettes.catppuccin_mocha]
+base = "#1e1e2e"
+blue = "#89b4fa"
+crust = "#11111b"
+flamingo = "#f2cdcd"
+green = "#a6e3a1"
+lavender = "#b4befe"
+mantle = "#181825"
+maroon = "#eba0ac"
+mauve = "#cba6f7"
+overlay0 = "#6c7086"
+overlay1 = "#7f849c"
+overlay2 = "#9399b2"
+peach = "#fab387"
+pink = "#f5c2e7"
+red = "#f38ba8"
+rosewater = "#f5e0dc"
+sapphire = "#74c7ec"
+sky = "#89dceb"
+subtext0 = "#a6adc8"
+subtext1 = "#bac2de"
+surface0 = "#313244"
+surface1 = "#45475a"
+surface2 = "#585b70"
+teal = "#94e2d5"
+text = "#cdd6f4"
+yellow = "#f9e2af"
+
 [perl]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [php]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [pijul_channel]
 symbol = "🪺 "
 
 [pulumi]
-format = 'via [$symbol$stack]($style)'
+format = "via [$symbol$stack]($style)"
 
 [purescript]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [python]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 symbol = " "
 
 [raku]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [red]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [rlang]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 symbol = "ﳒ "
 
 [ruby]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 symbol = " "
 
 [rust]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 symbol = " "
 
 [scala]
@@ -208,13 +260,13 @@ symbol = " "
 symbol = "🅢 "
 
 [swift]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [vagrant]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [vlang]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
 
 [zig]
-format = 'via [$symbol]($style)'
+format = "via [$symbol]($style)"
