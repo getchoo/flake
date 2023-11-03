@@ -35,6 +35,8 @@
       nix-direnv.enable = true;
     };
 
+    glamour.catppuccin.enable = true;
+
     ripgrep.enable = true;
 
     nix-index-database.comma.enable = true;
