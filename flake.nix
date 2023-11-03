@@ -42,7 +42,7 @@
       url = "github:Stonks3141/ctp-nix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "flake-compat";
+        home-manager.follows = "hm";
       };
     };
 
