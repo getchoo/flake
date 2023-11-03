@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   inputs,
@@ -20,6 +21,7 @@
 
       trusted-substituters = lib.mkDefault ["https://cache.garnix.io"];
       trusted-public-keys = lib.mkDefault ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
+      nix-path = config.nix.nixPath;
     };
 
     gc = {
