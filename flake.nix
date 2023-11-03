@@ -55,6 +55,7 @@
       url = "github:getchoo/getchvim";
       inputs = {
         nixpkgs.follows = "nixpkgs";
+        getchoo.follows = "getchoo";
         parts.follows = "parts";
         pre-commit.follows = "pre-commit";
       };
