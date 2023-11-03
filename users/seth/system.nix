@@ -31,7 +31,5 @@
         ./programs/firefox
         ./programs/mangohud.nix
       ];
-
-    nixpkgs.overlays = config.nixpkgs.overlays;
   };
 }
