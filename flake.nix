@@ -140,7 +140,7 @@
         inputs.pre-commit.flakeModule
 
         ./modules
-        ./overlays
+        ./overlay
         ./systems
         ./users
         ./dev.nix
