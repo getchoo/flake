@@ -22,7 +22,7 @@ in {
       };
 
       opengl = {
-        extraPackages = [pkgs.vaapiVdpau];
+        extraPackages = [(lib.setPrio (-11) pkgs.vaapiVdpau)];
       };
     };
 
