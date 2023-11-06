@@ -35,11 +35,14 @@ in {
     nixosConfigurations = mapNixOS {
       glados = {
         system = "x86_64-linux";
-        modules =
+        modules = with inputs;
           [
-            inputs.lanzaboote.nixosModules.lanzaboote
-            inputs.nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
-            inputs.nixos-hardware.nixosModules.common-pc-ssd
+            lanzaboote.nixosModules.lanzaboote
+            nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
+            nixos-hardware.nixosModules.common-pc-ssd
+            {
+              hardware.nvidia.modesetting.enable = true;
+            }
           ]
           ++ nixos;
       };
