@@ -13,7 +13,7 @@ in {
   config.virtualisation = lib.mkIf cfg.enable {
     podman = {
       enable = true;
-      enableNvidia = lib.mkDefault (config.hardware.nvidia.enable or false);
+      enableNvidia = lib.mkDefault (builtins.elem "nvidia" (config.services.xserver.videoDrivers or []));
       extraPackages = with pkgs; [podman-compose];
       autoPrune.enable = true;
     };

@@ -8,6 +8,5 @@
     budgie = ./desktop/budgie;
     server = ./server;
     services = ./services;
-    hardware = ./hardware;
   };
 }
