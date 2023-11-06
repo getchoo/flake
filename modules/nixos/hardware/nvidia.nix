@@ -22,9 +22,6 @@ in {
       };
 
       opengl = {
-        enable = true;
-        # make steam work
-        driSupport32Bit = true;
         extraPackages = [pkgs.vaapiVdpau];
       };
     };
