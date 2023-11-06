@@ -38,6 +38,8 @@ in {
         modules =
           [
             inputs.lanzaboote.nixosModules.lanzaboote
+            inputs.nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
+            inputs.nixos-hardware.nixosModules.common-pc-ssd
           ]
           ++ nixos;
       };

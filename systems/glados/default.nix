@@ -25,11 +25,6 @@
     virtualisation.enable = true;
   };
 
-  hardware = {
-    nvidia.enable = true;
-    ssd.enable = true;
-  };
-
   home-manager.users.seth = {
     desktop.enable = true;
   };

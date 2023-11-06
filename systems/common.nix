@@ -22,7 +22,6 @@ in {
     ])
     ++ [
       self.nixosModules.default
-      self.nixosModules.hardware
       self.nixosModules.features
 
       hmSetup
