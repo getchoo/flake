@@ -23,6 +23,7 @@
 
     fontconfig = {
       enable = lib.mkDefault true;
+      cache32Bit = true;
       defaultFonts = lib.mkDefault {
         serif = ["Noto Serif"];
         sansSerif = ["Noto Sans"];
