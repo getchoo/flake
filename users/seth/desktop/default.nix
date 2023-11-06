@@ -10,6 +10,7 @@
     ./budgie
     ./gnome
     ./plasma
+    ./sway
   ];
 
   config = lib.mkIf config.desktop.enable {

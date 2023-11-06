@@ -7,24 +7,20 @@
     enable = true;
     extraOptions = ["--unsupported-gpu"];
 
-    wrapperFeatures = {
-      base = true;
-      gtk = true;
-    };
+    wrapperFeatures = lib.genAttrs ["base" "gtk"] (lib.const true);
 
     extraPackages = with pkgs; [
-      grim
+      dmenu
+      fuzzel
       gnome.seahorse
       libnotify
       mako
-      slurp
       swaycontrib.grimshot
       swaylock
       swayidle
       swww
       waybar
       wezterm
-      rofi
     ];
   };
 
