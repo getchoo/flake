@@ -8,5 +8,6 @@
     budgie = ./desktop/budgie;
     server = ./server;
     services = ./services;
+    sway = ./desktop/sway;
   };
 }
