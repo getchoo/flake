@@ -32,9 +32,9 @@
       url = "github:dwarfmaster/arkenfox-nixos";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "flake-compat";
+        flake-compat.follows = "pre-commit/flake-compat";
         pre-commit.follows = "pre-commit";
-        flake-utils.follows = "flake-utils";
+        flake-utils.follows = "pre-commit/flake-utils";
       };
     };
 
@@ -79,9 +79,9 @@
       url = "github:nix-community/lanzaboote";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "flake-compat";
+        flake-compat.follows = "pre-commit/flake-compat";
         flake-parts.follows = "parts";
-        flake-utils.follows = "flake-utils";
+        flake-utils.follows = "pre-commit/flake-utils";
         pre-commit-hooks-nix.follows = "pre-commit";
       };
     };
@@ -102,8 +102,8 @@
       url = "github:nix-community/NixOS-WSL";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "flake-compat";
-        flake-utils.follows = "flake-utils";
+        flake-compat.follows = "pre-commit/flake-compat";
+        flake-utils.follows = "pre-commit/flake-utils";
       };
     };
 
@@ -119,21 +119,8 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         nixpkgs-stable.follows = "nixpkgs";
-        flake-compat.follows = "flake-compat";
-        flake-utils.follows = "flake-utils";
       };
     };
-
-    # ------------------------------
-    # -- these are just to avoid having multiple versions in flake.lock
-    # ------------------------------
-
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
-
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = {parts, ...} @ inputs:

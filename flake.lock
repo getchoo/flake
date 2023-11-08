@@ -29,9 +29,11 @@
     "arkenfox": {
       "inputs": {
         "flake-compat": [
+          "pre-commit",
           "flake-compat"
         ],
         "flake-utils": [
+          "pre-commit",
           "flake-utils"
         ],
         "nixpkgs": [
@@ -273,12 +275,14 @@
       "inputs": {
         "crane": "crane",
         "flake-compat": [
+          "pre-commit",
           "flake-compat"
         ],
         "flake-parts": [
           "parts"
         ],
         "flake-utils": [
+          "pre-commit",
           "flake-utils"
         ],
         "nixpkgs": [
@@ -361,9 +365,11 @@
     "nixos-wsl": {
       "inputs": {
         "flake-compat": [
+          "pre-commit",
           "flake-compat"
         ],
         "flake-utils": [
+          "pre-commit",
           "flake-utils"
         ],
         "nixpkgs": [
@@ -471,12 +477,8 @@
     },
     "pre-commit": {
       "inputs": {
-        "flake-compat": [
-          "flake-compat"
-        ],
-        "flake-utils": [
-          "flake-utils"
-        ],
+        "flake-compat": "flake-compat",
+        "flake-utils": "flake-utils",
         "gitignore": "gitignore",
         "nixpkgs": [
           "nixpkgs"
@@ -505,8 +507,6 @@
         "arkenfox": "arkenfox",
         "catppuccin": "catppuccin",
         "darwin": "darwin",
-        "flake-compat": "flake-compat",
-        "flake-utils": "flake-utils",
         "getchoo": "getchoo",
         "getchvim": "getchvim",
         "guzzle_api": "guzzle_api",
