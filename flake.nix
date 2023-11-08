@@ -55,7 +55,6 @@
       url = "github:getchoo/getchvim";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        getchoo.follows = "getchoo";
         parts.follows = "parts";
         pre-commit.follows = "pre-commit";
       };
@@ -84,6 +83,11 @@
         flake-utils.follows = "pre-commit/flake-utils";
         pre-commit-hooks-nix.follows = "pre-commit";
       };
+    };
+
+    nix2workflow = {
+      url = "github:getchoo/nix2workflow";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
     nixinate = {
@@ -127,7 +131,7 @@
     parts.lib.mkFlake {inherit inputs;} {
       imports = [
         inputs.pre-commit.flakeModule
-        inputs.getchoo.flakeModules.githubWorkflowGenerator
+        inputs.nix2workflow.flakeModule
 
         ./modules
         ./overlay
