@@ -33,8 +33,5 @@ jobs:
             oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
             tags: tag:gha
 
-      - name: enter dev shell
-        run: nix develop
-
       - name: deploy all systems
-        run: just da
+        run: nix run nixpkgs#just deploy-all
