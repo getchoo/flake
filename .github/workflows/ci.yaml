@@ -54,13 +54,13 @@ jobs:
 
       - name: install nix
         if: matrix.arch != 'aarch64'
-        uses: nixbuild/nix-quick-install-action@v26
+        uses: DeterminateSystems/nix-installer-action@v7
 
       - name: install nix (with aarch64)
         if: matrix.arch == 'aarch64'
-        uses: nixbuild/nix-quick-install-action@v26
+        uses: DeterminateSystems/nix-installer-action@v7
         with:
-          nix_conf: "extra-platforms = aarch64-linux arm-linux"
+          extra-conf: "extra-platforms = aarch64-linux arm-linux"
 
       - name: setup cachix
         uses: cachix/cachix-action@master
@@ -84,7 +84,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: install nix
-        uses: nixbuild/nix-quick-install-action@v26
+        uses: DeterminateSystems/nix-installer-action@v7
 
       - name: setup cachix
         uses: cachix/cachix-action@master
