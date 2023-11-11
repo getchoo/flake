@@ -33,5 +33,16 @@ jobs:
             oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
             tags: tag:gha
 
+      - name: disable host key verification for ssh
+        run: |
+          set -eux
+
+          [ ! -d ~/.ssh ] && mkdir -p ~/.ssh
+          cat >> ~/.ssh/config << EOF
+          Host *
+              StrictHostKeyChecking no
+              UserKnownHostsFile=/dev/null
+          EOF
+
       - name: deploy all systems
         run: nix run nixpkgs#just deploy-all
