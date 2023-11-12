@@ -222,32 +222,6 @@
         "type": "github"
       }
     },
-    "guzzle_api": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "parts": [
-          "parts"
-        ],
-        "pre-commit": [
-          "pre-commit"
-        ]
-      },
-      "locked": {
-        "lastModified": 1699129334,
-        "narHash": "sha256-4GDfY3GaBcFo9xXASiuJocyRX5KtmOLQpveOT6gsnaw=",
-        "owner": "getchoo",
-        "repo": "guzzle_api",
-        "rev": "3f14e61bd35922e13f418a08d50915ca0d75a379",
-        "type": "github"
-      },
-      "original": {
-        "owner": "getchoo",
-        "repo": "guzzle_api",
-        "type": "github"
-      }
-    },
     "hm": {
       "inputs": {
         "nixpkgs": [
@@ -526,7 +500,6 @@
         "darwin": "darwin",
         "getchoo": "getchoo",
         "getchvim": "getchvim",
-        "guzzle_api": "guzzle_api",
         "hm": "hm",
         "lanzaboote": "lanzaboote",
         "nix-index-database": "nix-index-database",

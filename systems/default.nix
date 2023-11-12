@@ -59,11 +59,7 @@ in {
       atlas = {
         builder = inputs.nixpkgs-stable.lib.nixosSystem;
         system = "aarch64-linux";
-        modules =
-          [
-            inputs.guzzle_api.nixosModules.default
-          ]
-          ++ server;
+        modules = server;
       };
     };
 

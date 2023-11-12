@@ -29,16 +29,6 @@
   };
 
   services = {
-    guzzle-api = {
-      enable = true;
-      domain = "api.${config.networking.domain}";
-      nginx = {
-        enableACME = true;
-        acmeRoot = null;
-        addSSL = true;
-      };
-    };
-
     resolved.enable = false;
   };
 

@@ -60,15 +60,6 @@
       };
     };
 
-    guzzle_api = {
-      url = "github:getchoo/guzzle_api";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        parts.follows = "parts";
-        pre-commit.follows = "pre-commit";
-      };
-    };
-
     hm = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
