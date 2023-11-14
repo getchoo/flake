@@ -1,0 +1,7 @@
+builds:
+  exclude: []
+  include:
+    - "checks.*.*"
+    - "devShells.x86_64-linux.default"
+    - "nixosConfigurations.*"
+    - "homeConfigurations.seth"
