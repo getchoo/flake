@@ -512,7 +512,8 @@
         "nur": "nur",
         "openwrt-imagebuilder": "openwrt-imagebuilder",
         "parts": "parts",
-        "pre-commit": "pre-commit"
+        "pre-commit": "pre-commit",
+        "teawiebot": "teawiebot"
       }
     },
     "rust-overlay": {
@@ -552,6 +553,32 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "teawiebot": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "parts": [
+          "parts"
+        ],
+        "pre-commit": [
+          "pre-commit"
+        ]
+      },
+      "locked": {
+        "lastModified": 1699920098,
+        "narHash": "sha256-KWqQZynu3MJ/jS2ySaTVLqH8JqFQoEs9B2rW6oU6wvo=",
+        "owner": "getchoo",
+        "repo": "teawiebot",
+        "rev": "928d1ab5caa5ad1f6e22a869686c77626e53e7e0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getchoo",
+        "repo": "teawiebot",
         "type": "github"
       }
     }

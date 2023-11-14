@@ -17,6 +17,8 @@
     hermetic = false;
   };
 
+  age.secrets.teawiebot.file = ../../secrets/systems/atlas/teawieBot.age;
+
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
@@ -30,6 +32,10 @@
 
   services = {
     resolved.enable = false;
+    teawiebot = {
+      enable = true;
+      environmentFile = config.age.secrets.teawiebot.path;
+    };
   };
 
   users.users.atlas = {

@@ -14,4 +14,5 @@ in {
   "systems/atlas/tailscaleAuthKey.age".publicKeys = atlas;
   "systems/atlas/cloudflaredCreds.age".publicKeys = atlas;
   "systems/atlas/cloudflareApiKey.age".publicKeys = atlas;
+  "systems/atlas/teawieBot.age".publicKeys = atlas;
 }

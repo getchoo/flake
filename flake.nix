@@ -116,6 +116,15 @@
         nixpkgs-stable.follows = "nixpkgs";
       };
     };
+
+    teawiebot = {
+      url = "github:getchoo/teawiebot";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        parts.follows = "parts";
+        pre-commit.follows = "pre-commit";
+      };
+    };
   };
 
   outputs = {parts, ...} @ inputs:

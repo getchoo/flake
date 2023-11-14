@@ -59,7 +59,11 @@ in {
       atlas = {
         builder = inputs.nixpkgs-stable.lib.nixosSystem;
         system = "aarch64-linux";
-        modules = server;
+        modules =
+          [
+            inputs.teawiebot.nixosModules.default
+          ]
+          ++ server;
       };
     };
 
