@@ -9,8 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    # only run after garnix
-    if: github.event.app.slug == 'garnix-ci'
+    # only run after garnix succeeds
+    if: github.event.check_suite.app.slug == 'garnix-ci' && github.event.check_suite.conclusion == 'success'
     steps:
       - uses: actions/checkout@v4
 
