@@ -1,16 +1,14 @@
 name: deploy systems
 
 on:
-  check_suite:
-    types: [completed]
+  #check_suite:
+  #  types: [completed]
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    # only run after garnix succeeds
-    if: github.event.check_suite.app.slug == 'garnix-ci' && github.event.check_suite.conclusion == 'success'
     steps:
       - uses: actions/checkout@v4
 
