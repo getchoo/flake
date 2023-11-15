@@ -1,8 +1,8 @@
 name: deploy systems
 
 on:
-  #check_suite:
-  #  types: [completed]
+  push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -34,4 +34,7 @@ jobs:
           EOF
 
       - name: deploy all systems
-        run: nix run nixpkgs#just deploy-all
+        run: |
+          nix develop --accept-flake-config \
+            --command bash \
+            --comand "just deploy-all"

@@ -37,7 +37,7 @@ there are some amazing tools i use to make/manage this flake that i would highly
 - [home-manager](https://github.com/nix-community/home-manager)
 - [agenix](https://github.com/ryantm/agenix)
 - [flake-parts](https://github.com/hercules-ci/flake-parts)
-- [nixinate](https://github.com/MatthewCroughan/nixinate)
+- [deploy-rs](https://github.com/serokell/deploy-rs)
 - [lanzaboote](https://github.com/nix-community/lanzaboote)
 - [nixos-wsl](https://github.com/nix-community/nixos-wsl)
 - [nix-openwrt-imagebuilder](https://github.com/astro/nix-openwrt-imagebuilder)

@@ -24,6 +24,7 @@
             actionlint
             alejandra
             deadnix
+            deploy-rs
             fzf
             just
             nil
