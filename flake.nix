@@ -46,15 +46,6 @@
       };
     };
 
-    deploy = {
-      url = "github:serokell/deploy-rs";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        utils.follows = "pre-commit/flake-utils";
-        flake-compat.follows = "pre-commit/flake-compat";
-      };
-    };
-
     getchoo = {
       url = "github:getchoo/nix-exprs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -83,6 +74,11 @@
         flake-utils.follows = "pre-commit/flake-utils";
         pre-commit-hooks-nix.follows = "pre-commit";
       };
+    };
+
+    nixinate = {
+      url = "github:MatthewCroughan/nixinate";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-index-database = {

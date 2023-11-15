@@ -32,10 +32,14 @@ check:
     nix flake check
 
 deploy host:
-    deploy -s .#{{ host }}
+    nix run .#{{ host }}
 
 deploy-all:
-    deploy -s
+    nix eval \
+      --json ".#apps.x86_64-linux" \
+      --apply builtins.attrNames \
+      | , jq -c '.[]' | grep -v "dry-run" \
+      | while read -r c; do nix run ".#$c"; done
 
 [linux]
 [macos]

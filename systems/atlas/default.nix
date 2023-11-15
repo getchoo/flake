@@ -9,6 +9,14 @@
     ./nginx.nix
   ];
 
+  _module.args.nixinate = {
+    host = "atlas";
+    sshUser = "root";
+    buildOn = "remote";
+    substituteOnTarget = true;
+    hermetic = false;
+  };
+
   age.secrets.teawiebot.file = ../../secrets/systems/atlas/teawieBot.age;
 
   boot = {
