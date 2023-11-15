@@ -9,7 +9,7 @@
     pre-commit = {
       settings.hooks = {
         actionlint.enable = true;
-        alejandra.enable = true;
+        ${config.formatter.pname}.enable = true;
         deadnix.enable = true;
         nil.enable = true;
         statix.enable = true;
@@ -22,12 +22,17 @@
         packages = with pkgs;
           [
             actionlint
-            alejandra
+
+            # nix
+            config.formatter
             deadnix
-            fzf
-            just
             nil
             statix
+
+            # utils
+            fzf
+            just
+            jq
           ]
           ++ lib.optional stdenv.isLinux inputs'.agenix.packages.agenix;
       };

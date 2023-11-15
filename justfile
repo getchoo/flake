@@ -38,7 +38,7 @@ deploy-all:
     nix eval \
       --json ".#apps.x86_64-linux" \
       --apply builtins.attrNames \
-      | , jq -c '.[]' | grep -v "dry-run" \
+      | jq -c '.[]' | grep -v "dry-run" \
       | while read -r c; do nix run ".#$c"; done
 
 [linux]
