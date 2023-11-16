@@ -121,6 +121,28 @@
         "type": "github"
       }
     },
+    "fenix": {
+      "inputs": {
+        "nixpkgs": [
+          "teawiebot",
+          "nixpkgs"
+        ],
+        "rust-analyzer-src": "rust-analyzer-src"
+      },
+      "locked": {
+        "lastModified": 1699424512,
+        "narHash": "sha256-ysy/MYHkdEhqCSnc8oG9ZS054nCkJgHMORDb1o7NPL8=",
+        "owner": "nix-community",
+        "repo": "fenix",
+        "rev": "dfaf3a97fe595a18bf9d55cda3416c17fe906f0f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "fenix",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -275,6 +297,27 @@
       "original": {
         "owner": "nix-community",
         "repo": "lanzaboote",
+        "type": "github"
+      }
+    },
+    "naersk": {
+      "inputs": {
+        "nixpkgs": [
+          "teawiebot",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1698420672,
+        "narHash": "sha256-/TdeHMPRjjdJub7p7+w55vyABrsJlt5QkznPYy55vKA=",
+        "owner": "nix-community",
+        "repo": "naersk",
+        "rev": "aeb58d5e8faead8980a807c840232697982d47b9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "naersk",
         "type": "github"
       }
     },
@@ -495,6 +538,23 @@
         "teawiebot": "teawiebot"
       }
     },
+    "rust-analyzer-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1699395221,
+        "narHash": "sha256-FPuZhacqpdozOpTivkkqITt78S8WzFyXxF+LXW14l20=",
+        "owner": "rust-lang",
+        "repo": "rust-analyzer",
+        "rev": "3b7c7f97e4a7bb253a8d398ee4f8346f6cf2817b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rust-lang",
+        "ref": "nightly",
+        "repo": "rust-analyzer",
+        "type": "github"
+      }
+    },
     "rust-overlay": {
       "inputs": {
         "flake-utils": [
@@ -537,6 +597,8 @@
     },
     "teawiebot": {
       "inputs": {
+        "fenix": "fenix",
+        "naersk": "naersk",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -548,11 +610,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1699920098,
-        "narHash": "sha256-KWqQZynu3MJ/jS2ySaTVLqH8JqFQoEs9B2rW6oU6wvo=",
+        "lastModified": 1700113563,
+        "narHash": "sha256-5mbfuWMJd/g0K7lRqMEZM0BgBvoum3OUA0VXFeEbY6E=",
         "owner": "getchoo",
         "repo": "teawiebot",
-        "rev": "928d1ab5caa5ad1f6e22a869686c77626e53e7e0",
+        "rev": "63b1ccaa01a75acd310b550084c964b946a66f90",
         "type": "github"
       },
       "original": {
