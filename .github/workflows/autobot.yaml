@@ -1,4 +1,4 @@
-name: auto-merge dependabot
+name: Auto-merge Dependabot
 
 on: pull_request
 
@@ -17,7 +17,7 @@ jobs:
         with:
           github-token: ${{ github.token }}
 
-      - name: enable auto-merge
+      - name: Enable auto-merge
         if: steps.metadata.outputs.update-type == 'version-update:semver-patch'
         run: gh pr merge --auto --rebase "$PR"
         env:

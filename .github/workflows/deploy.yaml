@@ -1,4 +1,4 @@
-name: deploy systems
+name: Deploy systems
 
 on:
   check_suite:
@@ -22,28 +22,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: install nix
+      - name: Install Nix
         uses: nixbuild/nix-quick-install-action@v26
 
-      - name: connect to tailscale
+      - name: Connect to Tailscale
         uses: tailscale/github-action@v2
         with:
-            oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
-            oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
-            tags: tag:gha
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:gha
 
-      - name: disable host key verification for ssh
+      - name:
         run: |
           set -eux
 
           [ ! -d ~/.ssh ] && mkdir -p ~/.ssh
-          cat >> ~/.ssh/config << EOF
-          Host *
-              StrictHostKeyChecking no
-              UserKnownHostsFile=/dev/null
-          EOF
+          pubkeys=(
+            "atlas ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC7YiSYYx/+zmVOPSCERHzSsMeUQtA+Vt1W0sLUw4YhK"
+          )
 
-      - name: deploy all systems
+          for key in "${pubkeys[@]}"; do echo "$key" >> ~/.ssh/known_hosts; done
+
+      - name: Run deploy
         run: |
           nix develop --accept-flake-config \
             --command bash \

@@ -1,4 +1,4 @@
-name: update flake lock
+name: Update flake.lock
 
 on:
   workflow_call:
@@ -20,11 +20,14 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
-      - uses: nixbuild/nix-quick-install-action@v26
 
-      - name: update lockfile
+      - name: Install Nix
+        uses: nixbuild/nix-quick-install-action@v26
+
+      - name: Update lockfile & make PR
         uses: DeterminateSystems/update-flake-lock@v20
         id: update
         with:
@@ -33,7 +36,7 @@ jobs:
           pr-title: ${{ inputs.commit-msg }}
           token: ${{ secrets.token }}
 
-      - name: enable auto-merge
+      - name: Enable auto-merge
         shell: bash
         run: gh pr merge --auto --rebase "$PR_ID"
         env:

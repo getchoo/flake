@@ -1,4 +1,4 @@
-name: update nixpkgs flake inputs
+name: Update nixpkgs flake inputs
 
 on:
   schedule:

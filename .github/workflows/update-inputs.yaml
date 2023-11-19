@@ -1,4 +1,4 @@
-name: update all flake inputs
+name: Update all flake inputs
 
 on:
   schedule:
