@@ -1,7 +1,7 @@
 {config, ...}: {
   config = {
     age.secrets = {
-      miniflux.file = ../../secrets/systems/${config.networking.hostName}/miniflux.age;
+      miniflux.file = ../../secrets/${config.networking.hostName}/miniflux.age;
     };
 
     services.miniflux = {

@@ -12,7 +12,7 @@ in {
 
   config = mkIf cfg.enable {
     age.secrets.cloudflaredCreds = {
-      file = ../../../secrets/systems/${config.networking.hostName}/cloudflaredCreds.age;
+      file = ../../../secrets/${config.networking.hostName}/cloudflaredCreds.age;
       mode = "400";
       owner = "cloudflared";
       group = "cloudflared";

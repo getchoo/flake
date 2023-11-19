@@ -7,7 +7,7 @@
   cfg = config.server.services.hercules-ci;
   inherit (lib) mkEnableOption mkIf;
 
-  baseDir = ../../../secrets/systems/${config.networking.hostName};
+  baseDir = ../../../secrets/${config.networking.hostName};
   hercArgs = {
     mode = "400";
     owner = "hercules-ci-agent";

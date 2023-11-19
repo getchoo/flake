@@ -1,7 +1,7 @@
-{config, ...}: {
-  age = let
-    baseDir = ../../../secrets/systems/${config.networking.hostName};
-  in {
+{config, ...}: let
+  baseDir = ../../../secrets/${config.networking.hostName};
+in {
+  age = {
     identityPaths = ["/etc/age/key"];
 
     secrets = {

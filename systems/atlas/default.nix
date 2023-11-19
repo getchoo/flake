@@ -17,7 +17,7 @@
     hermetic = false;
   };
 
-  age.secrets.teawiebot.file = ../../secrets/systems/atlas/teawieBot.age;
+  age.secrets.teawiebot.file = ../../secrets/atlas/teawieBot.age;
 
   boot = {
     loader.systemd-boot.enable = true;

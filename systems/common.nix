@@ -26,11 +26,11 @@ in {
 
       hmSetup
 
-      {
+      ({config, ...}: {
         age = {
           identityPaths = ["/etc/age/key"];
           secrets = let
-            baseDir = ../secrets/shared;
+            baseDir = ../secrets/${config.networking.hostName};
           in {
             rootPassword.file = "${baseDir}/rootPassword.age";
             sethPassword.file = "${baseDir}/sethPassword.age";
@@ -38,7 +38,7 @@ in {
         };
 
         system.stateVersion = "23.11";
-      }
+      })
     ];
 
   darwin = [
