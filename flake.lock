@@ -610,11 +610,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1700272492,
-        "narHash": "sha256-DzpsYjoqBPnqShh7GXPF6hmxTnPyj8jp0jBnyFPw/rg=",
+        "lastModified": 1700467527,
+        "narHash": "sha256-0LogGMrtBYe78Uu5HVh6WHlQ06WXjoD1CCR/EvLT1r8=",
         "owner": "getchoo",
         "repo": "teawiebot",
-        "rev": "cfe7ce98f1824e890beb0feba3591e457e5a4b79",
+        "rev": "1ee27a32d03bdc536f87fe065c5978059efa7f37",
         "type": "github"
       },
       "original": {
