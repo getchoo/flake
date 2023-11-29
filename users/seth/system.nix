@@ -30,6 +30,7 @@
         ./programs/chromium.nix
         ./programs/firefox
         ./programs/mangohud.nix
+        ./programs/vscode.nix
       ];
   };
 }
