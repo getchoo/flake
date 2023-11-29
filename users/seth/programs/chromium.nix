@@ -8,8 +8,7 @@
       "--enable-gpu-compositing"
       #"--enable-native-gpu-memory-buffers"
       "--enable-zero-copy"
-      "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder,CanvasOopRasterization,RawDraw,WebRTCPipeWireCapturer,Vulkan,WaylandWindowDecorations,WebUIDarkMode"
-      "--enable-features=WebRTCPipeWireCapturer,WaylandWindowDecorations,WebUIDarkMode"
+      "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder,CanvasOopRasterization,RawDraw,Vulkan,WebRTCPipeWireCapturer,WaylandWindowDecorations,WebUIDarkMode"
       "--force-dark-mode"
     ];
   };
