@@ -4,10 +4,10 @@ _: prev: {
     then
       prev.symlinkJoin {
         inherit (prev.btop) passthru;
-        name = "btop-nodesktop";
+        name = "btop-nodesktop-${prev.btop.version}";
         paths = [prev.btop];
         postBuild = ''
-          rm $out/share/applications/btop.desktop
+          rm -rf $out/share/{icons,applications}
         '';
       }
     else prev.btop;

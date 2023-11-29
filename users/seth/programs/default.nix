@@ -19,7 +19,17 @@
     nurl
     rclone
     restic
-    inputs.getchvim.packages.${pkgs.stdenv.hostPlatform.system}.default
+    (let
+      getchvim = inputs.getchvim.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    in
+      # remove desktop file
+      symlinkJoin {
+        name = builtins.replaceStrings ["neovim"] ["neovim-nodesktop"] getchvim.name;
+        paths = [getchvim];
+        postBuild = ''
+          rm -rf $out/share/{applications,icons}
+        '';
+      })
   ];
 
   catppuccin.flavour = "mocha";

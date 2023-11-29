@@ -7,7 +7,7 @@ _: prev: {
         name = "fish-nodesktop";
         paths = [prev.fish];
         postBuild = ''
-          rm $out/share/applications/fish.desktop
+          rm -rf $out/share/{applications,icons}
         '';
       }
     else prev.fish;
