@@ -1,6 +1,10 @@
-{pkgs, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs.vscode = {
-    enable = true;
+    inherit (config.desktop) enable;
     package = pkgs.vscode.fhs;
   };
 }
