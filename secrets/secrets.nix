@@ -8,6 +8,7 @@ let
   hosts = {
     glados = {
       owner = owners.getchoo;
+      pubkey = "age1n7tyxx63wpgnmwkzn7dmkm62jxel840rk3ye3vsultrszsfrwuzsawdzhq";
       files = [
         "rootPassword.age"
         "sethPassword.age"
