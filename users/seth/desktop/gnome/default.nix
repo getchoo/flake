@@ -10,14 +10,12 @@ in {
     home.packages = with pkgs;
       [
         adw-gtk3
-        papirus-icon-theme
         tuba
       ]
-      ++ (with pkgs.gnomeExtensions; [
+      ++ (with gnomeExtensions; [
         blur-my-shell
         burn-my-windows
         caffeine
-        gradience
       ]);
 
     dconf = {
@@ -42,7 +40,6 @@ in {
           document-font-name = ''Noto Sans 11'';
           font-antialiasing = ''rgba'';
           font-name = ''Noto Sans 11'';
-          icon-theme = ''Papirus-Dark'';
           monospace-font-name = ''FiraCode Nerd Font 10'';
         };
 
@@ -71,7 +68,7 @@ in {
     gtk = {
       enable = true;
       theme = {
-        name = "adw-gtk3";
+        name = "adw-gtk3-dark";
         package = pkgs.adw-gtk3;
       };
     };
