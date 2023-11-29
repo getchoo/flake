@@ -12,7 +12,15 @@
     initrd.systemd.enable = true;
     kernelPackages = pkgs.linuxPackages_latest;
 
-    bootspec.enable = true;
+    kernelParams = ["amd_pstate=active"];
+
+    kernel.sysctl = {
+      "vm.swappiness" = 100;
+      "vm.vfs_cache_pressure" = 500;
+      "vm.dirty_background_ratio" = 1;
+      "vm.dirty_ratio" = 50;
+    };
+
     loader.systemd-boot.enable = lib.mkForce false;
 
     lanzaboote = {

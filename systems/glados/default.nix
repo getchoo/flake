@@ -10,16 +10,6 @@
     self.nixosModules.gnome
   ];
 
-  boot = {
-    kernelParams = ["amd_pstate=active"];
-    kernel.sysctl = {
-      "vm.swappiness" = 100;
-      "vm.vfs_cache_pressure" = 500;
-      "vm.dirty_background_ratio" = 1;
-      "vm.dirty_ratio" = 50;
-    };
-  };
-
   features = {
     tailscale.enable = true;
     virtualisation.enable = true;
@@ -46,7 +36,7 @@
     nproc = 12;
   in
     builtins.map
-    (n: "w /sys/devices/system/cpu/cpu${builtins.toString n}/cpufreq/energy_performance_preference - - - - ${"balance_performance"}")
+    (n: "w /sys/devices/system/cpu/cpufreq/policy${builtins.toString n}/energy_performance_preference - - - - ${"balance_performance"}")
     (lib.range 0 (nproc - 1));
 
   powerManagement.cpuFreqGovernor = "powersave";
