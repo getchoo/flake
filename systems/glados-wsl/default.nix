@@ -12,6 +12,7 @@
   environment = {
     noXlibs = lib.mkForce false;
     systemPackages = with pkgs; [
+      wget
       wslu
     ];
   };
