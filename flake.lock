@@ -642,11 +642,11 @@
         "proc-flake": "proc-flake"
       },
       "locked": {
-        "lastModified": 1701432769,
-        "narHash": "sha256-Sxv9e8TMtYUKoADMwuxmFJogs0dzafZeLeFQOZK/HYM=",
+        "lastModified": 1701467485,
+        "narHash": "sha256-N407TlwQcpX/sCJ69j/D7G34yF54BN5mEZ5ukDEZDl8=",
         "owner": "getchoo",
         "repo": "teawiebot",
-        "rev": "f997cbdaea8364880f3a9b3743131c0ab5a60534",
+        "rev": "1fb58eb3791a22b344b79ef6b1b7ca5c739bc946",
         "type": "github"
       },
       "original": {
