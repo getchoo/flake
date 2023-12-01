@@ -159,6 +159,21 @@
         "type": "github"
       }
     },
+    "flake-root": {
+      "locked": {
+        "lastModified": 1692742795,
+        "narHash": "sha256-f+Y0YhVCIJ06LemO+3Xx00lIcqQxSKJHXT/yk1RTKxw=",
+        "owner": "srid",
+        "repo": "flake-root",
+        "rev": "d9a70d9c7a5fd7f3258ccf48da9335e9b47c3937",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "repo": "flake-root",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "inputs": {
         "systems": "systems"
@@ -515,6 +530,21 @@
         "type": "github"
       }
     },
+    "proc-flake": {
+      "locked": {
+        "lastModified": 1692742849,
+        "narHash": "sha256-Nv8SOX+O6twFfPnA9BfubbPLZpqc+UeK6JvIWnWkdb0=",
+        "owner": "srid",
+        "repo": "proc-flake",
+        "rev": "25291b6e3074ad5dd573c1cb7d96110a9591e10f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "srid",
+        "repo": "proc-flake",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -598,6 +628,7 @@
     "teawiebot": {
       "inputs": {
         "fenix": "fenix",
+        "flake-root": "flake-root",
         "naersk": "naersk",
         "nixpkgs": [
           "nixpkgs"
@@ -607,14 +638,15 @@
         ],
         "pre-commit": [
           "pre-commit"
-        ]
+        ],
+        "proc-flake": "proc-flake"
       },
       "locked": {
-        "lastModified": 1700875440,
-        "narHash": "sha256-9LORzYRrdrcoNQsoIor6o0wLaKEmJiecRf0Cl9kAhkw=",
+        "lastModified": 1701432769,
+        "narHash": "sha256-Sxv9e8TMtYUKoADMwuxmFJogs0dzafZeLeFQOZK/HYM=",
         "owner": "getchoo",
         "repo": "teawiebot",
-        "rev": "751fc05f236c8bbe505859c331454b162225ae88",
+        "rev": "f997cbdaea8364880f3a9b3743131c0ab5a60534",
         "type": "github"
       },
       "original": {
