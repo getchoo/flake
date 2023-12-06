@@ -2,8 +2,8 @@ name: Update nixpkgs flake inputs
 
 on:
   schedule:
-    # run daily at 0:00 utc
-    - cron: "0 0 * * *"
+    # run every day besides saturday at 0:00 utc
+    - cron: "0 0 * * 1,2,3,4,5"
   workflow_dispatch:
 
 jobs:

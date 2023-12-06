@@ -2,7 +2,7 @@ name: Update all flake inputs
 
 on:
   schedule:
-    # run every saturday
+    # run every saturday at 0:00 utc
     - cron: "0 0 * * 6"
   workflow_dispatch:
 
