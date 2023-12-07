@@ -119,3 +119,13 @@ config rule
 	option proto 'udp'
 	option target 'ACCEPT'
 
+config redirect
+	option dest 'lan'
+	option target 'DNAT'
+	option name 'tf2'
+	option src 'wan'
+	option src_dport '37015'
+	option dest_ip '192.168.1.157'
+	option dest_port '37015'
+	option enabled '0'
+

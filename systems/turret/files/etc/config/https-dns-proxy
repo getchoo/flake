@@ -4,8 +4,6 @@ config main 'config'
 	list force_dns_port '53'
 	list force_dns_port '853'
 	option procd_trigger_wan6 '0'
-	option canary_domains_icloud '0'
-	option canary_domains_mozilla '0'
 	option force_dns '0'
 
 config https-dns-proxy
