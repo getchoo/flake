@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{config, ...}: let
   inherit (config.networking) domain;
 
   mkProxy = endpoint: port: {
@@ -11,17 +7,6 @@
       proxyWebsockets = true;
     };
   };
-
-  mkVHosts = let
-    commonSettings = {
-      enableACME = true;
-      # workaround for https://github.com/NixOS/nixpkgs/issues/210807
-      acmeRoot = null;
-
-      addSSL = true;
-    };
-  in
-    lib.mapAttrs (_: lib.recursiveUpdate commonSettings);
 in {
   server.services.cloudflared.enable = true;
 
@@ -34,7 +19,7 @@ in {
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
-    virtualHosts = mkVHosts {
+    virtualHosts = {
       "cache.${domain}" = {
         locations = mkProxy "/" "5000";
       };
