@@ -2,12 +2,12 @@
   config,
   lib,
   unstable,
+  secretsDir,
   ...
 }: let
   cfg = config.server.services.hercules-ci;
   inherit (lib) mkEnableOption mkIf;
 
-  baseDir = ../../../secrets/${config.networking.hostName};
   hercArgs = {
     mode = "400";
     owner = "hercules-ci-agent";
@@ -23,19 +23,19 @@ in {
     age.secrets = mkIf cfg.secrets.enable {
       binaryCache =
         {
-          file = "${baseDir}/binaryCache.age";
+          file = secretsDir + "/binaryCache.age";
         }
         // hercArgs;
 
       clusterToken =
         {
-          file = "${baseDir}/clusterToken.age";
+          file = secretsDir + "/clusterToken.age";
         }
         // hercArgs;
 
       secretsJson =
         {
-          file = "${baseDir}/secretsJson.age";
+          file = secretsDir + "/secretsJson.age";
         }
         // hercArgs;
     };

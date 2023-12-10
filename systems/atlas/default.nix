@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  secretsDir,
   ...
 }: {
   imports = [
@@ -18,7 +19,7 @@
     hermetic = false;
   };
 
-  age.secrets.teawiebot.file = ../../secrets/atlas/teawieBot.age;
+  age.secrets.teawiebot.file = secretsDir + "/teawieBot.age";
 
   boot = {
     loader.systemd-boot.enable = true;

@@ -1,6 +1,10 @@
-{config, ...}: {
+{
+  config,
+  secretsDir,
+  ...
+}: {
   age.secrets = {
-    cloudflareApiKey.file = ../../../secrets/${config.networking.hostName}/cloudflareApiKey.age;
+    cloudflareApiKey.file = secretsDir + "/cloudflareApiKey.age";
   };
 
   security.acme = {

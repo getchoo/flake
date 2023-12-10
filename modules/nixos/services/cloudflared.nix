@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  secretsDir,
   ...
 }: let
   cfg = config.server.services.cloudflared;
@@ -12,7 +13,7 @@ in {
 
   config = mkIf cfg.enable {
     age.secrets.cloudflaredCreds = {
-      file = ../../../secrets/${config.networking.hostName}/cloudflaredCreds.age;
+      file = secretsDir + "/cloudflaredCreds.age";
       mode = "400";
       owner = "cloudflared";
       group = "cloudflared";

@@ -2,10 +2,10 @@
   config,
   lib,
   pkgs,
+  secretsDir,
   ...
 }: let
   cfg = config.features.tailscale;
-  secretsDir = ../../../secrets/${config.networking.hostName};
 in {
   options.features.tailscale = {
     enable = lib.mkEnableOption "enable support for tailscale";

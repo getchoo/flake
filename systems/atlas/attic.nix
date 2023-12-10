@@ -1,8 +1,9 @@
-{config, ...}: let
-  kb = 1024;
-in {
-  age.secrets.atticCreds.file =
-    ../../secrets/${config.networking.hostName}/atticCreds.age;
+{
+  config,
+  secretsDir,
+  ...
+}: {
+  age.secrets.atticCreds.file = secretsDir + "/atticCreds.age";
 
   services.atticd = {
     enable = true;
@@ -14,7 +15,9 @@ in {
 
       compression.type = "zstd";
 
-      chunking = {
+      chunking = let
+        kb = 1024;
+      in {
         nar-size-threshold = 64 * kb;
         min-size = 16 * kb;
         avg-size = 64 * kb;

@@ -14,7 +14,10 @@
       (builtins.removeAttrs args ["builder"])
       // {
         modules = args.modules ++ [./${name}];
-        specialArgs = {inherit inputs self;};
+        specialArgs = {
+          inherit inputs self;
+          secretsDir = ../secrets/${name};
+        };
       }
     );
 

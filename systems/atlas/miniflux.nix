@@ -1,6 +1,9 @@
-{config, ...}: {
-  age.secrets .miniflux.file =
-    ../../secrets/${config.networking.hostName}/miniflux.age;
+{
+  config,
+  secretsDir,
+  ...
+}: {
+  age.secrets .miniflux.file = secretsDir + "/miniflux.age";
 
   services.miniflux = {
     enable = true;

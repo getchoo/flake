@@ -26,14 +26,12 @@ in {
 
       hmSetup
 
-      ({config, ...}: {
+      ({secretsDir, ...}: {
         age = {
           identityPaths = ["/etc/age/key"];
-          secrets = let
-            baseDir = ../secrets/${config.networking.hostName};
-          in {
-            rootPassword.file = "${baseDir}/rootPassword.age";
-            sethPassword.file = "${baseDir}/sethPassword.age";
+          secrets = {
+            rootPassword.file = secretsDir + "/rootPassword.age";
+            sethPassword.file = secretsDir + "/sethPassword.age";
           };
         };
 

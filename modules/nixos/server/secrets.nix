@@ -1,12 +1,10 @@
-{config, ...}: let
-  baseDir = ../../../secrets/${config.networking.hostName};
-in {
+{secretsDir, ...}: {
   age = {
     identityPaths = ["/etc/age/key"];
 
     secrets = {
-      rootPassword.file = "${baseDir}/rootPassword.age";
-      userPassword.file = "${baseDir}/userPassword.age";
+      rootPassword.file = secretsDir + "/rootPassword.age";
+      userPassword.file = secretsDir + "/userPassword.age";
     };
   };
 }
