@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: {
@@ -13,7 +14,7 @@
       	source $nixfile
       end
 
-      nix-your-shell fish | source
+      ${lib.getExe pkgs.nix-your-shell} fish | source
 
       abbr -a !! --position anywhere --function last_history_item
     '';

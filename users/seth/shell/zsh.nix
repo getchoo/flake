@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   ...
 }: {
@@ -30,7 +31,7 @@
       promptinit
       colors
 
-      nix-your-shell zsh | source /dev/stdin
+      ${lib.getExe pkgs.nix-your-shell} zsh | source /dev/stdin
 
       zmodload zsh/zutil
       zmodload zsh/complist
