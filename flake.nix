@@ -2,8 +2,8 @@
   description = "getchoo's flake for system configurations";
 
   nixConfig = {
-    extra-substituters = ["https://cache.garnix.io"];
-    extra-trusted-public-keys = ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
+    extra-substituters = ["https://cache.mydadleft.me/getchoo"];
+    extra-trusted-public-keys = ["getchoo:rH35+W+4SV7UV9RTr69LwkH7b24Djui2ZQIQvPxzJCg="];
   };
 
   inputs = {
@@ -95,6 +95,11 @@
       };
     };
 
+    nix2workflow = {
+      url = "github:getchoo/nix2workflow";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
     nixinate = {
       url = "github:MatthewCroughan/nixinate";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -143,13 +148,14 @@
     parts.lib.mkFlake {inherit inputs;} {
       imports = [
         inputs.pre-commit.flakeModule
+        inputs.nix2workflow.flakeModule
 
         ./modules
         ./overlay
         ./systems
         ./users
-        ./ci.nix
         ./dev.nix
+        ./workflow.nix
       ];
 
       systems = [
