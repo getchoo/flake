@@ -57,6 +57,41 @@
         "type": "github"
       }
     },
+    "attic": {
+      "inputs": {
+        "crane": [
+          "lanzaboote",
+          "crane"
+        ],
+        "flake-compat": [
+          "pre-commit",
+          "flake-compat"
+        ],
+        "flake-utils": [
+          "pre-commit",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nixpkgs-stable": [
+          "nixpkgs-stable"
+        ]
+      },
+      "locked": {
+        "lastModified": 1698258239,
+        "narHash": "sha256-qnhoYYIJ0L/P7H/f56lQUEvpzNlXh4sxuHpRERV+B44=",
+        "owner": "zhaofengli",
+        "repo": "attic",
+        "rev": "e9918bc6be268da6fa97af6ced15193d8a0421c0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zhaofengli",
+        "repo": "attic",
+        "type": "github"
+      }
+    },
     "catppuccin": {
       "inputs": {
         "home-manager": [
@@ -549,6 +584,7 @@
       "inputs": {
         "agenix": "agenix",
         "arkenfox": "arkenfox",
+        "attic": "attic",
         "catppuccin": "catppuccin",
         "darwin": "darwin",
         "getchoo": "getchoo",

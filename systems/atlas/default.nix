@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./attic.nix
     ./miniflux.nix
     ./nginx.nix
   ];

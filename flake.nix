@@ -38,6 +38,17 @@
       };
     };
 
+    attic = {
+      url = "github:zhaofengli/attic";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "nixpkgs-stable";
+        crane.follows = "lanzaboote/crane";
+        flake-utils.follows = "pre-commit/flake-utils";
+        flake-compat.follows = "pre-commit/flake-compat";
+      };
+    };
+
     catppuccin = {
       url = "github:Stonks3141/ctp-nix";
       inputs = {
