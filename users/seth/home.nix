@@ -1,7 +1,7 @@
 {
   config,
   pkgs,
-  inputs,
+  self,
   ...
 }: {
   imports = [./.];
@@ -14,5 +14,5 @@
       else "/home/${config.home.username}";
   };
 
-  nixpkgs.overlays = with inputs; [getchoo.overlays.default self.overlays.default];
+  nixpkgs.overlays = [self.overlays.default];
 }

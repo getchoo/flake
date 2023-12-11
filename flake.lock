@@ -218,26 +218,6 @@
         "type": "github"
       }
     },
-    "getchoo": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1702082523,
-        "narHash": "sha256-EMUahY562bz3VLF8AhbqYuQwi054WAzuuMvvXe4STpc=",
-        "owner": "getchoo",
-        "repo": "nix-exprs",
-        "rev": "9595c225f1535845f5f1d6542389cec6be41f755",
-        "type": "github"
-      },
-      "original": {
-        "owner": "getchoo",
-        "repo": "nix-exprs",
-        "type": "github"
-      }
-    },
     "getchvim": {
       "inputs": {
         "nixpkgs": [
@@ -563,7 +543,6 @@
         "catppuccin": "catppuccin",
         "darwin": "darwin",
         "firefox-addons": "firefox-addons",
-        "getchoo": "getchoo",
         "getchvim": "getchvim",
         "hm": "hm",
         "lanzaboote": "lanzaboote",

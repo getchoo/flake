@@ -32,7 +32,7 @@
   };
 
   nixpkgs = {
-    overlays = with inputs; [getchoo.overlays.default self.overlays.default];
+    overlays = [self.overlays.default];
     config.allowUnfree = lib.mkDefault true;
   };
 }
