@@ -2,7 +2,7 @@
 
 [![made with neovim](https://img.shields.io/static/v1?label=made%20with&message=neovim&color=00b952&style=flat-square&logo=neovim)](https://neovim.io/)
 [![nixos unstable](https://img.shields.io/static/v1?label=NixOS&message=unstable&color=5277c3&style=flat-square&logo=nixos)](https://nixos.org/)
-![build status](https://github.com/getchoo/flake/actions/workflows/deploy.yaml/badge.svg)
+![build status](https://img.shields.io/github/actions/workflow/status/getchoo/flake/deploy.yaml?style=flat-square&logo=github&logoColor=238F97CB&label=CI&color=8f97cb)
 
 greasy taco i love
 
