@@ -57,41 +57,6 @@
         "type": "github"
       }
     },
-    "attic": {
-      "inputs": {
-        "crane": [
-          "lanzaboote",
-          "crane"
-        ],
-        "flake-compat": [
-          "pre-commit",
-          "flake-compat"
-        ],
-        "flake-utils": [
-          "pre-commit",
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "nixpkgs-stable": [
-          "nixpkgs-stable"
-        ]
-      },
-      "locked": {
-        "lastModified": 1698258239,
-        "narHash": "sha256-qnhoYYIJ0L/P7H/f56lQUEvpzNlXh4sxuHpRERV+B44=",
-        "owner": "zhaofengli",
-        "repo": "attic",
-        "rev": "e9918bc6be268da6fa97af6ced15193d8a0421c0",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zhaofengli",
-        "repo": "attic",
-        "type": "github"
-      }
-    },
     "catppuccin": {
       "inputs": {
         "home-manager": [
@@ -417,26 +382,6 @@
         "type": "github"
       }
     },
-    "nix2workflow": {
-      "inputs": {
-        "nixpkgs-lib": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1699416125,
-        "narHash": "sha256-IQHjxELWK6DBWbqYwggO4Q9gJbOm0XS3aCgMRzQWwZU=",
-        "owner": "getchoo",
-        "repo": "nix2workflow",
-        "rev": "f1de38cfea711e9a788794b5a658298b4062defb",
-        "type": "github"
-      },
-      "original": {
-        "owner": "getchoo",
-        "repo": "nix2workflow",
-        "type": "github"
-      }
-    },
     "nixinate": {
       "inputs": {
         "nixpkgs": [
@@ -615,7 +560,6 @@
       "inputs": {
         "agenix": "agenix",
         "arkenfox": "arkenfox",
-        "attic": "attic",
         "catppuccin": "catppuccin",
         "darwin": "darwin",
         "firefox-addons": "firefox-addons",
@@ -624,7 +568,6 @@
         "hm": "hm",
         "lanzaboote": "lanzaboote",
         "nix-index-database": "nix-index-database",
-        "nix2workflow": "nix2workflow",
         "nixinate": "nixinate",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",

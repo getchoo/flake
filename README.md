@@ -2,7 +2,7 @@
 
 [![made with neovim](https://img.shields.io/static/v1?label=made%20with&message=neovim&color=00b952&style=flat-square&logo=neovim)](https://neovim.io/)
 [![nixos unstable](https://img.shields.io/static/v1?label=NixOS&message=unstable&color=5277c3&style=flat-square&logo=nixos)](https://nixos.org/)
-![build status](https://img.shields.io/github/actions/workflow/status/getchoo/flake/deploy.yaml?style=flat-square&logo=github&logoColor=238F97CB&label=CI&color=8f97cb)
+[![built with garnix](https://img.shields.io/endpoint?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fgetchoo%2Fflake%3Fbranch%3Dmain)](https://garnix.io)
 
 greasy taco i love
 
@@ -34,7 +34,7 @@ my ampere arm server from oracle, services my miniflux instance.
 
 there are some amazing tools i use to make/manage this flake that i would highly recommend checking out:
 
-- [attic](https://github.com/zhaofengli/attic)
+- [garnix](https://garnix.io)
 - [home-manager](https://github.com/nix-community/home-manager)
 - [agenix](https://github.com/ryantm/agenix)
 - [flake-parts](https://github.com/hercules-ci/flake-parts)

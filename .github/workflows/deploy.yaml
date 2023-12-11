@@ -1,30 +1,29 @@
 name: Deploy systems
 
 on:
-  push:
-    branches: [main]
+  check_suite:
+    types: [completed]
   workflow_dispatch:
 
 jobs:
-  ci:
-    name: CI
-    uses: ./.github/workflows/ci.yaml
-    secrets: inherit
-
   deploy:
-    name: Deploy all
-    needs: ci
     runs-on: ubuntu-latest
 
     concurrency:
       group: deploy
       cancel-in-progress: true
 
+    # https://github.com/sellout/bash-strict-mode/commit/9bf1d65c2f786a9887facfcb81e06d8b8b5f4667
+    if: github.event.check_suite.app.name == 'Garnix CI'
+      && github.event.check_suite.conclusion == 'success'
+      && github.event.check_suite.latest_check_runs_count >= 12
+      && github.event.check_suite.head_branch == 'main'
+
     steps:
       - uses: actions/checkout@v4
 
       - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v9
+        uses: nixbuild/nix-quick-install-action@v26
 
       - name: Setup local Nix cache
         uses: DeterminateSystems/magic-nix-cache-action@v2
