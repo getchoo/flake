@@ -3,7 +3,7 @@
 
   nixConfig = {
     extra-substituters = ["https://cache.mydadleft.me/getchoo"];
-    extra-trusted-public-keys = ["getchoo:rH35+W+4SV7UV9RTr69LwkH7b24Djui2ZQIQvPxzJCg="];
+    extra-trusted-public-keys = ["getchoo:6DIF4zCJcRCrTpx8lrnoapenxoMmcfpU8/cdayOtxE4="];
   };
 
   inputs = {

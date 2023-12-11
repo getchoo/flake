@@ -24,14 +24,12 @@
         max-size = 256 * kb;
       };
 
-      database = {
+      storage = {
         type = "s3";
-        region = "us-west-004";
+        region = "us-west-4";
         bucket = "getchoo-attic";
-        endpoint = "s3.us-west-004.backblazeb2.com";
+        endpoint = "https://s3.us-west-004.backblazeb2.com";
       };
-
-      garbage-collection.interval = "12 hours";
     };
   };
 }

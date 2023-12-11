@@ -21,7 +21,7 @@
       experimental-features = lib.mkDefault ["nix-command" "flakes" "auto-allocate-uids" "repl-flake"];
 
       trusted-substituters = lib.mkDefault ["https://cache.mydadleft.me/getchoo"];
-      trusted-public-keys = lib.mkDefault ["getchoo:rH35+W+4SV7UV9RTr69LwkH7b24Djui2ZQIQvPxzJCg="];
+      trusted-public-keys = lib.mkDefault ["getchoo:6DIF4zCJcRCrTpx8lrnoapenxoMmcfpU8/cdayOtxE4="];
       nix-path = config.nix.nixPath;
     };
 
