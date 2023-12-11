@@ -1,8 +1,8 @@
 {
   lib,
+  withSystem,
   inputs,
   self,
-  withSystem,
   ...
 }: let
   /*
@@ -16,6 +16,7 @@
         modules = args.modules ++ [./${name}];
         specialArgs = {
           inherit inputs self;
+          inputs' = withSystem (args.system or "x86_64-linux") ({inputs', ...}: inputs');
           secretsDir = ../secrets/${name};
         };
       }

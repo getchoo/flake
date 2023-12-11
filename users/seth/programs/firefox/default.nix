@@ -1,6 +1,6 @@
 {
   config,
-  pkgs,
+  inputs',
   ...
 }: {
   imports = [
@@ -14,7 +14,7 @@
   programs.firefox = {
     inherit (config.desktop) enable;
     profiles.arkenfox = {
-      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+      extensions = with inputs'.firefox-addons.packages; [
         bitwarden
         floccus
         private-relay

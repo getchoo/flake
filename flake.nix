@@ -57,6 +57,14 @@
       };
     };
 
+    firefox-addons = {
+      url = "sourcehut:~rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "pre-commit/flake-utils";
+      };
+    };
+
     getchoo = {
       url = "github:getchoo/nix-exprs";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -107,8 +115,6 @@
         flake-utils.follows = "pre-commit/flake-utils";
       };
     };
-
-    nur.url = "github:nix-community/NUR";
 
     openwrt-imagebuilder = {
       url = "github:astro/nix-openwrt-imagebuilder";

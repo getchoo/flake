@@ -178,6 +178,32 @@
         "type": "github"
       }
     },
+    "firefox-addons": {
+      "inputs": {
+        "flake-utils": [
+          "pre-commit",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "dir": "pkgs/firefox-addons",
+        "lastModified": 1701511889,
+        "narHash": "sha256-r1s4LjtiFFZXEs+fXT2n6ULZVtezzv8uHVg5rSW76vo=",
+        "owner": "~rycee",
+        "repo": "nur-expressions",
+        "rev": "a72f098480eee3dc9609a11a4872d44747ce4cc8",
+        "type": "sourcehut"
+      },
+      "original": {
+        "dir": "pkgs/firefox-addons",
+        "owner": "~rycee",
+        "repo": "nur-expressions",
+        "type": "sourcehut"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -484,21 +510,6 @@
         "type": "indirect"
       }
     },
-    "nur": {
-      "locked": {
-        "lastModified": 1702079139,
-        "narHash": "sha256-P60Q83fiXY4x+pq0mbNAdT5AdiJEpeFLaUZK+hArYVg=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "eeb0b84c55657be1575872467aa5a40835af2dcd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "NUR",
-        "type": "github"
-      }
-    },
     "openwrt-imagebuilder": {
       "inputs": {
         "nixpkgs": [
@@ -587,6 +598,7 @@
         "attic": "attic",
         "catppuccin": "catppuccin",
         "darwin": "darwin",
+        "firefox-addons": "firefox-addons",
         "getchoo": "getchoo",
         "getchvim": "getchvim",
         "hm": "hm",
@@ -597,7 +609,6 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
-        "nur": "nur",
         "openwrt-imagebuilder": "openwrt-imagebuilder",
         "parts": "parts",
         "pre-commit": "pre-commit",

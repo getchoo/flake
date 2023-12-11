@@ -1,6 +1,6 @@
 {
   pkgs,
-  inputs,
+  inputs',
   ...
 }: {
   imports = [
@@ -13,18 +13,16 @@
     ./vim.nix
   ];
 
-  home.packages = with pkgs; let
-    inherit (stdenv.hostPlatform) system;
-  in [
+  home.packages = with pkgs; [
     fd
     nurl
     rclone
     restic
 
-    inputs.attic.packages.${system}.attic
+    inputs'.attic.packages.attic
 
     (let
-      getchvim = inputs.getchvim.packages.${system}.default;
+      getchvim = inputs'.getchvim.packages.default;
     in
       # remove desktop file
       symlinkJoin {

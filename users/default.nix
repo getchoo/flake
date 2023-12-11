@@ -1,5 +1,6 @@
 {
   lib,
+  withSystem,
   inputs,
   self,
   ...
@@ -22,7 +23,11 @@
           ]
           ++ (args.modules or []);
 
-        extraSpecialArgs = {inherit inputs self;};
+        extraSpecialArgs = {
+          inherit inputs self;
+          inputs' = withSystem (args.system or "x86_64-linux") ({inputs', ...}: inputs');
+        };
+
         pkgs = args.pkgs or inputs.nixpkgs.legacyPackages."x86_64-linux";
       });
 

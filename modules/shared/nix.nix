@@ -3,12 +3,13 @@
   lib,
   pkgs,
   inputs,
+  self,
   ...
 }: {
   nix = {
     registry = {
       n.flake = lib.mkDefault inputs.nixpkgs;
-      self.flake = inputs.self;
+      self.flake = self;
     };
 
     nixPath = [
@@ -31,7 +32,7 @@
   };
 
   nixpkgs = {
-    overlays = with inputs; [nur.overlay getchoo.overlays.default self.overlays.default];
+    overlays = with inputs; [getchoo.overlays.default self.overlays.default];
     config.allowUnfree = lib.mkDefault true;
   };
 }

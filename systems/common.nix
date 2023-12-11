@@ -2,7 +2,7 @@
   inputs,
   self,
 }: let
-  hmSetup = {
+  hmSetup = {inputs', ...}: {
     imports = [
       ../users/seth/system.nix
     ];
@@ -10,7 +10,7 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = {inherit inputs self;};
+      extraSpecialArgs = {inherit inputs inputs' self;};
     };
   };
 in {
