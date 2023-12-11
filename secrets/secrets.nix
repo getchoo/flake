@@ -30,7 +30,6 @@ let
         "miniflux.age"
         "tailscaleAuthKey.age"
         "cloudflaredCreds.age"
-        "cloudflareApiKey.age"
         "teawieBot.age"
       ];
     };
