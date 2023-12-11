@@ -35,19 +35,14 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:gha
 
-      - name: Add pubkeys to known_hosts
+      - name: Copy known_hosts
         run: |
           set -eux
 
           [ ! -d ~/.ssh ] && mkdir -p ~/.ssh
-          pubkeys=(
-            "atlas ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC7YiSYYx/+zmVOPSCERHzSsMeUQtA+Vt1W0sLUw4YhK"
-          )
-
-          for key in "${pubkeys[@]}"; do echo "$key" >> ~/.ssh/known_hosts; done
+          cp .known_hosts ~/.ssh/known_hosts
 
       - name: Run deploy
         run: |
           nix develop --accept-flake-config \
-            --command bash \
-            -c "just deploy-all"
+            --command just deploy-all
