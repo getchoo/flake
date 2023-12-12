@@ -555,7 +555,8 @@
         "openwrt-imagebuilder": "openwrt-imagebuilder",
         "parts": "parts",
         "pre-commit": "pre-commit",
-        "teawiebot": "teawiebot"
+        "teawiebot": "teawiebot",
+        "terranix": "terranix"
       }
     },
     "rust-analyzer-src": {
@@ -642,6 +643,33 @@
       "original": {
         "owner": "getchoo",
         "repo": "teawiebot",
+        "type": "github"
+      }
+    },
+    "terranix": {
+      "inputs": {
+        "bats-assert": [],
+        "bats-support": [],
+        "flake-utils": [
+          "pre-commit",
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "terranix-examples": []
+      },
+      "locked": {
+        "lastModified": 1695406838,
+        "narHash": "sha256-xiUfVD6rtsVWFotVtUW3Q1nQh4obKzgvpN1wqZuGXvM=",
+        "owner": "terranix",
+        "repo": "terranix",
+        "rev": "fc9077ca02ab5681935dbf0ecd725c4d889b9275",
+        "type": "github"
+      },
+      "original": {
+        "owner": "terranix",
+        "repo": "terranix",
         "type": "github"
       }
     }
