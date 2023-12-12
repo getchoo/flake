@@ -6,6 +6,8 @@
         git_protocol = "https";
         editor = "nvim";
         prompt = "enabled";
+        # workaround for https://github.com/nix-community/home-manager/issues/474
+        version = 1;
       };
 
       gitCredentialHelper = {
