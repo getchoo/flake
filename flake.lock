@@ -130,11 +130,11 @@
         "rust-analyzer-src": "rust-analyzer-src"
       },
       "locked": {
-        "lastModified": 1701411808,
-        "narHash": "sha256-K8QDx8UgbvGdENuvPvcsCXcd8brd55OkRDFLBT7xUVY=",
+        "lastModified": 1702016577,
+        "narHash": "sha256-fJmiS19tWgSC1jQm5EDGLy8XFRHcM54g6xc0p+Mek+c=",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "3776d0e2a30184cc6a0ba20fb86dc6df5b41fccd",
+        "rev": "9d04e9469af11e598daaafbcdbca282a3ce451c3",
         "type": "github"
       },
       "original": {
@@ -561,11 +561,11 @@
     "rust-analyzer-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1701372675,
-        "narHash": "sha256-MSHhnAoLjJuoPxzsTzBOzNhjhlCTHPs4nvkPAZVV1eY=",
+        "lastModified": 1701985524,
+        "narHash": "sha256-VZ4nVxJ9qMbozjJSo3g53NuG+wLk3Ds7L7hi2VS3I4w=",
         "owner": "rust-lang",
         "repo": "rust-analyzer",
-        "rev": "c9d189d1375e59a6c9b4d62fdede94ade001f6ee",
+        "rev": "bc9c952b6d02bf889fff84ba508423b1daca381e",
         "type": "github"
       },
       "original": {
@@ -632,11 +632,11 @@
         "proc-flake": "proc-flake"
       },
       "locked": {
-        "lastModified": 1701483451,
-        "narHash": "sha256-9/MSsFQP0LoxkDB/4R00jxOdscI17KDMPLIqzLmgoPs=",
+        "lastModified": 1702340497,
+        "narHash": "sha256-BmcXzjr8u+EQTzabnn4lFsVPYBqZcbb9eN0EX6RqNgg=",
         "owner": "getchoo",
         "repo": "teawiebot",
-        "rev": "e609e50ebbff97edc1c9794f30a596be8e1a115e",
+        "rev": "ac32ec2a0ba37deb0ad82b4f2ee9c1e1b359cc88",
         "type": "github"
       },
       "original": {
