@@ -33,6 +33,7 @@
             fzf
             just
             jq
+            opentofu
           ]
           ++ lib.optional stdenv.isLinux inputs'.agenix.packages.agenix;
       };

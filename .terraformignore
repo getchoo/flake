@@ -1,14 +1,11 @@
-# nix build artifacts
 result*
 repl-result-out*
 
-# dev shell
 .pre-commit-config.yaml
 .direnv/
 .env*
 !.envrc
 !.env.template
 
-# opentofu
 .terraform/
-config.tf.json
+.git/

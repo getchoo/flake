@@ -121,6 +121,17 @@
         pre-commit.follows = "pre-commit";
       };
     };
+
+    terranix = {
+      url = "github:terranix/terranix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "pre-commit/flake-utils";
+        terranix-examples.follows = "";
+        bats-support.follows = "";
+        bats-assert.follows = "";
+      };
+    };
   };
 
   outputs = {parts, ...} @ inputs:
@@ -131,6 +142,7 @@
         ./modules
         ./overlay
         ./systems
+        ./tofu
         ./users
         ./ci.nix
         ./dev.nix

@@ -1,4 +1,4 @@
-name: Deploy systems
+name: Deploy infrastructure
 
 on:
   check_suite:
@@ -6,7 +6,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  nixos:
+    name: Deploy NixOS systems
+
     runs-on: ubuntu-latest
 
     concurrency:
@@ -46,3 +48,36 @@ jobs:
         run: |
           nix develop --accept-flake-config \
             --command just deploy-all
+
+  opentofu:
+    name: Apply OpenTofu plan
+    needs: nixos
+
+    runs-on: ubuntu-latest
+
+    concurrency:
+      group: tofu
+      cancel-in-progress: true
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v9
+
+      - name: Setup local Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@v2
+
+      - name: Setup OpenTofu
+        uses: opentofu/setup-opentofu@v1
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Setup OpenTofu cache
+        uses: terraform-cache/terraform-cache@v1
+
+      - name: Run plan
+        run: nix run .#plan
+
+      - name: Apply
+        run: tofu apply
