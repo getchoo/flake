@@ -79,18 +79,11 @@ in {
     defaultUserShell = pkgs.bash;
     mutableUsers = false;
 
-    users.root = let
-      # yes this is a bad way to detect which option should be used (or exists)
-      # but i'm lazy. please do not copy this
-      passwordFile =
-        if lib.versionAtLeast config.system.stateVersion "23.11"
-        then "hashedPasswordFile"
-        else "passwordFile";
-    in {
+    users.root = {
       home = mkDefault "/root";
       uid = mkDefault config.ids.uids.root;
       group = mkDefault "root";
-      "${passwordFile}" = mkDefault config.age.secrets.rootPassword.path;
+      hashedPasswordFile = mkDefault config.age.secrets.rootPassword.path;
     };
   };
 }

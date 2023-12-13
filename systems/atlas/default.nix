@@ -42,7 +42,7 @@
   users.users.atlas = {
     isNormalUser = true;
     shell = pkgs.bash;
-    passwordFile = config.age.secrets.userPassword.path;
+    hashedPasswordFile = config.age.secrets.userPassword.path;
   };
 
   zramSwap.enable = true;
