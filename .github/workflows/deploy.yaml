@@ -47,7 +47,7 @@ jobs:
       - name: Run deploy
         run: |
           nix develop --accept-flake-config \
-            --command just deploy-all
+            --command deploy
 
   opentofu:
     name: Apply OpenTofu plan

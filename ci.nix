@@ -14,15 +14,20 @@
       (lib.filterAttrs (_: v: v.pkgs.system == system))
       (lib.mapAttrsToList (_: v: v.config.system.build.toplevel or v.activationPackage))
     ];
+
+    required = lib.concatLists [
+      systems
+      # and other checks
+      (builtins.attrValues (builtins.removeAttrs config.checks ["ciGate"]))
+    ];
+
+    paths =
+      builtins.foldl' (
+        acc: deriv:
+          acc // {${deriv.pname or deriv.name} = deriv.path or deriv.outPath;}
+      ) {}
+      required;
   in {
-    checks = {
-      ciGate = pkgs.runCommand "ci-gate" {
-        nativeBuildInputs = lib.concatLists [
-          systems
-          # and other checks
-          (builtins.attrValues (builtins.removeAttrs config.checks ["ciGate"]))
-        ];
-      } "touch $out";
-    };
+    packages.ciGate = pkgs.linkFarm "ci-gate" paths;
   };
 }

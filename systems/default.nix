@@ -28,6 +28,8 @@
   mapNixOS = mapSystems inputs.nixpkgs.lib.nixosSystem;
   inherit (import ./common.nix {inherit inputs self;}) darwin nixos server;
 in {
+  imports = [./deploy.nix];
+
   flake = {
     darwinConfigurations = mapDarwin {
       caroline = {
@@ -75,9 +77,5 @@ in {
       pkgs.callPackage ./turret {
         inherit (inputs) openwrt-imagebuilder;
       });
-  };
-
-  perSystem = {system, ...}: {
-    apps = (inputs.nixinate.nixinate.${system} self).nixinate;
   };
 }

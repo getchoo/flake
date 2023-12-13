@@ -25,21 +25,16 @@ rebuild subcmd root="false":
 
 [linux]
 [macos]
+boot:
+	@just rebuild boot {{ asRoot }}
+
+[linux]
+[macos]
 build:
     @just rebuild build
 
 check:
     nix flake check
-
-deploy host:
-    nix run .#{{ host }}
-
-deploy-all:
-    nix eval \
-      --json ".#apps.x86_64-linux" \
-      --apply builtins.attrNames \
-      | jq -c '.[]' | grep -v -E "dry-run|apply|destroy|tofu-config|plan" \
-      | while read -r c; do nix run ".#$c"; done
 
 [linux]
 [macos]
@@ -53,8 +48,6 @@ pre-commit:
 [macos]
 switch:
     @just rebuild switch {{ asRoot }}
-
-switch-and-deploy: switch deploy-all
 
 [linux]
 [macos]

@@ -30,6 +30,7 @@
             statix
 
             # utils
+            deploy-rs
             fzf
             just
             jq
