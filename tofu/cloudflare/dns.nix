@@ -7,6 +7,7 @@
     {
       name = args.name or name;
       zone_id = lib.tfRef "var.zone_id";
+      ttl = 1;
       inherit value type;
     }
     // lib.optionalAttrs (type != "TXT") {proxied = true;};

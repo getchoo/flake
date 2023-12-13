@@ -5,11 +5,6 @@
     ./tunnels.nix
   ];
 
-  terraform.required_providers.cloudflare = {
-    source = "cloudflare/cloudflare";
-    version = "~> 4";
-  };
-
   resource = {
     cloudflare_url_normalization_settings.incoming = {
       scope = "incoming";
