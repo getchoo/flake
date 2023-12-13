@@ -6,9 +6,8 @@
   } @ args:
     {
       name = args.name or name;
-      zone_id = "\${var.zone_id}";
+      zone_id = lib.tfRef "var.zone_id";
       inherit value type;
-      proxied = true;
     }
     // lib.optionalAttrs (type != "TXT") {proxied = true;};
 
