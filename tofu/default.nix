@@ -5,7 +5,7 @@
     system,
     ...
   }: let
-    config = inputs.terranix.lib.terranixConfiguration {
+    tofuConfig = inputs.terranix.lib.terranixConfiguration {
       inherit system;
       modules = [
         ./cloudflare
@@ -16,39 +16,20 @@
       ];
     };
   in {
-    apps =
-      lib.genAttrs ["apply" "destroy" "plan"] (fn: {
-        type = "app";
+    apps.gen-tofu = {
+      type = "app";
 
-        program = pkgs.writeShellApplication {
-          name = fn;
+      program = pkgs.writeShellApplication {
+        name = "tofu-config";
 
-          runtimeInputs = [pkgs.opentofu];
+        runtimeInputs = [pkgs.opentofu];
 
-          text = ''
-            config_file="config.tf.json"
-            [ -e "$config_file" ] && rm -f "$config_file"
-            cp ${config} "$config_file"
-            tofu init && tofu ${fn}
-          '';
-        };
-      })
-      // {
-        tofu-config = {
-          type = "app";
-
-          program = pkgs.writeShellApplication {
-            name = "tofu-config";
-
-            runtimeInputs = [pkgs.opentofu];
-
-            text = ''
-              config_file="config.tf.json"
-              [ -e "$config_file" ] && rm -f "$config_file"
-              cp ${config} "$config_file"
-            '';
-          };
-        };
+        text = ''
+          config_file="config.tf.json"
+          [ -e "$config_file" ] && rm -f "$config_file"
+          cp ${tofuConfig} "$config_file"
+        '';
       };
+    };
   };
 }
