@@ -1,7 +1,7 @@
 # This file is maintained automatically by "tofu init".
 # Manual edits may be lost in future updates.
 
-provider "registry.opentofu.org/cloudflare/cloudflare" {
+provider "registry.terraform.io/cloudflare/cloudflare" {
   version     = "4.20.0"
   constraints = "~> 4.0"
   hashes = [
@@ -24,7 +24,7 @@ provider "registry.opentofu.org/cloudflare/cloudflare" {
   ]
 }
 
-provider "registry.opentofu.org/tailscale/tailscale" {
+provider "registry.terraform.io/tailscale/tailscale" {
   version     = "0.13.13"
   constraints = "0.13.13"
   hashes = [

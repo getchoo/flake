@@ -27,7 +27,7 @@ in {
     };
 
     api = {
-      value = atlas_tunnel;
+      value = "teawieapi.pages.dev";
       type = "CNAME";
     };
 
