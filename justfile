@@ -1,11 +1,8 @@
 alias b := build
 alias c := check
-alias d := deploy
-alias da := deploy-all
 alias dr := dry-run
 alias p := pre-commit
 alias sw := switch
-alias sd := switch-and-deploy
 alias t := test
 alias u := update
 alias ui := update-input
@@ -26,7 +23,7 @@ rebuild subcmd root="false":
 [linux]
 [macos]
 boot:
-	@just rebuild boot {{ asRoot }}
+    @just rebuild boot {{ asRoot }}
 
 [linux]
 [macos]
@@ -35,6 +32,13 @@ build:
 
 check:
     nix flake check
+
+clean:
+    rm -rf \
+      result* \
+      repl-result-out* \
+      config.tf.json \
+      .terraform/
 
 [linux]
 [macos]
