@@ -146,7 +146,7 @@
         ./modules
         ./overlay
         ./systems
-        ./tofu
+        ./tf
         ./users
         ./ci.nix
         ./dev.nix

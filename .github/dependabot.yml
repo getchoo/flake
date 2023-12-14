@@ -11,4 +11,4 @@ updates:
     schedule:
       interval: "weekly"
     commit-message:
-      prefix: "tofu"
+      prefix: "tf"

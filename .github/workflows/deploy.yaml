@@ -49,52 +49,57 @@ jobs:
           nix develop --accept-flake-config \
             --command deploy
 
-  #opentofu:
-  #  name: Apply OpenTofu plan
-  #  needs: nixos
+  opentofu:
+    name: Apply OpenTofu plan
+    needs: nixos
 
-  #  runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-  #  concurrency:
-  #    group: tofu
-  #    cancel-in-progress: true
+    concurrency:
+      group: tofu
+      cancel-in-progress: true
 
-  #  steps:
-  #    - uses: actions/checkout@v4
+    steps:
+      - uses: actions/checkout@v4
 
-  #    - name: Install Nix
-  #      uses: DeterminateSystems/nix-installer-action@v9
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v9
 
-  #    - name: Setup local Nix cache
-  #      uses: DeterminateSystems/magic-nix-cache-action@v2
+      - name: Setup local Nix cache
+        uses: DeterminateSystems/magic-nix-cache-action@v2
 
-  #    - name: Setup OpenTofu cache
-  #      uses: terraform-cache/terraform-cache@v1
+      - name: Setup OpenTofu cache
+        uses: terraform-cache/terraform-cache@v1
 
-  #    - name: Authenticate with TF Cloud
-  #      run: |
-  #        dir="$HOME/.terraform.d"
-  #        [ ! -d "$dir" ] && mkdir -p "$dir"
+      - name: Authenticate with TF Cloud
+        run: |
+          dir="$HOME/.terraform.d"
+          [ ! -d "$dir" ] && mkdir -p "$dir"
 
-  #        cat > "$dir"/credentials.tfrc.json << EOF
-  #        {
-  #          "credentials": {
-  #            "app.terraform.io": {
-  #              "token": "${{ secrets.TF_API_TOKEN }}"
-  #            }
-  #          }
-  #        }
-  #        EOF
+          cat > "$dir"/credentials.tfrc.json << EOF
+          {
+            "credentials": {
+              "app.terraform.io": {
+                "token": "${{ secrets.TF_API_TOKEN }}"
+              }
+            }
+          }
+          EOF
 
-  #    - name: Generate configuration
-  #      run: nix run .#gen-tofu
+      - name: Generate configuration
+        run: nix run .#gen-tf
 
-  #    - name: Run plan
-  #      run: |
-  #        nix develop --accept-flake-config \
-  #          --command tofu plan
+      - name: Init workspace
+        run: |
+          nix develop --accept-flake-config \
+            --command tofu init
 
-  #    - name: Apply
-  #      run: |
-  #        nix develop --accept-flake-config \
-  #          --command tofu apply -auto-approve
+      - name: Validate plan
+        run: |
+          nix develop --accept-flake-config \
+            --command tofu validate 
+
+      - name: Apply
+        run: |
+          nix develop --accept-flake-config \
+            --command tofu apply -auto-approve

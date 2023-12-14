@@ -5,7 +5,7 @@
     system,
     ...
   }: let
-    tofuConfig = inputs.terranix.lib.terranixConfiguration {
+    tfConfig = inputs.terranix.lib.terranixConfiguration {
       inherit system;
       modules = [
         ./cloudflare
@@ -16,18 +16,16 @@
       ];
     };
   in {
-    apps.gen-tofu = {
+    apps.gen-tf = {
       type = "app";
 
       program = pkgs.writeShellApplication {
-        name = "tofu-config";
-
-        runtimeInputs = [pkgs.opentofu];
+        name = "gen-tf";
 
         text = ''
           config_file="config.tf.json"
           [ -e "$config_file" ] && rm -f "$config_file"
-          cp ${tofuConfig} "$config_file"
+          cp ${tfConfig} "$config_file"
         '';
       };
     };
