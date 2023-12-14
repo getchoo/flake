@@ -27,6 +27,7 @@ let
       files = [
         "rootPassword.age"
         "userPassword.age"
+        "atticCreds.age"
         "miniflux.age"
         "tailscaleAuthKey.age"
         "cloudflaredCreds.age"

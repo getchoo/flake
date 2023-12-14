@@ -13,24 +13,27 @@
     ./vim.nix
   ];
 
-  home.packages = with pkgs; [
-    fd
-    nurl
-    rclone
-    restic
+  home.packages = with pkgs;
+    [
+      fd
+      nix-output-monitor
+      nurl
+      rclone
+      restic
 
-    (let
-      getchvim = inputs'.getchvim.packages.default;
-    in
-      # remove desktop file
-      symlinkJoin {
-        name = builtins.replaceStrings ["neovim"] ["neovim-nodesktop"] getchvim.name;
-        paths = [getchvim];
-        postBuild = ''
-          rm -rf $out/share/{applications,icons}
-        '';
-      })
-  ];
+      (let
+        getchvim = inputs'.getchvim.packages.default;
+      in
+        # remove desktop file
+        symlinkJoin {
+          name = builtins.replaceStrings ["neovim"] ["neovim-nodesktop"] getchvim.name;
+          paths = [getchvim];
+          postBuild = ''
+            rm -rf $out/share/{applications,icons}
+          '';
+        })
+    ]
+    ++ lib.optional stdenv.isLinux inputs'.attic.packages.default;
 
   catppuccin.flavour = "mocha";
 

@@ -2,8 +2,8 @@
   description = "getchoo's flake for system configurations";
 
   nixConfig = {
-    extra-substituters = ["https://cache.garnix.io"];
-    extra-trusted-public-keys = ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
+    extra-substituters = ["https://cache.mydadleft.me/flake"];
+    extra-trusted-public-keys = ["flake:qQ6D8Mem+0lqpvzgCwKiUkwjoB7iRhVJwVh71+iwk9U="];
   };
 
   inputs = {
@@ -34,6 +34,17 @@
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "pre-commit/flake-compat";
         pre-commit.follows = "pre-commit";
+        flake-utils.follows = "pre-commit/flake-utils";
+      };
+    };
+
+    attic = {
+      url = "github:zhaofengli/attic";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "nixpkgs-stable";
+        crane.follows = "lanzaboote/crane";
+        flake-compat.follows = "pre-commit/flake-compat";
         flake-utils.follows = "pre-commit/flake-utils";
       };
     };
@@ -86,6 +97,11 @@
         flake-utils.follows = "pre-commit/flake-utils";
         pre-commit-hooks-nix.follows = "pre-commit";
       };
+    };
+
+    nix2workflow = {
+      url = "github:getchoo/nix2workflow";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
     nix-index-database = {
@@ -142,14 +158,15 @@
     parts.lib.mkFlake {inherit inputs;} {
       imports = [
         inputs.pre-commit.flakeModule
+        inputs.nix2workflow.flakeModule
 
         ./modules
         ./overlay
         ./systems
         ./tf
         ./users
-        ./ci.nix
         ./dev.nix
+        ./workflow.nix
       ];
 
       systems = [
