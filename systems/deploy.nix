@@ -5,39 +5,40 @@
   ...
 }: let
   targets = ["atlas"];
+  configurations = self.nixosConfigurations // self.darwinConfigurations;
 
   getDeploy = pkgs:
-    (import pkgs.path {
-      inherit (pkgs) system;
-      overlays = [
-        inputs.deploy.overlay
-        (_: prev: {
-          deploy-rs = {
-            inherit (pkgs) deploy-rs;
-            inherit (prev.deploy-rs) lib;
-          };
-        })
-      ];
-    })
+    (pkgs.appendOverlays [
+      inputs.deploy.overlay
+      (_: prev: {
+        deploy-rs = {
+          inherit (pkgs) deploy-rs;
+          inherit (prev.deploy-rs) lib;
+        };
+      })
+    ])
     .deploy-rs;
 
-  getType = pkgs:
-    if pkgs.stdenv.isDarwin
-    then "darwin"
-    else "nixos";
+  toType = system:
+    {
+      "Linux" = "nixos";
+      "Darwin" = "darwin";
+    }
+    .${system};
 
   toDeployNode = hostname: system: {
     sshUser = "root";
     inherit hostname;
-    profiles.system.path = (getDeploy system.pkgs).lib.activate.${getType system.pkgs} system;
+    profiles.system.path = let
+      deploy = getDeploy system.pkgs;
+      type = toType system.pkgs.stdenv.hostPlatform.uname.system;
+    in
+      deploy.lib.activate.${type} system;
   };
 in {
   flake.deploy = {
     remoteBuild = true;
     fastConnection = false;
-    nodes = lib.pipe (self.nixosConfigurations // self.darwinConfigurations) [
-      (lib.getAttrs targets)
-      (lib.mapAttrs toDeployNode)
-    ];
+    nodes = lib.mapAttrs toDeployNode (lib.getAttrs targets configurations);
   };
 }
