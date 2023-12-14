@@ -60,5 +60,22 @@
         }
       ];
     };
+
+    binary-cache = {
+      kind = "zone";
+      name = "default";
+      phase = "http_request_cache_settings";
+      zone_id = lib.tfRef "var.zone_id";
+
+      rules = {
+        action = "set_cache_settings";
+        action_parameters = {
+          cache = true;
+        };
+        description = "nix cache";
+        enabled = true;
+        expression = "(ssl and http.host eq \"cache.mydadleft.me\" and http.request.uri.query eq \"\" and ends_with(http.request.uri.path, \"nar\"))";
+      };
+    };
   };
 }
