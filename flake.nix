@@ -138,6 +138,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         parts.follows = "parts";
+        nix2workflow.follows = "nix2workflow";
         pre-commit.follows = "pre-commit";
       };
     };

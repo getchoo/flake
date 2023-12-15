@@ -686,6 +686,9 @@
         "fenix": "fenix",
         "flake-root": "flake-root",
         "naersk": "naersk",
+        "nix2workflow": [
+          "nix2workflow"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -698,11 +701,11 @@
         "proc-flake": "proc-flake"
       },
       "locked": {
-        "lastModified": 1702340497,
-        "narHash": "sha256-BmcXzjr8u+EQTzabnn4lFsVPYBqZcbb9eN0EX6RqNgg=",
+        "lastModified": 1702680898,
+        "narHash": "sha256-0lAJhJKBUIVG4/WontnkrFMDXZ5S4IOmJgWNRMd5aGY=",
         "owner": "getchoo",
         "repo": "teawiebot",
-        "rev": "ac32ec2a0ba37deb0ad82b4f2ee9c1e1b359cc88",
+        "rev": "fd0c1b3141d44325afdc664bf771bdd362fd85f3",
         "type": "github"
       },
       "original": {
