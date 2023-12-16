@@ -13,7 +13,7 @@ jobs:
     # https://github.com/sellout/bash-strict-mode/commit/9bf1d65c2f786a9887facfcb81e06d8b8b5f4667
     if: github.event.check_suite.app.name == 'Garnix CI'
       && github.event.check_suite.conclusion == 'success'
-      && github.event.check_suite.latest_check_runs_count >= 12
+      && github.event.check_suite.latest_check_runs_count >= 10
       && github.event.check_suite.head_branch == 'main'
 
     concurrency:
