@@ -36,10 +36,7 @@
             jq
             opentofu
           ]
-          ++ lib.optionals stdenv.isLinux (with inputs'; [
-            agenix.packages.agenix
-            attic.packages.default
-          ]);
+          ++ lib.optional stdenv.isLinux inputs'.agenix.packages.agenix;
       };
     };
 

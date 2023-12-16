@@ -19,18 +19,12 @@ in {
   services.nginx = {
     enable = true;
 
-    clientMaxBodySize = "1250m";
-
     recommendedGzipSettings = true;
     recommendedOptimisation = true;
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
     virtualHosts = toVHosts {
-      cache = {
-        locations = mkProxy "/" "5000";
-      };
-
       miniflux = {
         locations = mkProxy "/" "7000";
       };

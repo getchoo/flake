@@ -68,7 +68,6 @@ in {
         modules = with inputs;
           [
             teawiebot.nixosModules.default
-            attic.nixosModules.atticd
           ]
           ++ server;
       };

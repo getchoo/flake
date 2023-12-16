@@ -31,11 +31,6 @@ in {
       type = "CNAME";
     };
 
-    cache = {
-      value = atlas_tunnel;
-      type = "CNAME";
-    };
-
     miniflux = {
       value = atlas_tunnel;
       type = "CNAME";
