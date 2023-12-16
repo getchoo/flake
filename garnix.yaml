@@ -1,0 +1,10 @@
+builds:
+  exclude:
+    - "*.x86_64-darwin.*"
+    - "*.aarch64-darwin.*"
+  include:
+    - "checks.*.*"
+    - "devShells.x86_64-linux.default"
+    - "nixosConfigurations.*"
+    - "homeConfigurations.seth"
+    - "packages.*.*"
