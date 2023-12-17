@@ -38,13 +38,7 @@
       };
     };
 
-    catppuccin = {
-      url = "github:Stonks3141/ctp-nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "hm";
-      };
-    };
+    catppuccin.url = "github:Stonks3141/ctp-nix";
 
     deploy = {
       url = "github:serokell/deploy-rs";
