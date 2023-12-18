@@ -243,19 +243,19 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "parts": [
-          "parts"
-        ],
-        "pre-commit": [
-          "pre-commit"
+        "nixvim": "nixvim",
+        "tree-sitter-just": "tree-sitter-just",
+        "utils": [
+          "pre-commit",
+          "flake-utils"
         ]
       },
       "locked": {
-        "lastModified": 1702401948,
-        "narHash": "sha256-wwVQB6UftV10FOp630UP8G2oj+Pk+FeVKpddeiFuHeQ=",
+        "lastModified": 1702884383,
+        "narHash": "sha256-95CUIkITWlrNrDhzCXzFxKzneckXDxIbpv5OwMcTHFg=",
         "owner": "getchoo",
         "repo": "getchvim",
-        "rev": "9fe8afd0c5f2b439176728d8863570bf22614dbd",
+        "rev": "482f6e7bca8047ec89829c10aec69b0f6b91e030",
         "type": "github"
       },
       "original": {
@@ -453,6 +453,33 @@
         "id": "nixpkgs",
         "ref": "nixos-23.11",
         "type": "indirect"
+      }
+    },
+    "nixvim": {
+      "inputs": {
+        "flake-utils": [
+          "getchvim",
+          "utils"
+        ],
+        "nixpkgs": [
+          "getchvim",
+          "nixpkgs"
+        ],
+        "pre-commit-hooks": [
+          "getchvim"
+        ]
+      },
+      "locked": {
+        "lastModified": 1702653568,
+        "narHash": "sha256-SwrNBw/1/oMURAa9/8MdvC4b3UYohoMAvSazeIt3hkg=",
+        "rev": "b3fb1c4c8189bc873911da3f31d18082a0721fa9",
+        "revCount": 825,
+        "type": "tarball",
+        "url": "https://api.flakehub.com/f/pinned/nix-community/nixvim/0.1.825%2Brev-b3fb1c4c8189bc873911da3f31d18082a0721fa9/018c6e10-497a-79c6-be0a-722960db4fbf/source.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://flakehub.com/f/nix-community/nixvim/0.1.%2A.tar.gz"
       }
     },
     "openwrt-imagebuilder": {
@@ -670,6 +697,22 @@
       "original": {
         "owner": "terranix",
         "repo": "terranix",
+        "type": "github"
+      }
+    },
+    "tree-sitter-just": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1679148267,
+        "narHash": "sha256-Qs0Klt9uj6Vgs4vJrjKXYD8nNe8KYdWCnADvogm4/l0=",
+        "owner": "IndianBoy42",
+        "repo": "tree-sitter-just",
+        "rev": "4e5f5f3ff37b12a1bbf664eb3966b3019e924594",
+        "type": "github"
+      },
+      "original": {
+        "owner": "IndianBoy42",
+        "repo": "tree-sitter-just",
         "type": "github"
       }
     }

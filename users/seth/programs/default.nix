@@ -25,7 +25,7 @@
     in
       # remove desktop file
       symlinkJoin {
-        name = builtins.replaceStrings ["neovim"] ["neovim-nodesktop"] getchvim.name;
+        name = "${getchvim.name}-nodesktop";
         paths = [getchvim];
         postBuild = ''
           rm -rf $out/share/{applications,icons}

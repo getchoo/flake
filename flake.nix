@@ -61,8 +61,7 @@
       url = "github:getchoo/getchvim";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        parts.follows = "parts";
-        pre-commit.follows = "pre-commit";
+        utils.follows = "pre-commit/flake-utils";
       };
     };
 
