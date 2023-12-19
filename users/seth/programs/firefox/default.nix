@@ -17,7 +17,6 @@
       extensions = with inputs'.firefox-addons.packages; [
         bitwarden
         floccus
-        private-relay
         ublock-origin
       ];
 
@@ -27,9 +26,6 @@
         # disable firefox accounts & pocket
         "extensions.pocket.enabled" = false;
         "identity.fxaccounts.enabled" = false;
-
-        "gfx.webrender.all" = true;
-        "fission.autostart" = true;
 
         # hw accel
         "media.ffmpeg.vaapi.enabled" = true;

@@ -30,12 +30,6 @@
           # enable search autocomplete
           "5021"."keyword.enabled".value = true;
         };
-
-        # enable drm
-        "5500"."5508"."media.eme.enabled" = {
-          enable = true;
-          value = true;
-        };
       } (enableSections [
         "0100"
         "0200"
