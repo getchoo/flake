@@ -27,7 +27,6 @@
   };
 
   services = {
-    flatpak.enable = true;
     fwupd.enable = true;
   };
 
