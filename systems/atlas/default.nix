@@ -1,16 +1,14 @@
 {
   config,
   pkgs,
-  secretsDir,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
     ./miniflux.nix
     ./nginx.nix
+    ./teawiebot.nix
   ];
-
-  age.secrets.teawiebot.file = secretsDir + "/teawieBot.age";
 
   boot = {
     loader.systemd-boot.enable = true;
@@ -25,10 +23,6 @@
 
   services = {
     resolved.enable = false;
-    teawiebot = {
-      enable = true;
-      environmentFile = config.age.secrets.teawiebot.path;
-    };
   };
 
   users.users.atlas = {
