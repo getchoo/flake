@@ -35,6 +35,9 @@
             just
             jq
             opentofu
+
+            # ci
+            nix-eval-jobs
           ]
           ++ lib.optional stdenv.isLinux inputs'.agenix.packages.agenix;
       };

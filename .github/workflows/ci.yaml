@@ -1,0 +1,113 @@
+name: CI
+
+on:
+  pull_request:
+  workflow_call:
+    secrets:
+      CACHIX_AUTH_TOKEN:
+        description: "auth token for cachi"
+  workflow_dispatch:
+
+jobs:
+  eval:
+    name: Evaluate flake
+    runs-on: ubuntu-latest
+
+    outputs:
+      matrix: ${{ steps.eval.outputs.matrix }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v9
+
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v13
+        with:
+          name: getchoo
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Evaluate jobs
+        id: eval
+        run: |
+          nix shell --inputs-from . \
+            nixpkgs#{bash,coreutils,jq,nix-eval-jobs} \
+            --command bash ./.github/eval-flake.sh
+
+  build:
+    needs: eval
+
+    strategy:
+      matrix: ${{ fromJSON(needs.eval.outputs.matrix) }}
+
+    name: Build (${{ matrix.attr }})
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v9
+
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v13
+        with:
+          name: getchoo
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Check if cached
+        if: ${{ matrix.isCached }}
+        run: |
+          echo ${{ matrix.attr }} is already built!
+
+      - name: Run build
+        if: ${{ !matrix.isCached }}
+        run: |
+          nix build --print-build-logs --fallback \
+            .#hydraJobs.${{ matrix.attr }}
+
+  check:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+
+    name: Check flake (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Nix
+        uses: DeterminateSystems/nix-installer-action@v9
+
+      - name: Setup Cachix
+        uses: cachix/cachix-action@v13
+        with:
+          name: getchoo
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Run check
+        run: |
+          nix flake check \
+            --print-build-logs \
+            --fallback \
+            --show-trace \
+            --option allow-import-from-derivation true
+
+  gate:
+    needs: [build, check]
+
+    name: CI Gate
+    runs-on: ubuntu-latest
+
+    if: always()
+
+    steps:
+      - name: Exit with result
+        run: |
+          build_result="${{ needs.build.result }}"
+          check_result="${{ needs.check.result }}"
+          results=("$build_result" "$check_result")
+          for result in "${results[@]}"; do [ "$result" != "success" ] && exit 1; done
+          exit 0

@@ -1,20 +1,20 @@
 name: Deploy infrastructure
 
 on:
-  check_suite:
-    types: [completed]
+  push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
+  ci:
+    uses: ./.github/workflows/ci.yaml
+    secrets: inherit
+
   nixos:
+    needs: ci
+
     name: Deploy NixOS systems
     runs-on: ubuntu-latest
-
-    # https://github.com/sellout/bash-strict-mode/commit/9bf1d65c2f786a9887facfcb81e06d8b8b5f4667
-    if: github.event.check_suite.app.name == 'Garnix CI'
-      && github.event.check_suite.conclusion == 'success'
-      && github.event.check_suite.latest_check_runs_count >= 10
-      && github.event.check_suite.head_branch == 'main'
 
     concurrency:
       group: deploy
@@ -49,9 +49,9 @@ jobs:
             --command deploy
 
   opentofu:
-    name: Apply OpenTofu plan
     needs: nixos
 
+    name: Apply OpenTofu plan
     runs-on: ubuntu-latest
 
     concurrency:
