@@ -7,6 +7,7 @@ on:
 
 jobs:
   ci:
+    name: CI
     uses: ./.github/workflows/ci.yaml
     secrets: inherit
 
@@ -45,8 +46,7 @@ jobs:
 
       - name: Run deploy
         run: |
-          nix develop --accept-flake-config \
-            --command deploy
+          nix run --inputs-from . nixpkgs#deploy-rs -- -s
 
   opentofu:
     needs: nixos
@@ -90,15 +90,15 @@ jobs:
 
       - name: Init workspace
         run: |
-          nix develop --accept-flake-config \
-            --command tofu init
+          nix run --inputs-from . \
+            nixpkgs#opentofu -- init
 
       - name: Validate plan
         run: |
-          nix develop --accept-flake-config \
-            --command tofu validate
+          nix run --inputs-from . \
+            nixpkgs#opentofu -- validate
 
       - name: Apply
         run: |
-          nix develop --accept-flake-config \
-            --command tofu apply -auto-approve
+          nix run --inputs-from . \
+            nixpkgs#opentofu -- apply -auto-approve
