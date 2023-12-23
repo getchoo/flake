@@ -1,35 +1,33 @@
-{self, ...}: {
-  perSystem = {
-    lib,
-    pkgs,
-    system,
-    config,
-    ...
-  }: {
-    packages = let
-      allConfigurations = [
-        "nixosConfigurations"
-        "darwinConfigurations"
-        "homeConfigurations"
-      ];
+{
+  lib,
+  self,
+  ...
+}: {
+  flake.hydraJobs = let
+    ciSystems = ["x86_64-linux" "x86_64-darwin"];
+    recursiveMerge = builtins.foldl' lib.recursiveUpdate {};
+  in
+    recursiveMerge [
+      (let
+        outputs = lib.getAttrs ["checks" "devShells"] self;
+        isCompatible = system: _: lib.elem system ciSystems;
+      in
+        lib.mapAttrs (_: lib.filterAttrs isCompatible) outputs)
 
-      configurations = lib.pipe allConfigurations [
-        (configs: lib.getAttrs configs self)
-        builtins.attrValues
-        (lib.concatMap builtins.attrValues)
-        (lib.filter (deriv: deriv.pkgs.system == system))
-        (map (deriv: deriv.config.system.build.toplevel or deriv.activationPackage))
-      ];
+      (
+        let
+          configurations =
+            lib.getAttrs [
+              "nixosConfigurations"
+              "darwinConfigurations"
+              "homeConfigurations"
+            ]
+            self;
 
-      required = [
-        configurations
-        (builtins.attrValues config.checks)
-        (builtins.attrValues config.devShells)
-      ];
-    in {
-      ciGate = pkgs.writeText "ci-gate" ''
-        ${lib.concatMapStringsSep "\n" toString required}
-      '';
-    };
-  };
+          isCompatible = _: configuration: lib.elem configuration.pkgs.system ciSystems;
+          toDeriv = _: configuration: configuration.config.system.build.toplevel or configuration.activationPackage;
+        in
+          lib.mapAttrs (_: v: lib.mapAttrs toDeriv (lib.filterAttrs isCompatible v)) configurations
+      )
+    ];
 }
