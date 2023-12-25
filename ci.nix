@@ -3,6 +3,8 @@
   self,
   ...
 }: {
+  nix2workflow.output = self.hydraJobs;
+
   flake.hydraJobs = let
     ciSystems = ["x86_64-linux" "x86_64-darwin"];
     recursiveMerge = builtins.foldl' lib.recursiveUpdate {};

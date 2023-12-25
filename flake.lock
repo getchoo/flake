@@ -382,6 +382,26 @@
         "type": "github"
       }
     },
+    "nix2workflow": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1703496925,
+        "narHash": "sha256-Ayz0FD8ptejT9Uq7Rm1h9iv2PaPQg8zCMGuMSA/ib3k=",
+        "owner": "getchoo",
+        "repo": "nix2workflow",
+        "rev": "ee728efb75096431bb94f746d990f2dc786b0be2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getchoo",
+        "repo": "nix2workflow",
+        "type": "github"
+      }
+    },
     "nixos-hardware": {
       "locked": {
         "lastModified": 1702453208,
@@ -575,6 +595,7 @@
         "hm": "hm",
         "lanzaboote": "lanzaboote",
         "nix-index-database": "nix-index-database",
+        "nix2workflow": "nix2workflow",
         "nixos-hardware": "nixos-hardware",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
