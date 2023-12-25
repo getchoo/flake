@@ -64,7 +64,8 @@ jobs:
             if nix eval --raw .#"$JOBS".${{ matrix.attr }} \
               | cut -c12-43 \
               | xargs -I {} curl -f "$url"/{}.narinfo &> /dev/null; then
-              echo ${{ matrix.attr }} is already cached in $url!
+              echo ${{ matrix.attr }} is already cached at $url!
+              exit 0
             fi
           done
 
