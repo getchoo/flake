@@ -81,6 +81,11 @@
       };
     };
 
+    nix2workflow = {
+      url = "github:getchoo/nix2workflow";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -135,6 +140,7 @@
     parts.lib.mkFlake {inherit inputs;} {
       imports = [
         inputs.pre-commit.flakeModule
+        inputs.nix2workflow.flakeModule
 
         ./modules
         ./overlay

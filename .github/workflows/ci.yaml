@@ -31,18 +31,20 @@ jobs:
       - name: Evaluate jobs
         id: eval
         run: |
-          nix shell --inputs-from . \
-            nixpkgs#{bash,coreutils,jq,nix-eval-jobs} \
-            --command bash ./.github/eval-flake.sh
+          echo "matrix=$(nix eval --show-trace --json .#workflowMatrix)" >> "$GITHUB_OUTPUT"
 
   build:
     needs: eval
 
     strategy:
+      fail-fast: false
       matrix: ${{ fromJSON(needs.eval.outputs.matrix) }}
 
     name: Build (${{ matrix.attr }})
     runs-on: ${{ matrix.os }}
+
+    env:
+      JOBS: "hydraJobs"
 
     steps:
       - uses: actions/checkout@v4
@@ -56,19 +58,22 @@ jobs:
           name: getchoo
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
-      - name: Check if cached
-        if: ${{ matrix.isCached }}
-        run: |
-          echo ${{ matrix.attr }} is already built!
-
       - name: Run build
-        if: ${{ !matrix.isCached }}
         run: |
+          for url in "https://cache.nixos.org" "https://getchoo.cachix.org"; do
+            if nix eval --raw .#"$JOBS".${{ matrix.attr }} \
+              | cut -c12-43 \
+              | xargs -I {} curl -f "$url"/{}.narinfo &> /dev/null; then
+              echo ${{ matrix.attr }} is already cached in $url!
+            fi
+          done
+
           nix build --print-build-logs --fallback \
-            .#hydraJobs.${{ matrix.attr }}
+            .#"$JOBS".${{ matrix.attr }}
 
   check:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
 
