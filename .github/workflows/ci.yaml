@@ -5,52 +5,27 @@ on:
   workflow_call:
     secrets:
       CACHIX_AUTH_TOKEN:
-        description: "auth token for cachi"
+        description: "auth token for cachix"
   workflow_dispatch:
 
 jobs:
-  eval:
-    name: Evaluate flake
-    runs-on: ubuntu-latest
-
-    outputs:
-      matrix: ${{ steps.eval.outputs.matrix }}
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v9
-
-      - name: Setup Cachix
-        uses: cachix/cachix-action@v13
-        with:
-          name: getchoo
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-
-      - name: Evaluate jobs
-        id: eval
-        run: |
-          echo "matrix=$(nix eval --show-trace --json .#workflowMatrix)" >> "$GITHUB_OUTPUT"
-
   build:
-    needs: eval
-
     strategy:
       fail-fast: false
-      matrix: ${{ fromJSON(needs.eval.outputs.matrix) }}
+      matrix:
+        os: [ubuntu-latest, macos-latest]
 
-    name: Build (${{ matrix.attr }})
+    name: Build outputs (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
-
-    env:
-      JOBS: "hydraJobs"
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v9
+        with:
+          extra-conf: |
+            accept-flake-config = true
 
       - name: Setup Cachix
         uses: cachix/cachix-action@v13
@@ -60,17 +35,11 @@ jobs:
 
       - name: Run build
         run: |
-          for url in "https://cache.nixos.org" "https://getchoo.cachix.org"; do
-            if nix eval --raw .#"$JOBS".${{ matrix.attr }} \
-              | cut -c12-43 \
-              | xargs -I {} curl -f "$url"/{}.narinfo &> /dev/null; then
-              echo ${{ matrix.attr }} is already cached at $url!
-              exit 0
-            fi
-          done
-
-          nix build --print-build-logs --fallback \
-            .#"$JOBS".${{ matrix.attr }}
+          nix shell \
+            --inputs-from . \
+            nixpkgs#{bash,coreutils,jq,nix-eval-jobs} \
+            --command \
+            bash ./.github/build-outputs.sh ${{ matrix.os }}
 
   check:
     strategy:
@@ -96,24 +65,8 @@ jobs:
       - name: Run check
         run: |
           nix flake check \
+            --accept-flake-config \
             --print-build-logs \
             --fallback \
             --show-trace \
             --option allow-import-from-derivation true
-
-  gate:
-    needs: [build, check]
-
-    name: CI Gate
-    runs-on: ubuntu-latest
-
-    if: always()
-
-    steps:
-      - name: Exit with result
-        run: |
-          build_result="${{ needs.build.result }}"
-          check_result="${{ needs.check.result }}"
-          results=("$build_result" "$check_result")
-          for result in "${results[@]}"; do [ "$result" != "success" ] && exit 1; done
-          exit 0
