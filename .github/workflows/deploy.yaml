@@ -17,6 +17,7 @@ jobs:
     name: Deploy NixOS systems
     runs-on: ubuntu-latest
 
+    environment: nixos
     concurrency:
       group: nixos
       cancel-in-progress: true
@@ -26,9 +27,6 @@ jobs:
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v9
-
-      - name: Setup local Nix cache
-        uses: DeterminateSystems/magic-nix-cache-action@v2
 
       - name: Connect to Tailscale
         uses: tailscale/github-action@v2
@@ -48,10 +46,10 @@ jobs:
         run: |
           nix run --inputs-from . nixpkgs#deploy-rs -- -s
 
-  opentofu:
+  terranix:
     needs: nixos
 
-    name: Apply OpenTofu plan
+    name: Apply Terranix plan
     runs-on: ubuntu-latest
 
     environment: terranix
@@ -64,12 +62,6 @@ jobs:
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v9
-
-      - name: Setup local Nix cache
-        uses: DeterminateSystems/magic-nix-cache-action@v2
-
-      - name: Setup OpenTofu cache
-        uses: terraform-cache/terraform-cache@v1
 
       - name: Authenticate with TF Cloud
         run: |
@@ -86,11 +78,11 @@ jobs:
           }
           EOF
 
-      - name: Apply configuration
+      - name: Apply plan
         env:
-          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
-          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
-          TAILSCALE_API_KEY: ${{ secrets.TAILSCALE_API_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          OAUTH_CLIENT_ID: ${{ secrets.OAUTH_CLIENT_ID }}
+          OAUTH_CLIENT_SECRET: ${{ secrets.OAUTH_CLIENT_SECRET }}
         run: |
           nix develop .#terranix \
             --command bash -c \
