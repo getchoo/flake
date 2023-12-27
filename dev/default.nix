@@ -1,7 +1,6 @@
 {
   imports = [
     ./checks.nix
-    ./ci.nix
     ./shell.nix
   ];
 
