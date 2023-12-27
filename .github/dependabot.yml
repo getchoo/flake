@@ -6,9 +6,3 @@ updates:
       interval: "weekly"
     commit-message:
       prefix: "actions"
-  - package-ecosystem: "terraform"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    commit-message:
-      prefix: "tf"

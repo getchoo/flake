@@ -3,9 +3,11 @@
     lib,
     pkgs,
     system,
+    self',
+    opentofu',
     ...
   }: let
-    tfConfig = inputs.terranix.lib.terranixConfiguration {
+    terranixConfig = inputs.terranix.lib.terranixConfiguration {
       inherit system;
       modules = [
         ./cloudflare
@@ -16,7 +18,13 @@
       ];
     };
   in {
-    apps.gen-tf = {
+    _module.args.opentofu' = pkgs.opentofu.withPlugins (plugins:
+      with plugins; [
+        cloudflare
+        tailscale
+      ]);
+
+    apps.gen-terranix = {
       type = "app";
 
       program = pkgs.writeShellApplication {
@@ -25,9 +33,17 @@
         text = ''
           config_file="config.tf.json"
           [ -e "$config_file" ] && rm -f "$config_file"
-          cp ${tfConfig} "$config_file"
+          cp ${terranixConfig} "$config_file"
         '';
       };
+    };
+
+    devShells.terranix = pkgs.mkShell {
+      shellHook = ''
+        ${self'.apps.gen-terranix.program}
+      '';
+
+      packages = [pkgs.just opentofu'];
     };
   };
 }

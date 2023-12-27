@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
 
     concurrency:
-      group: deploy
+      group: nixos
       cancel-in-progress: true
 
     steps:
@@ -54,8 +54,9 @@ jobs:
     name: Apply OpenTofu plan
     runs-on: ubuntu-latest
 
+    environment: terranix
     concurrency:
-      group: tofu
+      group: terranix
       cancel-in-progress: true
 
     steps:
@@ -85,20 +86,12 @@ jobs:
           }
           EOF
 
-      - name: Generate configuration
-        run: nix run .#gen-tf
-
-      - name: Init workspace
+      - name: Apply configuration
+        env:
+          CLOUDFLARE_API_KEY: ${{ secrets.CLOUDFLARE_API_KEY }}
+          CLOUDFLARE_EMAIL: ${{ secrets.CLOUDFLARE_EMAIL }}
+          TAILSCALE_API_KEY: ${{ secrets.TAILSCALE_API_KEY }}
         run: |
-          nix run --inputs-from . \
-            nixpkgs#opentofu -- init
-
-      - name: Validate plan
-        run: |
-          nix run --inputs-from . \
-            nixpkgs#opentofu -- validate
-
-      - name: Apply
-        run: |
-          nix run --inputs-from . \
-            nixpkgs#opentofu -- apply -auto-approve
+          nix develop .#terranix \
+            --command bash -c \
+            'tofu init && tofu validate && tofu apply -auto-approve && just clean'

@@ -146,7 +146,7 @@
         ./modules
         ./overlay
         ./systems
-        ./tf
+        ./terranix
         ./users
       ];
 

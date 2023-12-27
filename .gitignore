@@ -9,6 +9,7 @@ repl-result-out*
 !.envrc
 !.env.template
 
-# opentofu
-.terraform/
+# terranix
 config.tf.json
+.terraform/
+.terraform.*

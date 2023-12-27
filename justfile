@@ -33,13 +33,6 @@ build:
 check:
     nix flake check
 
-clean:
-    rm -rf \
-      result* \
-      repl-result-out* \
-      config.tf.json \
-      .terraform/
-
 [linux]
 [macos]
 dry-run:
@@ -66,3 +59,10 @@ update-input input:
       --update-input {{ input }} \
       --commit-lock-file \
       --commit-lockfile-summary "flake: update {{ input }}"
+
+clean:
+    rm -rf \
+      result* \
+      repl-result-out* \
+      config.tf.json \
+      .terraform*

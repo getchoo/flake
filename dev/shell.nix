@@ -3,6 +3,7 @@
     pkgs,
     config,
     inputs',
+    opentofu',
     ...
   }: {
     devShells = {
@@ -23,7 +24,7 @@
             fzf
             just
             jq
-            opentofu
+            opentofu' # see ../terranix/
           ]
           ++ lib.optional stdenv.isLinux inputs'.agenix.packages.agenix;
       };
