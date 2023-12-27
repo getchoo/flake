@@ -1,21 +1,10 @@
 {
   perSystem = {
-    lib,
     pkgs,
     config,
     inputs',
     ...
   }: {
-    pre-commit = {
-      settings.hooks = {
-        actionlint.enable = true;
-        ${config.formatter.pname}.enable = true;
-        deadnix.enable = true;
-        nil.enable = true;
-        statix.enable = true;
-      };
-    };
-
     devShells = {
       default = pkgs.mkShell {
         shellHook = config.pre-commit.installationScript;
@@ -35,14 +24,9 @@
             just
             jq
             opentofu
-
-            # ci
-            nix-eval-jobs
           ]
           ++ lib.optional stdenv.isLinux inputs'.agenix.packages.agenix;
       };
     };
-
-    formatter = pkgs.alejandra;
   };
 }

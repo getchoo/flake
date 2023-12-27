@@ -142,13 +142,12 @@
         inputs.pre-commit.flakeModule
         inputs.nix2workflow.flakeModule
 
+        ./dev
         ./modules
         ./overlay
         ./systems
         ./tf
         ./users
-        ./ci.nix
-        ./dev.nix
       ];
 
       systems = [
