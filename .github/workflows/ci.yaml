@@ -9,67 +9,40 @@ on:
   workflow_dispatch:
 
 jobs:
-  eval:
-    name: Evaluate flake
-    runs-on: ubuntu-latest
-
-    outputs:
-      matrix: ${{ steps.eval.outputs.matrix }}
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Nix
-        uses: DeterminateSystems/nix-installer-action@v9
-
-      - name: Setup Cachix
-        uses: cachix/cachix-action@v13
-        with:
-          name: getchoo
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-
-      - name: Evaluate jobs
-        id: eval
-        run: |
-          nix shell --inputs-from . \
-            nixpkgs#{bash,coreutils,jq,nix-eval-jobs} \
-            --command bash ./.github/eval-flake.sh
-
   build:
-    needs: eval
-
     strategy:
       fail-fast: false
-      matrix: ${{ fromJSON(needs.eval.outputs.matrix) }}
+      matrix:
+        os: [ubuntu-latest, macos-latest]
 
-    name: Build (${{ matrix.attr }})
+    name: Build outputs (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Install Nix
-        if: ${{ !matrix.isCached }}
         uses: DeterminateSystems/nix-installer-action@v9
 
       - name: Setup Cachix
-        if: ${{ !matrix.isCached }}
         uses: cachix/cachix-action@v13
         with:
           name: getchoo
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Run build
-        if: ${{ !matrix.isCached }}
         run: |
-          nix build \
-            --accept-flake-config \
-            --print-build-logs \
-            --fallback \
-            .#hydraJobs.${{ matrix.attr }}
+          nix run \
+            --inputs-from . \
+            --override-input nixpkgs nixpkgs \
+            github:Mic92/nix-fast-build -- \
+            --skip-cached \
+            --no-nom \
+            --option accept-flake-config true
 
   check:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
 

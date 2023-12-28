@@ -1,33 +1,30 @@
-{
-  lib,
-  self,
-  ...
-}: {
-  flake.hydraJobs = let
-    ciSystems = ["x86_64-linux" "x86_64-darwin"];
-    recursiveMerge = builtins.foldl' lib.recursiveUpdate {};
-  in
-    recursiveMerge [
-      (let
-        outputs = lib.getAttrs ["checks" "devShells"] self;
-        isCompatible = system: _: lib.elem system ciSystems;
-      in
-        lib.mapAttrs (_: lib.filterAttrs isCompatible) outputs)
+{self, ...}: {
+  perSystem = {
+    lib,
+    system,
+    self',
+    ...
+  }: let
+    mapSystemConfigs = type:
+      lib.filterAttrs (_: v: v.system == system) (
+        lib.mapAttrs' (n: v: lib.nameValuePair "${type}-${n}" v.config.system.build.toplevel) self.${type}
+      );
 
-      (
-        let
-          configurations =
-            lib.getAttrs [
-              "nixosConfigurations"
-              "darwinConfigurations"
-              "homeConfigurations"
-            ]
-            self;
+    devShells = lib.mapAttrs' (n: lib.nameValuePair "devShell-${n}") self'.devShells;
 
-          isCompatible = _: configuration: lib.elem configuration.pkgs.system ciSystems;
-          toDeriv = _: configuration: configuration.config.system.build.toplevel or configuration.activationPackage;
-        in
-          lib.mapAttrs (_: v: lib.mapAttrs toDeriv (lib.filterAttrs isCompatible v)) configurations
-      )
+    homeConfigurations =
+      lib.mapAttrs'
+      (n: v: lib.nameValuePair "homeConfiguration-${n}" v.activationPackage)
+      self'.legacyPackages.homeConfigurations;
+
+    nixosConfigurations = mapSystemConfigs "nixosConfigurations";
+    darwinConfigurations = mapSystemConfigs "darwinConfigurations";
+  in {
+    checks = lib.attrsets.mergeAttrsList [
+      devShells
+      homeConfigurations
+      nixosConfigurations
+      darwinConfigurations
     ];
+  };
 }
