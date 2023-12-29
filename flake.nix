@@ -40,15 +40,6 @@
 
     catppuccin.url = "github:Stonks3141/ctp-nix";
 
-    deploy = {
-      url = "github:serokell/deploy-rs";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "pre-commit/flake-compat";
-        utils.follows = "pre-commit/flake-utils";
-      };
-    };
-
     firefox-addons = {
       url = "sourcehut:~rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs = {
@@ -79,6 +70,11 @@
         flake-utils.follows = "pre-commit/flake-utils";
         pre-commit-hooks-nix.follows = "pre-commit";
       };
+    };
+
+    nixinate = {
+      url = "github:MatthewCroughan/nixinate";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-index-database = {

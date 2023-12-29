@@ -14,42 +14,41 @@ asRoot := if os() == "linux" { "true" } else { "false" }
 default:
     @just --choose
 
-[linux]
-[macos]
 [private]
 rebuild subcmd root="false":
     {{ if root == "true" { "sudo " } else { "" } }}{{ rebuild }} {{ subcmd }} {{ rebuildArgs }} --flake .
 
-[linux]
-[macos]
 boot:
     @just rebuild boot {{ asRoot }}
 
-[linux]
-[macos]
 build:
     @just rebuild build
 
-check:
-    nix flake check
-
-[linux]
-[macos]
 dry-run:
     @just rebuild dry-run
 
-pre-commit:
-    pre-commit run
-
-[linux]
-[macos]
 switch:
     @just rebuild switch {{ asRoot }}
 
-[linux]
-[macos]
 test:
     @just rebuild test {{ asRoot }}
+
+ci:
+    nix run \
+      --inputs-from . \
+      --override-input nixpkgs nixpkgs \
+      github:Mic92/nix-fast-build -- \
+      --no-nom \
+      --skip-cached \
+      --option accept-flake-config true \
+      --flake '.#hydraJobs'
+
+check:
+    nix flake check \
+      --print-build-logs \
+      --show-trace \
+      --accept-flake-config \
+      --allow-import-from-derivation
 
 update:
     nix flake update
@@ -59,6 +58,14 @@ update-input input:
       --update-input {{ input }} \
       --commit-lock-file \
       --commit-lockfile-summary "flake: update {{ input }}"
+
+deploy-all:
+    for system in "atlas"; do \
+      nix run ".#$system"; \
+    done
+
+pre-commit:
+    pre-commit run
 
 clean:
     rm -rf \
