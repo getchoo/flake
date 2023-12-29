@@ -8,6 +8,9 @@ on:
         description: "Auth token for cachix"
   workflow_dispatch:
 
+env:
+  JUST_ARGS: --inputs-from . nixpkgs#just --command
+
 jobs:
   build:
     name: Build outputs
@@ -27,20 +30,11 @@ jobs:
 
       - name: Run build
         run: |
-          args=(
-            --inputs-from .
-            --override-input nixpkgs nixpkgs
-            github:Mic92/nix-fast-build --
-            --no-nom
-            --skip-cached
-            --option accept-flake-config true
-            --flake '.#hydraJobs'
-          )
-
-          nix run "${args[@]}"
+          nix shell ${{ env.JUST_ARGS }} just ci
 
   check:
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
 
@@ -61,11 +55,4 @@ jobs:
 
       - name: Run check
         run: |
-          args=(
-            --print-build-logs
-            --show-trace
-            --accept-flake-config
-            --allow-import-from-derivation
-          )
-
-          nix flake check "${args[@]}"
+          nix shell ${{ env.JUST_ARGS }} just check

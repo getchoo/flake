@@ -44,7 +44,14 @@ jobs:
 
       - name: Run deploy
         run: |
-          nix run --inputs-from . nixpkgs#deploy-rs -- -s
+          args=(
+            --inputs-from .
+            nixpkgs#just
+            --command
+            just deploy-all
+          )
+
+          nix shell "${args[@]}"
 
   terranix:
     needs: nixos
