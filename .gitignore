@@ -1,8 +1,6 @@
 # nix build artifacts
 result*
 repl-result-out*
-gc-roots/
-eval.json
 
 # dev shell
 .pre-commit-config.yaml
