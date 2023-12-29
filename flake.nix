@@ -23,8 +23,8 @@
       url = "github:ryantm/agenix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        darwin.follows = "darwin";
-        home-manager.follows = "hm";
+        darwin.follows = "";
+        home-manager.follows = "";
       };
     };
 
@@ -32,8 +32,8 @@
       url = "github:dwarfmaster/arkenfox-nixos";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "pre-commit/flake-compat";
-        pre-commit.follows = "pre-commit";
+        flake-compat.follows = "";
+        pre-commit.follows = "";
         flake-utils.follows = "pre-commit/flake-utils";
       };
     };
@@ -44,8 +44,8 @@
       url = "github:serokell/deploy-rs";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "pre-commit/flake-compat";
-        utils.follows = "pre-commit/flake-utils";
+        flake-compat.follows = "";
+        utils.follows = "";
       };
     };
 
@@ -74,7 +74,7 @@
       url = "github:nix-community/lanzaboote";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "pre-commit/flake-compat";
+        flake-compat.follows = "";
         flake-parts.follows = "parts";
         flake-utils.follows = "pre-commit/flake-utils";
         pre-commit-hooks-nix.follows = "pre-commit";
@@ -92,7 +92,7 @@
       url = "github:nix-community/NixOS-WSL";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-compat.follows = "pre-commit/flake-compat";
+        flake-compat.follows = "";
         flake-utils.follows = "pre-commit/flake-utils";
       };
     };

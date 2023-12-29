@@ -2,12 +2,8 @@
   "nodes": {
     "agenix": {
       "inputs": {
-        "darwin": [
-          "darwin"
-        ],
-        "home-manager": [
-          "hm"
-        ],
+        "darwin": [],
+        "home-manager": [],
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -28,10 +24,7 @@
     },
     "arkenfox": {
       "inputs": {
-        "flake-compat": [
-          "pre-commit",
-          "flake-compat"
-        ],
+        "flake-compat": [],
         "flake-utils": [
           "pre-commit",
           "flake-utils"
@@ -39,9 +32,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "pre-commit": [
-          "pre-commit"
-        ]
+        "pre-commit": []
       },
       "locked": {
         "lastModified": 1701036929,
@@ -115,17 +106,11 @@
     },
     "deploy": {
       "inputs": {
-        "flake-compat": [
-          "pre-commit",
-          "flake-compat"
-        ],
+        "flake-compat": [],
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": [
-          "pre-commit",
-          "flake-utils"
-        ]
+        "utils": []
       },
       "locked": {
         "lastModified": 1703087360,
@@ -308,10 +293,7 @@
     "lanzaboote": {
       "inputs": {
         "crane": "crane",
-        "flake-compat": [
-          "pre-commit",
-          "flake-compat"
-        ],
+        "flake-compat": [],
         "flake-parts": [
           "parts"
         ],
@@ -399,10 +381,7 @@
     },
     "nixos-wsl": {
       "inputs": {
-        "flake-compat": [
-          "pre-commit",
-          "flake-compat"
-        ],
+        "flake-compat": [],
         "flake-utils": [
           "pre-commit",
           "flake-utils"
