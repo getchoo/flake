@@ -23,8 +23,6 @@
             deploy-rs
             fzf
             just
-            jq
-            nix-eval-jobs
             opentofu' # see ../terranix/
           ]
           ++ lib.optional stdenv.isLinux inputs'.agenix.packages.agenix;
