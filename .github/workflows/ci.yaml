@@ -31,9 +31,13 @@ jobs:
       - name: Evaluate jobs
         id: eval
         run: |
-          nix shell --inputs-from . \
+          set -euo pipefail
+
+          matrix=$(nix shell --inputs-from . \
             nixpkgs#{bash,coreutils,jq,nix-eval-jobs} \
-            --command bash ./.github/eval-flake.sh
+            --command ./.github/eval-flake.sh)
+
+          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
 
   build:
     needs: eval
@@ -47,6 +51,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        if: ${{ !matrix.isCached }}
 
       - name: Install Nix
         if: ${{ !matrix.isCached }}
@@ -91,10 +96,11 @@ jobs:
       - name: Run check
         run: |
           nix flake check \
+            --accept-flake-config \
             --print-build-logs \
             --fallback \
             --show-trace \
-            --option allow-import-from-derivation true
+            --allow-import-from-derivation
 
   gate:
     needs: [build, check]
