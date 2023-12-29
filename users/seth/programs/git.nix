@@ -19,11 +19,10 @@
     git = {
       enable = true;
 
-      delta = {
+      difftastic = {
         enable = true;
-        options = {
-          syntax-theme = "Catppuccin-mocha";
-        };
+        background = "dark";
+        display = "inline";
       };
 
       extraConfig = {
