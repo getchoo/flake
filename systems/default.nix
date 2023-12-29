@@ -73,7 +73,7 @@ in {
       };
     };
 
-    openwrtConfigurations.turret = withSystem "x86_64-linux" ({pkgs, ...}:
+    legacyPackages.x86_64-linux.turret = withSystem "x86_64-linux" ({pkgs, ...}:
       pkgs.callPackage ./turret {
         inherit (inputs) openwrt-imagebuilder;
       });

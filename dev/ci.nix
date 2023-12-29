@@ -5,29 +5,29 @@
 }: {
   flake.hydraJobs = let
     ciSystems = ["x86_64-linux" "x86_64-darwin"];
-    recursiveMerge = builtins.foldl' lib.recursiveUpdate {};
+    getOutputs = lib.getAttrs ciSystems;
   in
-    recursiveMerge [
-      (let
-        outputs = lib.getAttrs ["checks" "devShells"] self;
-        isCompatible = system: _: lib.elem system ciSystems;
-      in
-        lib.mapAttrs (_: lib.filterAttrs isCompatible) outputs)
+    lib.attrsets.mergeAttrsList [
+      {
+        checks = getOutputs self.checks;
+        devShells = getOutputs self.devShells;
+        homeConfigurations = lib.mapAttrs (_: v:
+          lib.mapAttrs (_: v: v.activationPackage) v.homeConfigurations)
+        (getOutputs self.legacyPackages);
+      }
 
       (
         let
-          configurations =
-            lib.getAttrs [
-              "nixosConfigurations"
-              "darwinConfigurations"
-              "homeConfigurations"
-            ]
-            self;
+          toDerivs = lib.mapAttrs (_: configuration: configuration.config.system.build.toplevel);
+          toCompatible = lib.filterAttrs (_: configuration: lib.elem configuration.pkgs.system ciSystems);
+          getConfigurationsFor = type: toDerivs (toCompatible self.${type});
 
-          isCompatible = _: configuration: lib.elem configuration.pkgs.system ciSystems;
-          toDeriv = _: configuration: configuration.config.system.build.toplevel or configuration.activationPackage;
+          configurations = [
+            "nixosConfigurations"
+            "darwinConfigurations"
+          ];
         in
-          lib.mapAttrs (_: v: lib.mapAttrs toDeriv (lib.filterAttrs isCompatible v)) configurations
+          lib.genAttrs configurations getConfigurationsFor
       )
     ];
 }
