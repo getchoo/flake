@@ -10,14 +10,6 @@
     ./teawiebot.nix
   ];
 
-  _module.args.nixinate = {
-    host = config.networking.hostName;
-    sshUser = "root";
-    buildOn = "remote";
-    substituteOnTarget = true;
-    hermetic = false;
-  };
-
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;

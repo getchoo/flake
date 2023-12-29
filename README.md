@@ -37,7 +37,7 @@ there are some amazing tools i use to make/manage this flake that i would highly
 - [home-manager](https://github.com/nix-community/home-manager)
 - [agenix](https://github.com/ryantm/agenix)
 - [cachix](https://cachix.org)
-- [nixinate](https://github.com/MatthewCroughan/nixinate)
+- [deploy-rs](https://github.com/serokell/deploy-rs)
 - [flake-parts](https://github.com/hercules-ci/flake-parts)
 - [terranix](https://github.com/terranix/terranix)
 - [lanzaboote](https://github.com/nix-community/lanzaboote)

@@ -59,10 +59,16 @@ update-input input:
       --commit-lock-file \
       --commit-lockfile-summary "flake: update {{ input }}"
 
+deploy system:
+    nix run \
+      --inputs-from . \
+      'nixpkgs#deploy-rs' -- \
+      -s '.#{{ system }}'
+
 deploy-all:
-    for system in "atlas"; do \
-      nix run ".#$system"; \
-    done
+    nix run \
+      --inputs-from . \
+      'nixpkgs#deploy-rs' -- -s
 
 pre-commit:
     pre-commit run
