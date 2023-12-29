@@ -5,17 +5,14 @@ on:
   workflow_call:
     secrets:
       CACHIX_AUTH_TOKEN:
-        description: "auth token for cachix"
+        description: "Auth token for cachix"
   workflow_dispatch:
 
 jobs:
-  eval:
-    name: Evaluate flake
+  build:
+    name: Build outputs
     runs-on: ubuntu-latest
 
-    outputs:
-      matrix: ${{ steps.eval.outputs.matrix }}
-
     steps:
       - uses: actions/checkout@v4
 
@@ -23,55 +20,24 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@v9
 
       - name: Setup Cachix
-        uses: cachix/cachix-action@v13
-        with:
-          name: getchoo
-          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-
-      - name: Evaluate jobs
-        id: eval
-        run: |
-          set -euo pipefail
-
-          matrix=$(nix shell --inputs-from . \
-            nixpkgs#{bash,coreutils,jq,nix-eval-jobs} \
-            --command ./.github/eval-flake.sh)
-
-          echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
-
-  build:
-    needs: eval
-
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJSON(needs.eval.outputs.matrix) }}
-
-    name: Build (${{ matrix.attr }})
-    runs-on: ${{ matrix.os }}
-
-    steps:
-      - uses: actions/checkout@v4
-        if: ${{ !matrix.isCached }}
-
-      - name: Install Nix
-        if: ${{ !matrix.isCached }}
-        uses: DeterminateSystems/nix-installer-action@v9
-
-      - name: Setup Cachix
-        if: ${{ !matrix.isCached }}
         uses: cachix/cachix-action@v13
         with:
           name: getchoo
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Run build
-        if: ${{ !matrix.isCached }}
         run: |
-          nix build \
-            --accept-flake-config \
-            --print-build-logs \
-            --fallback \
-            .#hydraJobs.${{ matrix.attr }}
+          args=(
+            --inputs-from .
+            --override-input nixpkgs nixpkgs
+            github:Mic92/nix-fast-build --
+            --no-nom
+            --skip-cached
+            --option accept-flake-config true
+            --flake '.#hydraJobs'
+          )
+
+          nix run "${args[@]}"
 
   check:
     strategy:
@@ -95,12 +61,14 @@ jobs:
 
       - name: Run check
         run: |
-          nix flake check \
-            --accept-flake-config \
-            --print-build-logs \
-            --fallback \
-            --show-trace \
+          args=(
+            --print-build-logs
+            --show-trace
+            --accept-flake-config
             --allow-import-from-derivation
+          )
+
+          nix flake check "${args[@]}"
 
   gate:
     needs: [build, check]
@@ -113,8 +81,10 @@ jobs:
     steps:
       - name: Exit with result
         run: |
-          build_result="${{ needs.build.result }}"
-          check_result="${{ needs.check.result }}"
-          results=("$build_result" "$check_result")
+          results=(
+            "${{ needs.build.result }}"
+            "${{ needs.check.result }}"
+          )
+
           for result in "${results[@]}"; do [ "$result" != "success" ] && exit 1; done
           exit 0
