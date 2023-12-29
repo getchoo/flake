@@ -69,22 +69,3 @@ jobs:
           )
 
           nix flake check "${args[@]}"
-
-  gate:
-    needs: [build, check]
-
-    name: CI Gate
-    runs-on: ubuntu-latest
-
-    if: always()
-
-    steps:
-      - name: Exit with result
-        run: |
-          results=(
-            "${{ needs.build.result }}"
-            "${{ needs.check.result }}"
-          )
-
-          for result in "${results[@]}"; do [ "$result" != "success" ] && exit 1; done
-          exit 0
