@@ -22,13 +22,11 @@
       }
 
       (
-        let
-          mapCfgsToDerivs' = type: mapCfgsToDerivs (getCompatibleCfgs self.${type});
-        in
-          lib.attrsets.mergeAttrsList (map mapCfgsToDerivs' [
-            # "darwinConfigurations"
-            "nixosConfigurations"
-          ])
+        lib.genAttrs [
+          # "darwinConfigurations"
+          "nixosConfigurations"
+        ]
+        (type: mapCfgsToDerivs (getCompatibleCfgs self.${type}))
       )
     ];
 }
