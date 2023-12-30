@@ -111,7 +111,10 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": []
+        "utils": [
+          "pre-commit",
+          "flake-utils"
+        ]
       },
       "locked": {
         "lastModified": 1703087360,

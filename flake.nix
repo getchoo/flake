@@ -45,7 +45,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "";
-        utils.follows = "";
+        utils.follows = "pre-commit/flake-utils";
       };
     };
 
