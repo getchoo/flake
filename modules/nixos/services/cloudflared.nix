@@ -6,6 +6,7 @@
 }: let
   cfg = config.server.services.cloudflared;
   inherit (lib) mkEnableOption mkIf;
+  inherit (config.services) nginx;
 in {
   options.server.services.cloudflared = {
     enable = mkEnableOption "cloudflared";
@@ -25,14 +26,10 @@ in {
         "${config.networking.hostName}-nginx" = {
           default = "http_status:404";
 
-          ingress = let
-            inherit (config.services) nginx;
-          in
-            lib.genAttrs
-            (builtins.attrNames nginx.virtualHosts)
-            (_: {service = "http://localhost:${builtins.toString nginx.defaultHTTPListenPort}";});
+          ingress = lib.genAttrs (builtins.attrNames nginx.virtualHosts) (
+            _: {service = "http://localhost:${toString nginx.defaultHTTPListenPort}";}
+          );
 
-          originRequest.noTLSVerify = true;
           credentialsFile = config.age.secrets.cloudflaredCreds.path;
         };
       };
