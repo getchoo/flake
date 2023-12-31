@@ -59,10 +59,7 @@
 
     getchvim = {
       url = "github:getchoo/getchvim";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        utils.follows = "pre-commit/flake-utils";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     hm = {

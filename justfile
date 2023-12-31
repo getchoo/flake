@@ -41,14 +41,14 @@ ci:
       --no-nom \
       --skip-cached \
       --option accept-flake-config true \
+      --option allow-import-from-derivation false \
       --flake '.#hydraJobs'
 
 check:
     nix flake check \
       --print-build-logs \
       --show-trace \
-      --accept-flake-config \
-      --allow-import-from-derivation
+      --accept-flake-config
 
 update:
     nix flake update

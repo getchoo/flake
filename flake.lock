@@ -232,19 +232,14 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "nixvim": "nixvim",
-        "tree-sitter-just": "tree-sitter-just",
-        "utils": [
-          "pre-commit",
-          "flake-utils"
-        ]
+        "tree-sitter-just": "tree-sitter-just"
       },
       "locked": {
-        "lastModified": 1703897493,
-        "narHash": "sha256-XKQ1kvb9yLX4plTtEmgjsgDAAFGVxic+8Zgfv4ZKCAg=",
+        "lastModified": 1704030724,
+        "narHash": "sha256-oEGvjZmhpSI/tpF8SsYOhU+fezRLkYCvShO6MLa1sMQ=",
         "owner": "getchoo",
         "repo": "getchvim",
-        "rev": "add749d0d1597930ae95ee29d10f5f41416b76d7",
+        "rev": "3119d0e8be89bd5fa726d5424ecb181fc2fe0f58",
         "type": "github"
       },
       "original": {
@@ -436,33 +431,6 @@
         "id": "nixpkgs",
         "ref": "nixos-23.11",
         "type": "indirect"
-      }
-    },
-    "nixvim": {
-      "inputs": {
-        "flake-utils": [
-          "getchvim",
-          "utils"
-        ],
-        "nixpkgs": [
-          "getchvim",
-          "nixpkgs"
-        ],
-        "pre-commit-hooks": [
-          "getchvim"
-        ]
-      },
-      "locked": {
-        "lastModified": 1703859882,
-        "narHash": "sha256-wRXgap0eEuswF9xXUKDiWBh0tKuJ9vtmlJZ4iAX3K/E=",
-        "rev": "1d8e7906c9606c956c6b40d8d088c8d2110dc0c0",
-        "revCount": 865,
-        "type": "tarball",
-        "url": "https://api.flakehub.com/f/pinned/nix-community/nixvim/0.1.865%2Brev-1d8e7906c9606c956c6b40d8d088c8d2110dc0c0/018cb5f7-3a9f-7ad1-99f0-3e1da8634bb8/source.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://flakehub.com/f/nix-community/nixvim/0.1.%2A.tar.gz"
       }
     },
     "openwrt-imagebuilder": {
