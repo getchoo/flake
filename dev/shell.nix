@@ -7,7 +7,7 @@
     ...
   }: {
     devShells = {
-      default = pkgs.mkShell {
+      default = pkgs.mkShellNoCC {
         shellHook = config.pre-commit.installationScript;
         packages = with pkgs;
           [

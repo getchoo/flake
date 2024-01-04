@@ -38,7 +38,7 @@
       };
     };
 
-    devShells.terranix = pkgs.mkShell {
+    devShells.terranix = pkgs.mkShellNoCC {
       shellHook = ''
         ${self'.apps.gen-terranix.program}
       '';
