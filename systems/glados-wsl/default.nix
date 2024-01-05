@@ -9,6 +9,11 @@
     ../../modules/nixos/features/tailscale.nix
   ];
 
+  documentation = {
+    enable = lib.mkForce true;
+    man.enable = lib.mkForce true;
+  };
+
   environment = {
     noXlibs = lib.mkForce false;
     systemPackages = with pkgs; [

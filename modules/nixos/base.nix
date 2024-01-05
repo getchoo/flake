@@ -12,10 +12,7 @@ in {
 
   environment.systemPackages = with pkgs; [man-pages man-pages-posix];
 
-  documentation.man = {
-    generateCaches = mkDefault true;
-    man-db.enable = mkDefault true;
-  };
+  documentation.nixos.enable = false;
 
   i18n = {
     supportedLocales = [

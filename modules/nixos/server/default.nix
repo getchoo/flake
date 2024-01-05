@@ -20,14 +20,7 @@
 
   documentation = {
     enable = false;
-
-    man = {
-      enable = false;
-      man-db.enable = false;
-    };
-
-    nixos.enable = false;
-    dev.enable = false;
+    man.enable = false;
   };
 
   environment.defaultPackages = lib.mkForce [];
