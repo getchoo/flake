@@ -9,24 +9,15 @@
     getOutputs = lib.getAttrs ciSystems;
     mapCfgsToDerivs = lib.mapAttrs (_: cfg: cfg.activationPackage or cfg.config.system.build.toplevel);
     getCompatibleCfgs = lib.filterAttrs (_: cfg: lib.elem cfg.pkgs.system ciSystems);
-  in
-    lib.attrsets.mergeAttrsList [
-      {
-        checks = getOutputs self.checks;
-        devShells = getOutputs self.devShells;
+  in {
+    checks = getOutputs self.checks;
+    devShells = getOutputs self.devShells;
 
-        homeConfigurations = let
-          legacyPackages = getOutputs self.legacyPackages;
-        in
-          lib.mapAttrs (_: v: mapCfgsToDerivs v.homeConfigurations) legacyPackages;
-      }
+    homeConfigurations = let
+      legacyPackages = getOutputs self.legacyPackages;
+    in
+      lib.mapAttrs (_: v: mapCfgsToDerivs v.homeConfigurations) legacyPackages;
 
-      (
-        lib.genAttrs [
-          # "darwinConfigurations"
-          "nixosConfigurations"
-        ]
-        (type: mapCfgsToDerivs (getCompatibleCfgs self.${type}))
-      )
-    ];
+    nixosConfigurations = mapCfgsToDerivs (getCompatibleCfgs self.nixosConfigurations);
+  };
 }
