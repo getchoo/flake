@@ -26,7 +26,7 @@
 
   mapDarwin = mapSystems inputs.darwin.lib.darwinSystem;
   mapNixOS = mapSystems inputs.nixpkgs.lib.nixosSystem;
-  inherit (import ./common.nix {inherit inputs self;}) darwin nixos server;
+  common = import ./common.nix {inherit inputs self;};
 in {
   imports = [./deploy.nix];
 
@@ -34,42 +34,25 @@ in {
     darwinConfigurations = mapDarwin {
       caroline = {
         system = "x86_64-darwin";
-        modules = darwin;
+        modules = common.darwin;
       };
     };
 
     nixosConfigurations = mapNixOS {
       glados = {
         system = "x86_64-linux";
-        modules = with inputs;
-          [
-            lanzaboote.nixosModules.lanzaboote
-            nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
-            nixos-hardware.nixosModules.common-pc-ssd
-            {
-              hardware.nvidia.modesetting.enable = true;
-            }
-          ]
-          ++ nixos;
+        modules = common.personal;
       };
 
       glados-wsl = {
         system = "x86_64-linux";
-        modules =
-          [
-            inputs.nixos-wsl.nixosModules.wsl
-          ]
-          ++ nixos;
+        modules = common.personal;
       };
 
       atlas = {
         builder = inputs.nixpkgs-stable.lib.nixosSystem;
         system = "aarch64-linux";
-        modules = with inputs;
-          [
-            teawiebot.nixosModules.default
-          ]
-          ++ server;
+        modules = common.server;
       };
     };
 

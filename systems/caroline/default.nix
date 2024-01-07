@@ -14,4 +14,6 @@
   nix.settings.trusted-users = ["seth"];
 
   services.tailscale.enable = true;
+
+  system.stateVersion = 4;
 }

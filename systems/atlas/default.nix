@@ -31,5 +31,7 @@
     hashedPasswordFile = config.age.secrets.userPassword.path;
   };
 
+  system.stateVersion = "23.05";
+
   zramSwap.enable = true;
 }

@@ -1,8 +1,11 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }: {
+  imports = [inputs.lanzaboote.nixosModules.lanzaboote];
+
   environment.systemPackages = with pkgs; [
     sbctl
     tpm2-tss

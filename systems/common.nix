@@ -14,7 +14,7 @@
     };
   };
 in {
-  nixos =
+  personal =
     (with inputs; [
       agenix.nixosModules.default
       catppuccin.nixosModules.catppuccin
@@ -34,8 +34,6 @@ in {
             sethPassword.file = secretsDir + "/sethPassword.age";
           };
         };
-
-        system.stateVersion = "23.11";
       })
     ];
 
@@ -45,10 +43,6 @@ in {
     self.darwinModules.desktop
 
     hmSetup
-
-    {
-      system.stateVersion = 4;
-    }
   ];
 
   server = [
@@ -65,7 +59,6 @@ in {
       };
 
       nix.registry.n.flake = inputs.nixpkgs-stable;
-      system.stateVersion = "23.05";
     }
   ];
 }

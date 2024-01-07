@@ -6,6 +6,8 @@
   imports = [
     ./boot.nix
     ./hardware-configuration.nix
+    ./nvidia.nix
+
     self.nixosModules.desktop
     self.nixosModules.gnome
   ];
@@ -44,6 +46,8 @@
     enable = true;
     remotePlay.openFirewall = true;
   };
+
+  system.stateVersion = "23.11";
 
   zramSwap = {
     enable = true;
