@@ -7,16 +7,20 @@
   enable = osConfig.services.xserver.desktopManager.gnome.enable or false;
 in {
   config = lib.mkIf enable {
-    home.packages = with pkgs;
-      [
+    home = {
+      packages = with pkgs; [
         adw-gtk3
         tuba
-      ]
-      ++ (with gnomeExtensions; [
-        blur-my-shell
-        burn-my-windows
-        caffeine
-      ]);
+        qadwaitadecorations
+        qadwaitadecorations-qt6
+
+        gnomeExtensions.caffeine
+      ];
+
+      sessionVariables = {
+        QT_WAYLAND_DECORATION = "adwaita";
+      };
+    };
 
     dconf = {
       enable = true;
