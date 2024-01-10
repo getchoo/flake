@@ -1,15 +1,22 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   programs.chromium = {
     inherit (config.desktop) enable;
-    # hw accel support
-    commandLineArgs = [
-      "--ignore-gpu-blocklist"
-      "--enable-gpu-rasterization"
-      "--enable-gpu-compositing"
-      #"--enable-native-gpu-memory-buffers"
-      "--enable-zero-copy"
-      "--enable-features=VaapiVideoDecoder,VaapiVideoEncoder,CanvasOopRasterization,RawDraw,Vulkan,WebRTCPipeWireCapturer,WaylandWindowDecorations,WebUIDarkMode"
-      "--force-dark-mode"
+
+    dictionaries = [pkgs.hunspellDictsChromium.en_US];
+
+    extensions = [
+      # ublock origin
+      {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";}
+      # bitwarden
+      {id = "nngceckbapebfimnlniiiahkandclblb";}
+      # floccus bookmark sync
+      {id = "fnaicdffflnofjppbagibeoednhnbjhg";}
+      # tabby cat
+      {id = "mefhakmgclhhfbdadeojlkbllmecialg";}
     ];
   };
 }

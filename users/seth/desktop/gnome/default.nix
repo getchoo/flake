@@ -33,7 +33,7 @@ in {
           ];
 
           favorite-apps = [
-            "firefox.desktop"
+            "chromium-browser.desktop"
             "org.gnome.Nautilus.desktop"
             "discord.desktop"
           ];
