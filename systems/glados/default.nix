@@ -1,6 +1,7 @@
 {
   lib,
   self,
+  inputs,
   ...
 }: {
   imports = [
@@ -8,6 +9,7 @@
     ./hardware-configuration.nix
     ./nvidia.nix
 
+    inputs.nixos-hardware.nixosModules.common-pc-ssd
     self.nixosModules.desktop
     self.nixosModules.gnome
   ];

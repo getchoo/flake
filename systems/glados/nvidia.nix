@@ -3,9 +3,8 @@
   inputs,
   ...
 }: {
-  imports = with inputs; [
-    nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
-    nixos-hardware.nixosModules.common-pc-ssd
+  imports = [
+    inputs.nixos-hardware.nixosModules.common-gpu-nvidia-nonprime
   ];
 
   hardware.nvidia = {
