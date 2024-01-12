@@ -18,12 +18,20 @@ in {
 
     system.replaceRuntimeDependencies = [
       {
-        original = pkgs.mesa.out;
-        replacement = mesa.out;
+        original = pkgs.mesa;
+        replacement = mesa;
       }
       {
-        original = pkgs.pkgsi686Linux.mesa.out;
-        replacement = mesa32.out;
+        original = pkgs.mesa.drivers;
+        replacement = mesa.drivers;
+      }
+      {
+        original = pkgs.pkgsi686Linux.mesa;
+        replacement = mesa32;
+      }
+      {
+        original = pkgs.pkgsi686Linux.mesa.drivers;
+        replacement = mesa32.drivers;
       }
     ];
   };

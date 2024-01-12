@@ -136,13 +136,17 @@
           ]
         else ["auto"];
     })
-    .overrideAttrs (new: old: {
-      version = "24.0.0-rc1";
+    .overrideAttrs (_new: old: let
+      # for some reason this version string won't work with
+      # system.replaceRuntimeDependencies /shrug
+      actualVersion = "24.0.0-rc1";
+    in {
+      version = "24.0.0";
 
       src = pkgs.fetchurl {
         urls = [
-          "https://archive.mesa3d.org/mesa-${new.version}.tar.xz"
-          "https://mesa.freedesktop.org/archive/mesa-${new.version}.tar.xz"
+          "https://archive.mesa3d.org/mesa-${actualVersion}.tar.xz"
+          "https://mesa.freedesktop.org/archive/mesa-${actualVersion}.tar.xz"
         ];
 
         hash = "sha256-hvsZnrrNlztnUjgdbTnyOLg+V749aVeMOCQ1OkCujO4=";
