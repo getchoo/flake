@@ -10,6 +10,7 @@
       caroline.tags = tags.personal;
       glados.tags = tags.personal;
       glados-wsl.tags = tags.personal;
+      glados-windows.tags = tags.personal;
       iphone-14.tags = tags.personal;
     };
 }
