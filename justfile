@@ -1,7 +1,6 @@
 alias b := build
 alias c := check
 alias dr := dry-run
-alias p := pre-commit
 alias sw := switch
 alias t := test
 alias u := update
@@ -9,29 +8,21 @@ alias ui := update-input
 
 rebuildArgs := "--verbose"
 rebuild := if os() == "macos" { "darwin-rebuild" } else { "nixos-rebuild" }
-asRoot := if os() == "linux" { "true" } else { "false" }
 
 default:
     @just --choose
 
 [private]
-rebuild subcmd root="false":
-    {{ if root == "true" { "sudo " } else { "" } }}{{ rebuild }} {{ subcmd }} {{ rebuildArgs }} --flake .
+rebuild subcmd:
+    {{ rebuild }} {{ subcmd }} {{ rebuildArgs }} --flake .
 
-boot:
-    @just rebuild boot {{ asRoot }}
+build: (rebuild "build")
 
-build:
-    @just rebuild build
+dry-run: (rebuild "dry-run")
 
-dry-run:
-    @just rebuild dry-run
+switch: (rebuild "switch")
 
-switch:
-    @just rebuild switch {{ asRoot }}
-
-test:
-    @just rebuild test {{ asRoot }}
+test: (rebuild "test")
 
 ci:
     nix run \
@@ -69,9 +60,6 @@ deploy-all:
     nix run \
       --inputs-from . \
       'nixpkgs#deploy-rs' -- -s
-
-pre-commit:
-    pre-commit run
 
 clean:
     rm -rf \
