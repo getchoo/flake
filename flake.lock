@@ -235,11 +235,11 @@
         "tree-sitter-just": "tree-sitter-just"
       },
       "locked": {
-        "lastModified": 1705107311,
-        "narHash": "sha256-PMz/A7h+yM6GeTNA9e7vSUt4U8TitFSfJQOvZ0zM/DY=",
+        "lastModified": 1705651688,
+        "narHash": "sha256-Xlz4PbVI+oj15r+8uXGYrxpDyhZdMGu3ypp2GOgJeck=",
         "owner": "getchoo",
         "repo": "getchvim",
-        "rev": "bc1489046e0ddf3ac9460e3b227455d3cb3606e5",
+        "rev": "50e2b31e32c9c56c9c1c0f2865000e5a0a572437",
         "type": "github"
       },
       "original": {
@@ -669,16 +669,17 @@
     "tree-sitter-just": {
       "flake": false,
       "locked": {
-        "lastModified": 1704966794,
-        "narHash": "sha256-iK+MpyK5pQ/sYT2CHYmeI0k231HwHdZ80ij1cqlO5Nk=",
+        "lastModified": 1704453670,
+        "narHash": "sha256-mQbq0fQIyj8XhYvsLUfGlhRIuMUfpb/KuSd6MRmZS8c=",
         "owner": "IndianBoy42",
         "repo": "tree-sitter-just",
-        "rev": "f807ab33c36651ecb503a291aed933932754864d",
+        "rev": "27b2d8a07e409025cd4160e56c1c1af939a2c556",
         "type": "github"
       },
       "original": {
         "owner": "IndianBoy42",
         "repo": "tree-sitter-just",
+        "rev": "27b2d8a07e409025cd4160e56c1c1af939a2c556",
         "type": "github"
       }
     }
