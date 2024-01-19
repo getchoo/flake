@@ -34,6 +34,8 @@ in {
             sethPassword.file = secretsDir + "/sethPassword.age";
           };
         };
+
+        services.nixseparatedebuginfod.enable = true;
       })
     ];
 
