@@ -23,6 +23,9 @@
 
   services = {
     resolved.enable = false;
+    # not sure why this fails...
+    # context: https://discourse.nixos.org/t/logrotate-config-fails-due-to-missing-group-30000/28501
+    logrotate.checkConfig = false;
   };
 
   users.users.atlas = {
