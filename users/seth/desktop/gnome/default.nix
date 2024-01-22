@@ -41,18 +41,18 @@ in {
 
         "org/gnome/desktop/interface" = {
           color-scheme = "prefer-dark";
-          document-font-name = ''Noto Sans 11'';
-          font-antialiasing = ''rgba'';
-          font-name = ''Noto Sans 11'';
-          monospace-font-name = ''FiraCode Nerd Font 10'';
+          document-font-name = "Noto Sans 11";
+          font-antialiasing = "rgba";
+          font-name = "Noto Sans 11";
+          monospace-font-name = "NotoMono Nerd Font 10";
         };
 
         "org/gnome/desktop/peripherals/mouse" = {
-          accel-profile = ''flat'';
+          accel-profile = "flat";
         };
 
         "org/gnome/desktop/wm/preferences" = {
-          titlebar-font = ''Noto Sans Bold 11'';
+          titlebar-font = "Noto Sans Bold 11";
         };
 
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
@@ -62,8 +62,8 @@ in {
         };
 
         "com/raggesilver/BlackBox" = {
-          font = ''FiraCode Nerd Font 12'';
-          theme-dark = ''Catppuccin-Mocha'';
+          font = "NotoMono Nerd Font 12";
+          theme-dark = "Catppuccin-Mocha";
           remember-window-size = true;
         };
       };
