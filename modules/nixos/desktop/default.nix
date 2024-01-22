@@ -12,12 +12,10 @@
     enableDefaultPackages = lib.mkDefault true;
 
     packages = with pkgs; [
-      corefonts
-      fira-code
       (nerdfonts.override {fonts = ["FiraCode" "Hack" "Noto"];})
       noto-fonts
       noto-fonts-extra
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       noto-fonts-cjk-sans
     ];
 
@@ -28,7 +26,7 @@
         serif = ["Noto Serif"];
         sansSerif = ["Noto Sans"];
         emoji = ["Noto Color Emoji"];
-        monospace = ["Fira Code"];
+        monospace = ["Noto Sans Mono"];
       };
     };
   };
@@ -36,7 +34,7 @@
   hardware.pulseaudio.enable = false;
 
   programs = {
-    dconf.enable = lib.mkDefault true;
+    chromium.enable = lib.mkDefault true;
     firefox.enable = lib.mkDefault true;
     xwayland.enable = lib.mkDefault true;
   };
