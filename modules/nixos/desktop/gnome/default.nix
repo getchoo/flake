@@ -1,8 +1,4 @@
-{
-  pkgs,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   environment = {
     gnome.excludePackages = with pkgs; [
       gnome-tour
@@ -19,11 +15,7 @@
   };
 
   services.xserver = {
-    displayManager.gdm = {
-      enable = true;
-      wayland = lib.mkForce true;
-    };
-
+    displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
   };
 }
