@@ -16,7 +16,7 @@ let
     };
 
     glados-wsl = {
-      pubkey = "age16jps7cr3jtjjusf3p3yadcmnmmh2kzfyfcfpv2zs6hrmnlthhf2sr05jdn";
+      pubkey = "age1ffqfq3azqfwxwtxnfuzzs0y566a7ydgxce4sqxjqzw8yexc2v4yqfr55vr";
       owner = owners.getchoo;
       inherit (hosts.glados) files;
     };
