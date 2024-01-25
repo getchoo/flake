@@ -5,10 +5,9 @@
   ];
 
   home = {
-    sessionVariables = {
+    sessionVariables = rec {
       EDITOR = "nvim";
-      VISUAL = "$EDITOR";
-      GPG_TTY = "$(tty)";
+      VISUAL = EDITOR;
       CARGO_HOME = "${config.xdg.dataHome}/cargo";
       LESSHISTFILE = "${config.xdg.stateHome}/less/history";
     };

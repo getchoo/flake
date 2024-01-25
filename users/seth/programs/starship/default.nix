@@ -1,8 +1,10 @@
 {
   programs.starship = {
     enable = true;
+
     enableBashIntegration = false;
     enableZshIntegration = false;
+
     settings =
       {
         format = "$all";

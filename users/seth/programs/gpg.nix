@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   osConfig,
@@ -9,10 +8,6 @@
 
   services.gpg-agent = lib.mkIf pkgs.stdenv.isLinux {
     enable = true;
-
-    enableBashIntegration = config.programs.bash.enable;
-    enableFishIntegration = config.programs.fish.enable;
-    enableZshIntegration = config.programs.zsh.enable;
 
     pinentryFlavor =
       if osConfig ? programs
