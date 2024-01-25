@@ -1,6 +1,7 @@
 {config, ...}: {
   programs.bash = {
     enable = true;
+    # TODO: find out if i need this anymore with standalone HM
     bashrcExtra = ''
       nixfile=${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.sh
       [ -e "$nixfile" ] && source "$nixfile"

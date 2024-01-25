@@ -433,6 +433,22 @@
         "type": "indirect"
       }
     },
+    "nu-scripts": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1706107043,
+        "narHash": "sha256-YIBRQ59yjBAoKRUxbLN/Jyor3lhyhhyd4QlSlMz+cj4=",
+        "owner": "nushell",
+        "repo": "nu_scripts",
+        "rev": "f0dac68236ddcc023f4abdff8a78ec00878271ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nushell",
+        "repo": "nu_scripts",
+        "type": "github"
+      }
+    },
     "openwrt-imagebuilder": {
       "inputs": {
         "nixpkgs": [
@@ -530,6 +546,7 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
+        "nu-scripts": "nu-scripts",
         "openwrt-imagebuilder": "openwrt-imagebuilder",
         "parts": "parts",
         "pre-commit": "pre-commit",
