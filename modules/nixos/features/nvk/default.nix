@@ -11,6 +11,17 @@ in {
   options.features.nvk.enable = lib.mkEnableOption "nvk";
 
   config = lib.mkIf cfg.enable {
+    # make sure we're loading new gsp firmware
+    boot.kernelParams = [
+      "nouveau.config=NvGspRm=1"
+      "nouveau.debug=info,VBIOS=info,gsp=debug"
+    ];
+
+    environment.sessionVariables = {
+      # (fake) advertise vk 1.3
+      MESA_VK_VERSION_OVERRIDE = "1.3";
+    };
+
     hardware.opengl = {
       package = mesa.drivers;
       package32 = mesa32.drivers;
@@ -18,20 +29,12 @@ in {
 
     system.replaceRuntimeDependencies = [
       {
-        original = pkgs.mesa;
-        replacement = mesa;
+        original = pkgs.mesa.out;
+        replacement = mesa.out;
       }
       {
-        original = pkgs.mesa.drivers;
-        replacement = mesa.drivers;
-      }
-      {
-        original = pkgs.pkgsi686Linux.mesa;
-        replacement = mesa32;
-      }
-      {
-        original = pkgs.pkgsi686Linux.mesa.drivers;
-        replacement = mesa32.drivers;
+        original = pkgs.pkgsi686Linux.mesa.out;
+        replacement = mesa32.out;
       }
     ];
   };

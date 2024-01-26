@@ -29,63 +29,6 @@ SOFTWARE.
   pkgs,
   ...
 }: let
-  directx-headers = pkgs.directx-headers.overrideAttrs (new: _: {
-    version = "1.611.0";
-    src = pkgs.fetchFromGitHub {
-      owner = "microsoft";
-      repo = "DirectX-Headers";
-      rev = "v${new.version}";
-      hash = "sha256-HG2Zj8hvsgv8oeSDp1eK+1A5bvFL6oQIh5mMFWOFsvk=";
-    };
-  });
-
-  libdrm = pkgs.libdrm.overrideAttrs (new: _: {
-    version = "2.4.119";
-
-    src = pkgs.fetchFromGitLab {
-      domain = "gitlab.freedesktop.org";
-      owner = "mesa";
-      repo = "drm";
-      rev = "libdrm-${new.version}";
-      hash = "sha256-bIP3yK3VGZ/WGaUclJpb4nH8y6+zHQlQma+C9Or+Vg8=";
-    };
-  });
-
-  meson = pkgs.meson.overrideAttrs (new: old: let
-    badPatches = [
-      "https://github.com/mesonbuild/meson/commit/d5252c5d4cf1c1931fef0c1c98dd66c000891d21.patch"
-    ];
-  in {
-    version = "1.3.1";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "mesonbuild";
-      repo = "meson";
-      rev = "refs/tags/${new.version}";
-      hash = "sha256-KNNtHi3jx0MRiOgmluA4ucZJWB2WeIYdApfHuspbCqg=";
-    };
-
-    patches = lib.filter (p: !(lib.attrsets.isDerivation p) || !(lib.elem (p.url or null) badPatches)) old.patches;
-  });
-
-  revert26943 = pkgs.fetchpatch {
-    url = "https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/26943.diff";
-    hash = "sha256-KwIG68mf+aArMlvWBtGJdOFdCn5zTZJG6geWXE7bK44=";
-    revert = true;
-  };
-
-  revert24386_1 = pkgs.fetchpatch {
-    url = "https://gitlab.freedesktop.org/mesa/mesa/-/commit//299f9497758ca5d7278e5aafd210aa91d20dfb4d.patch";
-    hash = "sha256-ugrkIqJ/Tndimn6YIQSanLVvQ5qZfp2m6GGStHLt8xg=";
-    revert = true;
-  };
-
-  revert24386_2 = pkgs.fetchpatch {
-    url = "https://gitlab.freedesktop.org/mesa/mesa/-/commit/1e5bc00715ad8acf3dc323278d0d6a24986bb4ae.patch";
-    hash = "sha256-i0+sBeU/c8Eo8WA34aJfMLJOxhd7146+t7H6llGwS+g=";
-    revert = true;
-  };
-
   cargoDeps = {
     proc-macro2 = {
       version = "1.0.70";
@@ -104,35 +47,8 @@ SOFTWARE.
       hash = "sha256-M1S5rD+uH/Z1XLbbU2g622YWNPZ1V5Qt6k+s6+wP7ks=";
     };
   };
-
-  cargoFetch = crate:
-    pkgs.fetchurl {
-      url = "https://crates.io/api/v1/crates/${crate}/${cargoDeps.${crate}.version}/download";
-      inherit (cargoDeps.${crate}) hash;
-    };
-
-  cargoSubproject = crate: ''
-    ln -s ${cargoFetch crate} subprojects/packagecache/${crate}-${cargoDeps.${crate}.version}.tar.gz
-  '';
-
-  subprojects = lib.concatMapStringsSep "\n" cargoSubproject (lib.attrNames cargoDeps);
-
-  replacePatches = patch:
-    {
-      "opencl.patch" = ./opencl.patch;
-      "disk_cache-include-dri-driver-path-in-cache-key.patch" = ./disk_cache-include-dri-driver-path-in-cache-key.patch;
-    }
-    .${baseNameOf patch}
-    or patch;
-
   mesa =
     (pkgs.mesa.override {
-      inherit
-        directx-headers
-        libdrm
-        meson
-        ;
-
       # we use the new flag for this
       enablePatentEncumberedCodecs = false;
 
@@ -162,33 +78,42 @@ SOFTWARE.
           ]
         else ["auto"];
     })
-    .overrideAttrs (_new: old: let
-      # for some reason this version string won't work with
-      # system.replaceRuntimeDependencies /shrug
-      actualVersion = "24.0.0-rc1";
-    in {
+    .overrideAttrs (new: old: {
       version = "24.0.0";
 
       src = pkgs.fetchurl {
         urls = [
-          "https://archive.mesa3d.org/mesa-${actualVersion}.tar.xz"
-          "https://mesa.freedesktop.org/archive/mesa-${actualVersion}.tar.xz"
+          "https://archive.mesa3d.org/mesa-${new.version}.tar.xz"
+          "https://mesa.freedesktop.org/archive/mesa-${new.version}.tar.xz"
         ];
 
-        hash = "sha256-hvsZnrrNlztnUjgdbTnyOLg+V749aVeMOCQ1OkCujO4=";
+        hash = "sha256-YoWlu7v0P92vtLO3JrFIpKIiRg6JK9G2mq/004DJg1U=";
       };
 
       nativeBuildInputs = old.nativeBuildInputs ++ [pkgs.rustc pkgs.rust-bindgen];
 
-      patches =
-        map replacePatches old.patches
-        ++ lib.optionals (!pkgs.stdenv.hostPlatform.is32bit) [
-          revert26943
-          revert24386_1
-          revert24386_2
+      patches = let
+        badPatches = [
+          "0001-dri-added-build-dependencies-for-systems-using-non-s.patch"
+          "0002-util-Update-util-libdrm.h-stubs-to-allow-loader.c-to.patch"
+          "0003-glx-fix-automatic-zink-fallback-loading-between-hw-a.patch"
         ];
+      in
+        lib.filter (patch: !(lib.elem (baseNameOf patch) badPatches)) old.patches;
 
-      postPatch =
+      postPatch = let
+        cargoFetch = crate:
+          pkgs.fetchurl {
+            url = "https://crates.io/api/v1/crates/${crate}/${cargoDeps.${crate}.version}/download";
+            inherit (cargoDeps.${crate}) hash;
+          };
+
+        cargoSubproject = crate: ''
+          ln -s ${cargoFetch crate} subprojects/packagecache/${crate}-${cargoDeps.${crate}.version}.tar.gz
+        '';
+
+        subprojects = lib.concatMapStringsSep "\n" cargoSubproject (lib.attrNames cargoDeps);
+      in
         old.postPatch
         + ''
           mkdir subprojects/packagecache
