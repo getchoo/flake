@@ -6,11 +6,6 @@
   enable = osConfig.services.xserver.desktopManager.budgie.enable or false;
 in {
   config = lib.mkIf enable {
-    programs.alacritty = {
-      enable = true;
-      catppuccin.enable = true;
-    };
-
     dconf = {
       enable = true;
       settings = {

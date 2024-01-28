@@ -1,4 +1,34 @@
 {pkgs, ...}: {
+  environment = {
+    budgie.excludePackages = with pkgs; [
+      qogir-theme
+      qogir-icon-theme
+
+      # i don't like mates apps. fedora doesn't use them either :/
+      mate.atril
+      mate.pluma
+      mate.engrampa
+      mate.mate-calc
+      mate.mate-terminal
+      mate.mate-system-monitor
+      vlc
+    ];
+
+    systemPackages = with pkgs; [
+      materia-theme
+      papirus-icon-theme
+
+      # replacements for mate stuff
+      evince
+      gedit
+      cinnamon.nemo-fileroller
+      gnome.gnome-calculator
+      blackbox-terminal
+      gnome.gnome-system-monitor
+      celluloid
+    ];
+  };
+
   services.xserver = {
     displayManager.lightdm.greeters.slick = {
       theme = {
@@ -9,36 +39,16 @@
         name = "Papirus-Dark";
         package = pkgs.papirus-icon-theme;
       };
-      cursorTheme = {
-        name = "Breeze-gtk";
-        package = pkgs.libsForQt5.breeze-gtk;
-      };
     };
 
     desktopManager.budgie = {
       enable = true;
       extraGSettingsOverrides = ''
         [org.gnome.desktop.interface:Budgie]
-        gtk-theme="Materia-dark"
-        icon-theme="Papirus-Dark"
-        cursor-theme="Breeze-gtk"
-        font-name="Noto Sans 10"
-        document-font-name="Noto Sans 10"
-        monospace-font-name="Fira Code 10"
-        enable-hot-corners=true
+        color-scheme='prefer-dark'
+        gtk-theme='Materia-dark'
+        icon-theme='Papirus-Dark'
       '';
     };
   };
-
-  environment.budgie.excludePackages = with pkgs; [
-    qogir-theme
-    qogir-icon-theme
-  ];
-
-  environment.systemPackages = with pkgs; [
-    alacritty
-    breeze-gtk
-    materia-theme
-    papirus-icon-theme
-  ];
 }
