@@ -1,32 +1,39 @@
 {
+  config,
   lib,
   pkgs,
   ...
-}: {
-  fonts.fonts = with pkgs;
-    lib.mkDefault [
-      (nerdfonts.override {fonts = ["FiraCode"];})
-    ];
+}: let
+  cfg = config.desktop;
+in {
+  options.desktop.enable = lib.mkEnableOption "base desktop settings";
 
-  homebrew = {
-    enable = lib.mkDefault true;
+  config = lib.mkIf cfg.enable {
+    fonts.fonts = with pkgs;
+      lib.mkDefault [
+        (nerdfonts.override {fonts = ["FiraCode"];})
+      ];
 
-    onActivation = lib.mkDefault {
-      autoUpdate = true;
-      cleanup = "zap";
-      upgrade = true;
+    homebrew = {
+      enable = lib.mkDefault true;
+
+      onActivation = lib.mkDefault {
+        autoUpdate = true;
+        cleanup = "zap";
+        upgrade = true;
+      };
+
+      caskArgs = {
+        no_quarantine = true;
+        require_sha = false;
+      };
+
+      casks = [
+        "chromium"
+        "iterm2"
+      ];
     };
 
-    caskArgs = {
-      no_quarantine = true;
-      require_sha = false;
-    };
-
-    casks = [
-      "chromium"
-      "iterm2"
-    ];
+    programs.gnupg.agent.enable = lib.mkDefault true;
   };
-
-  programs.gnupg.agent.enable = lib.mkDefault true;
 }

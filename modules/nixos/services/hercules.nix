@@ -15,8 +15,8 @@
   };
 in {
   options.server.services.hercules-ci = {
-    enable = mkEnableOption "enable hercules-ci";
-    secrets.enable = mkEnableOption "manage secrets for hercules-ci";
+    enable = mkEnableOption "hercules-ci";
+    secrets.enable = mkEnableOption "secrets management for hercules-ci";
   };
 
   config = mkIf cfg.enable {

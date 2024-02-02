@@ -4,10 +4,10 @@
   pkgs,
   ...
 }: let
-  cfg = config.features.virtualisation;
+  cfg = config.features.containers;
 in {
-  options.features.virtualisation = {
-    enable = lib.mkEnableOption "enable podman";
+  options.features.containers = {
+    enable = lib.mkEnableOption "containers support";
   };
 
   config.virtualisation = lib.mkIf cfg.enable {

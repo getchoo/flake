@@ -13,16 +13,16 @@
       extraSpecialArgs = {inherit inputs inputs' self;};
     };
   };
+
+  nixosModules = builtins.attrValues self.nixosModules;
+  darwinModules = builtins.attrValues self.darwinModules;
 in {
   personal =
-    (with inputs; [
-      agenix.nixosModules.default
-      catppuccin.nixosModules.catppuccin
-      hm.nixosModules.home-manager
-    ])
+    nixosModules
     ++ [
-      self.nixosModules.default
-      self.nixosModules.features
+      inputs.agenix.nixosModules.default
+      inputs.catppuccin.nixosModules.catppuccin
+      inputs.hm.nixosModules.home-manager
 
       hmSetup
 
@@ -39,28 +39,34 @@ in {
       })
     ];
 
-  darwin = [
-    inputs.hm.darwinModules.home-manager
-    self.darwinModules.default
-    self.darwinModules.desktop
+  darwin =
+    darwinModules
+    ++ [
+      inputs.hm.darwinModules.home-manager
+      hmSetup
 
-    hmSetup
-  ];
+      {
+        desktop.enable = true;
+      }
+    ];
 
-  server = [
-    inputs.agenix.nixosModules.default
-    self.nixosModules.default
-    self.nixosModules.features
-    self.nixosModules.server
-    self.nixosModules.services
+  server =
+    nixosModules
+    ++ [
+      inputs.agenix.nixosModules.default
 
-    {
-      features.tailscale = {
-        enable = true;
-        ssh.enable = true;
-      };
+      {
+        features.tailscale = {
+          enable = true;
+          ssh.enable = true;
+        };
 
-      nix.registry.n.flake = inputs.nixpkgs-stable;
-    }
-  ];
+        server = {
+          enable = true;
+          secrets.enable = true;
+        };
+
+        nix.registry.n.flake = inputs.nixpkgs-stable;
+      }
+    ];
 }

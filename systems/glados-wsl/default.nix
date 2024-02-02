@@ -7,10 +7,7 @@
 }: {
   imports = [
     (modulesPath + "/profiles/minimal.nix")
-
     inputs.nixos-wsl.nixosModules.wsl
-
-    ../../modules/nixos/features/tailscale.nix
   ];
 
   documentation = {

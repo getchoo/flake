@@ -1,6 +1,5 @@
 {
   lib,
-  self,
   inputs,
   ...
 }: {
@@ -10,13 +9,16 @@
     ./nvidia.nix
 
     inputs.nixos-hardware.nixosModules.common-pc-ssd
-    self.nixosModules.desktop
-    self.nixosModules.gnome
   ];
 
+  desktop = {
+    enable = true;
+    gnome.enable = true;
+  };
+
   features = {
+    containers.enable = true;
     tailscale.enable = true;
-    virtualisation.enable = true;
   };
 
   home-manager.users.seth = {

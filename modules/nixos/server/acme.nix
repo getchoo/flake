@@ -1,18 +1,25 @@
 {
   config,
+  lib,
   secretsDir,
   ...
-}: {
-  age.secrets = {
-    cloudflareApiKey.file = secretsDir + "/cloudflareApiKey.age";
-  };
+}: let
+  cfg = config.server.acme;
+in {
+  options.server.acme.enable = lib.mkEnableOption "ACME support";
 
-  security.acme = {
-    acceptTerms = true;
-    defaults = {
-      email = "getchoo@tuta.io";
-      dnsProvider = "cloudflare";
-      credentialsFile = config.age.secrets.cloudflareApiKey.path;
+  config = lib.mkIf cfg.enable {
+    age.secrets = {
+      cloudflareApiKey.file = secretsDir + "/cloudflareApiKey.age";
+    };
+
+    security.acme = {
+      acceptTerms = true;
+      defaults = {
+        email = "getchoo@tuta.io";
+        dnsProvider = "cloudflare";
+        credentialsFile = config.age.secrets.cloudflareApiKey.path;
+      };
     };
   };
 }

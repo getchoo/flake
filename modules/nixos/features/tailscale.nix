@@ -7,8 +7,8 @@
   cfg = config.features.tailscale;
 in {
   options.features.tailscale = {
-    enable = lib.mkEnableOption "enable support for tailscale";
-    ssh.enable = lib.mkEnableOption "enable support for tailscale ssh";
+    enable = lib.mkEnableOption "Tailscale";
+    ssh.enable = lib.mkEnableOption "Tailscale SSH";
   };
 
   config = lib.mkIf cfg.enable {

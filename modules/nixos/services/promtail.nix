@@ -7,7 +7,7 @@
   inherit (lib) mkEnableOption mkIf mkOption types;
 in {
   options.server.services.promtail = {
-    enable = mkEnableOption "enable promtail";
+    enable = mkEnableOption "Promtail";
 
     clients = mkOption {
       type = types.listOf types.attrs;

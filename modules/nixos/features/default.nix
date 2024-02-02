@@ -1,7 +1,7 @@
 {
   imports = [
+    ./containers.nix
     ./nvk
     ./tailscale.nix
-    ./virtualisation.nix
   ];
 }
