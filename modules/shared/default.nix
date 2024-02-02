@@ -1,5 +1,11 @@
-{lib, ...}: {
+{
+  lib,
+  self,
+  ...
+}: {
   imports = [./nix.nix];
+
+  system.configurationRevision = self.rev or self.dirtyRev or "dirty-unknown";
 
   documentation = {
     doc.enable = false;
