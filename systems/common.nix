@@ -67,6 +67,7 @@ in {
         };
 
         nix.registry.n.flake = inputs.nixpkgs-stable;
+        environment.etc."nix/inputs/nixpkgs".source = inputs.nixpkgs-stable.outPath;
       }
     ];
 }

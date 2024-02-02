@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: let
   inherit (lib) mkDefault;
@@ -13,6 +14,9 @@ in {
   environment.systemPackages = with pkgs; [man-pages man-pages-posix];
 
   documentation.nixos.enable = false;
+
+  # not sure why i can't use this on darwin?
+  environment.etc."nix/inputs/nixpkgs".source = lib.mkDefault inputs.nixpkgs.outPath;
 
   i18n = {
     supportedLocales = [
