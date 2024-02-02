@@ -3,7 +3,7 @@
     pkgs,
     config,
     inputs',
-    opentofu',
+    self',
     ...
   }: {
     devShells = {
@@ -14,7 +14,7 @@
             actionlint
 
             # nix
-            config.formatter
+            self'.formatter
             deadnix
             nil
             statix
@@ -23,7 +23,7 @@
             deploy-rs
             fzf
             just
-            opentofu' # see ../terranix/
+            config.terranix.package
           ]
           ++ lib.optional stdenv.isLinux inputs'.agenix.packages.agenix;
       };

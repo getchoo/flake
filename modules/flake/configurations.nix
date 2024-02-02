@@ -156,8 +156,8 @@
       example = literalExpression ''
         {
           foo = {
-        	  system = "aarch64-${kernelFor type}";
-        	};
+            system = "aarch64-${kernelFor type}";
+          };
         }
       '';
       description = mdDoc ''
@@ -192,8 +192,8 @@ in {
           example = literalExpression ''
             {
               john = {
-            	  pkgs = inputs.nixpkgs.legacyPackages.aarch64-linux;
-            	};
+                pkgs = inputs.nixpkgs.legacyPackages.aarch64-linux;
+              };
             }
           '';
           description = mdDoc ''
