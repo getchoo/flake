@@ -11,9 +11,10 @@
         shellHook = config.pre-commit.installationScript;
         packages = with pkgs;
           [
-            actionlint
+            nix
 
-            # nix
+            # format + lint
+            actionlint
             self'.formatter
             deadnix
             nil
@@ -25,7 +26,8 @@
             just
             config.terranix.package
           ]
-          ++ lib.optional stdenv.isLinux inputs'.agenix.packages.agenix;
+          ++ lib.optional stdenv.isDarwin [inputs'.darwin.packages.darwin-rebuild]
+          ++ lib.optionals stdenv.isLinux [nixos-rebuild inputs'.agenix.packages.agenix];
       };
     };
   };
