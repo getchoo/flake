@@ -7,13 +7,10 @@
   ...
 }: {
   nix = {
-    registry = {
-      n.flake = lib.mkDefault inputs.nixpkgs;
-      self.flake = self;
-    };
+    registry.n.flake = lib.mkDefault inputs.nixpkgs;
 
     nixPath = [
-      "nixpkgs=${inputs.nixpkgs.outPath}"
+      "nixpkgs=/etc/nix/inputs/nixpkgs"
     ];
 
     settings = {
