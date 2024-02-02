@@ -6,6 +6,24 @@
     extra-trusted-public-keys = ["getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="];
   };
 
+  outputs = {parts, ...} @ inputs:
+    parts.lib.mkFlake {inherit inputs;} {
+      imports = [
+        ./configs.nix
+        ./dev
+        ./modules
+        ./overlay
+        ./terranix
+      ];
+
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+    };
+
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "nixpkgs/nixos-23.11";
@@ -132,23 +150,4 @@
       };
     };
   };
-
-  outputs = {parts, ...} @ inputs:
-    parts.lib.mkFlake {inherit inputs;} {
-      imports = [
-        ./dev
-        ./modules
-        ./overlay
-        ./systems
-        ./terranix
-        ./users
-      ];
-
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
-    };
 }
