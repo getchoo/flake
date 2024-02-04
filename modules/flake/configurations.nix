@@ -3,6 +3,7 @@
   lib,
   withSystem,
   inputs,
+  self,
   ...
 }: let
   namespace = "configurations";
@@ -48,6 +49,7 @@
           ../../systems/${name}
           {networking.hostName = name;}
         ]
+        ++ lib.attrValues self."${type}Modules"
         ++ cfg.${type}.modules
         ++ args.modules;
 

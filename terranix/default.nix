@@ -1,6 +1,4 @@
 {inputs, ...}: {
-  imports = [../modules/flake/terranix.nix];
-
   perSystem = {pkgs, ...}: {
     terranix = {
       builder = inputs.terranix.lib.terranixConfiguration;

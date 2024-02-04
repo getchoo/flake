@@ -10,6 +10,6 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    users.seth.enable = true;
+    users.seth.enable = lib.mkDefault true;
   };
 }

@@ -1,35 +1,15 @@
 {
-  lib,
   withSystem,
   inputs,
-  self,
   ...
-}: let
-  mkModulesFor = type: extra:
-    lib.concatLists [
-      (lib.attrValues self."${type}Modules")
-      extra
-    ];
-in {
-  imports = [
-    ./systems/deploy.nix
-    ./modules/flake/configurations.nix
-  ];
+}: {
+  imports = [./deploy.nix];
 
   configurations = {
-    home = {
-      builder = inputs.hm.lib.homeManagerConfiguration;
-      pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-
-      users = {
-        seth = {};
-      };
-    };
-
     nixos = {
       builder = inputs.nixpkgs.lib.nixosSystem;
 
-      modules = mkModulesFor "nixos" [
+      modules = [
         inputs.agenix.nixosModules.default
         inputs.hm.nixosModules.home-manager
       ];
@@ -49,7 +29,7 @@ in {
     darwin = {
       builder = inputs.darwin.lib.darwinSystem;
 
-      modules = mkModulesFor "darwin" [
+      modules = [
         inputs.hm.darwinModules.home-manager
       ];
 
