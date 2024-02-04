@@ -4,8 +4,9 @@
     (
       prev.lib.pipe ./. [
         builtins.readDir
-        (prev.lib.filterAttrs (n: _: n != "default.nix"))
-        (prev.lib.mapAttrsToList (f: _: import ./${f}))
+        builtins.attrNames
+        (builtins.filter (name: name != "default.nix"))
+        (map (file: import ./${file}))
       ]
     )
     final
