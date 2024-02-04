@@ -21,6 +21,7 @@ in {
       tmp.cleanOnBoot = lib.mkDefault true;
       kernelPackages = lib.mkDefault pkgs.linuxPackages_hardened;
     };
+    environment.etc."nix/inputs/nixpkgs".source = inputs.nixpkgs-stable.outPath;
 
     documentation = {
       enable = false;
@@ -35,6 +36,7 @@ in {
         options = "-d --delete-older-than 2d";
       };
 
+      registry.n.flake = inputs.nixpkgs-stable;
       settings.allowed-users = [config.networking.hostName];
     };
   };

@@ -10,6 +10,8 @@
     inputs.nixos-wsl.nixosModules.wsl
   ];
 
+  suites.personal.enable = true;
+
   documentation = {
     enable = lib.mkForce true;
     man.enable = lib.mkForce true;

@@ -1,9 +1,15 @@
 {
   lib,
-  self,
+  inputs,
   ...
-}: {
-  imports = [./nix.nix];
+}: let
+  inherit (inputs) self;
+in {
+  imports = [
+    ./nix.nix
+    ./suites
+    ./users
+  ];
 
   system.configurationRevision = self.rev or self.dirtyRev or "dirty-unknown";
 

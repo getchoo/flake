@@ -5,5 +5,6 @@
     features = ./features;
     server = ./server;
     services = ./services;
+    suites = ./suites;
   };
 }

@@ -11,6 +11,8 @@
     inputs.nixos-hardware.nixosModules.common-pc-ssd
   ];
 
+  suites.personal.enable = true;
+
   desktop = {
     enable = true;
     gnome.enable = true;
@@ -22,7 +24,7 @@
   };
 
   home-manager.users.seth = {
-    desktop.enable = true;
+    seth.desktop.enable = true;
   };
 
   networking.hostName = "glados";
