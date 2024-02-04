@@ -1,4 +1,6 @@
 {
+  suites.personal.enable = true;
+
   homebrew.casks = [
     "altserver"
     "discord"

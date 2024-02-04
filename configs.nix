@@ -1,10 +1,24 @@
 {
+  lib,
   withSystem,
   inputs,
   self,
   ...
 }: let
-  common = import ./systems/common.nix {inherit inputs self;};
+  mkModulesFor = type: extra:
+    lib.concatLists [
+      (lib.attrValues self."${type}Modules")
+      extra
+    ];
+
+  nixosModules = mkModulesFor "nixos" [
+    inputs.agenix.nixosModules.default
+    inputs.hm.nixosModules.home-manager
+  ];
+
+  darwinModules = mkModulesFor "darwin" [
+    inputs.hm.darwinModules.home-manager
+  ];
 in {
   imports = [
     ./systems/deploy.nix
@@ -26,17 +40,17 @@ in {
 
       systems = {
         glados = {
-          modules = common.personal;
+          modules = nixosModules;
         };
 
         glados-wsl = {
-          modules = common.personal;
+          modules = nixosModules;
         };
 
         atlas = {
           builder = inputs.nixpkgs-stable.lib.nixosSystem;
           system = "aarch64-linux";
-          modules = common.server;
+          modules = nixosModules;
         };
       };
     };
@@ -46,7 +60,7 @@ in {
 
       systems = {
         caroline = {
-          modules = common.darwin;
+          modules = darwinModules;
         };
       };
     };

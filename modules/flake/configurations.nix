@@ -1,9 +1,7 @@
 {
   config,
   lib,
-  withSystem,
   inputs,
-  self,
   ...
 }: let
   namespace = "configurations";
@@ -46,8 +44,7 @@
       // {
         modules = args.modules ++ [../../systems/${name} {networking.hostName = name;}];
         specialArgs = {
-          inherit inputs self;
-          inputs' = withSystem args.system ({inputs', ...}: inputs');
+          inherit inputs;
           secretsDir = ../../secrets/${name};
         };
       }
@@ -70,10 +67,7 @@
         ]
         ++ args.modules;
 
-      extraSpecialArgs = {
-        inherit inputs self;
-        inputs' = withSystem args.pkgs.system ({inputs', ...}: inputs');
-      };
+      extraSpecialArgs = {inherit inputs;};
     });
 
   mapSystems = type: mapAttrs (name: _: mkSystem type name) cfg.${type}.systems;

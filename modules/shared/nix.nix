@@ -3,7 +3,6 @@
   lib,
   pkgs,
   inputs,
-  self,
   ...
 }: {
   nix = {
@@ -29,7 +28,7 @@
   };
 
   nixpkgs = {
-    overlays = [self.overlays.default];
+    overlays = [inputs.self.overlays.default];
     config.allowUnfree = lib.mkDefault true;
   };
 }

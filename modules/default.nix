@@ -2,5 +2,6 @@
   imports = [
     ./nixos
     ./darwin
+    ./flake
   ];
 }
