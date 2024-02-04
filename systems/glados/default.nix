@@ -27,8 +27,6 @@
     seth.desktop.enable = true;
   };
 
-  networking.hostName = "glados";
-
   security.tpm2 = {
     enable = true;
     abrmd.enable = true;

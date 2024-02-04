@@ -1,4 +1,4 @@
-{
+{config, ...}: {
   suites.personal.enable = true;
 
   homebrew.casks = [
@@ -8,10 +8,7 @@
     "prismlauncher"
   ];
 
-  networking = rec {
-    computerName = "caroline";
-    hostName = computerName;
-  };
+  networking.computerName = config.networking.hostName;
 
   nix.settings.trusted-users = ["seth"];
 

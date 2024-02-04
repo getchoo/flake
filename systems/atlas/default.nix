@@ -19,7 +19,6 @@
 
   networking = {
     domain = "mydadleft.me";
-    hostName = "atlas";
     networkmanager.enable = false;
   };
 

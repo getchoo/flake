@@ -41,12 +41,8 @@
 
   # doesn't work on wsl
   services.dbus.apparmor = "disabled";
-
-  networking = {
-    hostName = "glados-wsl";
-    # ditto
-    networkmanager.enable = false;
-  };
+  # ditto
+  networking.networkmanager.enable = false;
 
   # ditto
   security = {
