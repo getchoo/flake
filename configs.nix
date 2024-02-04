@@ -10,15 +10,6 @@
       (lib.attrValues self."${type}Modules")
       extra
     ];
-
-  nixosModules = mkModulesFor "nixos" [
-    inputs.agenix.nixosModules.default
-    inputs.hm.nixosModules.home-manager
-  ];
-
-  darwinModules = mkModulesFor "darwin" [
-    inputs.hm.darwinModules.home-manager
-  ];
 in {
   imports = [
     ./systems/deploy.nix
@@ -38,19 +29,19 @@ in {
     nixos = {
       builder = inputs.nixpkgs.lib.nixosSystem;
 
-      systems = {
-        glados = {
-          modules = nixosModules;
-        };
+      modules = mkModulesFor "nixos" [
+        inputs.agenix.nixosModules.default
+        inputs.hm.nixosModules.home-manager
+      ];
 
-        glados-wsl = {
-          modules = nixosModules;
-        };
+      systems = {
+        glados = {};
+
+        glados-wsl = {};
 
         atlas = {
           builder = inputs.nixpkgs-stable.lib.nixosSystem;
           system = "aarch64-linux";
-          modules = nixosModules;
         };
       };
     };
@@ -58,10 +49,12 @@ in {
     darwin = {
       builder = inputs.darwin.lib.darwinSystem;
 
+      modules = mkModulesFor "darwin" [
+        inputs.hm.darwinModules.home-manager
+      ];
+
       systems = {
-        caroline = {
-          modules = darwinModules;
-        };
+        caroline = {};
       };
     };
   };
