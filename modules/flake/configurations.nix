@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  withSystem,
   inputs,
   ...
 }: let
@@ -36,6 +37,8 @@
     }
     .${type};
 
+  inputsFor = system: withSystem system ({inputs', ...}: inputs');
+
   mkSystem = type: name: let
     args = cfg.${type}.systems.${name};
   in
@@ -50,6 +53,7 @@
 
       specialArgs = {
         inherit inputs;
+        inputs' = inputsFor args.system;
         secretsDir = ../../secrets/${name};
       };
     });
@@ -72,7 +76,10 @@
         ++ cfg.home.modules
         ++ args.modules;
 
-      extraSpecialArgs = {inherit inputs;};
+      extraSpecialArgs = {
+        inherit inputs;
+        inputs' = inputsFor args.pkgs.stdenv.hostPlatform.system;
+      };
     });
 
   mapSystems = type: mapAttrs (name: _: mkSystem type name) cfg.${type}.systems;

@@ -2,11 +2,10 @@
   config,
   lib,
   pkgs,
-  inputs,
+  inputs',
   ...
 }: let
   cfg = config.seth.programs.neovim;
-  inherit (pkgs.stdenv.hostPlatform) system;
 in {
   options.seth.programs.neovim = {
     enable = lib.mkEnableOption "Neovim configuration" // {default = true;};
@@ -15,7 +14,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = [
       (let
-        getchvim = inputs.getchvim.packages.${system}.default;
+        getchvim = inputs'.getchvim.packages.default;
       in
         # remove desktop file
         pkgs.symlinkJoin {
