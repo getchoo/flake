@@ -39,16 +39,20 @@
   mkSystem = type: name: let
     args = cfg.${type}.systems.${name};
   in
-    args.builder (
-      (removeAttrs args ["builder"])
-      // {
-        modules = args.modules ++ [../../systems/${name} {networking.hostName = name;}];
-        specialArgs = {
-          inherit inputs;
-          secretsDir = ../../secrets/${name};
-        };
-      }
-    );
+    args.builder (lib.recursiveUpdate (removeAttrs args ["builder"]) {
+      modules =
+        [
+          ../../systems/${name}
+          {networking.hostName = name;}
+        ]
+        ++ cfg.${type}.modules
+        ++ args.modules;
+
+      specialArgs = {
+        inherit inputs;
+        secretsDir = ../../secrets/${name};
+      };
+    });
 
   mkUser = name: let
     args = cfg.home.users.${name};
@@ -65,6 +69,7 @@
             programs.home-manager.enable = true;
           }
         ]
+        ++ cfg.home.modules
         ++ args.modules;
 
       extraSpecialArgs = {inherit inputs;};
@@ -144,6 +149,15 @@
       '';
     };
 
+    modules = mkOption {
+      type = modulesType;
+      default = [];
+      example = literalExpression "[ self.${type}Modules.default ]";
+      description = mdDoc ''
+        List of modules to add to all ${type}Configurations
+      '';
+    };
+
     systems = mkOption {
       type = types.attrsOf (types.submodule (systemsSubmodule type));
       default = {};
@@ -169,6 +183,15 @@ in {
           example = literalExpression "inputs.home-manager.lib.homeManagerConfiguration";
           description = mdDoc ''
             Default function to build homeConfigurations with
+          '';
+        };
+
+        modules = mkOption {
+          type = modulesType;
+          default = [];
+          example = literalExpression "[ self.homeModules.default ]";
+          description = mdDoc ''
+            List of modules to add to all homeConfigurations
           '';
         };
 
