@@ -6,20 +6,24 @@
     extra-trusted-public-keys = ["getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="];
   };
 
-  outputs = inputs:
+  outputs = inputs: let
+    inherit ((import ./modules/flake).flake) flakeModules;
+  in
     inputs.parts.lib.mkFlake {inherit inputs;} {
       imports = [
-        ./dev
         ./modules
         ./overlay
         ./systems
         ./users
-        ./terranix
+
+        ./repo # checks, ci, devShells, etc.
+        ./ext # nix expressions for *external*, not so nix-y things
 
         inputs.pre-commit.flakeModule
+
         # dogfooding
-        ./modules/flake/configurations.nix
-        ./modules/flake/terranix.nix
+        flakeModules.configurations
+        flakeModules.terranix
       ];
 
       systems = [
