@@ -10,7 +10,12 @@
     inputs.nixos-wsl.nixosModules.wsl
   ];
 
-  suites.personal.enable = true;
+  archetypes.personal.enable = true;
+
+  base = {
+    networking.enable = false;
+    security.enable = false;
+  };
 
   documentation = {
     enable = lib.mkForce true;
@@ -25,7 +30,7 @@
     ];
   };
 
-  features.tailscale.enable = true;
+  traits.tailscale.enable = true;
 
   wsl = {
     enable = true;
@@ -38,21 +43,6 @@
     startMenuLaunchers = false;
     interop.includePath = false;
   };
-
-  # doesn't work on wsl
-  services.dbus.apparmor = "disabled";
-  # ditto
-  networking.networkmanager.enable = false;
-
-  # ditto
-  security = {
-    apparmor.enable = false;
-    audit.enable = false;
-    auditd.enable = false;
-  };
-
-  # ditto
-  services.resolved.enable = false;
 
   system.stateVersion = "23.11";
 }

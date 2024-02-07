@@ -1,8 +1,4 @@
 {
-  config,
-  pkgs,
-  ...
-}: {
   imports = [
     ./hardware-configuration.nix
     ./miniflux.nix
@@ -10,7 +6,7 @@
     ./teawiebot.nix
   ];
 
-  suites.server.enable = true;
+  archetypes.server.enable = true;
 
   boot = {
     loader.systemd-boot.enable = true;
@@ -27,12 +23,6 @@
     # not sure why this fails...
     # context: https://discourse.nixos.org/t/logrotate-config-fails-due-to-missing-group-30000/28501
     logrotate.checkConfig = false;
-  };
-
-  users.users.atlas = {
-    isNormalUser = true;
-    shell = pkgs.bash;
-    hashedPasswordFile = config.age.secrets.userPassword.path;
   };
 
   system.stateVersion = "23.05";

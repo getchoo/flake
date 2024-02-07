@@ -1,10 +1,8 @@
 {
   flake.nixosModules = {
-    default = ./base.nix;
+    default = ./base;
+    archetypes = ./archetypes;
     desktop = ./desktop;
-    features = ./features;
-    server = ./server;
-    services = ./services;
-    suites = ./suites;
+    traits = ./traits;
   };
 }

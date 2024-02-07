@@ -11,20 +11,16 @@
     inputs.nixos-hardware.nixosModules.common-pc-ssd
   ];
 
-  suites.personal.enable = true;
+  archetypes.personal.enable = true;
 
   desktop = {
     enable = true;
     gnome.enable = true;
   };
 
-  features = {
+  traits = {
     containers.enable = true;
     tailscale.enable = true;
-  };
-
-  home-manager.users.seth = {
-    seth.desktop.enable = true;
   };
 
   security.tpm2 = {

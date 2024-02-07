@@ -2,12 +2,17 @@
   config,
   lib,
   pkgs,
+  osConfig,
   ...
 }: let
   cfg = config.seth.desktop;
 in {
   options.seth.desktop = {
-    enable = lib.mkEnableOption "desktop";
+    enable =
+      lib.mkEnableOption "desktop"
+      // {
+        default = osConfig.desktop.enable or false;
+      };
   };
 
   imports = [
