@@ -1,5 +1,5 @@
 {config, ...}: {
-  suites.personal.enable = true;
+  archetypes.personal.enable = true;
 
   homebrew.casks = [
     "altserver"
