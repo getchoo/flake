@@ -8,23 +8,18 @@
   ];
 
   archetypes.server.enable = true;
+  base.networking.enable = false;
 
   boot = {
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
   };
 
-  networking = {
-    domain = "mydadleft.me";
-    networkmanager.enable = false;
-  };
+  networking.domain = "mydadleft.me";
 
-  services = {
-    resolved.enable = false;
-    # not sure why this fails...
-    # context: https://discourse.nixos.org/t/logrotate-config-fails-due-to-missing-group-30000/28501
-    logrotate.checkConfig = false;
-  };
+  # not sure why this fails...
+  # context: https://discourse.nixos.org/t/logrotate-config-fails-due-to-missing-group-30000/28501
+  services.logrotate.checkConfig = false;
 
   system.stateVersion = "23.05";
 
