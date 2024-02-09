@@ -18,6 +18,7 @@ in {
     };
 
     traits = {
+      autoUpgrade.enable = true;
       cloudflared.enable = true;
 
       locale = {
