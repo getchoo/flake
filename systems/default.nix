@@ -28,7 +28,7 @@
       builder = inputs.darwin.lib.darwinSystem;
 
       modules = [
-        inputs.hm.darwinModules.home-manager
+        inputs.home-manager.darwinModules.home-manager
       ];
 
       systems = {
