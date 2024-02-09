@@ -5,6 +5,7 @@
     ./containers.nix
     ./hercules.nix
     ./locale.nix
+    ./nginx.nix
     ./nvk
     ./promtail.nix
     ./secrets.nix
