@@ -1,21 +1,12 @@
 {
   config,
-  lib,
+  inputs,
   ...
 }: let
-  mkProxy = endpoint: port: {
-    "${endpoint}" = {
-      proxyPass = "http://localhost:${toString port}";
-      proxyWebsockets = true;
-    };
-  };
-
-  toVHosts = lib.mapAttrs' (
-    name: value: lib.nameValuePair "${name}.${config.networking.domain}" value
-  );
+  inherit (inputs.self.lib.nginx) mkProxy toVHosts;
 in {
   services.nginx = {
-    virtualHosts = toVHosts {
+    virtualHosts = toVHosts config.networking.domain {
       miniflux = {
         locations = mkProxy "/" "7000";
       };
