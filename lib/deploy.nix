@@ -1,10 +1,9 @@
 {
   lib,
   inputs,
-  self,
   ...
 }: let
-  targets = ["atlas"];
+  inherit (inputs) self;
   configurations = self.nixosConfigurations // self.darwinConfigurations;
 
   getDeploy = pkgs:
@@ -36,9 +35,5 @@
       deploy.lib.activate.${type} system;
   };
 in {
-  flake.deploy = {
-    remoteBuild = true;
-    fastConnection = false;
-    nodes = lib.mapAttrs toDeployNode (lib.getAttrs targets configurations);
-  };
+  mapNodes = targets: lib.mapAttrs toDeployNode (lib.getAttrs targets configurations);
 }

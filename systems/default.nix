@@ -1,6 +1,8 @@
-{inputs, ...}: {
-  imports = [./deploy.nix];
-
+{
+  inputs,
+  self,
+  ...
+}: {
   configurations = {
     nixos = {
       builder = inputs.nixpkgs.lib.nixosSystem;
@@ -33,5 +35,13 @@
         caroline = {};
       };
     };
+  };
+
+  flake.deploy = {
+    remoteBuild = true;
+    fastConnection = false;
+    nodes = self.lib.deploy.mapNodes [
+      "atlas"
+    ];
   };
 }
