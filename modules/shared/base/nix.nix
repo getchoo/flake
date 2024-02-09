@@ -22,10 +22,10 @@ in {
 
       settings = {
         auto-optimise-store = pkgs.stdenv.isLinux;
-        experimental-features = lib.mkDefault ["nix-command" "flakes" "auto-allocate-uids" "repl-flake"];
+        experimental-features = ["nix-command" "flakes" "auto-allocate-uids" "repl-flake"];
 
-        trusted-substituters = lib.mkDefault ["https://getchoo.cachix.org"];
-        trusted-public-keys = lib.mkDefault ["getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="];
+        trusted-substituters = ["https://cache.garnix.io"];
+        trusted-public-keys = ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
         nix-path = config.nix.nixPath;
       };
 
