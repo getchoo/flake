@@ -11,6 +11,7 @@
   in
     inputs.parts.lib.mkFlake {inherit inputs;} {
       imports = [
+        ./lib
         ./modules
         ./overlay
         ./systems
