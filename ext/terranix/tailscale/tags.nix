@@ -3,7 +3,7 @@
     getDeviceID = device: lib.tfRef "data.tailscale_device.${device}.id";
     toTags = n: v: {device_id = getDeviceID n;} // v;
 
-    tags = lib.genAttrs ["server" "personal" "gha"] (n: ["tag:${n}"]);
+    tags = lib.genAttrs ["server" "personal"] (n: ["tag:${n}"]);
   in
     builtins.mapAttrs toTags {
       atlas.tags = tags.server;
