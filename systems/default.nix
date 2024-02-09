@@ -7,9 +7,9 @@
     nixos = {
       builder = inputs.nixpkgs.lib.nixosSystem;
 
-      modules = [
-        inputs.agenix.nixosModules.default
-        inputs.hm.nixosModules.home-manager
+      modules = with inputs; [
+        agenix.nixosModules.default
+        home-manager.nixosModules.home-manager
       ];
 
       systems = {

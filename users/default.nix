@@ -1,7 +1,7 @@
 {inputs, ...}: {
   configurations = {
     home = {
-      builder = inputs.hm.lib.homeManagerConfiguration;
+      builder = inputs.home-manager.lib.homeManagerConfiguration;
       pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
 
       users = {

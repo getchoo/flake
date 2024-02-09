@@ -9,7 +9,7 @@
   outputs = inputs: let
     inherit ((import ./modules/flake).flake) flakeModules;
   in
-    inputs.parts.lib.mkFlake {inherit inputs;} {
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
         ./lib
         ./modules
@@ -43,7 +43,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    parts = {
+    flake-parts = {
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
@@ -91,7 +91,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hm = {
+    home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -101,7 +101,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "";
-        flake-parts.follows = "parts";
+        flake-parts.follows = "flake-parts";
         flake-utils.follows = "pre-commit/flake-utils";
         pre-commit-hooks-nix.follows = "pre-commit";
       };
@@ -145,7 +145,7 @@
       url = "github:getchoo/teawiebot";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        parts.follows = "parts";
+        parts.follows = "flake-parts";
         pre-commit.follows = "pre-commit";
       };
     };
