@@ -6,8 +6,8 @@
   cfg = config.seth.shell;
 in {
   options.seth.shell = {
-    aliases.enable = lib.mkEnableOption "Shell aliases" // {default = true;};
-    variables.enable = lib.mkEnableOption "Shell variables" // {default = true;};
+    aliases.enable = lib.mkEnableOption "Shell aliases" // {default = config.seth.enable;};
+    variables.enable = lib.mkEnableOption "Shell variables" // {default = config.seth.enable;};
   };
 
   imports = [

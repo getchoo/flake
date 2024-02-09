@@ -8,7 +8,7 @@
   cfg = config.seth.programs.neovim;
 in {
   options.seth.programs.neovim = {
-    enable = lib.mkEnableOption "Neovim configuration" // {default = true;};
+    enable = lib.mkEnableOption "Neovim configuration" // {default = config.seth.enable;};
   };
 
   config = lib.mkIf cfg.enable {

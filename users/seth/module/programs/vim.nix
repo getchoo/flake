@@ -7,7 +7,7 @@
   inherit (config.xdg) configHome dataHome stateHome;
 in {
   options.seth.programs.vim = {
-    enable = lib.mkEnableOption "Vim configuration" // {default = true;};
+    enable = lib.mkEnableOption "Vim configuration" // {default = config.seth.enable;};
   };
 
   config = lib.mkIf cfg.enable {

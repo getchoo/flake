@@ -6,7 +6,7 @@
   cfg = config.seth.programs.starship;
 in {
   options.seth.programs.starship = {
-    enable = lib.mkEnableOption "Starship configuration" // {default = true;};
+    enable = lib.mkEnableOption "Starship configuration" // {default = config.seth.enable;};
   };
 
   config = lib.mkIf cfg.enable {

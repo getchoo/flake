@@ -6,8 +6,8 @@
   cfg = config.seth.programs.git;
 in {
   options.seth.programs.git = {
-    enable = lib.mkEnableOption "Git configuration settings" // {default = true;};
-    gh.enable = lib.mkEnableOption "GitHub CLI support" // {default = true;};
+    enable = lib.mkEnableOption "Git configuration settings" // {default = config.seth.enable;};
+    gh.enable = lib.mkEnableOption "GitHub CLI support" // {default = cfg.enable;};
   };
 
   config = lib.mkIf cfg.enable {

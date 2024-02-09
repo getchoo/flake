@@ -8,12 +8,16 @@
   cfg = config.seth.programs;
 in {
   options.seth.programs = {
-    basePrograms.enable = lib.mkEnableOption "Base programs and configurations" // {default = true;};
+    basePrograms.enable =
+      lib.mkEnableOption "base programs and configurations"
+      // {
+        default = config.seth.enable;
+      };
   };
 
-  imports = [
-    inputs.catppuccin.homeManagerModules.catppuccin
-    inputs.nix-index-database.hmModules.nix-index
+  imports = with inputs; [
+    catppuccin.homeManagerModules.catppuccin
+    nix-index-database.hmModules.nix-index
     ./bat.nix
     ./chromium.nix
     ./eza.nix

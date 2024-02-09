@@ -8,13 +8,17 @@
   cfg = config.traits.users;
   inherit (config.networking) hostName;
 in {
-  imports = [
-    ../../../users/seth/nixos.nix
-  ];
-
   options.traits.users = {
     hostUser = {
       enable = lib.mkEnableOption "${hostName} user configuration";
+      manageSecrets =
+        lib.mkEnableOption "automatic secrets management"
+        // {
+          default = config.traits.secrets.enable;
+        };
+    };
+
+    seth = {
       manageSecrets =
         lib.mkEnableOption "automatic secrets management"
         // {
@@ -38,6 +42,16 @@ in {
 
       users.users.${hostName} = {
         hashedPasswordFile = config.age.secrets.userPassword.path;
+      };
+    })
+
+    (lib.mkIf (cfg.seth.enable && cfg.seth.manageSecrets) {
+      age.secrets = {
+        sethPassword.file = secretsDir + "/sethPassword.age";
+      };
+
+      users.users.seth = {
+        hashedPasswordFile = lib.mkDefault config.age.secrets.sethPassword.path;
       };
     })
   ];

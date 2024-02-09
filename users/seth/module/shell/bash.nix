@@ -6,7 +6,7 @@
   cfg = config.seth.shell.bash;
 in {
   options.seth.shell.bash = {
-    enable = lib.mkEnableOption "Bash configuration" // {default = true;};
+    enable = lib.mkEnableOption "Bash configuration" // {default = config.seth.enable;};
   };
 
   config = lib.mkIf cfg.enable {

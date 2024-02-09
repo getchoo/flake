@@ -6,12 +6,13 @@
   ...
 }: let
   cfg = config.seth.standalone;
+  enable = config.seth.enable && cfg.enable;
 in {
   options.seth.standalone = {
     enable = lib.mkEnableOption "Standalone options";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = lib.mkIf enable {
     home = {
       username = "seth";
       homeDirectory =

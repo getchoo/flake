@@ -7,7 +7,7 @@
   cfg = config.seth.programs.ssh;
 in {
   options.seth.programs.ssh = {
-    enable = lib.mkEnableOption "SSH configuration" // {default = true;};
+    enable = lib.mkEnableOption "SSH configuration" // {default = config.seth.enable;};
   };
 
   config = lib.mkIf cfg.enable {

@@ -8,7 +8,7 @@
   cfg = config.seth.programs.gpg;
 in {
   options.seth.programs.gpg = {
-    enable = lib.mkEnableOption "GnuPG configuration" // {default = true;};
+    enable = lib.mkEnableOption "GnuPG configuration" // {default = config.seth.enable;};
   };
 
   config = lib.mkIf cfg.enable {

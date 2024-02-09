@@ -68,7 +68,7 @@
 
       modules =
         [
-          ../../users/${name}/home.nix
+          ../../users/${name}
 
           {
             _module.args.osConfig = {};

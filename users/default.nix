@@ -9,4 +9,8 @@
       };
     };
   };
+
+  flake.homeModules = {
+    seth = import ./seth/module;
+  };
 }

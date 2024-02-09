@@ -6,7 +6,7 @@
   cfg = config.seth.programs.bat;
 in {
   options.seth.programs.bat = {
-    enable = lib.mkEnableOption "bat configuration" // {default = true;};
+    enable = lib.mkEnableOption "bat configuration" // {default = config.seth.enable;};
   };
 
   config = lib.mkIf cfg.enable {
