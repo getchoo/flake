@@ -25,6 +25,8 @@ in {
         US-east.enable = true;
       };
 
+      nginx.defaultConfiguration = true;
+
       secrets.enable = true;
 
       tailscale = {
