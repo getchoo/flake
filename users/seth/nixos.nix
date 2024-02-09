@@ -9,7 +9,7 @@
 in {
   options.traits.users.seth = {
     manageSecrets =
-      lib.mkEnableOption "automatic management of sercrets"
+      lib.mkEnableOption "automatic secrets management"
       // {
         default = config.traits.secrets.enable or false;
       };

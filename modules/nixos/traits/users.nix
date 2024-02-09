@@ -16,7 +16,7 @@ in {
     hostUser = {
       enable = lib.mkEnableOption "${hostName} user configuration";
       manageSecrets =
-        lib.mkEnableOption "automatically manage secrets"
+        lib.mkEnableOption "automatic secrets management"
         // {
           default = config.traits.secrets.enable;
         };

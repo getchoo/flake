@@ -10,7 +10,7 @@ in {
     enable = lib.mkEnableOption "ACME support";
 
     manageSecrets =
-      lib.mkEnableOption "automatic management of secrets"
+      lib.mkEnableOption "automatic secrets management"
       // {
         default = config.traits.secrets.enable;
       };

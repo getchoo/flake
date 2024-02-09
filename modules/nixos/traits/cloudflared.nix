@@ -10,7 +10,7 @@ in {
   options.traits.cloudflared = {
     enable = lib.mkEnableOption "cloudflared";
     manageSecrets =
-      lib.mkEnableOption "automatically managed secrets"
+      lib.mkEnableOption "automatic secrets management"
       // {
         default = config.traits.secrets.enable;
       };

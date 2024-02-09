@@ -10,7 +10,7 @@ in {
     enable = lib.mkEnableOption "Tailscale";
     ssh.enable = lib.mkEnableOption "Tailscale SSH";
     manageSecrets =
-      lib.mkEnableOption "the use of agenix for auth"
+      lib.mkEnableOption "automatic secrets management"
       // {
         default = config.traits.secrets.enable && cfg.ssh.enable;
       };
