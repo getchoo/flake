@@ -12,14 +12,15 @@ on:
         required: false
         default: ""
         type: string
-    secrets:
-      token:
-        description: PAT for creating creating/merging the PR
-        required: true
 
 jobs:
   update:
+    name: Update & make PR
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v4
@@ -34,11 +35,11 @@ jobs:
           commit-msg: ${{ inputs.commit-msg }}
           inputs: ${{ inputs.inputs }}
           pr-title: ${{ inputs.commit-msg }}
-          token: ${{ secrets.token }}
+          token: ${{ github.token }}
 
       - name: Enable auto-merge
         shell: bash
         run: gh pr merge --auto --rebase "$PR_ID"
         env:
-          GITHUB_TOKEN: ${{ secrets.token }}
+          GH_TOKEN: ${{ github.token }}
           PR_ID: ${{ steps.update.outputs.pull-request-number }}
