@@ -1,6 +1,7 @@
 {
   imports = [
     ./acme.nix
+    ./auto-upgrade.nix
     ./cloudflared.nix
     ./containers.nix
     ./hercules.nix
