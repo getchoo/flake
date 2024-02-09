@@ -2,7 +2,7 @@
 
 [![made with neovim](https://img.shields.io/static/v1?label=made%20with&message=neovim&color=00b952&style=flat-square&logo=neovim)](https://neovim.io/)
 [![nixos unstable](https://img.shields.io/static/v1?label=NixOS&message=unstable&color=5277c3&style=flat-square&logo=nixos)](https://nixos.org/)
-![build status](https://img.shields.io/github/actions/workflow/status/getchoo/flake/deploy.yaml?style=flat-square&logo=github&logoColor=238F97CB&label=CI&color=8f97cb)
+[![built with garnix](https://img.shields.io/endpoint?url=https%3A%2F%2Fgarnix.io%2Fapi%2Fbadges%2Fgetchoo%2Fflake%3Fbranch%3Dmain)](https://garnix.io)
 
 greasy taco i love
 
@@ -22,13 +22,9 @@ my main desktop, but the windows install :p
 
 my macbook air
 
-### turret
-
-my netgear wac104 router, using [nix-openwrt-imagebuilder](https://github.com/astro/nix-openwrt-imagebuilder) to build reproducible, customized images
-
 ### atlas
 
-my ampere arm server from oracle, services my miniflux instance.
+my ampere arm server from oracle, services my miniflux instance and some other things.
 
 ## special thanks
 
@@ -36,7 +32,7 @@ there are some amazing tools i use to make/manage this flake that i would highly
 
 - [home-manager](https://github.com/nix-community/home-manager)
 - [agenix](https://github.com/ryantm/agenix)
-- [cachix](https://cachix.org)
+- [garnix](https://garnix.io)
 - [deploy-rs](https://github.com/serokell/deploy-rs)
 - [flake-parts](https://github.com/hercules-ci/flake-parts)
 - [terranix](https://github.com/terranix/terranix)

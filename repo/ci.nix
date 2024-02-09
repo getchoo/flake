@@ -1,24 +1,29 @@
-{
-  lib,
-  self,
-  ...
-}: {
-  flake.hydraJobs = let
-    ciSystems = ["x86_64-linux"];
-    ci = self.lib.ci ciSystems;
-  in
-    builtins.foldl' lib.recursiveUpdate {} [
-      (
-        lib.genAttrs
-        ["nixosConfigurations" "homeConfigurations"]
-        (
-          type: ci.mapCfgsToDerivs (ci.getCompatibleCfgs self."${type}")
-        )
-      )
-      (
-        lib.genAttrs
-        ["checks" "devShells"]
-        (type: ci.getOutputs self.${type})
-      )
+{self, ...}: {
+  perSystem = {
+    lib,
+    pkgs,
+    system,
+    self',
+    ...
+  }: let
+    ci = self.lib.ci [system];
+
+    configurations = map (type: ci.mapCfgsToDerivs (ci.getCompatibleCfgs self.${type})) [
+      "nixosConfigurations"
+      "darwinConfigurations"
+      "homeConfigurations"
     ];
+
+    required = lib.concatMap lib.attrValues (
+      [
+        self'.checks
+        self'.devShells
+      ]
+      ++ configurations
+    );
+  in {
+    packages.ciGate = pkgs.writeText "ci-gate" (
+      lib.concatMapStringsSep "\n" toString required
+    );
+  };
 }

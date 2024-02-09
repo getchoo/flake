@@ -24,17 +24,6 @@ switch: (rebuild "switch")
 
 test: (rebuild "test")
 
-ci:
-    nix run \
-      --inputs-from . \
-      --override-input nixpkgs nixpkgs \
-      github:Mic92/nix-fast-build -- \
-      --no-nom \
-      --skip-cached \
-      --option accept-flake-config true \
-      --option allow-import-from-derivation false \
-      --flake '.#hydraJobs'
-
 check:
     nix flake check \
       --print-build-logs \
