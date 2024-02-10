@@ -1,7 +1,7 @@
 {
   flake.darwinModules = {
-    default = ./base;
     archetypes = ./archetypes;
+    base = ./base;
     desktop = ./desktop;
     traits = ./traits;
   };

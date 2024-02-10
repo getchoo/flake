@@ -5,6 +5,7 @@
     ./cloudflared.nix
     ./containers.nix
     ./hercules.nix
+    ./home-manager.nix
     ./locale.nix
     ./nginx.nix
     ./nvk

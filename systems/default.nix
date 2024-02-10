@@ -7,11 +7,6 @@
     nixos = {
       builder = inputs.nixpkgs.lib.nixosSystem;
 
-      modules = with inputs; [
-        agenix.nixosModules.default
-        home-manager.nixosModules.home-manager
-      ];
-
       systems = {
         glados = {};
 
@@ -26,10 +21,6 @@
 
     darwin = {
       builder = inputs.darwin.lib.darwinSystem;
-
-      modules = [
-        inputs.home-manager.darwinModules.home-manager
-      ];
 
       systems = {
         caroline = {};
