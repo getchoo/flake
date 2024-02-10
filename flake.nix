@@ -54,6 +54,7 @@
         nixpkgs.follows = "nixpkgs";
         darwin.follows = "";
         home-manager.follows = "";
+        systems.follows = "pre-commit/flake-utils/systems";
       };
     };
 
@@ -138,6 +139,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         nixpkgs-stable.follows = "nixpkgs";
+        flake-compat.follows = "";
       };
     };
 
