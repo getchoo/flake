@@ -13,6 +13,10 @@ in {
   imports = [inputs.agenix.nixosModules.default];
 
   config = lib.mkIf cfg.enable {
+    _module.args = {
+      secretsDir = ../../../secrets/${config.networking.hostName};
+    };
+
     age = {
       identityPaths = ["/etc/age/key"];
     };

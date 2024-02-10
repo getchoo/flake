@@ -1,16 +1,13 @@
-{inputs, ...}: {
-  configurations = {
-    home = {
-      builder = inputs.home-manager.lib.homeManagerConfiguration;
-      pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
-
-      users = {
-        seth = {};
-      };
+{inputs, ...}: let
+  unstableFor = inputs.nixpkgs.legacyPackages;
+in {
+  homeConfigurations = {
+    seth = {
+      pkgs = unstableFor.x86_64-linux;
     };
   };
 
-  flake.homeModules = {
+  homeModules = {
     seth = import ./seth/module;
   };
 }

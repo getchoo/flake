@@ -2,33 +2,31 @@
   inputs,
   self,
   ...
-}: {
-  configurations = {
-    nixos = {
-      builder = inputs.nixpkgs.lib.nixosSystem;
-
-      systems = {
-        glados = {};
-
-        glados-wsl = {};
-
-        atlas = {
-          builder = inputs.nixpkgs-stable.lib.nixosSystem;
-          system = "aarch64-linux";
-        };
-      };
+}: let
+  nixos-stable = inputs.nixpkgs-stable.lib.nixosSystem;
+in {
+  nixosConfigurations = {
+    glados = {
+      system = "x86_64-linux";
     };
 
-    darwin = {
-      builder = inputs.darwin.lib.darwinSystem;
+    glados-wsl = {
+      system = "x86_64-linux";
+    };
 
-      systems = {
-        caroline = {};
-      };
+    atlas = {
+      builder = nixos-stable;
+      system = "aarch64-linux";
     };
   };
 
-  flake.deploy = {
+  darwinConfigurations = {
+    caroline = {
+      system = "x86_64-darwin";
+    };
+  };
+
+  deploy = {
     remoteBuild = true;
     fastConnection = false;
     nodes = self.lib.deploy.mapNodes [
