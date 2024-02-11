@@ -5,10 +5,10 @@
   secretsDir,
   ...
 }: let
-  cfg = config.traits.hercules-ci;
+  cfg = config.server.mixins.hercules-ci;
 in {
-  options.traits.hercules-ci = {
-    enable = lib.mkEnableOption "hercules-ci";
+  options.server.mixins.hercules-ci = {
+    enable = lib.mkEnableOption "hercules-ci mixin";
     manageSecrets =
       lib.mkEnableOption "automatic secrets management"
       // {

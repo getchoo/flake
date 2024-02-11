@@ -4,11 +4,11 @@
   secretsDir,
   ...
 }: let
-  cfg = config.traits.cloudflared;
+  cfg = config.server.mixins.cloudflared;
   inherit (config.services) nginx;
 in {
-  options.traits.cloudflared = {
-    enable = lib.mkEnableOption "cloudflared";
+  options.server.mixins.cloudflared = {
+    enable = lib.mkEnableOption "cloudflared mixin";
     manageSecrets =
       lib.mkEnableOption "automatic secrets management"
       // {

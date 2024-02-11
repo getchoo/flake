@@ -3,13 +3,13 @@
   lib,
   ...
 }: let
-  cfg = config.traits.nginx;
+  cfg = config.server.mixins.nginx;
 in {
-  options.traits.nginx = {
-    defaultConfiguration = lib.mkEnableOption "default nginx configuration";
+  options.server.mixins.nginx = {
+    enable = lib.mkEnableOption "nginx mixin";
   };
 
-  config = lib.mkIf cfg.defaultConfiguration {
+  config = lib.mkIf cfg.enable {
     services.nginx = {
       enable = true;
 

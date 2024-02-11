@@ -3,16 +3,16 @@
   lib,
   ...
 }: let
-  cfg = config.traits.promtail;
+  cfg = config.server.mixins.promtail;
   inherit (lib) types;
 in {
-  options.traits.promtail = {
-    enable = lib.mkEnableOption "Promtail";
+  options.server.mixins.promtail = {
+    enable = lib.mkEnableOption "Promtail mixin";
 
     clients = lib.mkOption {
       type = types.listOf types.attrs;
       default = [{}];
-      description = "clients for promtail";
+      description = "Clients for promtail";
     };
   };
 
