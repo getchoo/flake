@@ -8,6 +8,6 @@
 
   toVHosts = domain:
     lib.mapAttrs' (
-      name: value: lib.nameValuePair "${name}.${domain}" value
+      name: lib.nameValuePair "${name}.${domain}"
     );
 }
