@@ -44,10 +44,7 @@ in {
 
     _module.args.unstable = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
 
-    boot = {
-      tmp.cleanOnBoot = lib.mkDefault true;
-      kernelPackages = lib.mkDefault pkgs.linuxPackages_hardened;
-    };
+    boot.tmp.cleanOnBoot = lib.mkDefault true;
 
     documentation = {
       enable = false;

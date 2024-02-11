@@ -1,6 +1,7 @@
 {modulesPath, ...}: {
   imports = [
     (modulesPath + "/profiles/minimal.nix")
+    (modulesPath + "/profiles/hardened.nix")
     ./hardware-configuration.nix
     ./miniflux.nix
     ./nginx.nix
