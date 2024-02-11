@@ -22,7 +22,7 @@ in {
           palette = "catppuccin_mocha";
           command_timeout = 250;
         }
-        // fromTOML (builtins.readFile ./starship.toml);
+        // lib.importTOML ./starship.toml;
     };
   };
 }
