@@ -14,5 +14,6 @@
     ./tailscale.nix
     ./user-setup.nix
     ./users.nix
+    ./zram.nix
   ];
 }

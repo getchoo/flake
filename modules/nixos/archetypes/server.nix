@@ -40,6 +40,8 @@ in {
       users = {
         hostUser.enable = true;
       };
+
+      zram.enable = true;
     };
 
     _module.args.unstable = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};

@@ -23,6 +23,4 @@
   services.logrotate.checkConfig = false;
 
   system.stateVersion = "23.05";
-
-  zramSwap.enable = true;
 }

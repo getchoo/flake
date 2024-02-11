@@ -21,6 +21,7 @@
   traits = {
     containers.enable = true;
     tailscale.enable = true;
+    zram.enable = true;
   };
 
   security.tpm2 = {
@@ -48,11 +49,4 @@
   };
 
   system.stateVersion = "23.11";
-
-  zramSwap = {
-    enable = true;
-    algorithm = "zstd";
-    swapDevices = 1;
-    memoryPercent = 50;
-  };
 }
