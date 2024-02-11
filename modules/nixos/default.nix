@@ -1,8 +1,6 @@
 {
-  flake.nixosModules = {
-    archetypes = ./archetypes;
-    base = ./base;
-    desktop = ./desktop;
-    traits = ./traits;
-  };
+  archetypes = ./archetypes;
+  base = ./base;
+  desktop = ./desktop;
+  traits = ./traits;
 }

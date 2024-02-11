@@ -7,7 +7,7 @@
   };
 
   outputs = inputs: let
-    inherit ((import ./modules/flake).flake) flakeModules;
+    flakeModules = import ./modules/flake;
   in
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [

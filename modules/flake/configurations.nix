@@ -146,6 +146,7 @@ in {
     (mkAliasOptionModule ["nixosModules"] ["flake" "nixosModules"])
     (mkAliasOptionModule ["darwinModules"] ["flake" "darwinModules"])
     (mkAliasOptionModule ["homeModules"] ["flake" "homeModules"])
+    (mkAliasOptionModule ["flakeModules"] ["flake" "flakeModules"])
   ];
 
   options = {
