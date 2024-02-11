@@ -1,6 +1,7 @@
 {
   lib,
   flake-parts-lib,
+  inputs,
   ...
 }: let
   namespace = "terranix";
@@ -30,14 +31,6 @@ in {
       cfg = config.${namespace};
     in {
       options.${namespace} = {
-        builder = mkOption {
-          type = types.functionTo (types.lazyAttrsOf types.raw);
-          example = literalExpression "inputs.terranix.lib.terranixConfiguration";
-          description = mdDoc ''
-            Function used to build this terranixConfiguration
-          '';
-        };
-
         modules = mkOption {
           type = types.listOf types.unspecified;
           default = [];
@@ -62,7 +55,7 @@ in {
       };
 
       config = {
-        terranix.configuration = cfg.builder {
+        terranix.configuration = inputs.terranix.lib.terranixConfiguration {
           inherit system;
           inherit (cfg) modules;
         };
