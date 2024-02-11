@@ -15,6 +15,7 @@ in {
     base = {
       enable = true;
       documentation.enable = false;
+      defaultPrograms.enable = false;
     };
 
     traits = {
