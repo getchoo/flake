@@ -21,6 +21,12 @@ in {
       type = "CNAME";
     };
 
+    keyoxide = {
+      name = "@";
+      value = "$argon2id$v=19$m=512,t=256,p=1$AlA6W5fP7J14zMsw0W5KFQ$EQz/NCE0/TQpE64r2Eo/yOpjtMZ9WXevHsv3YYP7CXg";
+      type = "TXT";
+    };
+
     www = {
       value = "mydadleft.me";
       type = "CNAME";
