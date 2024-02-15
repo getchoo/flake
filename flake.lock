@@ -40,11 +40,11 @@
         "pre-commit": []
       },
       "locked": {
-        "lastModified": 1701036929,
-        "narHash": "sha256-5TkAr5a3EoY9/oeO53SU+FRNfOUTpChj7mEW/Ax3T1w=",
+        "lastModified": 1707613797,
+        "narHash": "sha256-cwOOBPJfoLZrF7NLbHOzyL4tDTjdKJ00aogBZSg1qN8=",
         "owner": "dwarfmaster",
         "repo": "arkenfox-nixos",
-        "rev": "1c9d061a4ef7bf3ce8a5260eaee4acdb3ee097f9",
+        "rev": "81e5a88ea21dd3b5986d07a290592c77bc8938d3",
         "type": "github"
       },
       "original": {
