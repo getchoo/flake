@@ -147,8 +147,8 @@
       url = "github:getchoo/teawiebot";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        parts.follows = "flake-parts";
-        pre-commit.follows = "pre-commit";
+        flake-parts.follows = "flake-parts";
+        pre-commit-hooks-nix.follows = "pre-commit";
       };
     };
 
