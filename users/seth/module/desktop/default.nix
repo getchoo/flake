@@ -26,7 +26,7 @@ in {
       discord
       element-desktop
       spotify
-      prismlauncher
+      (prismlauncher.override {withWaylandGLFW = true;})
     ];
   };
 }
