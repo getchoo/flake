@@ -12,6 +12,7 @@ in {
   };
 
   imports = [
+    ./host-user.nix
     ./mixins
   ];
 

@@ -9,6 +9,15 @@
 in {
   options.server.mixins.cloudflared = {
     enable = lib.mkEnableOption "cloudflared mixin";
+    tunnelName = lib.mkOption {
+      type = lib.types.str;
+      default = "${config.networking.hostName}-nginx";
+      example = lib.literalExpression "my-tunnel";
+      description = lib.mdDoc ''
+        Name of the default tunnel being created
+      '';
+    };
+
     manageSecrets =
       lib.mkEnableOption "automatic secrets management"
       // {
@@ -21,18 +30,12 @@ in {
       {
         services.cloudflared = {
           enable = true;
-          tunnels = {
-            "${config.networking.hostName}-nginx" =
-              {
-                default = "http_status:404";
+          tunnels.${cfg.tunnelName} = {
+            default = "http_status:404";
 
-                ingress = lib.genAttrs (builtins.attrNames nginx.virtualHosts) (
-                  _: {service = "http://localhost:${toString nginx.defaultHTTPListenPort}";}
-                );
-              }
-              // lib.optionalAttrs cfg.manageSecrets {
-                credentialsFile = config.age.secrets.cloudflaredCreds.path;
-              };
+            ingress = lib.genAttrs (builtins.attrNames nginx.virtualHosts) (
+              _: {service = "http://localhost:${toString nginx.defaultHTTPListenPort}";}
+            );
           };
         };
       }
@@ -43,6 +46,10 @@ in {
           mode = "400";
           owner = "cloudflared";
           group = "cloudflared";
+        };
+
+        services.cloudflared.tunnels.${cfg.tunnelName} = {
+          credentialsFile = config.age.secrets.cloudflaredCreds.path;
         };
       })
     ]

@@ -10,7 +10,6 @@ let
       owner = owners.getchoo;
       pubkey = "age1n7tyxx63wpgnmwkzn7dmkm62jxel840rk3ye3vsultrszsfrwuzsawdzhq";
       files = [
-        "rootPassword.age"
         "sethPassword.age"
       ];
     };
@@ -25,7 +24,6 @@ let
       pubkey = "age18eu3ya4ucd2yzdrpkpg7wrymrxewt8j3zj2p2rqgcjeruacp0dgqryp39z";
       owner = owners.getchoo;
       files = [
-        "rootPassword.age"
         "userPassword.age"
         "miniflux.age"
         "tailscaleAuthKey.age"

@@ -11,7 +11,7 @@ in {
     enable = lib.mkEnableOption "base user configurations" // {default = true;};
 
     defaultRoot = {
-      enable = lib.mkEnableOption "default root user configuration" // {default = true;};
+      enable = lib.mkEnableOption "default root user configuration" // {default = false;};
       manageSecrets =
         lib.mkEnableOption "automatic secrets management"
         // {
@@ -37,7 +37,7 @@ in {
         };
       })
 
-      (lib.mkIf cfg.defaultRoot.manageSecrets {
+      (lib.mkIf (cfg.defaultRoot.enable && cfg.defaultRoot.manageSecrets) {
         age.secrets = {
           rootPassword.file = secretsDir + "/rootPassword.age";
         };

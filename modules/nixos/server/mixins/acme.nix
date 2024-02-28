@@ -23,22 +23,25 @@ in {
       {
         security.acme = {
           acceptTerms = true;
-          defaults =
-            {
-              email = "getchoo@tuta.io";
-            }
-            // lib.optionalAttrs cfg.useDns {
-              dnsProvider = "cloudflare";
-            }
-            // lib.optionalAttrs cfg.manageSecrets {
-              credentialsFile = config.age.secrets.cloudflareApiKey.path;
-            };
+          defaults = {
+            email = "getchoo@tuta.io";
+          };
         };
       }
+
+      (lib.mkIf cfg.useDns {
+        security.acme.defaults = {
+          dnsProvider = "cloudflare";
+        };
+      })
 
       (lib.mkIf cfg.manageSecrets {
         age.secrets = {
           cloudflareApiKey.file = secretsDir + "/cloudflareApiKey.age";
+        };
+
+        security.acme.defaults = {
+          credentialsFile = config.age.secrets.cloudflareApiKey.path;
         };
       })
     ]

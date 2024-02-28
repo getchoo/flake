@@ -39,10 +39,6 @@ in {
         ssh.enable = true;
       };
 
-      users = {
-        hostUser.enable = true;
-      };
-
       zram.enable = true;
     };
   };

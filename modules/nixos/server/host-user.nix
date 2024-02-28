@@ -1,15 +1,15 @@
 {
   config,
   lib,
-  pkgs,
   secretsDir,
   ...
 }: let
-  cfg = config.traits.users.hostUser;
+  cfg = config.server.hostUser;
   inherit (config.networking) hostName;
 in {
-  options.traits.users.hostUser = {
-    enable = lib.mkEnableOption "${hostName} user configuration";
+  options.server.hostUser = {
+    enable = lib.mkEnableOption "${hostName} user configuration" // {default = config.server.enable;};
+
     manageSecrets =
       lib.mkEnableOption "automatic secrets management"
       // {
@@ -22,7 +22,7 @@ in {
       {
         users.users.${hostName} = {
           isNormalUser = true;
-          shell = pkgs.bash;
+          extraGroups = ["wheel"];
         };
       }
 

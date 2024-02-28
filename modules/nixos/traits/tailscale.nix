@@ -16,33 +16,38 @@ in {
       };
   };
 
-  config = lib.mkIf cfg.enable (lib.mkMerge [
-    {
-      networking.firewall =
-        {
-          trustedInterfaces = ["tailscale0"];
-        }
-        // lib.optionalAttrs cfg.ssh.enable {
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      {
+        networking.firewall = {
+          trustedInterfaces = [config.services.tailscale.interfaceName];
+        };
+
+        services.tailscale = {
+          enable = true;
+          openFirewall = true;
+        };
+      }
+
+      (lib.mkIf cfg.ssh.enable {
+        networking.firewall = {
           allowedTCPPorts = [22];
         };
 
-      services.tailscale =
-        {
-          enable = true;
-          openFirewall = true;
-        }
-        // lib.optionalAttrs cfg.ssh.enable {
+        services.tailscale = {
           extraUpFlags = ["--ssh"];
-        }
-        // lib.optionalAttrs cfg.manageSecrets {
+        };
+      })
+
+      (lib.mkIf cfg.manageSecrets {
+        age.secrets = lib.mkIf cfg.manageSecrets {
+          tailscaleAuthKey.file = "${secretsDir}/tailscaleAuthKey.age";
+        };
+
+        services.tailscale = {
           authKeyFile = config.age.secrets.tailscaleAuthKey.path;
         };
-    }
-
-    (lib.mkIf cfg.manageSecrets {
-      age.secrets = lib.mkIf cfg.manageSecrets {
-        tailscaleAuthKey.file = "${secretsDir}/tailscaleAuthKey.age";
-      };
-    })
-  ]);
+      })
+    ]
+  );
 }
