@@ -9,7 +9,7 @@
   outputs = inputs: let
     flakeModules = import ./modules/flake;
   in
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} ({self, ...}: {
       imports = [
         ./lib
         ./modules
@@ -17,7 +17,6 @@
         ./systems
         ./users
 
-        ./repo # checks, ci, devShells, etc.
         ./ext # nix expressions for *external*, not so nix-y things
 
         inputs.pre-commit.flakeModule
@@ -33,7 +32,73 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-    };
+
+      perSystem = {
+        config,
+        lib,
+        pkgs,
+        system,
+        inputs',
+        self',
+        ...
+      }: {
+        pre-commit = {
+          settings.hooks = {
+            actionlint.enable = true;
+            ${self'.formatter.pname}.enable = true;
+            deadnix.enable = true;
+            nil.enable = true;
+            statix.enable = true;
+          };
+        };
+
+        devShells.default = pkgs.mkShellNoCC {
+          shellHook = config.pre-commit.installationScript;
+          packages = with pkgs;
+            [
+              nix
+
+              # format + lint
+              actionlint
+              self'.formatter
+              deadnix
+              nil
+              statix
+
+              # utils
+              deploy-rs
+              fzf
+              just
+              config.terranix.package
+            ]
+            ++ lib.optional stdenv.isDarwin [inputs'.darwin.packages.darwin-rebuild]
+            ++ lib.optionals stdenv.isLinux [nixos-rebuild inputs'.agenix.packages.agenix];
+        };
+
+        formatter = pkgs.alejandra;
+
+        packages.ciGate = let
+          ci = self.lib.ci [system];
+
+          configurations = map (type: ci.mapCfgsToDerivs (ci.getCompatibleCfgs self.${type})) [
+            "nixosConfigurations"
+            "darwinConfigurations"
+            "homeConfigurations"
+          ];
+
+          required = lib.concatMap lib.attrValues (
+            [
+              self'.checks
+              self'.devShells
+            ]
+            ++ configurations
+          );
+        in
+          pkgs.writeText "ci-gate" (
+            lib.concatMapStringsSep "\n" toString required
+          );
+      };
+    });
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
