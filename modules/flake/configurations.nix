@@ -1,11 +1,15 @@
 {
   config,
   lib,
+  moduleLocation,
+  flake-parts-lib,
   withSystem,
   inputs,
   self,
   ...
 }: let
+  inherit (flake-parts-lib) mkSubmoduleOptions;
+
   inherit
     (lib)
     attrValues
@@ -150,6 +154,17 @@ in {
   ];
 
   options = {
+    flake = mkSubmoduleOptions {
+      darwinModules = mkOption {
+        type = types.lazyAttrsOf types.unspecified;
+        default = {};
+        apply = mapAttrs (name: value: {
+          _file = "${toString moduleLocation}#darwinModules.${name}";
+          imports = [value];
+        });
+      };
+    };
+
     nixosConfigurations = mkSystemOptions "nixos";
     darwinConfigurations = mkSystemOptions "darwin";
 

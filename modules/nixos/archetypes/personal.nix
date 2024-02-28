@@ -22,7 +22,6 @@ in {
 
       secrets.enable = true;
       tailscale.enable = true;
-      user-setup.enable = true;
 
       users = {
         seth.enable = true;

@@ -10,4 +10,12 @@ in {
   homeModules = {
     seth = import ./seth/module;
   };
+
+  nixosModules = {
+    seth = import ./seth/nixos.nix;
+  };
+
+  darwinModules = {
+    seth = import ./seth/darwin.nix;
+  };
 }

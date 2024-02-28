@@ -39,7 +39,6 @@ in {
         ssh.enable = true;
       };
 
-      user-setup.enable = true;
       users = {
         hostUser.enable = true;
       };

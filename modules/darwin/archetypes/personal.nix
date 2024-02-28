@@ -15,7 +15,9 @@ in {
 
     traits = {
       home-manager.enable = true;
-      users.seth.enable = true;
+      users = {
+        seth.enable = true;
+      };
     };
   };
 }
