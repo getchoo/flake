@@ -529,7 +529,8 @@
         "openwrt-imagebuilder": "openwrt-imagebuilder",
         "pre-commit": "pre-commit",
         "teawiebot": "teawiebot",
-        "terranix": "terranix"
+        "terranix": "terranix",
+        "treefmt-nix": "treefmt-nix"
       }
     },
     "rust-analyzer-src": {
@@ -603,7 +604,9 @@
           "pre-commit"
         ],
         "procfile-nix": "procfile-nix",
-        "treefmt-nix": "treefmt-nix"
+        "treefmt-nix": [
+          "treefmt-nix"
+        ]
       },
       "locked": {
         "lastModified": 1708356801,
@@ -649,16 +652,15 @@
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
-          "teawiebot",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1707300477,
-        "narHash": "sha256-qQF0fEkHlnxHcrKIMRzOETnRBksUK048MXkX0SOmxvA=",
+        "lastModified": 1708897213,
+        "narHash": "sha256-QECZB+Hgz/2F/8lWvHNk05N6NU/rD9bWzuNn6Cv8oUk=",
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "rev": "ac599dab59a66304eb511af07b3883114f061b9d",
+        "rev": "e497a9ddecff769c2a7cbab51e1ed7a8501e7a3a",
         "type": "github"
       },
       "original": {

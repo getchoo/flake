@@ -20,6 +20,7 @@
         ./ext # nix expressions for *external*, not so nix-y things
 
         inputs.pre-commit.flakeModule
+        inputs.treefmt-nix.flakeModule
 
         # dogfooding
         flakeModules.configurations
@@ -42,11 +43,28 @@
         self',
         ...
       }: {
-        pre-commit = {
-          settings.hooks = {
-            actionlint.enable = true;
-            ${self'.formatter.pname}.enable = true;
+        treefmt = {
+          projectRootFile = "flake.nix";
+
+          programs = {
+            alejandra.enable = true;
             deadnix.enable = true;
+            prettier.enable = true;
+          };
+
+          settings.global = {
+            excludes = [
+              "./flake.lock"
+            ];
+          };
+        };
+
+        pre-commit.settings = {
+          settings.treefmt.package = config.treefmt.build.wrapper;
+
+          hooks = {
+            actionlint.enable = true;
+            treefmt.enable = true;
             nil.enable = true;
             statix.enable = true;
           };
@@ -74,8 +92,6 @@
             ++ lib.optional stdenv.isDarwin [inputs'.darwin.packages.darwin-rebuild]
             ++ lib.optionals stdenv.isLinux [nixos-rebuild inputs'.agenix.packages.agenix];
         };
-
-        formatter = pkgs.alejandra;
 
         packages.ciGate = let
           ci = self.lib.ci [system];
@@ -214,6 +230,7 @@
         nixpkgs.follows = "nixpkgs";
         flake-parts.follows = "flake-parts";
         pre-commit-hooks-nix.follows = "pre-commit";
+        treefmt-nix.follows = "treefmt-nix";
       };
     };
 
@@ -226,6 +243,11 @@
         bats-support.follows = "";
         bats-assert.follows = "";
       };
+    };
+
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }
