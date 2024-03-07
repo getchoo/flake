@@ -1,38 +1,17 @@
 {
-  config,
   lib,
   pkgs,
   osConfig,
   ...
 }: let
-  enable = osConfig.services.xserver.desktopManager.plasma5.enable or false;
-  themeDir = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}";
+  enable = osConfig.services.xserver.desktopManager.plasma6.enable or false;
 in {
   config = lib.mkIf enable {
     home.packages = with pkgs; [
-      catppuccin-cursors
-      (catppuccin-kde.override
-        {
-          flavour = ["mocha"];
-          accents = ["mauve"];
-        })
-
-      (catppuccin-kvantum.override
-        {
-          variant = "Mocha";
-          accent = "Mauve";
-        })
-
-      libsForQt5.qtstyleplugin-kvantum
       papirus-icon-theme
     ];
 
     xdg = {
-      configFile = {
-        "gtk-4.0/gtk.css".source = "${themeDir}/gtk-4.0/gtk.css";
-        "gtk-4.0/gtk-dark.css".source = "${themeDir}/gtk-4.0/gtk-dark.css";
-      };
-
       dataFile."konsole/catppuccin-mocha.colorscheme".source =
         pkgs.fetchFromGitHub {
           owner = "catppuccin";
@@ -41,18 +20,6 @@ in {
           sha256 = "EwSJMTxnaj2UlNJm1t6znnatfzgm1awIQQUF3VPfCTM=";
         }
         + "/Catppuccin-Mocha.colorscheme";
-    };
-
-    gtk = {
-      enable = true;
-
-      theme = {
-        name = "Catppuccin-Mocha-Standard-Mauve-dark";
-        package = pkgs.catppuccin-gtk.override {
-          accents = ["mauve"];
-          variant = "mocha";
-        };
-      };
     };
   };
 }
