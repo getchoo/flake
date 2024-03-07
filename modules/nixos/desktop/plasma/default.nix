@@ -10,7 +10,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment = {
-      plasma5.excludePackages = with pkgs.libsForQt5; [
+      plasma6.excludePackages = with pkgs.libsForQt5; [
         khelpcenter
         plasma-browser-integration
         print-manager
@@ -18,10 +18,14 @@ in {
     };
 
     services.xserver = {
-      displayManager.sddm.enable = true;
-      desktopManager.plasma5 = {
+      displayManager.sddm = {
         enable = true;
-        useQtScaling = true;
+        wayland.enable = true;
+      };
+
+      desktopManager.plasma6 = {
+        enable = true;
+        enableQt5Integration = true;
       };
     };
   };
