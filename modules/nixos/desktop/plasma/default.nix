@@ -10,13 +10,16 @@ in {
 
   config = lib.mkIf cfg.enable (
     # this is bad, i don't care
-    if (lib.versionAtLeast lib.version "24.05pre-git")
-    then {
+    lib.optionalAttrs (lib.versionAtLeast lib.version "24.05pre-git") {
       environment = {
-        plasma6.excludePackages = with pkgs.libsForQt5; [
+        plasma6.excludePackages = with pkgs.kdePackages; [
           khelpcenter
           plasma-browser-integration
           print-manager
+        ];
+
+        systemPackages = with pkgs; [
+          haruna
         ];
       };
 
@@ -32,6 +35,5 @@ in {
         };
       };
     }
-    else {}
   );
 }
