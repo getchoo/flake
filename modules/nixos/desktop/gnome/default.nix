@@ -12,6 +12,7 @@ in {
     environment = {
       gnome.excludePackages = with pkgs; [
         gnome-tour
+        gnome.totem # replaced with celluloid
       ];
 
       sessionVariables = {
@@ -21,6 +22,7 @@ in {
       systemPackages = with pkgs; [
         adw-gtk3
         blackbox-terminal
+        celluloid
       ];
     };
 
