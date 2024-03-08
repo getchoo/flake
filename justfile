@@ -13,25 +13,34 @@ default:
     @just --choose
 
 [private]
-rebuild subcmd:
+rebuild subcmd *extraArgs="":
     {{ rebuild }} {{ subcmd }} {{ rebuildArgs }} --flake .
 
-build: (rebuild "build")
+build *extraArgs="": (rebuild "build" extraArgs)
 
-dry-run: (rebuild "dry-run")
+dry-run *extraArgs="": (rebuild "dry-run" extraArgs)
 
-switch: (rebuild "switch")
+switch *extraArgs="": (rebuild "switch" extraArgs)
 
-test: (rebuild "test")
+test *extraArgs="": (rebuild "test" extraArgs)
 
-check:
+check *args="":
     nix flake check \
       --print-build-logs \
       --show-trace \
-      --accept-flake-config
+      --accept-flake-config \
+      {{ args }}
+
+eval system *args="":
+    nix eval \
+      --raw \
+      '.#nixosConfigurations.{{ system }}.config.system.build.toplevel' \
+      {{ args }}
 
 update:
-    nix flake update
+    nix flake update \
+      --commit-lock-file \
+      --commit-lockfile-summary "flake: update all inputs"
 
 update-input input:
     nix flake lock \
@@ -39,16 +48,18 @@ update-input input:
       --commit-lock-file \
       --commit-lockfile-summary "flake: update {{ input }}"
 
-deploy system:
+deploy system *args="":
     nix run \
       --inputs-from . \
       'nixpkgs#deploy-rs' -- \
-      -s '.#{{ system }}'
+      '.#{{ system }}' \
+      {{ args }}
 
-deploy-all:
+deploy-all *args="":
     nix run \
       --inputs-from . \
-      'nixpkgs#deploy-rs' -- -s
+      'nixpkgs#deploy-rs' -- \
+      {{ args }}
 
 clean:
     rm -rf \
