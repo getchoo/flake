@@ -24,6 +24,7 @@
 
         # dogfooding
         flakeModules.configurations
+        flakeModules.openwrt
         flakeModules.terranix
       ];
 
