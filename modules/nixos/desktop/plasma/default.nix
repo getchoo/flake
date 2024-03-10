@@ -18,6 +18,10 @@ in {
           print-manager
         ];
 
+        sessionVariables = {
+          NIXOS_OZONE_WL = "1";
+        };
+
         systemPackages = with pkgs; [
           haruna
         ];
