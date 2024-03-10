@@ -15,7 +15,7 @@
 
   desktop = {
     enable = true;
-    gnome.enable = true;
+    plasma.enable = true;
   };
 
   traits = {
