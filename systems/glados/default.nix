@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   inputs,
   ...
 }: {
@@ -17,6 +18,8 @@
     enable = true;
     plasma.enable = true;
   };
+
+  environment.systemPackages = [pkgs.obs-studio];
 
   traits = {
     containers.enable = true;
