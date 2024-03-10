@@ -33,10 +33,7 @@ in {
           wayland.enable = true;
         };
 
-        desktopManager.plasma6 = {
-          enable = true;
-          enableQt5Integration = true;
-        };
+        desktopManager.plasma6.enable = true;
       };
     }
   );
