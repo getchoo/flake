@@ -8,8 +8,7 @@
   ];
 
   hardware.nvidia = {
-    # 545 isn't stable enough yet
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
     modesetting.enable = true;
   };
 }
