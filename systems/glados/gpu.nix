@@ -3,7 +3,11 @@
   lib,
   pkgs,
   ...
-}: {
+}: let
+  usingNvidia = lib.elem "nvidia" config.services.xserver.videoDrivers;
+in {
+  boot.kernelParams = lib.optional usingNvidia "nvidia_drm.fbdev=1";
+
   services.xserver.videoDrivers = ["nvidia"];
 
   hardware = {
