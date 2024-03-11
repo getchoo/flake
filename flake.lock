@@ -281,6 +281,26 @@
         "type": "github"
       }
     },
+    "krunner-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1696278906,
+        "narHash": "sha256-z2tbFXMC+nSN7vhn2WSoMVdViolucLeoDSfOfnRcmCE=",
+        "owner": "pluiedev",
+        "repo": "krunner-nix",
+        "rev": "8a819944620db8eab35e7dbb14d1916c9e7a478d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pluiedev",
+        "repo": "krunner-nix",
+        "type": "github"
+      }
+    },
     "lanzaboote": {
       "inputs": {
         "crane": "crane",
@@ -504,6 +524,7 @@
         "flake-parts": "flake-parts",
         "getchvim": "getchvim",
         "home-manager": "home-manager",
+        "krunner-nix": "krunner-nix",
         "lanzaboote": "lanzaboote",
         "nix-index-database": "nix-index-database",
         "nixos-wsl": "nixos-wsl",

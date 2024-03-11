@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs',
   ...
 }: let
   cfg = config.desktop.plasma;
@@ -24,6 +25,7 @@ in {
 
         systemPackages = with pkgs; [
           haruna
+          inputs'.krunner-nix.packages.default
         ];
       };
 
