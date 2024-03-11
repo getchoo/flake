@@ -23,5 +23,7 @@
       enable = true;
       pkiBundle = "/etc/secureboot";
     };
+
+    supportedFilesystems = ["ntfs"];
   };
 }
