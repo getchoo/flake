@@ -1,15 +1,12 @@
 {
   lib,
   pkgs,
-  inputs,
   ...
 }: {
   imports = [
     ./boot.nix
     ./hardware-configuration.nix
-    ./nvidia.nix
-
-    inputs.nixos-hardware.nixosModules.common-pc-ssd
+    ./gpu.nix
   ];
 
   archetypes.personal.enable = true;
@@ -34,6 +31,7 @@
 
   services = {
     flatpak.enable = true;
+    fstrim.enable = true;
     fwupd.enable = true;
   };
 
