@@ -6,7 +6,6 @@
   imports = [
     ./boot.nix
     ./hardware-configuration.nix
-    ./gpu.nix
   ];
 
   archetypes.personal.enable = true;
@@ -20,6 +19,10 @@
 
   traits = {
     containers.enable = true;
+    nvidia = {
+      enable = true;
+      nvk.enable = true;
+    };
     tailscale.enable = true;
     zram.enable = true;
   };
