@@ -35,6 +35,10 @@ in {
             initrd.kernelModules = ["nouveau"];
           };
 
+          environment.sessionVariables = {
+            MESA_VK_VERSION_OVERRIDE = "1.3";
+          };
+
           hardware.opengl.extraPackages = lib.mkForce [];
 
           services.xserver.videoDrivers = lib.mkForce ["modesetting"];
