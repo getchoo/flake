@@ -1,8 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./boot.nix
     ./hardware-configuration.nix
@@ -37,16 +33,6 @@
     fstrim.enable = true;
     fwupd.enable = true;
   };
-
-  # set energy preference for pstate driver
-  systemd.tmpfiles.rules = let
-    nproc = 12;
-  in
-    builtins.map
-    (n: "w /sys/devices/system/cpu/cpufreq/policy${builtins.toString n}/energy_performance_preference - - - - ${"balance_performance"}")
-    (lib.range 0 (nproc - 1));
-
-  powerManagement.cpuFreqGovernor = "powersave";
 
   programs.steam = {
     enable = true;
