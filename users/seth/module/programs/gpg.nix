@@ -16,11 +16,7 @@ in {
 
     services.gpg-agent = lib.mkIf pkgs.stdenv.isLinux {
       enable = true;
-
-      pinentryFlavor =
-        if osConfig ? programs
-        then osConfig.programs.gnupg.agent.pinentryFlavor or "curses"
-        else "curses";
+      pinentryPackage = osConfig.programs.gnupg.agent.pinentryPackage or pkgs.pinentry-curses;
     };
   };
 }

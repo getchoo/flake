@@ -12,7 +12,6 @@ in {
   config = lib.mkIf cfg.enable {
     programs.eza = {
       enable = true;
-      enableAliases = true;
       icons = true;
     };
   };
