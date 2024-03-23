@@ -60,15 +60,16 @@
           };
         };
 
-        pre-commit.settings = {
-          settings.treefmt.package = config.treefmt.build.wrapper;
+        pre-commit.settings.hooks = {
+          actionlint.enable = true;
 
-          hooks = {
-            actionlint.enable = true;
-            treefmt.enable = true;
-            nil.enable = true;
-            statix.enable = true;
+          treefmt = {
+            enable = true;
+            package = config.treefmt.build.wrapper;
           };
+
+          nil.enable = true;
+          statix.enable = true;
         };
 
         devShells.default = pkgs.mkShellNoCC {
