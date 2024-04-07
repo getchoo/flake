@@ -9,15 +9,22 @@
   outputs = inputs: let
     flakeModules = import ./modules/flake;
   in
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} ({self, ...}: {
+    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       imports = [
+        # primary outputs
         ./lib
         ./modules
         ./overlay
         ./systems
         ./users
 
-        ./ext # nix expressions for *external*, not so nix-y things
+        # some tools to help me out
+        ./pre-commit.nix
+        ./shell.nix
+        ./treefmt.nix
+
+        ./ext # expressions for *external*, not so nix-y things
+        ./ci.nix # how i make sure my systems wont implode before i update
 
         inputs.pre-commit.flakeModule
         inputs.treefmt-nix.flakeModule
@@ -34,89 +41,7 @@
         "x86_64-darwin"
         "aarch64-darwin"
       ];
-
-      perSystem = {
-        config,
-        lib,
-        pkgs,
-        system,
-        inputs',
-        self',
-        ...
-      }: {
-        treefmt = {
-          projectRootFile = "flake.nix";
-
-          programs = {
-            alejandra.enable = true;
-            deadnix.enable = true;
-            prettier.enable = true;
-          };
-
-          settings.global = {
-            excludes = [
-              "./flake.lock"
-            ];
-          };
-        };
-
-        pre-commit.settings.hooks = {
-          actionlint.enable = true;
-
-          treefmt = {
-            enable = true;
-            package = config.treefmt.build.wrapper;
-          };
-
-          nil.enable = true;
-          statix.enable = true;
-        };
-
-        devShells.default = pkgs.mkShellNoCC {
-          shellHook = config.pre-commit.installationScript;
-          packages = with pkgs;
-            [
-              nix
-
-              # format + lint
-              actionlint
-              self'.formatter
-              deadnix
-              nil
-              statix
-
-              # utils
-              deploy-rs
-              fzf
-              just
-              config.terranix.package
-            ]
-            ++ lib.optional stdenv.isDarwin [inputs'.darwin.packages.darwin-rebuild]
-            ++ lib.optionals stdenv.isLinux [nixos-rebuild inputs'.agenix.packages.agenix];
-        };
-
-        packages.ciGate = let
-          ci = self.lib.ci [system];
-
-          configurations = map (type: ci.mapCfgsToDerivs (ci.getCompatibleCfgs self.${type})) [
-            "nixosConfigurations"
-            "darwinConfigurations"
-            "homeConfigurations"
-          ];
-
-          required = lib.concatMap lib.attrValues (
-            [
-              self'.checks
-              self'.devShells
-            ]
-            ++ configurations
-          );
-        in
-          pkgs.writeText "ci-gate" (
-            lib.concatMapStringsSep "\n" toString required
-          );
-      };
-    });
+    };
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
