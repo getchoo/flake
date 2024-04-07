@@ -14,7 +14,7 @@ default:
 
 [private]
 rebuild subcmd *extraArgs="":
-    {{ rebuild }} {{ subcmd }} {{ rebuildArgs }} --flake .
+    {{ rebuild }} {{ subcmd }} {{ rebuildArgs }} --flake . {{ extraArgs }}
 
 build *extraArgs="": (rebuild "build" extraArgs)
 
