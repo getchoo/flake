@@ -10,10 +10,6 @@ in {
       miniflux = {
         locations = mkProxy "/" "7000";
       };
-
-      msix = {
-        root = "/var/www/msix";
-      };
     };
   };
 }

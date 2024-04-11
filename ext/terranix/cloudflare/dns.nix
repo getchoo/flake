@@ -42,11 +42,6 @@ in {
       type = "CNAME";
     };
 
-    msix = {
-      value = atlas_tunnel;
-      type = "CNAME";
-    };
-
     # prevent email spoofing
 
     dmarc = {
