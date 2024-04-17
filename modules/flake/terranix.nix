@@ -9,7 +9,6 @@
   inherit
     (lib)
     literalExpression
-    mdDoc
     mkOption
     mkPackageOption
     types
@@ -25,7 +24,6 @@ in {
       config,
       pkgs,
       system,
-      self',
       ...
     }: let
       cfg = config.${namespace};
@@ -35,16 +33,8 @@ in {
           type = types.listOf types.unspecified;
           default = [];
           example = literalExpression "[ ./terranix ]";
-          description = mdDoc ''
+          description = ''
             Modules to use in this terranixConfiguration
-          '';
-        };
-
-        configuration = mkOption {
-          type = types.pathInStore;
-          readOnly = true;
-          description = mdDoc ''
-            Final configuration created by terranix
           '';
         };
 
@@ -55,29 +45,9 @@ in {
       };
 
       config = {
-        terranix.configuration = inputs.terranix.lib.terranixConfiguration {
+        packages.terranix = inputs.terranix.lib.terranixConfiguration {
           inherit system;
           inherit (cfg) modules;
-        };
-
-        apps.gen-terranix = {
-          program = pkgs.writeShellApplication {
-            name = "gen-tf";
-
-            text = ''
-              config_file="config.tf.json"
-              [ -e "$config_file" ] && rm -f "$config_file"
-              cp ${cfg.configuration} "$config_file"
-            '';
-          };
-        };
-
-        devShells.terranix = pkgs.mkShellNoCC {
-          shellHook = ''
-            ${self'.apps.gen-terranix.program}
-          '';
-
-          packages = [pkgs.just cfg.package];
         };
       };
     });
