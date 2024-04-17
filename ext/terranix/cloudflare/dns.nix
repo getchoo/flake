@@ -74,6 +74,27 @@ in {
         zone_id = getchoo_com;
       };
 
+      getchoo_com_api = {
+        name = "api";
+        value = "teawieapi.pages.dev";
+        type = "CNAME";
+        zone_id = getchoo_com;
+      };
+
+      getchoo_com_miniflux = {
+        name = "miniflux";
+        value = atlas_tunnel;
+        type = "CNAME";
+        zone_id = getchoo_com;
+      };
+
+      getchoo_com_keyoxide = {
+        name = "@";
+        value = "$argon2id$v=19$m=512,t=256,p=1$AlA6W5fP7J14zMsw0W5KFQ$EQz/NCE0/TQpE64r2Eo/yOpjtMZ9WXevHsv3YYP7CXg";
+        type = "TXT";
+        zone_id = getchoo_com;
+      };
+
       mydadleft_me_website = {
         name = "@";
         value = "website-86j.pages.dev";
