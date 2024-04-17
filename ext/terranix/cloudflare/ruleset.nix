@@ -1,31 +1,10 @@
 {lib, ...}: {
   resource.cloudflare_ruleset = {
-    default = {
-      kind = "zone";
-      name = "default";
-      phase = "http_config_settings";
-      zone_id = lib.tfRef "var.zone_id";
-
-      rules = [
-        {
-          action = "set_config";
-          action_parameters = {
-            automatic_https_rewrites = true;
-            email_obfuscation = true;
-            opportunistic_encryption = false;
-          };
-          description = "base redirects";
-          enabled = true;
-          expression = "true";
-        }
-      ];
-    };
-
-    redirect = {
+    mydadleft_me_redirects = {
       kind = "zone";
       name = "default";
       phase = "http_request_dynamic_redirect";
-      zone_id = lib.tfRef "var.zone_id";
+      zone_id = lib.tfRef "var.mydadleft_me_zone_id";
 
       rules = [
         {
