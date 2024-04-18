@@ -33,9 +33,7 @@ in {
           tunnels.${cfg.tunnelName} = {
             default = "http_status:404";
 
-            ingress = lib.genAttrs (builtins.attrNames nginx.virtualHosts) (
-              _: {service = "http://localhost:${toString nginx.defaultHTTPListenPort}";}
-            );
+            ingress = lib.mapAttrs (_: _: {service = "http://localhost:${toString nginx.defaultHTTPListenPort}";}) nginx.virtualHosts;
           };
         };
       }

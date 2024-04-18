@@ -23,6 +23,7 @@
 
   atlas_tunnel = lib.tfRef "data.cloudflare_tunnel.atlas-nginx.id" + ".cfargotunnel.com";
 
+  pagesSubdomainFor = project: lib.tfRef "resource.cloudflare_pages_project.${project}.subdomain";
   blockEmailSpoofingFor = domain: let
     zone_id = zones.${domain};
   in {
@@ -62,7 +63,7 @@ in {
     lib.mapAttrs (_: mkRecord) {
       getchoo_com_website = {
         name = "@";
-        value = "website-86j.pages.dev";
+        value = pagesSubdomainFor "personal_website";
         type = "CNAME";
         zone_id = getchoo_com;
       };
@@ -76,7 +77,7 @@ in {
 
       getchoo_com_api = {
         name = "api";
-        value = "teawieapi.pages.dev";
+        value = pagesSubdomainFor "teawie_api";
         type = "CNAME";
         zone_id = getchoo_com;
       };
@@ -97,7 +98,7 @@ in {
 
       mydadleft_me_website = {
         name = "@";
-        value = "website-86j.pages.dev";
+        value = pagesSubdomainFor "personal_website";
         type = "CNAME";
         zone_id = mydadleft_me;
       };
@@ -118,7 +119,7 @@ in {
 
       mydadleft_me_api = {
         name = "api";
-        value = "teawieapi.pages.dev";
+        value = pagesSubdomainFor "teawie_api";
         type = "CNAME";
         zone_id = mydadleft_me;
       };

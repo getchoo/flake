@@ -66,4 +66,5 @@ clean:
       result* \
       repl-result-out* \
       config.tf.json \
+      plan.tf \
       .terraform*

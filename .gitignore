@@ -11,5 +11,6 @@ repl-result-out*
 
 # terranix
 config.tf.json
+plan.tf
 .terraform/
 .terraform.*
