@@ -16,7 +16,7 @@
     loader.efi.canTouchEfiVariables = true;
   };
 
-  networking.domain = "mydadleft.me";
+  networking.domain = "getchoo.com";
 
   # not sure why this fails...
   # context: https://discourse.nixos.org/t/logrotate-config-fails-due-to-missing-group-30000/28501
