@@ -156,12 +156,7 @@
 
     teawiebot = {
       url = "github:getchoo/teawiebot";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-        pre-commit-hooks-nix.follows = "pre-commit";
-        treefmt-nix.follows = "treefmt-nix";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     terranix = {

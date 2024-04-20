@@ -134,28 +134,6 @@
         "type": "github"
       }
     },
-    "fenix": {
-      "inputs": {
-        "nixpkgs": [
-          "teawiebot",
-          "nixpkgs"
-        ],
-        "rust-analyzer-src": "rust-analyzer-src"
-      },
-      "locked": {
-        "lastModified": 1711606966,
-        "narHash": "sha256-nTaO7ZDL4D02dVC5ktqnXNiNuODBUHyE4qEcFjAUCQY=",
-        "owner": "nix-community",
-        "repo": "fenix",
-        "rev": "aa45c3e901ea42d6633af083c0c555efaf948b17",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "fenix",
-        "type": "github"
-      }
-    },
     "firefox-addons": {
       "inputs": {
         "flake-utils": [
@@ -471,27 +449,6 @@
         "type": "github"
       }
     },
-    "procfile-nix": {
-      "inputs": {
-        "nixpkgs": [
-          "teawiebot",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1711158989,
-        "narHash": "sha256-exgncIe/lQIswv2L1M0y+RrHAg5dofLFCOxGu4/yJww=",
-        "owner": "getchoo",
-        "repo": "procfile-nix",
-        "rev": "6388308f9e9c8a8fbfdff54b30adf486fa292cf9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "getchoo",
-        "repo": "procfile-nix",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -515,23 +472,6 @@
         "teawiebot": "teawiebot",
         "terranix": "terranix",
         "treefmt-nix": "treefmt-nix"
-      }
-    },
-    "rust-analyzer-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1711562745,
-        "narHash": "sha256-s/YOyBM0vumhkqCFi8CnV5imFlC5JJrGia8CmEXyQkM=",
-        "owner": "rust-lang",
-        "repo": "rust-analyzer",
-        "rev": "ad51a17c627b4ca57f83f0dc1f3bb5f3f17e6d0b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rust-lang",
-        "ref": "nightly",
-        "repo": "rust-analyzer",
-        "type": "github"
       }
     },
     "rust-overlay": {
@@ -576,27 +516,16 @@
     },
     "teawiebot": {
       "inputs": {
-        "fenix": "fenix",
-        "flake-parts": [
-          "flake-parts"
-        ],
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "pre-commit-hooks-nix": [
-          "pre-commit"
-        ],
-        "procfile-nix": "procfile-nix",
-        "treefmt-nix": [
-          "treefmt-nix"
         ]
       },
       "locked": {
-        "lastModified": 1711986880,
-        "narHash": "sha256-SH/xCKkpF2f0yrmg1zp5IL/59Ud/uL0FOYdeEmN/9T8=",
+        "lastModified": 1713587009,
+        "narHash": "sha256-egVhLFstrdBCO6F1UV19aCkuW+EOY6Pt9IRJCEUPzZk=",
         "owner": "getchoo",
         "repo": "teawiebot",
-        "rev": "1b92b254bc64b356f5c59657d2f0acc767bb2964",
+        "rev": "ae1dc52060791990f994df6ecfd4960e6ff3fe5c",
         "type": "github"
       },
       "original": {
