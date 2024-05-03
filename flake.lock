@@ -134,6 +134,28 @@
         "type": "github"
       }
     },
+    "fenix": {
+      "inputs": {
+        "nixpkgs": [
+          "teawiebot",
+          "nixpkgs"
+        ],
+        "rust-analyzer-src": "rust-analyzer-src"
+      },
+      "locked": {
+        "lastModified": 1714112748,
+        "narHash": "sha256-jq6Cpf/pQH85p+uTwPPrGG8Ky/zUOTwMJ7mcqc5M4So=",
+        "owner": "nix-community",
+        "repo": "fenix",
+        "rev": "3ae4b908a795b6a3824d401a0702e11a7157d7e1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "fenix",
+        "type": "github"
+      }
+    },
     "firefox-addons": {
       "inputs": {
         "flake-utils": [
@@ -474,6 +496,23 @@
         "treefmt-nix": "treefmt-nix"
       }
     },
+    "rust-analyzer-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1714031783,
+        "narHash": "sha256-xS/niQsq1CQPOe4M4jvVPO2cnXS/EIeRG5gIopUbk+Q=",
+        "owner": "rust-lang",
+        "repo": "rust-analyzer",
+        "rev": "56bee2ddafa6177b19c631eedc88d43366553223",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rust-lang",
+        "ref": "nightly",
+        "repo": "rust-analyzer",
+        "type": "github"
+      }
+    },
     "rust-overlay": {
       "inputs": {
         "flake-utils": [
@@ -516,16 +555,17 @@
     },
     "teawiebot": {
       "inputs": {
+        "fenix": "fenix",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1713587009,
-        "narHash": "sha256-egVhLFstrdBCO6F1UV19aCkuW+EOY6Pt9IRJCEUPzZk=",
+        "lastModified": 1714696152,
+        "narHash": "sha256-oEi6EWKfFPC3qGal7I7CIZl8Ihb44TdEE1iHrnqBxrg=",
         "owner": "getchoo",
         "repo": "teawiebot",
-        "rev": "ae1dc52060791990f994df6ecfd4960e6ff3fe5c",
+        "rev": "a1876d5a6d47f9bf8fb78be4162d6a7d7fa90d16",
         "type": "github"
       },
       "original": {
