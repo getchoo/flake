@@ -561,11 +561,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1714696152,
-        "narHash": "sha256-oEi6EWKfFPC3qGal7I7CIZl8Ihb44TdEE1iHrnqBxrg=",
+        "lastModified": 1714700636,
+        "narHash": "sha256-li+CcRYz9WEqcqLhjUGm2loIZgTDeMrHRbIpVYAvdpw=",
         "owner": "getchoo",
         "repo": "teawiebot",
-        "rev": "a1876d5a6d47f9bf8fb78be4162d6a7d7fa90d16",
+        "rev": "ea712d95dc575c5dace753094c1e978fdd46cb1d",
         "type": "github"
       },
       "original": {
