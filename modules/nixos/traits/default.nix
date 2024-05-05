@@ -7,6 +7,7 @@
     ./nvidia.nix
     ./secrets.nix
     ./tailscale.nix
+    ./users.nix
     ./zram.nix
   ];
 }

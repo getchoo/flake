@@ -8,7 +8,7 @@
           "nixpkgs"
         ],
         "systems": [
-          "pre-commit",
+          "lanzaboote",
           "flake-utils",
           "systems"
         ]
@@ -31,7 +31,7 @@
       "inputs": {
         "flake-compat": [],
         "flake-utils": [
-          "pre-commit",
+          "lanzaboote",
           "flake-utils"
         ],
         "nixpkgs": [
@@ -57,14 +57,14 @@
       "locked": {
         "lastModified": 1714607657,
         "narHash": "sha256-AnmN+JOzrpHv7Uw7JSPJ9JEjuqF7gjhx29UuuldNpas=",
-        "owner": "Stonks3141",
-        "repo": "ctp-nix",
+        "owner": "catppuccin",
+        "repo": "nix",
         "rev": "b0dc7f3181063daa6532dc5f757ded1a605dfbd5",
         "type": "github"
       },
       "original": {
-        "owner": "Stonks3141",
-        "repo": "ctp-nix",
+        "owner": "catppuccin",
+        "repo": "nix",
         "type": "github"
       }
     },
@@ -116,7 +116,7 @@
           "nixpkgs"
         ],
         "utils": [
-          "pre-commit",
+          "lanzaboote",
           "flake-utils"
         ]
       },
@@ -159,7 +159,7 @@
     "firefox-addons": {
       "inputs": {
         "flake-utils": [
-          "pre-commit",
+          "lanzaboote",
           "flake-utils"
         ],
         "nixpkgs": [
@@ -180,6 +180,21 @@
         "owner": "~rycee",
         "repo": "nur-expressions",
         "type": "sourcehut"
+      }
+    },
+    "flake-checks": {
+      "locked": {
+        "lastModified": 1714464432,
+        "narHash": "sha256-MYeWsW8BDA3KO17wwuc8D+7l8PSidbdQIv64QNNVEcI=",
+        "owner": "getchoo",
+        "repo": "flake-checks",
+        "rev": "a711dab545e8b964914ac01ed06971a5a37ae22b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getchoo",
+        "repo": "flake-checks",
+        "type": "github"
       }
     },
     "flake-parts": {
@@ -240,27 +255,6 @@
         "type": "github"
       }
     },
-    "gitignore": {
-      "inputs": {
-        "nixpkgs": [
-          "pre-commit",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1709087332,
-        "narHash": "sha256-HG2cCnktfHsKV0s4XW83gU3F57gaTljL9KNSuG6bnQs=",
-        "owner": "hercules-ci",
-        "repo": "gitignore.nix",
-        "rev": "637db329424fd7e46cf4185293b9cc8c88c95394",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hercules-ci",
-        "repo": "gitignore.nix",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -308,16 +302,11 @@
         "flake-parts": [
           "flake-parts"
         ],
-        "flake-utils": [
-          "pre-commit",
-          "flake-utils"
-        ],
+        "flake-utils": "flake-utils",
         "nixpkgs": [
           "nixpkgs"
         ],
-        "pre-commit-hooks-nix": [
-          "pre-commit"
-        ],
+        "pre-commit-hooks-nix": [],
         "rust-overlay": "rust-overlay"
       },
       "locked": {
@@ -358,7 +347,7 @@
       "inputs": {
         "flake-compat": [],
         "flake-utils": [
-          "pre-commit",
+          "lanzaboote",
           "flake-utils"
         ],
         "nixpkgs": [
@@ -396,8 +385,8 @@
     },
     "nixpkgs-stable": {
       "locked": {
-        "lastModified": 1714685007,
-        "narHash": "sha256-Q4ddhb5eC5pwci0QhAapFwnsc8X8H9ZMQiWpsofBsDc=",
+        "lastModified": 1714531828,
+        "narHash": "sha256-ILsf3bdY/hNNI/Hu5bSt2/KbmHaAVhBbNUOdGztTHEg=",
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "383ffe076d9b633a2e97b6e4dd97fc15fcf30159",
@@ -445,32 +434,6 @@
         "type": "github"
       }
     },
-    "pre-commit": {
-      "inputs": {
-        "flake-compat": [],
-        "flake-utils": "flake-utils",
-        "gitignore": "gitignore",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "nixpkgs-stable": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1714478972,
-        "narHash": "sha256-q//cgb52vv81uOuwz1LaXElp3XAe1TqrABXODAEF6Sk=",
-        "owner": "cachix",
-        "repo": "pre-commit-hooks.nix",
-        "rev": "2849da033884f54822af194400f8dff435ada242",
-        "type": "github"
-      },
-      "original": {
-        "owner": "cachix",
-        "repo": "pre-commit-hooks.nix",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -479,6 +442,7 @@
         "darwin": "darwin",
         "deploy": "deploy",
         "firefox-addons": "firefox-addons",
+        "flake-checks": "flake-checks",
         "flake-parts": "flake-parts",
         "getchvim": "getchvim",
         "home-manager": "home-manager",
@@ -490,10 +454,8 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nu-scripts": "nu-scripts",
         "openwrt-imagebuilder": "openwrt-imagebuilder",
-        "pre-commit": "pre-commit",
         "teawiebot": "teawiebot",
-        "terranix": "terranix",
-        "treefmt-nix": "treefmt-nix"
+        "terranix": "terranix"
       }
     },
     "rust-analyzer-src": {
@@ -579,7 +541,7 @@
         "bats-assert": [],
         "bats-support": [],
         "flake-utils": [
-          "pre-commit",
+          "lanzaboote",
           "flake-utils"
         ],
         "nixpkgs": [
@@ -598,26 +560,6 @@
       "original": {
         "owner": "terranix",
         "repo": "terranix",
-        "type": "github"
-      }
-    },
-    "treefmt-nix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1714058656,
-        "narHash": "sha256-Qv4RBm4LKuO4fNOfx9wl40W2rBbv5u5m+whxRYUMiaA=",
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "rev": "c6aaf729f34a36c445618580a9f95a48f5e4e03f",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "treefmt-nix",
         "type": "github"
       }
     }

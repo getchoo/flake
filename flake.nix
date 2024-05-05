@@ -10,6 +10,13 @@
     flakeModules = import ./modules/flake;
   in
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+
       imports = [
         # primary outputs
         ./lib
@@ -18,28 +25,14 @@
         ./systems
         ./users
 
-        # some tools to help me out
-        ./pre-commit.nix
-        ./shell.nix
-        ./treefmt.nix
+        # development related outputs
+        ./parts
 
-        ./ext # expressions for *external*, not so nix-y things
-        ./ci.nix # how i make sure my systems wont implode before i update
+        # external, not so nix-y things
+        ./ext
 
-        inputs.pre-commit.flakeModule
-        inputs.treefmt-nix.flakeModule
-
-        # dogfooding
+        # dogfood some modules
         flakeModules.configurations
-        flakeModules.openwrt
-        flakeModules.terranix
-      ];
-
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
       ];
     };
 
@@ -62,7 +55,7 @@
         nixpkgs.follows = "nixpkgs";
         darwin.follows = "";
         home-manager.follows = "";
-        systems.follows = "pre-commit/flake-utils/systems";
+        systems.follows = "lanzaboote/flake-utils/systems";
       };
     };
 
@@ -72,18 +65,18 @@
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "";
         pre-commit.follows = "";
-        flake-utils.follows = "pre-commit/flake-utils";
+        flake-utils.follows = "lanzaboote/flake-utils";
       };
     };
 
-    catppuccin.url = "github:Stonks3141/ctp-nix";
+    catppuccin.url = "github:catppuccin/nix";
 
     deploy = {
       url = "github:serokell/deploy-rs";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "";
-        utils.follows = "pre-commit/flake-utils";
+        utils.follows = "lanzaboote/flake-utils";
       };
     };
 
@@ -91,9 +84,11 @@
       url = "sourcehut:~rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "pre-commit/flake-utils";
+        flake-utils.follows = "lanzaboote/flake-utils";
       };
     };
+
+    flake-checks.url = "github:getchoo/flake-checks";
 
     getchvim = {
       url = "github:getchoo/getchvim";
@@ -116,8 +111,7 @@
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "";
         flake-parts.follows = "flake-parts";
-        flake-utils.follows = "pre-commit/flake-utils";
-        pre-commit-hooks-nix.follows = "pre-commit";
+        pre-commit-hooks-nix.follows = "";
       };
     };
 
@@ -131,7 +125,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "";
-        flake-utils.follows = "pre-commit/flake-utils";
+        flake-utils.follows = "lanzaboote/flake-utils";
       };
     };
 
@@ -145,15 +139,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    pre-commit = {
-      url = "github:cachix/pre-commit-hooks.nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        nixpkgs-stable.follows = "nixpkgs";
-        flake-compat.follows = "";
-      };
-    };
-
     teawiebot = {
       url = "github:getchoo/teawiebot";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -163,16 +148,11 @@
       url = "github:terranix/terranix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "pre-commit/flake-utils";
+        flake-utils.follows = "lanzaboote/flake-utils";
         terranix-examples.follows = "";
         bats-support.follows = "";
         bats-assert.follows = "";
       };
-    };
-
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }

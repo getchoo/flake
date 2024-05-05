@@ -1,5 +1,7 @@
 {
-  nixosModules = import ./nixos;
-  darwinModules = import ./darwin;
-  flakeModules = import ./flake;
+  flake = {
+    darwinModules = import ./darwin;
+    flakeModules = import ./flake;
+    nixosModules = import ./nixos;
+  };
 }

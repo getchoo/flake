@@ -1,33 +1,43 @@
 {
   config,
   lib,
-  moduleLocation,
   flake-parts-lib,
-  withSystem,
   inputs,
-  self,
+  moduleLocation,
+  withSystem,
   ...
 }: let
   inherit (flake-parts-lib) mkSubmoduleOptions;
+
+  inherit
+    (builtins)
+    removeAttrs
+    ;
 
   inherit
     (lib)
     attrValues
     literalExpression
     mapAttrs
-    mdDoc
     mkAliasOptionModule
     mkOption
     recursiveUpdate
     types
     ;
 
-  builderType = types.functionTo pkgsType;
+  inherit
+    (inputs)
+    nixpkgs
+    darwin
+    home-manager
+    ;
+
   pkgsType = types.lazyAttrsOf types.raw;
+  builderType = types.functionTo pkgsType;
 
   defaultBuilderFor = {
-    nixos = inputs.nixpkgs.lib.nixosSystem;
-    darwin = (inputs.darwin or inputs.nix-darwin).lib.darwinSystem;
+    nixos = nixpkgs.lib.nixosSystem;
+    darwin = (inputs.nix-darwin or darwin).lib.darwinSystem;
   };
 
   builderStringFor = {
@@ -48,13 +58,13 @@
 
   toSystem = type: name: args:
     args.builder (
-      recursiveUpdate (builtins.removeAttrs args ["builder"]) {
+      recursiveUpdate (removeAttrs args ["builder"]) {
         modules =
           [
             ../../systems/${name}
             {networking.hostName = name;}
           ]
-          ++ attrValues (self."${type}Modules" or {})
+          ++ attrValues (inputs.self."${type}Modules" or {})
           ++ (args.modules or []);
 
         specialArgs = applySpecialArgsFor args.system (args.specialArgs or {});
@@ -62,18 +72,18 @@
     );
 
   toUser = name: args:
-    inputs.home-manager.lib.homeManagerConfiguration (
+    home-manager.lib.homeManagerConfiguration (
       recursiveUpdate args {
         modules =
           [
-            ../../users/${name}
+            ../../users/${name}/home.nix
 
             {
               _module.args.osConfig = {};
               programs.home-manager.enable = true;
             }
           ]
-          ++ attrValues (self.homeModules or {})
+          ++ attrValues (inputs.self.homeModules or {})
           ++ (args.modules or []);
 
         extraSpecialArgs = let
@@ -96,7 +106,7 @@
         type = builderType;
         default = defaultBuilderFor.${type};
         example = literalExpression (builderStringFor type);
-        description = mdDoc ''
+        description = ''
           Function to build this ${type}Configuration with
         '';
       };
@@ -105,7 +115,7 @@
         type = types.str;
         default = "x86_64-${kernelFor type}";
         example = literalExpression "aarch64-${kernelFor type}";
-        description = mdDoc ''
+        description = ''
           System to build this ${type}Configuration for
         '';
       };
@@ -118,8 +128,10 @@
     options = {
       pkgs = mkOption {
         type = pkgsType;
+        default = nixpkgs.legacyPackages.x86_64-linux;
+        defaultText = "inputs.nixpkgs.legacyPackages.x86_64-linux";
         example = literalExpression "inputs.nixpkgs.legacyPackages.aarch64-linux";
-        description = mdDoc ''
+        description = ''
           Instance of nixpkgs to use in this homeConfiguration
         '';
       };
@@ -137,7 +149,7 @@
           };
         }
       '';
-      description = mdDoc ''
+      description = ''
         Attribute set of `lib.${type}System` options. The names of
         each attribute will be used to import files in the `systems/`
         directory
@@ -178,7 +190,7 @@ in {
           };
         }
       '';
-      description = mdDoc ''
+      description = ''
         Attribute set of `lib.homeManagerConfiguration` arguments. The
         name of each attribute will be used to import files in the `users/`
         directory.
