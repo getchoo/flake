@@ -3,14 +3,13 @@
     lib,
     pkgs,
     system,
-    inputs',
     self',
     ...
   }: {
     packages = {
       ciGate = let
-        inherit (self.lib.ci) toTopLevel;
-        isCompatible = self.lib.ci.isCompatibleWith system;
+        toTopLevel = cfg: cfg.config.system.build.toplevel or cfg.activationPackage;
+        isCompatible = cfg: cfg.pkgs.system == system;
 
         configurations =
           map

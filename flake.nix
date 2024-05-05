@@ -6,7 +6,9 @@
     extra-trusted-public-keys = ["cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="];
   };
 
-  outputs = inputs:
+  outputs = inputs: let
+    flakeModules = import ./modules/flake;
+  in
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
         "x86_64-linux"
@@ -28,6 +30,9 @@
 
         # external, not so nix-y things
         ./ext
+
+        # dogfood some modules
+        flakeModules.configurations
       ];
     };
 
