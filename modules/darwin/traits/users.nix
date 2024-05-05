@@ -3,12 +3,10 @@
   lib,
   ...
 }: let
-  cfg = config.traits.users.seth;
+  cfg = config.traits.users;
 in {
-  imports = [./system.nix];
-
   config = lib.mkMerge [
-    (lib.mkIf cfg.enable {
+    (lib.mkIf cfg.seth.enable {
       home-manager.users.seth = {
         seth.desktop.enable = false;
       };

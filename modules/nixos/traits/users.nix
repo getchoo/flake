@@ -4,20 +4,20 @@
   secretsDir,
   ...
 }: let
-  cfg = config.traits.users.seth;
+  cfg = config.traits.users;
 in {
-  options.traits.users.seth = {
-    manageSecrets =
-      lib.mkEnableOption "automatic secrets management"
-      // {
-        default = config.traits.secrets.enable;
-      };
+  options.traits.users = {
+    seth = {
+      manageSecrets =
+        lib.mkEnableOption "automatic secrets management"
+        // {
+          default = config.traits.secrets.enable;
+        };
+    };
   };
 
-  imports = [./system.nix];
-
   config = lib.mkMerge [
-    (lib.mkIf (cfg.enable && cfg.manageSecrets) {
+    (lib.mkIf (cfg.seth.enable && cfg.seth.manageSecrets) {
       age.secrets = {
         sethPassword.file = secretsDir + "/sethPassword.age";
       };

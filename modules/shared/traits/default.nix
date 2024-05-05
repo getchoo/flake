@@ -1,6 +1,7 @@
 {
   imports = [
-    ./locale.nix
     ./home-manager.nix
+    ./locale.nix
+    ./users.nix
   ];
 }
