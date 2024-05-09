@@ -1,7 +1,6 @@
 {modulesPath, ...}: {
   imports = [
     (modulesPath + "/profiles/minimal.nix")
-    (modulesPath + "/profiles/hardened.nix")
     ./hardware-configuration.nix
     ./miniflux.nix
     ./nginx.nix
@@ -17,10 +16,6 @@
   };
 
   networking.domain = "getchoo.com";
-
-  # not sure why this fails...
-  # context: https://discourse.nixos.org/t/logrotate-config-fails-due-to-missing-group-30000/28501
-  services.logrotate.checkConfig = false;
 
   system.stateVersion = "23.05";
 }
