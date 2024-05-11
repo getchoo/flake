@@ -19,7 +19,6 @@ in {
     ./budgie
     ./gnome
     ./plasma
-    ./plasma5
   ];
 
   config = lib.mkIf cfg.enable {
