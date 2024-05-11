@@ -53,11 +53,3 @@ update-input input:
 
 deploy system:
     nix run '.#{{ system }}'
-
-clean:
-    rm -rf \
-      result* \
-      repl-result-out* \
-      config.tf.json \
-      plan.tf \
-      .terraform*
