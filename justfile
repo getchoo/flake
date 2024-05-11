@@ -16,6 +16,8 @@ default:
 rebuild subcmd *extraArgs="":
     {{ rebuild }} {{ subcmd }} {{ rebuildArgs }} --flake . {{ extraArgs }}
 
+boot *extraArgs="": (rebuild "boot" extraArgs)
+
 build *extraArgs="": (rebuild "build" extraArgs)
 
 dry-run *extraArgs="": (rebuild "dry-run" extraArgs)
@@ -48,18 +50,8 @@ update-input input:
       --commit-lock-file \
       --commit-lockfile-summary "flake: update {{ input }}"
 
-deploy system *args="":
-    nix run \
-      --inputs-from . \
-      'nixpkgs#deploy-rs' -- \
-      '.#{{ system }}' \
-      {{ args }}
-
-deploy-all *args="":
-    nix run \
-      --inputs-from . \
-      'nixpkgs#deploy-rs' -- \
-      {{ args }}
+deploy system:
+    nix run '.#{{ system }}'
 
 clean:
     rm -rf \

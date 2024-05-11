@@ -1,4 +1,4 @@
-{lib, ...}: {
+lib: {
   mkProxy = endpoint: port: {
     "${endpoint}" = {
       proxyPass = "http://localhost:${toString port}";
