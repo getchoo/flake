@@ -19,9 +19,7 @@ in {
     catppuccin.homeManagerModules.catppuccin
     nix-index-database.hmModules.nix-index
 
-    ./bat.nix
     ./chromium.nix
-    ./eza.nix
     ./firefox
     ./git.nix
     ./gpg.nix
@@ -42,20 +40,24 @@ in {
       restic
     ];
 
-    catppuccin.flavour = "mocha";
+    catppuccin = {
+      enable = true;
+      flavour = "mocha";
+    };
 
     programs = {
-      btop = {
+      bat.enable = true;
+      btop.enable = true;
+
+      eza = {
         enable = true;
-        catppuccin.enable = true;
+        icons = true;
       };
 
       direnv = {
         enable = true;
         nix-direnv.enable = true;
       };
-
-      glamour.catppuccin.enable = true;
 
       ripgrep.enable = true;
 
