@@ -13,6 +13,9 @@ in {
     programs.starship = {
       enable = true;
 
+      # i do this manually
+      catppuccin.enable = false;
+
       enableBashIntegration = false;
       enableZshIntegration = false;
 

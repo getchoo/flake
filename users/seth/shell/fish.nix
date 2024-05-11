@@ -15,7 +15,6 @@ in {
     programs.fish = lib.mkMerge [
       {
         enable = true;
-        catppuccin.enable = true;
 
         interactiveShellInit = ''
           set -l nixfile ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.fish
@@ -39,7 +38,7 @@ in {
 
       (lib.mkIf cfg.withPlugins {
         plugins = let
-          mkFishPlugins = builtins.map (plugin: {
+          mkFishPlugins = map (plugin: {
             name = plugin;
             inherit (pkgs.fishPlugins.${plugin}) src;
           });
