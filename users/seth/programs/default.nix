@@ -18,6 +18,7 @@ in {
   imports = with inputs; [
     catppuccin.homeManagerModules.catppuccin
     nix-index-database.hmModules.nix-index
+
     ./bat.nix
     ./chromium.nix
     ./eza.nix
