@@ -37,6 +37,7 @@ eval system *args="":
     nix eval \
       --raw \
       '.#nixosConfigurations.{{ system }}.config.system.build.toplevel' \
+      --no-allow-import-from-derivation \
       {{ args }}
 
 update:
