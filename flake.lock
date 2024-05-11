@@ -109,31 +109,6 @@
         "type": "github"
       }
     },
-    "deploy": {
-      "inputs": {
-        "flake-compat": [],
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": [
-          "lanzaboote",
-          "flake-utils"
-        ]
-      },
-      "locked": {
-        "lastModified": 1711973905,
-        "narHash": "sha256-UFKME/N1pbUtn+2Aqnk+agUt8CekbpuqwzljivfIme8=",
-        "owner": "serokell",
-        "repo": "deploy-rs",
-        "rev": "88b3059b020da69cbe16526b8d639bd5e0b51c8b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "serokell",
-        "repo": "deploy-rs",
-        "type": "github"
-      }
-    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -343,6 +318,26 @@
         "type": "github"
       }
     },
+    "nixinate": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1708891350,
+        "narHash": "sha256-VOQrKK7Df/IVuNki+NshVuGkTa/Tw0GigPjWcZff6kk=",
+        "owner": "MatthewCroughan",
+        "repo": "nixinate",
+        "rev": "452f33c60df5b72ad0858f5f2cf224bdf1f17746",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MatthewCroughan",
+        "repo": "nixinate",
+        "type": "github"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": [],
@@ -440,7 +435,6 @@
         "arkenfox": "arkenfox",
         "catppuccin": "catppuccin",
         "darwin": "darwin",
-        "deploy": "deploy",
         "firefox-addons": "firefox-addons",
         "flake-checks": "flake-checks",
         "flake-parts": "flake-parts",
@@ -449,6 +443,7 @@
         "krunner-nix": "krunner-nix",
         "lanzaboote": "lanzaboote",
         "nix-index-database": "nix-index-database",
+        "nixinate": "nixinate",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",

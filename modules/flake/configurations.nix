@@ -158,7 +158,6 @@
 in {
   # i don't like prefixing so much with `flake`
   imports = [
-    (mkAliasOptionModule ["deploy"] ["flake" "deploy"])
     (mkAliasOptionModule ["nixosModules"] ["flake" "nixosModules"])
     (mkAliasOptionModule ["darwinModules"] ["flake" "darwinModules"])
     (mkAliasOptionModule ["homeModules"] ["flake" "homeModules"])

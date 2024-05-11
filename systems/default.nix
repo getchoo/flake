@@ -9,14 +9,6 @@
     };
   };
 
-  deploy = {
-    remoteBuild = true;
-    fastConnection = false;
-    nodes = self.lib.deploy.mapNodes [
-      "atlas"
-    ];
-  };
-
   nixosConfigurations = let
     stable = inputs.nixpkgs-stable.lib.nixosSystem;
   in {
@@ -32,5 +24,9 @@
       builder = stable;
       system = "aarch64-linux";
     };
+  };
+
+  perSystem = {system, ...}: {
+    apps = (inputs.nixinate.nixinate.${system} self).nixinate;
   };
 }
