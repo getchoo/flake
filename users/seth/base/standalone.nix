@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }: let
   cfg = config.seth.standalone;
@@ -20,7 +19,5 @@ in {
         then "/Users/${config.home.username}"
         else "/home/${config.home.username}";
     };
-
-    nixpkgs.overlays = [inputs.self.overlays.default];
   };
 }

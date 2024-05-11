@@ -23,11 +23,32 @@ in {
   ];
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [
-      discord
-      element-desktop
-      spotify
-      (prismlauncher.override {withWaylandGLFW = true;})
+    home.packages = [
+      (
+        let
+          inherit (pkgs) discord;
+          flags = lib.concatStringsSep " " [
+            "--enable-gpu-rasterization"
+            "--enable-zero-copy"
+            "--enable-gpu-compositing"
+            "--enable-native-gpu-memory-buffers"
+            "--enable-oop-rasterization"
+            "--enable-features=UseSkiaRenderer,WaylandWindowDecorations"
+          ];
+        in
+          if pkgs.stdenv.isLinux
+          then
+            discord.overrideAttrs (old: {
+              desktopItem = old.desktopItem.override (old': {
+                exec = "${old'.exec} ${flags}";
+              });
+            })
+          else discord
+      )
+
+      pkgs.element-desktop
+      pkgs.spotify
+      (pkgs.prismlauncher.override {withWaylandGLFW = true;})
     ];
   };
 }

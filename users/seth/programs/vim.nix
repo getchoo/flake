@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   cfg = config.seth.programs.vim;
@@ -13,11 +14,14 @@ in {
   config = lib.mkIf cfg.enable {
     programs.vim = {
       enable = true;
+      packageConfigurable = pkgs.vim;
+
       settings = {
         expandtab = false;
         shiftwidth = 2;
         tabstop = 2;
       };
+
       extraConfig = ''
         " https://wiki.archlinux.org/title/XDG_Base_Directory
         set runtimepath^=${configHome}/vim

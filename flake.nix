@@ -21,7 +21,6 @@
         # primary outputs
         ./lib
         ./modules
-        ./overlay
         ./systems
         ./users
 
