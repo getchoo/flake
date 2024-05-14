@@ -12,12 +12,10 @@
     // lib.optionalAttrs (type != "TXT") {proxied = true;};
 
   zones = {
-    mydadleft_me = lib.tfRef "var.mydadleft_me_zone_id";
     getchoo_com = lib.tfRef "var.getchoo_com_zone_id";
   };
   inherit
     (zones)
-    mydadleft_me
     getchoo_com
     ;
 
@@ -50,10 +48,6 @@
   };
 in {
   resource.cloudflare_zone_dnssec = {
-    mydadleft_me_dnssec = {
-      zone_id = mydadleft_me;
-    };
-
     getchoo_com_dnssec = {
       zone_id = getchoo_com;
     };
@@ -96,41 +90,6 @@ in {
         zone_id = getchoo_com;
       };
 
-      mydadleft_me_website = {
-        name = "@";
-        value = pagesSubdomainFor "personal_website";
-        type = "CNAME";
-        zone_id = mydadleft_me;
-      };
-
-      mydadleft_me_keyoxide = {
-        name = "@";
-        value = "$argon2id$v=19$m=512,t=256,p=1$AlA6W5fP7J14zMsw0W5KFQ$EQz/NCE0/TQpE64r2Eo/yOpjtMZ9WXevHsv3YYP7CXg";
-        type = "TXT";
-        zone_id = mydadleft_me;
-      };
-
-      mydadleft_me_www = {
-        name = "www";
-        value = "mydadleft.me";
-        type = "CNAME";
-        zone_id = mydadleft_me;
-      };
-
-      mydadleft_me_api = {
-        name = "api";
-        value = pagesSubdomainFor "teawie_api";
-        type = "CNAME";
-        zone_id = mydadleft_me;
-      };
-
-      mydadleft_me_miniflux = {
-        name = "miniflux";
-        value = atlas_tunnel;
-        type = "CNAME";
-        zone_id = mydadleft_me;
-      };
     }
-    // blockEmailSpoofingFor "mydadleft_me"
     // blockEmailSpoofingFor "getchoo_com";
 }

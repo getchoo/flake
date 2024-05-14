@@ -20,11 +20,11 @@ in {
     setDomainsFor {
       account_id = lib.tfRef "var.account_id";
       project = "personal_website";
-      domains = ["mydadleft.me" "getchoo.com"];
+      domains = ["getchoo.com"];
     }
     // setDomainsFor {
       account_id = lib.tfRef "var.account_id";
       project = "teawie_api";
-      domains = ["api.mydadleft.me" "api.getchoo.com"];
+      domains = ["api.getchoo.com"];
     };
 }

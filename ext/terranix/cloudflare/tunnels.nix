@@ -10,11 +10,6 @@
     });
 
   resource.cloudflare_authenticated_origin_pulls = {
-    mydadleft_me_origin = {
-      zone_id = lib.tfRef "var.mydadleft_me_zone_id";
-      enabled = true;
-    };
-
     getchoo_com_origin = {
       zone_id = lib.tfRef "var.getchoo_com_zone_id";
       enabled = true;
