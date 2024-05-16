@@ -89,7 +89,6 @@ in {
         type = "TXT";
         zone_id = getchoo_com;
       };
-
     }
     // blockEmailSpoofingFor "getchoo_com";
 }
