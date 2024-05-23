@@ -25,7 +25,7 @@
             pkgs.just
             self'.packages.opentofu
           ]
-          ++ lib.optional pkgs.stdenv.isDarwin [inputs'.darwin.packages.darwin-rebuild]
+          ++ lib.optional pkgs.stdenv.isDarwin [inputs'.nix-darwin.packages.darwin-rebuild]
           ++ lib.optionals pkgs.stdenv.isLinux [pkgs.nixos-rebuild inputs'.agenix.packages.agenix];
       };
     };

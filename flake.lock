@@ -89,26 +89,6 @@
         "type": "github"
       }
     },
-    "darwin": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1715901937,
-        "narHash": "sha256-eMyvWP56ZOdraC2IOvZo0/RTDcrrsqJ0oJWDC76JTak=",
-        "owner": "LnL7",
-        "repo": "nix-darwin",
-        "rev": "ffc01182f90118119930bdfc528c1ee9a39ecef8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "LnL7",
-        "repo": "nix-darwin",
-        "type": "github"
-      }
-    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -298,6 +278,26 @@
         "type": "github"
       }
     },
+    "nix-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1716329735,
+        "narHash": "sha256-ap51w+VqG21vuzyQ04WrhI2YbWHd3UGz0e7dc/QQmoA=",
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "rev": "eac4f25028c1975a939c8f8fba95c12f8a25e01c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "LnL7",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -434,7 +434,6 @@
         "agenix": "agenix",
         "arkenfox": "arkenfox",
         "catppuccin": "catppuccin",
-        "darwin": "darwin",
         "firefox-addons": "firefox-addons",
         "flake-checks": "flake-checks",
         "flake-parts": "flake-parts",
@@ -442,6 +441,7 @@
         "home-manager": "home-manager",
         "krunner-nix": "krunner-nix",
         "lanzaboote": "lanzaboote",
+        "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
         "nixinate": "nixinate",
         "nixos-wsl": "nixos-wsl",

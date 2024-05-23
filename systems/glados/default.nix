@@ -13,15 +13,7 @@
 
   environment.systemPackages = [pkgs.obs-studio];
 
-  traits = {
-    containers.enable = true;
-    nvidia = {
-      enable = true;
-      nvk.enable = true;
-    };
-    tailscale.enable = true;
-    zram.enable = true;
-  };
+  networking.hostName = "glados";
 
   security.tpm2 = {
     enable = true;
@@ -35,4 +27,14 @@
   };
 
   system.stateVersion = "23.11";
+
+  traits = {
+    containers.enable = true;
+    nvidia = {
+      enable = true;
+      nvk.enable = true;
+    };
+    tailscale.enable = true;
+    zram.enable = true;
+  };
 }

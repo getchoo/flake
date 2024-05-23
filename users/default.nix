@@ -1,5 +1,7 @@
 {
-  homeConfigurations = {
-    seth = {};
+  configurations.home = {
+    seth = {
+      modules = [./seth/home.nix];
+    };
   };
 }

@@ -27,7 +27,10 @@
     loader.efi.canTouchEfiVariables = true;
   };
 
-  networking.domain = "getchoo.com";
+  networking = {
+    domain = "getchoo.com";
+    hostName = "atlas";
+  };
 
   system.stateVersion = "23.05";
 }
