@@ -12,6 +12,9 @@ in {
   };
 
   config = lib.mkIf enable {
+    _module.args.osConfig = {};
+    programs.home-manager.enable = true;
+
     home = {
       username = "seth";
       homeDirectory =

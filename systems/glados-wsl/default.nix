@@ -30,6 +30,10 @@
     ];
   };
 
+  networking.hostName = "glados-wsl";
+
+  system.stateVersion = "23.11";
+
   traits.tailscale.enable = true;
 
   wsl = {
@@ -43,6 +47,4 @@
     startMenuLaunchers = false;
     interop.includePath = false;
   };
-
-  system.stateVersion = "23.11";
 }

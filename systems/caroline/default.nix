@@ -8,7 +8,10 @@
     "prismlauncher"
   ];
 
-  networking.computerName = config.networking.hostName;
+  networking = {
+    computerName = config.networking.hostName;
+    hostName = "caroline";
+  };
 
   nix.settings.trusted-users = ["seth"];
 

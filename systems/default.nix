@@ -3,26 +3,29 @@
   self,
   ...
 }: {
-  darwinConfigurations = {
-    caroline = {
-      system = "x86_64-darwin";
-    };
-  };
-
-  nixosConfigurations = let
-    stable = inputs.nixpkgs-stable.lib.nixosSystem;
-  in {
-    glados = {
-      system = "x86_64-linux";
+  configurations = {
+    darwin = {
+      caroline = {
+        modules = [./caroline];
+      };
     };
 
-    glados-wsl = {
-      system = "x86_64-linux";
-    };
+    nixos = let
+      stable = inputs.nixpkgs-stable.lib.nixosSystem;
+    in {
+      glados = {
+        modules = [./glados];
+      };
 
-    atlas = {
-      builder = stable;
-      system = "aarch64-linux";
+      glados-wsl = {
+        modules = [./glados-wsl];
+      };
+
+      atlas = {
+        builder = stable;
+        modules = [./atlas];
+        system = "aarch64-linux";
+      };
     };
   };
 

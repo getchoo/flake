@@ -3,6 +3,7 @@
   lib,
   flake-parts-lib,
   inputs,
+  self,
   moduleLocation,
   withSystem,
   ...
@@ -11,39 +12,19 @@
 
   inherit
     (builtins)
+    attrValues
+    mapAttrs
     removeAttrs
     ;
 
   inherit
     (lib)
-    attrValues
+    const
     literalExpression
-    mapAttrs
-    mkAliasOptionModule
     mkOption
     recursiveUpdate
     types
     ;
-
-  inherit
-    (inputs)
-    nixpkgs
-    darwin
-    home-manager
-    ;
-
-  pkgsType = types.lazyAttrsOf types.raw;
-  builderType = types.functionTo pkgsType;
-
-  defaultBuilderFor = {
-    nixos = nixpkgs.lib.nixosSystem;
-    darwin = (inputs.nix-darwin or darwin).lib.darwinSystem;
-  };
-
-  builderStringFor = {
-    nixos = "inputs.nixpkgs.lib.nixosSystem";
-    darwin = "inputs.nix-darwin.lib.darwinSystem";
-  };
 
   kernelFor = {
     nixos = "linux";
@@ -56,65 +37,71 @@
       inputs' = withSystem system ({inputs', ...}: inputs');
     };
 
-  toSystem = type: name: args:
+  toSystem = type: {
+    modules ? [],
+    system,
+    specialArgs ? {},
+    ...
+  } @ args:
     args.builder (
-      recursiveUpdate (removeAttrs args ["builder"]) {
-        modules =
-          [
-            ../../systems/${name}
-            {networking.hostName = name;}
-          ]
-          ++ attrValues (inputs.self."${type}Modules" or {})
-          ++ (args.modules or []);
-
-        specialArgs = applySpecialArgsFor args.system (args.specialArgs or {});
+      removeAttrs args ["builder"]
+      // {
+        modules = modules ++ attrValues (self."${type}Modules" or {});
+        specialArgs = applySpecialArgsFor system specialArgs;
       }
     );
 
-  toUser = name: args:
-    home-manager.lib.homeManagerConfiguration (
-      recursiveUpdate args {
-        modules =
-          [
-            ../../users/${name}/home.nix
-
-            {
-              _module.args.osConfig = {};
-              programs.home-manager.enable = true;
-            }
-          ]
-          ++ attrValues (inputs.self.homeModules or {})
-          ++ (args.modules or []);
-
-        extraSpecialArgs = let
-          inherit (args.pkgs.stdenv.hostPlatform) system;
-        in
-          applySpecialArgsFor system (args.extraSpecialArgs or {});
+  toUser = {
+    extraSpecialArgs ? {},
+    modules ? [],
+    pkgs,
+  } @ args:
+    inputs.home-manager.lib.homeManagerConfiguration (
+      args
+      // {
+        modules = modules ++ attrValues (self.homeManagerModules or {});
+        extraSpecialArgs = applySpecialArgsFor pkgs.stdenv.hostPlatform.system extraSpecialArgs;
       }
     );
 
-  mapSystems = type: mapAttrs (toSystem type);
-  mapUsers = mapAttrs toUser;
+  mapSystems = type: mapAttrs (const (toSystem type));
+  mapUsers = mapAttrs (const toUser);
   mapNixOS = mapSystems "nixos";
   mapDarwin = mapSystems "darwin";
 
   systemsSubmodule = type: {
-    freeformType = types.attrsOf types.any;
+    freeformType = types.attrsOf types.anything;
 
     options = {
-      builder = mkOption {
-        type = builderType;
-        default = defaultBuilderFor.${type};
-        example = literalExpression (builderStringFor type);
-        description = ''
-          Function to build this ${type}Configuration with
-        '';
-      };
+      builder = let
+        error = throw "System configuration of type `${type}` is not supported!";
+      in
+        mkOption {
+          type = types.functionTo (types.lazyAttrsOf types.raw);
+          default =
+            {
+              nixos = inputs.nixpkgs.lib.nixosSystem;
+              darwin = inputs.nix-darwin.lib.darwinSystem;
+            }
+            .${type}
+            or error;
+          example = literalExpression (
+            {
+              nixos = "inputs.nixpkgs.lib.nixosSystem";
+              darwin = "inputs.nix-darwin.lib.darwinSystem";
+            }
+            .${type}
+            or error
+          );
+          description = ''
+            Function to build this ${type}Configuration with
+          '';
+        };
 
       system = mkOption {
         type = types.str;
-        default = "x86_64-${kernelFor type}";
-        example = literalExpression "aarch64-${kernelFor type}";
+        default = "x86_64-" + kernelFor.${type};
+        example = literalExpression ("aarch64-" + kernelFor.${type});
         description = ''
           System to build this ${type}Configuration for
         '';
@@ -123,12 +110,12 @@
   };
 
   usersSubmodule = {
-    freeformType = types.attrsOf types.any;
+    freeformType = types.attrsOf types.anything;
 
     options = {
       pkgs = mkOption {
-        type = pkgsType;
-        default = nixpkgs.legacyPackages.x86_64-linux;
+        type = types.lazyAttrsOf types.raw;
+        default = inputs.nixpkgs.legacyPackages.x86_64-linux;
         defaultText = "inputs.nixpkgs.legacyPackages.x86_64-linux";
         example = literalExpression "inputs.nixpkgs.legacyPackages.aarch64-linux";
         description = ''
@@ -144,8 +131,8 @@
       default = {};
       example = literalExpression ''
         {
-          foo = {
-            system = "aarch64-${kernelFor type}";
+          myComputer = {
+            system = "aarch64${kernelFor type}";
           };
         }
       '';
@@ -156,14 +143,6 @@
       '';
     };
 in {
-  # i don't like prefixing so much with `flake`
-  imports = [
-    (mkAliasOptionModule ["nixosModules"] ["flake" "nixosModules"])
-    (mkAliasOptionModule ["darwinModules"] ["flake" "darwinModules"])
-    (mkAliasOptionModule ["homeModules"] ["flake" "homeModules"])
-    (mkAliasOptionModule ["flakeModules"] ["flake" "flakeModules"])
-  ];
-
   options = {
     flake = mkSubmoduleOptions {
       darwinModules = mkOption {
@@ -176,30 +155,32 @@ in {
       };
     };
 
-    nixosConfigurations = mkSystemOptions "nixos";
-    darwinConfigurations = mkSystemOptions "darwin";
+    configurations = {
+      nixos = mkSystemOptions "nixos";
+      darwin = mkSystemOptions "darwin";
 
-    homeConfigurations = mkOption {
-      type = types.attrsOf (types.submodule usersSubmodule);
-      default = {};
-      example = literalExpression ''
-        {
-          john = {
-            pkgs = inputs.nixpkgs.legacyPackages.aarch64-linux;
-          };
-        }
-      '';
-      description = ''
-        Attribute set of `lib.homeManagerConfiguration` arguments. The
-        name of each attribute will be used to import files in the `users/`
-        directory.
-      '';
+      home = mkOption {
+        type = types.attrsOf (types.submodule usersSubmodule);
+        default = {};
+        example = literalExpression ''
+          {
+            john = {
+              pkgs = inputs.nixpkgs.legacyPackages.aarch64-linux;
+            };
+          }
+        '';
+        description = ''
+          Attribute set of `lib.homeManagerConfiguration` arguments. The
+          name of each attribute will be used to import files in the `users/`
+          directory.
+        '';
+      };
     };
   };
 
   config.flake = {
-    nixosConfigurations = mapNixOS config.nixosConfigurations;
-    darwinConfigurations = mapDarwin config.darwinConfigurations;
-    homeConfigurations = mapUsers config.homeConfigurations;
+    nixosConfigurations = mapNixOS config.configurations.nixos;
+    darwinConfigurations = mapDarwin config.configurations.darwin;
+    homeConfigurations = mapUsers config.configurations.home;
   };
 }
