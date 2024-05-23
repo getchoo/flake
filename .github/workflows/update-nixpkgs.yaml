@@ -8,11 +8,8 @@ on:
 
 jobs:
   update:
-    permissions:
-      contents: write
-      pull-requests: write
-
     uses: ./.github/workflows/update-lock.yaml
     with:
       commit-msg: "flake: update nixpkgs"
       inputs: "nixpkgs nixpkgs-stable"
+    secrets: inherit

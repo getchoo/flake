@@ -4,26 +4,28 @@ on:
   workflow_call:
     inputs:
       commit-msg:
-        description: summary for lockfile commit
+        description: "Summary for lockfile commit"
         required: true
         type: string
       inputs:
-        description: flake inputs to update
+        description: "Flake inputs to update"
         required: false
         default: ""
         type: string
+    secrets:
+      MERGE_TOKEN:
+        description: PAT to create and merge PR
+        required: true
 
 jobs:
   update:
     name: Update & make PR
+
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: write
-      pull-requests: write
-
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v11
@@ -35,11 +37,11 @@ jobs:
           commit-msg: ${{ inputs.commit-msg }}
           inputs: ${{ inputs.inputs }}
           pr-title: ${{ inputs.commit-msg }}
-          token: ${{ github.token }}
+          token: ${{ secrets.MERGE_TOKEN }}
 
       - name: Enable auto-merge
         shell: bash
         run: gh pr merge --auto --rebase "$PR_ID"
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.MERGE_TOKEN }}
           PR_ID: ${{ steps.update.outputs.pull-request-number }}

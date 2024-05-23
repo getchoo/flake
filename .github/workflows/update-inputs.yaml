@@ -8,10 +8,7 @@ on:
 
 jobs:
   update:
-    permissions:
-      contents: write
-      pull-requests: write
-
     uses: ./.github/workflows/update-lock.yaml
     with:
       commit-msg: "flake: update all inputs"
+    secrets: inherit
