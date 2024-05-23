@@ -1,34 +1,27 @@
-{self, ...}: {
-  perSystem = {
-    lib,
+{
+  lib,
+  self,
+  withSystem,
+  ...
+}: let
+  ciSystem = "x86_64-linux";
+  derivFromCfg = deriv: deriv.config.system.build.toplevel or deriv.activationPackage;
+  mapCfgsToDerivs = lib.mapAttrs (lib.const derivFromCfg);
+in {
+  flake.hydraJobs = withSystem ciSystem ({
     pkgs,
-    system,
     self',
     ...
   }: {
-    packages = {
-      ciGate = let
-        toTopLevel = cfg: cfg.config.system.build.toplevel or cfg.activationPackage;
-        isCompatible = cfg: cfg.pkgs.system == system;
-
-        configurations =
-          map
-          (type:
-            lib.mapAttrs (lib.const toTopLevel)
-            (lib.filterAttrs (lib.const isCompatible) self.${type}))
-          [
-            "nixosConfigurations"
-            "darwinConfigurations"
-            "homeConfigurations"
-          ];
-
-        required = lib.concatMap lib.attrValues (
-          lib.flatten [self'.checks self'.devShells configurations]
-        );
-      in
-        pkgs.writeText "ci-gate" (
-          lib.concatMapStringsSep "\n" toString required
-        );
-    };
-  };
+    inherit (self') checks;
+    inherit (self') devShells;
+    darwinConfigurations = mapCfgsToDerivs self.darwinConfigurations;
+    homeConfigurations = mapCfgsToDerivs self.homeConfigurations;
+    nixosConfigurations =
+      mapCfgsToDerivs self.nixosConfigurations
+      // {
+        # please add aarch64 runners github...please...
+        atlas = lib.deepSeq (derivFromCfg self.nixosConfigurations.atlas).drvPath pkgs.emptyFile;
+      };
+  });
 }
