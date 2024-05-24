@@ -1,14 +1,7 @@
-{lib, ...}: let
-  fnsFrom = files:
-    builtins.listToAttrs (
-      map (file: {
-        name = lib.removeSuffix ".nix" (baseNameOf file);
-        value = import file lib;
-      })
-      files
-    );
-in {
-  flake.lib = fnsFrom [
-    ./nginx.nix
-  ];
+{lib, ...} @ args: {
+  flake.lib =
+    (lib.extend (final: prev: {
+      my = import ./lib.nix args;
+    }))
+    .my;
 }

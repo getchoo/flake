@@ -14,6 +14,7 @@
   };
 
   nix.settings.trusted-users = ["seth"];
+  nixpkgs.hostPlatform = "x86_64-darwin";
 
   services.tailscale.enable = true;
 

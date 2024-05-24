@@ -3,28 +3,28 @@
   self,
   ...
 }: {
-  configurations = {
-    darwin = {
-      caroline = {
+  flake = {
+    darwinConfigurations = let
+      inherit (self.lib) darwinSystem;
+    in {
+      caroline = darwinSystem {
         modules = [./caroline];
       };
     };
 
-    nixos = let
-      stable = inputs.nixpkgs-stable.lib.nixosSystem;
+    nixosConfigurations = let
+      inherit (self.lib) nixosSystem nixosSystemStable;
     in {
-      glados = {
+      glados = nixosSystem {
         modules = [./glados];
       };
 
-      glados-wsl = {
+      glados-wsl = nixosSystem {
         modules = [./glados-wsl];
       };
 
-      atlas = {
-        builder = stable;
+      atlas = nixosSystemStable {
         modules = [./atlas];
-        system = "aarch64-linux";
       };
     };
   };

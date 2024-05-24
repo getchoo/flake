@@ -1,3 +1,0 @@
-{
-  configurations = import ./configurations.nix;
-}

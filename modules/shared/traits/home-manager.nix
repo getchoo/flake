@@ -2,7 +2,6 @@
   config,
   lib,
   inputs,
-  inputs',
   ...
 }: let
   cfg = config.traits.home-manager;
@@ -15,7 +14,7 @@ in {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = {inherit inputs inputs';};
+      extraSpecialArgs = {inherit inputs;};
     };
   };
 }

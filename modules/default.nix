@@ -1,7 +1,10 @@
-{
+{moduleLocation, ...}: {
   flake = {
-    darwinModules = import ./darwin;
-    flakeModules = import ./flake;
+    darwinModules = builtins.mapAttrs (k: v: {
+      _file = "${toString moduleLocation}#darwinModules.${k}";
+      imports = [v];
+    }) (import ./darwin);
+
     nixosModules = import ./nixos;
   };
 }

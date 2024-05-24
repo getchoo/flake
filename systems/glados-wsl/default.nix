@@ -32,6 +32,8 @@
 
   networking.hostName = "glados-wsl";
 
+  nixpkgs.hostPlatform = "x86_64-linux";
+
   system.stateVersion = "23.11";
 
   traits.tailscale.enable = true;
