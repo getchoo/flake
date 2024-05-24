@@ -6,9 +6,7 @@
     extra-trusted-public-keys = ["getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="];
   };
 
-  outputs = inputs: let
-    flakeModules = import ./modules/flake;
-  in
+  outputs = inputs:
     inputs.flake-parts.lib.mkFlake {inherit inputs;} {
       systems = [
         "x86_64-linux"
@@ -29,9 +27,6 @@
 
         # external, not so nix-y things
         ./ext
-
-        # dogfood some modules
-        flakeModules.configurations
       ];
     };
 

@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  inputs',
+  inputs,
   ...
 }: let
   cfg = config.desktop.plasma;
@@ -23,9 +23,9 @@ in {
           NIXOS_OZONE_WL = "1";
         };
 
-        systemPackages = with pkgs; [
-          haruna
-          inputs'.krunner-nix.packages.default
+        systemPackages = [
+          pkgs.haruna
+          inputs.krunner-nix.packages.${pkgs.system}.default
         ];
       };
 

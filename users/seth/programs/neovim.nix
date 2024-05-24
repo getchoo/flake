@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  inputs',
+  inputs,
   ...
 }: let
   cfg = config.seth.programs.neovim;
@@ -14,7 +14,7 @@ in {
   config = lib.mkIf cfg.enable {
     home.packages = [
       (let
-        getchvim = inputs'.getchvim.packages.default;
+        getchvim = inputs.getchvim.packages.${pkgs.system}.default;
       in
         # remove desktop file
         pkgs.symlinkJoin {

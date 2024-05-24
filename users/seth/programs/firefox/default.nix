@@ -1,7 +1,8 @@
 {
   config,
   lib,
-  inputs',
+  pkgs,
+  inputs,
   ...
 }: let
   cfg = config.seth.programs.firefox;
@@ -26,7 +27,7 @@ in {
     programs.firefox = {
       enable = true;
       profiles.arkenfox = {
-        extensions = with inputs'.firefox-addons.packages; [
+        extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
           bitwarden
           floccus
           ublock-origin

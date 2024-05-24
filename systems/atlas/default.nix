@@ -32,5 +32,7 @@
     hostName = "atlas";
   };
 
+  nixpkgs.hostPlatform = "aarch64-linux";
+
   system.stateVersion = "23.05";
 }
