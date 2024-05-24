@@ -22,12 +22,18 @@
         ./systems
         ./users
 
-        # development related outputs
-        ./parts
+        # dev outputs
+        ./checks.nix
+        ./devShells.nix
+        ./hydraJobs.nix
 
         # external, not so nix-y things
         ./ext
       ];
+
+      perSystem = {pkgs, ...}: {
+        formatter = pkgs.alejandra;
+      };
     };
 
   inputs = {
