@@ -5,7 +5,7 @@
   ...
 }: let
   cfg = config.seth.shell.nushell;
-  theme = "catppuccin-${config.catppuccin.flavour}";
+  theme = "catppuccin-${config.catppuccin.flavor}";
 in {
   options.seth.shell.nushell = {
     enable = lib.mkEnableOption "Nushell configuration";
