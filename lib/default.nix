@@ -1,7 +1,7 @@
 {lib, ...} @ args: {
   flake.lib =
-    (lib.extend (final: prev: {
-      my = import ./lib.nix args;
+    (lib.extend (final: _: {
+      my = import ./lib.nix (args // {lib = final;});
     }))
     .my;
 }
