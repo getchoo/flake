@@ -7,8 +7,11 @@
     checks = {
       inherit
         (inputs.flake-checks.lib.mkChecks {
-          root = ../.;
           inherit pkgs;
+          root = lib.fileset.toSource {
+            root = ./.;
+            fileset = lib.fileset.gitTracked ./.;
+          };
         })
         actionlint
         alejandra
