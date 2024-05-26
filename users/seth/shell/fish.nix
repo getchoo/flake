@@ -7,7 +7,7 @@
   cfg = config.seth.shell.fish;
 in {
   options.seth.shell.fish = {
-    enable = lib.mkEnableOption "Fish configuration" // {default = config.seth.enable;};
+    enable = lib.mkEnableOption "Fish configuration";
     withPlugins = lib.mkEnableOption "Fish plugins" // {default = true;};
   };
 

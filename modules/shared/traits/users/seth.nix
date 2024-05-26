@@ -18,7 +18,10 @@ in {
 
       home-manager.users.seth = {
         imports = [../../../../users/seth];
-        seth.enable = true;
+        seth = {
+          enable = true;
+          shell.fish.enable = true;
+        };
       };
     })
 
