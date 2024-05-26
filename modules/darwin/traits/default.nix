@@ -1,6 +1,6 @@
 {
   imports = [
     ./home-manager.nix
-    ./users.nix
+    ./users
   ];
 }
