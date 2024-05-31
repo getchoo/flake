@@ -4,7 +4,7 @@
   osConfig,
   ...
 }: let
-  enable = osConfig.services.xserver.desktopManager.plasma6.enable or false;
+  enable = osConfig.services.desktopManager.plasma6.enable or false;
 in {
   config = lib.mkIf enable {
     home.packages = with pkgs; [
