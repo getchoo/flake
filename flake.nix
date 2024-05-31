@@ -125,11 +125,6 @@
       };
     };
 
-    nu-scripts = {
-      url = "github:nushell/nu_scripts";
-      flake = false;
-    };
-
     openwrt-imagebuilder = {
       url = "github:astro/nix-openwrt-imagebuilder";
       inputs.nixpkgs.follows = "nixpkgs";

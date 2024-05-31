@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  inputs,
+  pkgs,
   ...
 }: let
   cfg = config.seth.shell.nushell;
@@ -23,7 +23,7 @@ in {
         '';
 
         envFile.text = ''
-          use ${inputs.nu-scripts}/themes/nu-themes/${theme}.nu
+          use ${pkgs.nu_scripts}/share/nu_scripts/themes/nu-themes/${theme}.nu
           $env.config.color_config = (${theme})
         '';
 
