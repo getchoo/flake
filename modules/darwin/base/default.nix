@@ -1,7 +1,8 @@
 {
   imports = [
     ../../shared
-    ./nix.nix
     ./programs.nix
   ];
+
+  services.nix-daemon.enable = true;
 }

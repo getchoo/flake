@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }: let
   cfg = config.base.nixSettings;
@@ -14,12 +13,6 @@ in {
 
   config = lib.mkIf enable {
     nix = {
-      registry.n.flake = lib.mkDefault inputs.nixpkgs;
-
-      nixPath = [
-        "nixpkgs=/etc/nix/inputs/nixpkgs"
-      ];
-
       settings = {
         auto-optimise-store = pkgs.stdenv.isLinux;
         experimental-features = ["nix-command" "flakes" "auto-allocate-uids" "repl-flake"];
