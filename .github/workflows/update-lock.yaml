@@ -41,6 +41,7 @@ jobs:
 
       - name: Enable auto-merge
         shell: bash
+        if: steps.update.outputs.pull-request-number != ''
         run: gh pr merge --auto --rebase "$PR_ID"
         env:
           GH_TOKEN: ${{ secrets.MERGE_TOKEN }}
