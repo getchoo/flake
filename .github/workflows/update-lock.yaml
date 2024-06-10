@@ -31,7 +31,7 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@v11
 
       - name: Update lockfile & make PR
-        uses: DeterminateSystems/update-flake-lock@v21
+        uses: DeterminateSystems/update-flake-lock@v22
         id: update
         with:
           commit-msg: ${{ inputs.commit-msg }}
