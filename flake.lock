@@ -89,28 +89,6 @@
         "type": "github"
       }
     },
-    "fenix": {
-      "inputs": {
-        "nixpkgs": [
-          "teawiebot",
-          "nixpkgs"
-        ],
-        "rust-analyzer-src": "rust-analyzer-src"
-      },
-      "locked": {
-        "lastModified": 1717136818,
-        "narHash": "sha256-BKFOT/eg0mCf99oTKa63yW+d5Y3K6c5Gb+NetxacaHg=",
-        "owner": "nix-community",
-        "repo": "fenix",
-        "rev": "14c3b99d4b7cb91343807eac77f005ed9218f742",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "fenix",
-        "type": "github"
-      }
-    },
     "firefox-addons": {
       "inputs": {
         "flake-utils": [
@@ -138,21 +116,6 @@
       }
     },
     "flake-checks": {
-      "locked": {
-        "lastModified": 1716193450,
-        "narHash": "sha256-wIbyIQRoLAfGe2v8W7LM6zEZ9Oy0jKuUX0HMUCLQJsM=",
-        "owner": "getchoo",
-        "repo": "flake-checks",
-        "rev": "842c3f225677aa55e44b94342f19c8f3e6f2be06",
-        "type": "github"
-      },
-      "original": {
-        "owner": "getchoo",
-        "repo": "flake-checks",
-        "type": "github"
-      }
-    },
-    "flake-checks_2": {
       "locked": {
         "lastModified": 1716193450,
         "narHash": "sha256-wIbyIQRoLAfGe2v8W7LM6zEZ9Oy0jKuUX0HMUCLQJsM=",
@@ -207,7 +170,7 @@
     },
     "getchvim": {
       "inputs": {
-        "flake-checks": "flake-checks_2",
+        "flake-checks": [],
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -411,6 +374,28 @@
         "type": "github"
       }
     },
+    "nixpkgs-tracker-bot": {
+      "inputs": {
+        "fenix": [],
+        "flake-checks": [],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1718536513,
+        "narHash": "sha256-+pdLDgH/WlG5VHqFOeicqnpsPf9uwp+EMkOB5nDOzZQ=",
+        "owner": "getchoo",
+        "repo": "nixpkgs-tracker-bot",
+        "rev": "d25129d829e0ebd70b4e60e399fe91c0d80aa1ad",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getchoo",
+        "repo": "nixpkgs-tracker-bot",
+        "type": "github"
+      }
+    },
     "openwrt-imagebuilder": {
       "inputs": {
         "nixpkgs": [
@@ -449,26 +434,10 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
+        "nixpkgs-tracker-bot": "nixpkgs-tracker-bot",
         "openwrt-imagebuilder": "openwrt-imagebuilder",
         "teawiebot": "teawiebot",
         "terranix": "terranix"
-      }
-    },
-    "rust-analyzer-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1716828004,
-        "narHash": "sha256-mUZtVS2S+leFcMpBgbqkMnZm4II1qBM21pW8UnivVSo=",
-        "owner": "rust-lang",
-        "repo": "rust-analyzer",
-        "rev": "b32f181f477576bb203879f7539608f3327b6178",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rust-lang",
-        "ref": "nightly",
-        "repo": "rust-analyzer",
-        "type": "github"
       }
     },
     "rust-overlay": {
@@ -513,7 +482,7 @@
     },
     "teawiebot": {
       "inputs": {
-        "fenix": "fenix",
+        "fenix": [],
         "nixpkgs": [
           "nixpkgs"
         ]

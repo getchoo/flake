@@ -83,7 +83,10 @@
 
     getchvim = {
       url = "github:getchoo/getchvim";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-checks.follows = "";
+      };
     };
 
     home-manager = {
@@ -125,6 +128,15 @@
       };
     };
 
+    nixpkgs-tracker-bot = {
+      url = "github:getchoo/nixpkgs-tracker-bot";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        fenix.follows = "";
+        flake-checks.follows = "";
+      };
+    };
+
     openwrt-imagebuilder = {
       url = "github:astro/nix-openwrt-imagebuilder";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -132,7 +144,10 @@
 
     teawiebot = {
       url = "github:getchoo/teawiebot";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        fenix.follows = "";
+      };
     };
 
     terranix = {

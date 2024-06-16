@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     ./miniflux.nix
     ./nginx.nix
+    ./nixpkgs-tracker-bot.nix
     ./teawiebot.nix
   ];
 

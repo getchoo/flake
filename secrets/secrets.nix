@@ -26,6 +26,7 @@ let
       files = [
         "userPassword.age"
         "miniflux.age"
+        "nixpkgs-tracker-bot.age"
         "tailscaleAuthKey.age"
         "cloudflaredCreds.age"
         "teawieBot.age"
