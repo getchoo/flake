@@ -12,9 +12,8 @@ in {
   };
 
   config = lib.mkIf enable {
-    fonts.fonts = with pkgs;
-      lib.mkDefault [
-        (nerdfonts.override {fonts = ["FiraCode"];})
-      ];
+    fonts.packages = [
+      (pkgs.nerdfonts.override {fonts = ["FiraCode"];})
+    ];
   };
 }
