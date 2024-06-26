@@ -19,7 +19,7 @@ in {
       services.xserver.videoDrivers = ["nvidia"];
 
       hardware = {
-        opengl.extraPackages = [pkgs.vaapiVdpau];
+        graphics.extraPackages = [pkgs.vaapiVdpau];
         nvidia = {
           package = lib.mkDefault config.boot.kernelPackages.nvidiaPackages.latest;
           modesetting.enable = true;
@@ -39,7 +39,7 @@ in {
             MESA_VK_VERSION_OVERRIDE = "1.3";
           };
 
-          hardware.opengl.extraPackages = lib.mkForce [];
+          hardware.graphics.extraPackages = lib.mkForce [];
 
           services.xserver.videoDrivers = lib.mkForce ["modesetting"];
 
