@@ -170,17 +170,16 @@
     },
     "getchvim": {
       "inputs": {
-        "flake-checks": [],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1719018304,
-        "narHash": "sha256-59Yx6f0+BBAt8tfeDUOJTmetOezoBZ1nMXR2tbsAzrE=",
+        "lastModified": 1719757008,
+        "narHash": "sha256-G3mu0E/xl+fdyrUWT5k68JLFGD6nWfNExOm8DWmLke8=",
         "owner": "getchoo",
         "repo": "getchvim",
-        "rev": "e27749f43ad3423ece65ade536a1dfd00a10c9e5",
+        "rev": "4de3b4a1bc88e8fcf676dcd065bab867b32f9d29",
         "type": "github"
       },
       "original": {

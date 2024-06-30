@@ -83,10 +83,7 @@
 
     getchvim = {
       url = "github:getchoo/getchvim";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-checks.follows = "";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
