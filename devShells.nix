@@ -12,7 +12,7 @@
         default = pkgs.mkShellNoCC {
           packages =
             [
-              pkgs.nix
+              pkgs.lix
 
               # format + lint
               pkgs.actionlint
