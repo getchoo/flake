@@ -29,6 +29,9 @@ jobs:
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v12
+        with:
+          diagnostic-endpoint: ""
+          source-url: "https://install.lix.systems/lix"
 
       - name: Update lockfile & make PR
         uses: DeterminateSystems/update-flake-lock@v22
