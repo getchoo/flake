@@ -1,16 +1,15 @@
 { config, lib, ... }:
 let
   cfg = config.desktop.audio;
-  enable = config.desktop.enable && cfg.enable;
 in
 {
   options.desktop.audio = {
     enable = lib.mkEnableOption "desktop audio configuration" // {
-      default = true;
+      default = config.desktop.enable;
     };
   };
 
-  config = lib.mkIf enable {
+  config = lib.mkIf cfg.enable {
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
 
