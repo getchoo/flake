@@ -10,7 +10,6 @@ in
   config = lib.mkIf cfg.enable {
     base = {
       enable = true;
-      documentation.enable = false;
       defaultPrograms.enable = false;
     };
 
