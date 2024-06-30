@@ -23,10 +23,7 @@ in
 
     boot.tmp.cleanOnBoot = lib.mkDefault true;
 
-    documentation = {
-      enable = false;
-      man.enable = false;
-    };
+    documentation.enable = false;
 
     environment.defaultPackages = lib.mkForce [ ];
 

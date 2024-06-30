@@ -11,6 +11,7 @@ in
     base = {
       enable = true;
       defaultPrograms.enable = false;
+      nixSettings.lix.enable = false;
     };
 
     server = {

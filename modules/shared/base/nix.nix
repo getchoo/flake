@@ -12,10 +12,16 @@ in
     enable = lib.mkEnableOption "nix settings" // {
       default = config.base.enable;
     };
+
+    lix.enable = lib.mkEnableOption "the use of Lix over Nix" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
     nix = {
+      package = lib.mkIf cfg.lix.enable pkgs.lix;
+
       settings = {
         auto-optimise-store = pkgs.stdenv.isLinux;
         experimental-features = [
