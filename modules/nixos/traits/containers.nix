@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  options,
   pkgs,
   ...
 }:
@@ -20,7 +19,7 @@ in
         virtualisation = {
           podman = {
             enable = true;
-            extraPackages = with pkgs; [ podman-compose ];
+            extraPackages = [ pkgs.podman-compose ];
             autoPrune.enable = true;
           };
 
