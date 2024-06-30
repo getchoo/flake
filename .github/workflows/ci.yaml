@@ -34,7 +34,7 @@ jobs:
         uses: DeterminateSystems/nix-installer-action@v12
         with:
           diagnostic-endpoint: ""
-          source-url: "https://install.lix.systems/lix"
+          source-url: https://install.lix.systems/lix/lix-installer-${{ matrix.system }}
 
       - name: Setup Cachix
         uses: cachix/cachix-action@v15
