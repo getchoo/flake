@@ -1,16 +1,15 @@
 { config, lib, ... }:
 let
   cfg = config.desktop.homebrew;
-  enable = config.desktop.enable && cfg.enable;
 in
 {
   options.desktop.homebrew = {
     enable = lib.mkEnableOption "Homebrew integration" // {
-      default = true;
+      default = config.desktop.enable;
     };
   };
 
-  config = lib.mkIf enable {
+  config = lib.mkIf cfg.enable {
     homebrew = {
       enable = true;
 
