@@ -1,10 +1,9 @@
 { config, lib, ... }:
 let
   cfg = config.base.defaultPrograms;
-  enable = config.base.enable && cfg.enable;
 in
 {
-  config = lib.mkIf enable {
+  config = lib.mkIf cfg.enable {
     programs = {
       bash.enable = true;
       vim.enable = true;

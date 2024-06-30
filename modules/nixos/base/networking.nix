@@ -1,16 +1,15 @@
 { config, lib, ... }:
 let
   cfg = config.base.networking;
-  enable = config.base.enable && cfg.enable;
 in
 {
   options.base.networking = {
     enable = lib.mkEnableOption "base network settings" // {
-      default = true;
+      default = config.base.enable;
     };
   };
 
-  config = lib.mkIf enable {
+  config = lib.mkIf cfg.enable {
     networking.networkmanager = {
       enable = lib.mkDefault true;
       dns = "systemd-resolved";

@@ -14,7 +14,6 @@ in
   };
 
   imports = [
-    ./documentation.nix
     ./nix.nix
     ./programs.nix
   ];

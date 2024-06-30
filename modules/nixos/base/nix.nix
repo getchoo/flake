@@ -7,7 +7,6 @@ in
   config = lib.mkIf enable {
     nix = {
       channel.enable = lib.mkDefault false;
-      gc.dates = lib.mkDefault "weekly";
       settings.trusted-users = [
         "root"
         "@wheel"

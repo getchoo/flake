@@ -1,8 +1,12 @@
+{ config, lib, ... }:
+let
+  cfg = config.base;
+in
 {
   imports = [
     ../../shared
     ./programs.nix
   ];
 
-  services.nix-daemon.enable = true;
+  config = lib.mkIf cfg.enable { services.nix-daemon.enable = true; };
 }
