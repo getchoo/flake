@@ -2,7 +2,6 @@
   lib,
   self,
   inputs,
-  ...
 }:
 let
   # function -> function -> { } -> { }
