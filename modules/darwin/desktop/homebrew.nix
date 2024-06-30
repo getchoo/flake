@@ -1,13 +1,13 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.desktop.homebrew;
   enable = config.desktop.enable && cfg.enable;
-in {
+in
+{
   options.desktop.homebrew = {
-    enable = lib.mkEnableOption "Homebrew integration" // {default = true;};
+    enable = lib.mkEnableOption "Homebrew integration" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf enable {

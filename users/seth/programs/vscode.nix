@@ -3,15 +3,15 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.seth.programs.vscode;
-in {
+in
+{
   options.seth.programs.vscode = {
-    enable =
-      lib.mkEnableOption "VSCode configuration"
-      // {
-        default = config.seth.desktop.enable;
-      };
+    enable = lib.mkEnableOption "VSCode configuration" // {
+      default = config.seth.desktop.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable {

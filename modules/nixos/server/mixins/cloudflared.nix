@@ -3,10 +3,12 @@
   lib,
   secretsDir,
   ...
-}: let
+}:
+let
   cfg = config.server.mixins.cloudflared;
   inherit (config.services) nginx;
-in {
+in
+{
   options.server.mixins.cloudflared = {
     enable = lib.mkEnableOption "cloudflared mixin";
     tunnelName = lib.mkOption {
@@ -18,11 +20,9 @@ in {
       '';
     };
 
-    manageSecrets =
-      lib.mkEnableOption "automatic secrets management"
-      // {
-        default = config.traits.secrets.enable;
-      };
+    manageSecrets = lib.mkEnableOption "automatic secrets management" // {
+      default = config.traits.secrets.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable (
@@ -33,7 +33,9 @@ in {
           tunnels.${cfg.tunnelName} = {
             default = "http_status:404";
 
-            ingress = lib.mapAttrs (_: _: {service = "http://localhost:${toString nginx.defaultHTTPListenPort}";}) nginx.virtualHosts;
+            ingress = lib.mapAttrs (_: _: {
+              service = "http://localhost:${toString nginx.defaultHTTPListenPort}";
+            }) nginx.virtualHosts;
           };
         };
       }

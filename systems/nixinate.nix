@@ -1,9 +1,8 @@
+{ inputs, self, ... }:
 {
-  inputs,
-  self,
-  ...
-}: {
-  perSystem = {system, ...}: {
-    apps = (inputs.nixinate.nixinate.${system} self).nixinate;
-  };
+  perSystem =
+    { system, ... }:
+    {
+      apps = (inputs.nixinate.nixinate.${system} self).nixinate;
+    };
 }

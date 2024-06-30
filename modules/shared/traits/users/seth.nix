@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.traits.users.seth;
-in {
+in
+{
   options.traits.users.seth = {
     enable = lib.mkEnableOption "Seth's user & home configurations";
   };
@@ -17,7 +19,7 @@ in {
       programs.fish.enable = true;
 
       home-manager.users.seth = {
-        imports = [../../../../users/seth];
+        imports = [ ../../../../users/seth ];
         seth = {
           enable = true;
           shell.fish.enable = true;
@@ -33,7 +35,7 @@ in {
 
     (lib.mkIf (cfg.enable && pkgs.stdenv.isLinux) {
       users.users.seth = {
-        extraGroups = ["wheel"];
+        extraGroups = [ "wheel" ];
         isNormalUser = true;
       };
     })

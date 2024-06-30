@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.archetypes.personal;
-in {
+in
+{
   options.archetypes = {
     personal.enable = lib.mkEnableOption "personal archetype";
   };

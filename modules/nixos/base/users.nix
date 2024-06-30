@@ -4,19 +4,23 @@
   pkgs,
   secretsDir,
   ...
-}: let
+}:
+let
   cfg = config.base.users;
-in {
+in
+{
   options.base.users = {
-    enable = lib.mkEnableOption "base user configurations" // {default = true;};
+    enable = lib.mkEnableOption "base user configurations" // {
+      default = true;
+    };
 
     defaultRoot = {
-      enable = lib.mkEnableOption "default root user configuration" // {default = false;};
-      manageSecrets =
-        lib.mkEnableOption "automatic secrets management"
-        // {
-          default = config.traits.secrets.enable;
-        };
+      enable = lib.mkEnableOption "default root user configuration" // {
+        default = false;
+      };
+      manageSecrets = lib.mkEnableOption "automatic secrets management" // {
+        default = config.traits.secrets.enable;
+      };
     };
   };
 

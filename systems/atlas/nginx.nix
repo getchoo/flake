@@ -1,10 +1,8 @@
-{
-  config,
-  inputs,
-  ...
-}: let
+{ config, inputs, ... }:
+let
   inherit (inputs.self.lib.nginx) mkProxy toVHosts;
-in {
+in
+{
   services.nginx = {
     virtualHosts = toVHosts config.networking.domain {
       miniflux = {

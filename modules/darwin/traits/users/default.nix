@@ -1,5 +1,1 @@
-{
-  imports = [
-    ./seth.nix
-  ];
-}
+{ imports = [ ./seth.nix ]; }

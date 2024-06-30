@@ -3,9 +3,11 @@
   pkgs,
   osConfig,
   ...
-}: let
+}:
+let
   enable = osConfig.services.xserver.desktopManager.gnome.enable or false;
-in {
+in
+{
   config = lib.mkIf enable {
     home = {
       packages = with pkgs; [
@@ -28,9 +30,7 @@ in {
         "org/gnome/shell" = {
           disable-user-extensions = false;
 
-          enabled-extensions = [
-            "caffeine@patapon.info"
-          ];
+          enabled-extensions = [ "caffeine@patapon.info" ];
 
           favorite-apps = [
             "chromium-browser.desktop"

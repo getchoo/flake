@@ -1,15 +1,16 @@
-{lib, ...}: let
-  getGitHubRepo = {
-    owner,
-    repo_name,
-  }: {
-    type = "github";
-    config = {
-      inherit owner repo_name;
-      production_branch = "main";
+{ lib, ... }:
+let
+  getGitHubRepo =
+    { owner, repo_name }:
+    {
+      type = "github";
+      config = {
+        inherit owner repo_name;
+        production_branch = "main";
+      };
     };
-  };
-in {
+in
+{
   resource.cloudflare_pages_project = {
     personal_website = {
       account_id = lib.tfRef "var.account_id";
@@ -27,14 +28,16 @@ in {
         destination_dir = "/dist";
       };
 
-      deployment_configs = let
-        environment_variables = {
-          MINIFLUX_URL = "https://miniflux.getchoo.com";
+      deployment_configs =
+        let
+          environment_variables = {
+            MINIFLUX_URL = "https://miniflux.getchoo.com";
+          };
+        in
+        {
+          production = [ { inherit environment_variables; } ];
+          preview = [ { inherit environment_variables; } ];
         };
-      in {
-        production = [{inherit environment_variables;}];
-        preview = [{inherit environment_variables;}];
-      };
     };
 
     teawie_api = {

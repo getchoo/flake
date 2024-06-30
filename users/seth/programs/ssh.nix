@@ -3,11 +3,15 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.seth.programs.ssh;
-in {
+in
+{
   options.seth.programs.ssh = {
-    enable = lib.mkEnableOption "SSH configuration" // {default = config.seth.enable;};
+    enable = lib.mkEnableOption "SSH configuration" // {
+      default = config.seth.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -15,35 +19,37 @@ in {
       enable = true;
       package = pkgs.openssh;
 
-      matchBlocks = let
-        sshDir = "${config.home.homeDirectory}/.ssh";
-      in {
-        # git forges
-        "codeberg.org" = {
-          identityFile = "${sshDir}/codeberg";
-          user = "git";
-        };
+      matchBlocks =
+        let
+          sshDir = "${config.home.homeDirectory}/.ssh";
+        in
+        {
+          # git forges
+          "codeberg.org" = {
+            identityFile = "${sshDir}/codeberg";
+            user = "git";
+          };
 
-        # linux packaging
-        "aur.archlinux.org" = {
-          identityFile = "${sshDir}/aur";
-          user = "aur";
-        };
+          # linux packaging
+          "aur.archlinux.org" = {
+            identityFile = "${sshDir}/aur";
+            user = "aur";
+          };
 
-        "pagure.io" = {
-          identityFile = "${sshDir}/copr";
-          user = "git";
-        };
+          "pagure.io" = {
+            identityFile = "${sshDir}/copr";
+            user = "git";
+          };
 
-        # router
-        "192.168.1.1" = {
-          identityFile = "${sshDir}/openwrt";
-          user = "root";
-        };
+          # router
+          "192.168.1.1" = {
+            identityFile = "${sshDir}/openwrt";
+            user = "root";
+          };
 
-        # servers
-        "atlas".user = "atlas";
-      };
+          # servers
+          "atlas".user = "atlas";
+        };
     };
 
     services.ssh-agent.enable = pkgs.stdenv.isLinux;

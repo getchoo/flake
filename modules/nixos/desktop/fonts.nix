@@ -3,12 +3,16 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.desktop.fonts;
   enable = config.desktop.enable && cfg.enable;
-in {
+in
+{
   options.desktop.fonts = {
-    enable = lib.mkEnableOption "desktop fonts" // {default = true;};
+    enable = lib.mkEnableOption "desktop fonts" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf enable {
@@ -16,7 +20,13 @@ in {
       enableDefaultPackages = true;
 
       packages = with pkgs; [
-        (nerdfonts.override {fonts = ["FiraCode" "Hack" "Noto"];})
+        (nerdfonts.override {
+          fonts = [
+            "FiraCode"
+            "Hack"
+            "Noto"
+          ];
+        })
         noto-fonts
         noto-fonts-extra
         noto-fonts-color-emoji
@@ -27,10 +37,10 @@ in {
         enable = true;
         cache32Bit = lib.mkDefault true;
         defaultFonts = lib.mkDefault {
-          serif = ["Noto Serif"];
-          sansSerif = ["Noto Sans"];
-          emoji = ["Noto Color Emoji"];
-          monospace = ["Noto Sans Mono"];
+          serif = [ "Noto Serif" ];
+          sansSerif = [ "Noto Sans" ];
+          emoji = [ "Noto Color Emoji" ];
+          monospace = [ "Noto Sans Mono" ];
         };
       };
     };

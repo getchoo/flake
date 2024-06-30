@@ -4,11 +4,15 @@
   pkgs,
   osConfig,
   ...
-}: let
+}:
+let
   cfg = config.seth.programs.gpg;
-in {
+in
+{
   options.seth.programs.gpg = {
-    enable = lib.mkEnableOption "GnuPG configuration" // {default = config.seth.enable;};
+    enable = lib.mkEnableOption "GnuPG configuration" // {
+      default = config.seth.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable {

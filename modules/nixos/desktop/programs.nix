@@ -3,18 +3,25 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.desktop.defaultPrograms;
   enable = config.desktop.enable && cfg.enable;
-in {
+in
+{
   options.desktop.defaultPrograms = {
-    enable = lib.mkEnableOption "default desktop programs" // {default = true;};
+    enable = lib.mkEnableOption "default desktop programs" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf enable {
     environment = {
       noXlibs = lib.mkForce false;
-      systemPackages = with pkgs; [wl-clipboard xclip];
+      systemPackages = with pkgs; [
+        wl-clipboard
+        xclip
+      ];
     };
 
     programs = {

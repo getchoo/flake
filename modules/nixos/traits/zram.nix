@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.traits.zram;
-in {
+in
+{
   options.traits.zram = {
     enable = lib.mkEnableOption "zram setup & configuration";
   };

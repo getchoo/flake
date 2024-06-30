@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.desktop;
-in {
+in
+{
   options.desktop = {
     enable = lib.mkEnableOption "desktop settings";
   };
@@ -19,7 +17,5 @@ in {
     ./plasma
   ];
 
-  config = lib.mkIf cfg.enable {
-    services.xserver.enable = true;
-  };
+  config = lib.mkIf cfg.enable { services.xserver.enable = true; };
 }

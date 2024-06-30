@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   resource.cloudflare_ruleset = {
     getchoo_com_redirects = {
       kind = "zone";

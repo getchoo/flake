@@ -1,17 +1,15 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.server.mixins.promtail;
   inherit (lib) types;
-in {
+in
+{
   options.server.mixins.promtail = {
     enable = lib.mkEnableOption "Promtail mixin";
 
     clients = lib.mkOption {
       type = types.listOf types.attrs;
-      default = [{}];
+      default = [ { } ];
       description = "Clients for promtail";
     };
   };
@@ -37,7 +35,7 @@ in {
 
             relabel_configs = [
               {
-                source_labels = ["__journal__systemd_unit"];
+                source_labels = [ "__journal__systemd_unit" ];
                 target_label = "unit";
               }
             ];

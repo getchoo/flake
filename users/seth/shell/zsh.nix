@@ -3,12 +3,16 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.seth.shell.zsh;
-in {
+in
+{
   options.seth.shell.zsh = {
     enable = lib.mkEnableOption "Zsh configuration";
-    withPlugins = lib.mkEnableOption "Zsh plugins" // {default = true;};
+    withPlugins = lib.mkEnableOption "Zsh plugins" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {

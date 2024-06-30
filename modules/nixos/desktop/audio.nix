@@ -1,13 +1,13 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.desktop.audio;
   enable = config.desktop.enable && cfg.enable;
-in {
+in
+{
   options.desktop.audio = {
-    enable = lib.mkEnableOption "desktop audio configuration" // {default = true;};
+    enable = lib.mkEnableOption "desktop audio configuration" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf enable {

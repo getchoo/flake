@@ -4,15 +4,15 @@
   pkgs,
   osConfig,
   ...
-}: let
+}:
+let
   cfg = config.seth.desktop;
-in {
+in
+{
   options.seth.desktop = {
-    enable =
-      lib.mkEnableOption "desktop"
-      // {
-        default = osConfig.desktop.enable or false;
-      };
+    enable = lib.mkEnableOption "desktop" // {
+      default = osConfig.desktop.enable or false;
+    };
   };
 
   imports = [
@@ -35,19 +35,19 @@ in {
             "--enable-features=UseSkiaRenderer,WaylandWindowDecorations"
           ];
         in
-          if pkgs.stdenv.isLinux
-          then
-            discord.overrideAttrs (old: {
-              desktopItem = old.desktopItem.override (old': {
-                exec = "${old'.exec} ${flags}";
-              });
-            })
-          else discord
+        if pkgs.stdenv.isLinux then
+          discord.overrideAttrs (old: {
+            desktopItem = old.desktopItem.override (old': {
+              exec = "${old'.exec} ${flags}";
+            });
+          })
+        else
+          discord
       )
 
       pkgs.element-desktop
       pkgs.spotify
-      (pkgs.prismlauncher.override {withWaylandGLFW = true;})
+      (pkgs.prismlauncher.override { withWaylandGLFW = true; })
     ];
   };
 }

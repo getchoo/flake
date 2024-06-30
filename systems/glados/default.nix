@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   imports = [
     ./boot.nix
     ./hardware-configuration.nix
@@ -11,7 +12,7 @@
     plasma.enable = true;
   };
 
-  environment.systemPackages = [pkgs.obs-studio];
+  environment.systemPackages = [ pkgs.obs-studio ];
 
   networking.hostName = "glados";
 

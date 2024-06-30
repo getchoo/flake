@@ -3,10 +3,12 @@
   lib,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.base;
   inherit (inputs) self;
-in {
+in
+{
   options.base = {
     enable = lib.mkEnableOption "basic configurations";
   };

@@ -4,15 +4,15 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.seth.programs;
-in {
+in
+{
   options.seth.programs = {
-    basePrograms.enable =
-      lib.mkEnableOption "base programs and configurations"
-      // {
-        default = config.seth.enable;
-      };
+    basePrograms.enable = lib.mkEnableOption "base programs and configurations" // {
+      default = config.seth.enable;
+    };
   };
 
   imports = with inputs; [

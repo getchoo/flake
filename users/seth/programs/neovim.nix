@@ -4,26 +4,32 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.seth.programs.neovim;
-in {
+in
+{
   options.seth.programs.neovim = {
-    enable = lib.mkEnableOption "Neovim configuration" // {default = config.seth.enable;};
+    enable = lib.mkEnableOption "Neovim configuration" // {
+      default = config.seth.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable {
     home.packages = [
-      (let
-        getchvim = inputs.getchvim.packages.${pkgs.system}.default;
-      in
+      (
+        let
+          getchvim = inputs.getchvim.packages.${pkgs.system}.default;
+        in
         # remove desktop file
         pkgs.symlinkJoin {
           name = "${getchvim.name}-nodesktop";
-          paths = [getchvim];
+          paths = [ getchvim ];
           postBuild = ''
             rm -rf $out/share/{applications,icons}
           '';
-        })
+        }
+      )
     ];
   };
 }

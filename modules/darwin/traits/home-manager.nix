@@ -1,3 +1,4 @@
-{inputs, ...}: {
-  imports = [inputs.home-manager.darwinModules.home-manager];
+{ inputs, ... }:
+{
+  imports = [ inputs.home-manager.darwinModules.home-manager ];
 }

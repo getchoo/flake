@@ -1,13 +1,13 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.base.security;
   enable = config.base.enable && cfg.enable;
-in {
+in
+{
   options.base.security = {
-    enable = lib.mkEnableOption "base security settings" // {default = true;};
+    enable = lib.mkEnableOption "base security settings" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf enable {

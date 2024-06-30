@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.traits.users.seth;
-in {
+in
+{
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       home-manager.users.seth = {

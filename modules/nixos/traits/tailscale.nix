@@ -3,24 +3,24 @@
   lib,
   secretsDir,
   ...
-}: let
+}:
+let
   cfg = config.traits.tailscale;
-in {
+in
+{
   options.traits.tailscale = {
     enable = lib.mkEnableOption "Tailscale";
     ssh.enable = lib.mkEnableOption "Tailscale SSH";
-    manageSecrets =
-      lib.mkEnableOption "automatic secrets management"
-      // {
-        default = config.traits.secrets.enable && cfg.ssh.enable;
-      };
+    manageSecrets = lib.mkEnableOption "automatic secrets management" // {
+      default = config.traits.secrets.enable && cfg.ssh.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
       {
         networking.firewall = {
-          trustedInterfaces = [config.services.tailscale.interfaceName];
+          trustedInterfaces = [ config.services.tailscale.interfaceName ];
         };
 
         services.tailscale = {
@@ -31,11 +31,11 @@ in {
 
       (lib.mkIf cfg.ssh.enable {
         networking.firewall = {
-          allowedTCPPorts = [22];
+          allowedTCPPorts = [ 22 ];
         };
 
         services.tailscale = {
-          extraUpFlags = ["--ssh"];
+          extraUpFlags = [ "--ssh" ];
         };
       })
 

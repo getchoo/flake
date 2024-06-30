@@ -3,8 +3,9 @@
   secretsDir,
   inputs,
   ...
-}: {
-  imports = [inputs.teawiebot.nixosModules.default];
+}:
+{
+  imports = [ inputs.teawiebot.nixosModules.default ];
 
   age.secrets.teawiebot.file = secretsDir + "/teawieBot.age";
 

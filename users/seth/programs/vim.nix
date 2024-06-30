@@ -3,12 +3,16 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.seth.programs.vim;
   inherit (config.xdg) configHome dataHome stateHome;
-in {
+in
+{
   options.seth.programs.vim = {
-    enable = lib.mkEnableOption "Vim configuration" // {default = config.seth.enable;};
+    enable = lib.mkEnableOption "Vim configuration" // {
+      default = config.seth.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable {

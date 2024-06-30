@@ -6,23 +6,28 @@
   lib,
   modulesPath,
   ...
-}: {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot = {
-    extraModulePackages = [];
-    kernelModules = ["kvm-amd"];
+    extraModulePackages = [ ];
+    kernelModules = [ "kvm-amd" ];
 
     initrd = {
-      availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
-      kernelModules = [];
+      availableKernelModules = [
+        "xhci_pci"
+        "ahci"
+        "usb_storage"
+        "usbhid"
+        "sd_mod"
+      ];
+      kernelModules = [ ];
 
       luks.devices."cryptroot" = {
         device = "/dev/disk/by-uuid/bbbc1f37-53f5-4776-a70e-f2779179de50";
         allowDiscards = true;
-        crypttabExtraOpts = ["tpm2-device=auto"];
+        crypttabExtraOpts = [ "tpm2-device=auto" ];
       };
     };
   };
@@ -31,25 +36,42 @@
     "/" = {
       device = "/dev/mapper/cryptroot";
       fsType = "btrfs";
-      options = ["subvol=root" "compress=zstd" "noatime"];
+      options = [
+        "subvol=root"
+        "compress=zstd"
+        "noatime"
+      ];
     };
 
     "/var/log" = {
       device = "/dev/mapper/cryptroot";
       fsType = "btrfs";
-      options = ["subvol=var_log" "compress=zstd" "noatime"];
+      options = [
+        "subvol=var_log"
+        "compress=zstd"
+        "noatime"
+      ];
     };
 
     "/nix" = {
       device = "/dev/mapper/cryptroot";
       fsType = "btrfs";
-      options = ["subvol=nix" "compress=zstd" "noatime" "nodatacow"];
+      options = [
+        "subvol=nix"
+        "compress=zstd"
+        "noatime"
+        "nodatacow"
+      ];
     };
 
     "/home" = {
       device = "/dev/mapper/cryptroot";
       fsType = "btrfs";
-      options = ["subvol=home" "compress=zstd" "noatime"];
+      options = [
+        "subvol=home"
+        "compress=zstd"
+        "noatime"
+      ];
     };
 
     "/boot" = {
@@ -58,7 +80,7 @@
     };
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
