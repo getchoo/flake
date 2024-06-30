@@ -1,8 +1,5 @@
+{ config, modulesPath, ... }:
 {
-  config,
-  modulesPath,
-  ...
-}: {
   imports = [
     (modulesPath + "/profiles/minimal.nix")
     ./hardware-configuration.nix

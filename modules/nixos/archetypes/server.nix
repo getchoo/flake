@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.archetypes.server;
-in {
+in
+{
   options.archetypes = {
     server.enable = lib.mkEnableOption "server archetype";
   };

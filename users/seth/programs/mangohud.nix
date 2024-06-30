@@ -1,16 +1,12 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.seth.programs.mangohud;
-in {
+in
+{
   options.seth.programs.mangohud = {
-    enable =
-      lib.mkEnableOption "MangoHud configuration"
-      // {
-        default = config.seth.desktop.enable;
-      };
+    enable = lib.mkEnableOption "MangoHud configuration" // {
+      default = config.seth.desktop.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable {

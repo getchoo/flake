@@ -2,12 +2,13 @@
   description = "getchoo's flake for system configurations";
 
   nixConfig = {
-    extra-substituters = ["https://getchoo.cachix.org"];
-    extra-trusted-public-keys = ["getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE="];
+    extra-substituters = [ "https://getchoo.cachix.org" ];
+    extra-trusted-public-keys = [ "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE=" ];
   };
 
-  outputs = inputs:
-    inputs.flake-parts.lib.mkFlake {inherit inputs;} {
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -31,9 +32,11 @@
         ./ext
       ];
 
-      perSystem = {pkgs, ...}: {
-        formatter = pkgs.alejandra;
-      };
+      perSystem =
+        { pkgs, ... }:
+        {
+          formatter = pkgs.nixfmt-rfc-style;
+        };
     };
 
   inputs = {

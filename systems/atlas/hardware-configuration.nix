@@ -1,15 +1,17 @@
-{modulesPath, ...}: {
-  imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
-  ];
+{ modulesPath, ... }:
+{
+  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
   boot = {
-    extraModulePackages = [];
-    kernelModules = [];
+    extraModulePackages = [ ];
+    kernelModules = [ ];
 
     initrd = {
-      availableKernelModules = ["virtio_pci" "usbhid"];
-      kernelModules = [];
+      availableKernelModules = [
+        "virtio_pci"
+        "usbhid"
+      ];
+      kernelModules = [ ];
     };
   };
 
@@ -25,5 +27,5 @@
     };
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
 }

@@ -3,8 +3,9 @@
   pkgs,
   inputs,
   ...
-}: {
-  imports = [inputs.lanzaboote.nixosModules.lanzaboote];
+}:
+{
+  imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
 
   environment.systemPackages = with pkgs; [
     sbctl
@@ -15,7 +16,7 @@
     initrd.systemd.enable = true;
     kernelPackages = pkgs.linuxPackages_latest;
 
-    kernelParams = ["amd_pstate=active"];
+    kernelParams = [ "amd_pstate=active" ];
 
     loader.systemd-boot.enable = lib.mkForce false;
 
@@ -24,6 +25,6 @@
       pkiBundle = "/etc/secureboot";
     };
 
-    supportedFilesystems = ["ntfs"];
+    supportedFilesystems = [ "ntfs" ];
   };
 }

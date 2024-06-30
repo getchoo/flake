@@ -3,13 +3,18 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.base.documentation;
   enable = config.base.enable && cfg.enable;
-in {
+in
+{
   config = lib.mkIf enable {
     documentation.nixos.enable = false;
 
-    environment.systemPackages = with pkgs; [man-pages man-pages-posix];
+    environment.systemPackages = with pkgs; [
+      man-pages
+      man-pages-posix
+    ];
   };
 }

@@ -3,18 +3,20 @@
   lib,
   secretsDir,
   ...
-}: let
+}:
+let
   cfg = config.server.hostUser;
   inherit (config.networking) hostName;
-in {
+in
+{
   options.server.hostUser = {
-    enable = lib.mkEnableOption "${hostName} user configuration" // {default = config.server.enable;};
+    enable = lib.mkEnableOption "${hostName} user configuration" // {
+      default = config.server.enable;
+    };
 
-    manageSecrets =
-      lib.mkEnableOption "automatic secrets management"
-      // {
-        default = config.traits.secrets.enable;
-      };
+    manageSecrets = lib.mkEnableOption "automatic secrets management" // {
+      default = config.traits.secrets.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable (
@@ -22,7 +24,7 @@ in {
       {
         users.users.${hostName} = {
           isNormalUser = true;
-          extraGroups = ["wheel"];
+          extraGroups = [ "wheel" ];
         };
       }
 

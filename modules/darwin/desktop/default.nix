@@ -1,4 +1,5 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   options.desktop = {
     enable = lib.mkEnableOption "base desktop settings";
   };

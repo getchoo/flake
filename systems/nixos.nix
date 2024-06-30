@@ -1,19 +1,16 @@
-{self, ...}: {
+{ self, ... }:
+{
   flake = {
-    nixosConfigurations = let
-      inherit (self.lib) nixosSystem nixosSystemStable;
-    in {
-      glados = nixosSystem {
-        modules = [./glados];
-      };
+    nixosConfigurations =
+      let
+        inherit (self.lib) nixosSystem nixosSystemStable;
+      in
+      {
+        glados = nixosSystem { modules = [ ./glados ]; };
 
-      glados-wsl = nixosSystem {
-        modules = [./glados-wsl];
-      };
+        glados-wsl = nixosSystem { modules = [ ./glados-wsl ]; };
 
-      atlas = nixosSystemStable {
-        modules = [./atlas];
+        atlas = nixosSystemStable { modules = [ ./atlas ]; };
       };
-    };
   };
 }

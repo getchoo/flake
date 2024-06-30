@@ -3,13 +3,13 @@
   pkgs,
   osConfig,
   ...
-}: let
+}:
+let
   enable = osConfig.services.desktopManager.plasma6.enable or false;
-in {
+in
+{
   config = lib.mkIf enable {
-    home.packages = with pkgs; [
-      papirus-icon-theme
-    ];
+    home.packages = with pkgs; [ papirus-icon-theme ];
 
     xdg = {
       dataFile."konsole/catppuccin-mocha.colorscheme".source =

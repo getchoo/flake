@@ -1,13 +1,13 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.base.documentation;
   enable = config.base.enable && cfg.enable;
-in {
+in
+{
   options.base.documentation = {
-    enable = lib.mkEnableOption "documentation settings" // {default = true;};
+    enable = lib.mkEnableOption "documentation settings" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf enable {

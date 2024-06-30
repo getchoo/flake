@@ -9,9 +9,7 @@ let
     glados = {
       owner = owners.getchoo;
       pubkey = "age1n7tyxx63wpgnmwkzn7dmkm62jxel840rk3ye3vsultrszsfrwuzsawdzhq";
-      files = [
-        "sethPassword.age"
-      ];
+      files = [ "sethPassword.age" ];
     };
 
     glados-wsl = {
@@ -34,4 +32,4 @@ let
     };
   };
 in
-  toSecrets hosts
+toSecrets hosts

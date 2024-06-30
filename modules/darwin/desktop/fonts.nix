@@ -3,17 +3,19 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.desktop.fonts;
   enable = config.desktop.enable && cfg.enable;
-in {
+in
+{
   options.desktop.fonts = {
-    enable = lib.mkEnableOption "desktop fonts" // {default = true;};
+    enable = lib.mkEnableOption "desktop fonts" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf enable {
-    fonts.packages = [
-      (pkgs.nerdfonts.override {fonts = ["FiraCode"];})
-    ];
+    fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
   };
 }

@@ -1,19 +1,13 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.seth;
-in {
+in
+{
   options.seth = {
     enable = lib.mkEnableOption "Seth's home configuration";
   };
 
-  imports = [
-    ./standalone.nix
-  ];
+  imports = [ ./standalone.nix ];
 
-  config = lib.mkIf cfg.enable {
-    home.stateVersion = "23.11";
-  };
+  config = lib.mkIf cfg.enable { home.stateVersion = "23.11"; };
 }

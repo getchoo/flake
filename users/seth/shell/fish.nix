@@ -3,12 +3,16 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.seth.shell.fish;
-in {
+in
+{
   options.seth.shell.fish = {
     enable = lib.mkEnableOption "Fish configuration";
-    withPlugins = lib.mkEnableOption "Fish plugins" // {default = true;};
+    withPlugins = lib.mkEnableOption "Fish plugins" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -37,15 +41,14 @@ in {
       }
 
       (lib.mkIf cfg.withPlugins {
-        plugins = let
-          mkFishPlugins = map (plugin: {
-            name = plugin;
-            inherit (pkgs.fishPlugins.${plugin}) src;
-          });
-        in
-          mkFishPlugins [
-            "autopair"
-          ];
+        plugins =
+          let
+            mkFishPlugins = map (plugin: {
+              name = plugin;
+              inherit (pkgs.fishPlugins.${plugin}) src;
+            });
+          in
+          mkFishPlugins [ "autopair" ];
       })
     ];
   };

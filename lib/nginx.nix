@@ -12,8 +12,5 @@ lib: {
   # string -> { } -> { }
   # transform the names of an attribute set of nginx virtualHosts
   # into a full subdomain
-  toVHosts = domain:
-    lib.mapAttrs' (
-      name: lib.nameValuePair "${name}.${domain}"
-    );
+  toVHosts = domain: lib.mapAttrs' (name: lib.nameValuePair "${name}.${domain}");
 }

@@ -3,30 +3,33 @@
   inputs,
   withSystem,
   ...
-}: let
-  pkgs = withSystem "x86_64-linux" ({pkgs, ...}: pkgs);
+}:
+let
+  pkgs = withSystem "x86_64-linux" ({ pkgs, ... }: pkgs);
 
-  profileFromRelease = release:
-    (inputs.openwrt-imagebuilder.lib.profiles {
-      inherit pkgs release;
-    })
-    .identifyProfile;
+  profileFromRelease =
+    release: (inputs.openwrt-imagebuilder.lib.profiles { inherit pkgs release; }).identifyProfile;
 
-  mkImage = {profile, ...} @ args:
+  mkImage =
+    { profile, ... }@args:
     inputs.openwrt-imagebuilder.lib.build (
       profileFromRelease args.release profile
-      // builtins.removeAttrs args ["profile" "release"]
+      // builtins.removeAttrs args [
+        "profile"
+        "release"
+      ]
     );
 
   mapImages = lib.mapAttrs (lib.const mkImage);
-in {
+in
+{
   flake.legacyPackages.x86_64-linux = {
     openWrtImages = mapImages {
       turret = {
         release = "23.05.0";
         profile = "netgear_wac104";
 
-        files = pkgs.runCommand "image-files" {} ''
+        files = pkgs.runCommand "image-files" { } ''
           mkdir -p $out/etc/uci-defaults
 
           cat > $out/etc/uci-defaults/99-custom << EOF

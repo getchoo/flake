@@ -1,13 +1,15 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.seth.programs.git;
-in {
+in
+{
   options.seth.programs.git = {
-    enable = lib.mkEnableOption "Git configuration settings" // {default = config.seth.enable;};
-    gh.enable = lib.mkEnableOption "GitHub CLI support" // {default = cfg.enable;};
+    enable = lib.mkEnableOption "Git configuration settings" // {
+      default = config.seth.enable;
+    };
+    gh.enable = lib.mkEnableOption "GitHub CLI support" // {
+      default = cfg.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -24,7 +26,10 @@ in {
 
         gitCredentialHelper = {
           enable = true;
-          hosts = ["https://github.com" "https://github.example.com"];
+          hosts = [
+            "https://github.com"
+            "https://github.example.com"
+          ];
         };
       };
 
@@ -38,7 +43,9 @@ in {
         };
 
         extraConfig = {
-          init = {defaultBranch = "main";};
+          init = {
+            defaultBranch = "main";
+          };
         };
 
         signing = {

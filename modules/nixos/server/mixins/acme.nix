@@ -3,19 +3,21 @@
   lib,
   secretsDir,
   ...
-}: let
+}:
+let
   cfg = config.server.mixins.acme;
-in {
+in
+{
   options.server.mixins.acme = {
     enable = lib.mkEnableOption "ACME mixin";
 
-    manageSecrets =
-      lib.mkEnableOption "automatic secrets management"
-      // {
-        default = config.traits.secrets.enable;
-      };
+    manageSecrets = lib.mkEnableOption "automatic secrets management" // {
+      default = config.traits.secrets.enable;
+    };
 
-    useDns = lib.mkEnableOption "the usage of Cloudflare to obtain certs" // {default = true;};
+    useDns = lib.mkEnableOption "the usage of Cloudflare to obtain certs" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable (

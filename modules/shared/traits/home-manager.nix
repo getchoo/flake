@@ -3,9 +3,11 @@
   lib,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.traits.home-manager;
-in {
+in
+{
   options.traits.home-manager = {
     enable = lib.mkEnableOption "home-manager configuration";
   };
@@ -14,7 +16,9 @@ in {
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
-      extraSpecialArgs = {inherit inputs;};
+      extraSpecialArgs = {
+        inherit inputs;
+      };
     };
   };
 }

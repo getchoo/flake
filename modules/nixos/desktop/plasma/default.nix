@@ -4,9 +4,11 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.desktop.plasma;
-in {
+in
+{
   options.desktop.plasma.enable = lib.mkEnableOption "Plasma desktop";
 
   config = lib.mkIf cfg.enable {

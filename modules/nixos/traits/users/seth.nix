@@ -3,15 +3,15 @@
   lib,
   secretsDir,
   ...
-}: let
+}:
+let
   cfg = config.traits.users.seth;
-in {
+in
+{
   options.traits.users.seth = {
-    manageSecrets =
-      lib.mkEnableOption "automatic secrets management"
-      // {
-        default = config.traits.secrets.enable;
-      };
+    manageSecrets = lib.mkEnableOption "automatic secrets management" // {
+      default = config.traits.secrets.enable;
+    };
   };
 
   config = lib.mkMerge [

@@ -3,9 +3,11 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.desktop.budgie;
-in {
+in
+{
   options.desktop.budgie.enable = lib.mkEnableOption "budgie desktop";
 
   config = lib.mkIf cfg.enable {

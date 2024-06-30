@@ -4,20 +4,18 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.seth.programs.firefox;
-in {
+in
+{
   options.seth.programs.firefox = {
-    enable =
-      lib.mkEnableOption "Firefox configuration"
-      // {
-        default = config.seth.desktop.enable;
-      };
+    enable = lib.mkEnableOption "Firefox configuration" // {
+      default = config.seth.desktop.enable;
+    };
   };
 
-  imports = [
-    ./arkenfox.nix
-  ];
+  imports = [ ./arkenfox.nix ];
 
   config = lib.mkIf cfg.enable {
     home.sessionVariables = {

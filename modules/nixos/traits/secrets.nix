@@ -3,14 +3,16 @@
   lib,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.traits.secrets;
-in {
+in
+{
   options.traits.secrets = {
     enable = lib.mkEnableOption "secrets management";
   };
 
-  imports = [inputs.agenix.nixosModules.default];
+  imports = [ inputs.agenix.nixosModules.default ];
 
   config = lib.mkIf cfg.enable {
     _module.args = {
@@ -18,7 +20,7 @@ in {
     };
 
     age = {
-      identityPaths = ["/etc/age/key"];
+      identityPaths = [ "/etc/age/key" ];
     };
   };
 }

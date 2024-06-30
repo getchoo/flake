@@ -4,9 +4,11 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   cfg = config.server;
-in {
+in
+{
   options.server = {
     enable = lib.mkEnableOption "server settings";
   };
@@ -26,7 +28,7 @@ in {
       man.enable = false;
     };
 
-    environment.defaultPackages = lib.mkForce [];
+    environment.defaultPackages = lib.mkForce [ ];
 
     nix = {
       gc = {
@@ -34,7 +36,7 @@ in {
         options = "-d --delete-older-than 2d";
       };
 
-      settings.allowed-users = [config.networking.hostName];
+      settings.allowed-users = [ config.networking.hostName ];
     };
   };
 }

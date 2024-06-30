@@ -3,32 +3,32 @@
   lib,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.seth.programs.chromium;
-in {
+in
+{
   options.seth.programs.chromium = {
-    enable =
-      lib.mkEnableOption "Chromium configuration"
-      // {
-        default = config.seth.desktop.enable;
-      };
+    enable = lib.mkEnableOption "Chromium configuration" // {
+      default = config.seth.desktop.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable {
     programs.chromium = {
       enable = true;
 
-      dictionaries = [pkgs.hunspellDictsChromium.en_US];
+      dictionaries = [ pkgs.hunspellDictsChromium.en_US ];
 
       extensions = [
         # ublock origin
-        {id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";}
+        { id = "cjpalhdlnbpafiamejdnhcphjbkeiagm"; }
         # bitwarden
-        {id = "nngceckbapebfimnlniiiahkandclblb";}
+        { id = "nngceckbapebfimnlniiiahkandclblb"; }
         # floccus bookmark sync
-        {id = "fnaicdffflnofjppbagibeoednhnbjhg";}
+        { id = "fnaicdffflnofjppbagibeoednhnbjhg"; }
         # tabby cat
-        {id = "mefhakmgclhhfbdadeojlkbllmecialg";}
+        { id = "mefhakmgclhhfbdadeojlkbllmecialg"; }
       ];
     };
   };

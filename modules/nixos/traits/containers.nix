@@ -4,10 +4,12 @@
   options,
   pkgs,
   ...
-}: let
+}:
+let
   cfg = config.traits.containers;
-  enableNvidia = lib.elem "nvidia" (config.services.xserver.videoDrivers or []);
-in {
+  enableNvidia = lib.elem "nvidia" (config.services.xserver.videoDrivers or [ ]);
+in
+{
   options.traits.containers = {
     enable = lib.mkEnableOption "containers support";
   };
@@ -18,7 +20,7 @@ in {
         virtualisation = {
           podman = {
             enable = true;
-            extraPackages = with pkgs; [podman-compose];
+            extraPackages = with pkgs; [ podman-compose ];
             autoPrune.enable = true;
           };
 
@@ -26,9 +28,7 @@ in {
         };
       }
 
-      (lib.mkIf enableNvidia {
-        hardware.nvidia-container-toolkit.enable = true;
-      })
+      (lib.mkIf enableNvidia { hardware.nvidia-container-toolkit.enable = true; })
     ]
   );
 }

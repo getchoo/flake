@@ -1,12 +1,12 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.seth.shell.bash;
-in {
+in
+{
   options.seth.shell.bash = {
-    enable = lib.mkEnableOption "Bash configuration" // {default = config.seth.enable;};
+    enable = lib.mkEnableOption "Bash configuration" // {
+      default = config.seth.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable {

@@ -4,16 +4,16 @@
   unstable,
   secretsDir,
   ...
-}: let
+}:
+let
   cfg = config.server.mixins.hercules-ci;
-in {
+in
+{
   options.server.mixins.hercules-ci = {
     enable = lib.mkEnableOption "hercules-ci mixin";
-    manageSecrets =
-      lib.mkEnableOption "automatic secrets management"
-      // {
-        default = config.traits.secrets.enable;
-      };
+    manageSecrets = lib.mkEnableOption "automatic secrets management" // {
+      default = config.traits.secrets.enable;
+    };
   };
 
   config = lib.mkIf cfg.enable (
@@ -25,29 +25,29 @@ in {
         };
       }
 
-      (let
-        secretNames = [
-          "binaryCaches"
-          "clusterJoinToken"
-          "secretsJson"
-        ];
-      in
+      (
+        let
+          secretNames = [
+            "binaryCaches"
+            "clusterJoinToken"
+            "secretsJson"
+          ];
+        in
         lib.mkIf cfg.manageSecrets {
-          age.secrets = lib.genAttrs secretNames (
-            file: {
-              file = "${secretsDir}/${file}.age";
-              mode = "400";
-              owner = "hercules-ci-agent";
-              group = "hercules-ci-agent";
-            }
-          );
+          age.secrets = lib.genAttrs secretNames (file: {
+            file = "${secretsDir}/${file}.age";
+            mode = "400";
+            owner = "hercules-ci-agent";
+            group = "hercules-ci-agent";
+          });
 
           services.hercules-ci-agent = {
             settings = lib.mapAttrs' (name: lib.nameValuePair (name + "Path")) (
               lib.genAttrs secretNames (name: config.age.secrets.${name}.path)
             );
           };
-        })
+        }
+      )
     ]
   );
 }

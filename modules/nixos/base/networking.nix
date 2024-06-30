@@ -1,13 +1,13 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   cfg = config.base.networking;
   enable = config.base.enable && cfg.enable;
-in {
+in
+{
   options.base.networking = {
-    enable = lib.mkEnableOption "base network settings" // {default = true;};
+    enable = lib.mkEnableOption "base network settings" // {
+      default = true;
+    };
   };
 
   config = lib.mkIf enable {

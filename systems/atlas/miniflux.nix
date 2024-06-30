@@ -1,9 +1,6 @@
+{ config, secretsDir, ... }:
 {
-  config,
-  secretsDir,
-  ...
-}: {
-  age.secrets .miniflux.file = secretsDir + "/miniflux.age";
+  age.secrets.miniflux.file = secretsDir + "/miniflux.age";
 
   services.miniflux = {
     enable = true;
