@@ -82,8 +82,6 @@
       };
     };
 
-    flake-checks.url = "github:getchoo/flake-checks";
-
     getchvim = {
       url = "github:getchoo/getchvim";
       inputs.nixpkgs.follows = "nixpkgs";

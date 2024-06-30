@@ -115,21 +115,6 @@
         "type": "sourcehut"
       }
     },
-    "flake-checks": {
-      "locked": {
-        "lastModified": 1716193450,
-        "narHash": "sha256-wIbyIQRoLAfGe2v8W7LM6zEZ9Oy0jKuUX0HMUCLQJsM=",
-        "owner": "getchoo",
-        "repo": "flake-checks",
-        "rev": "842c3f225677aa55e44b94342f19c8f3e6f2be06",
-        "type": "github"
-      },
-      "original": {
-        "owner": "getchoo",
-        "repo": "flake-checks",
-        "type": "github"
-      }
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
@@ -421,7 +406,6 @@
         "arkenfox": "arkenfox",
         "catppuccin": "catppuccin",
         "firefox-addons": "firefox-addons",
-        "flake-checks": "flake-checks",
         "flake-parts": "flake-parts",
         "getchvim": "getchvim",
         "home-manager": "home-manager",
