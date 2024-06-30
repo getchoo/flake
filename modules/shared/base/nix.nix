@@ -24,12 +24,15 @@ in
 
       settings = {
         auto-optimise-store = pkgs.stdenv.isLinux;
-        experimental-features = [
-          "nix-command"
-          "flakes"
-          "auto-allocate-uids"
-          "repl-flake"
-        ];
+        experimental-features =
+          [
+            "nix-command"
+            "flakes"
+            "auto-allocate-uids"
+          ]
+          # TODO: remove when nix >= 2.22.0 is the default in nixpkgs
+          # repl-flake was removed in nix 2.22.0
+          ++ lib.optional (lib.versionOlder config.nix.package.version "2.22.0") "repl-flake";
 
         trusted-substituters = [ "https://getchoo.cachix.org" ];
         trusted-public-keys = [ "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE=" ];
