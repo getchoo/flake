@@ -34,7 +34,7 @@ jobs:
           source-url: https://install.lix.systems/lix/lix-installer-x86_64-linux 
 
       - name: Update lockfile & make PR
-        uses: DeterminateSystems/update-flake-lock@v22
+        uses: DeterminateSystems/update-flake-lock@v23
         id: update
         with:
           commit-msg: ${{ inputs.commit-msg }}
