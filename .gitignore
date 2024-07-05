@@ -3,7 +3,6 @@ result*
 repl-result-out*
 
 # dev shell
-.pre-commit-config.yaml
 .direnv/
 .env*
 !.envrc
