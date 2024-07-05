@@ -1,4 +1,4 @@
-# flake ❄️
+# ./. ❄️
 
 [![made with neovim](https://img.shields.io/static/v1?label=made%20with&message=neovim&color=00b952&style=flat-square&logo=neovim)](https://neovim.io/)
 [![nixos unstable](https://img.shields.io/static/v1?label=NixOS&message=unstable&color=5277c3&style=flat-square&logo=nixos)](https://nixos.org/)
@@ -6,47 +6,41 @@
 
 greasy taco i love
 
-## my machines
+## dev/
 
-all of these names are based off the [portal](<https://en.wikipedia.org/wiki/Portal_(video_game)>) series
+Tools that help me make and maintain everything
 
-### glados
+## lib/
 
-my main desktop
+Small functions I like to use around here
 
-### glados-wsl
+## modules/
 
-my main desktop, but the windows install :p
+Sets of modules meant for NixOS and
+[nix-darwin](https://github.com/LnL7/nix-darwin)
 
-### caroline
+## secrets/
 
-my macbook air
+Configuration secrets managed by the wonderful
+[agenix](https://github.com/ryantm/agenix)
 
-### atlas
+## users/
 
-my ampere arm server from oracle, services my miniflux instance and some other things.
+Home of my [home-manager](https://nix-community.github.io/home-manager/) user
+configurations
 
-## special thanks
+## ext/
 
-there are some amazing tools i use to make/manage this flake that i would highly recommend checking out:
+External, not so nix-y things
 
-- [home-manager](https://github.com/nix-community/home-manager)
-- [agenix](https://github.com/ryantm/agenix)
-- [cachix](https://www.cachix.org/)
-- [nix-fast-build](https://github.com/Mic92/nix-fast-build)
-- [nixinate](https://github.com/MatthewCroughan/nixinate)
-- [flake-parts](https://github.com/hercules-ci/flake-parts)
-- [terranix](https://github.com/terranix/terranix)
-- [lanzaboote](https://github.com/nix-community/lanzaboote)
-- [nixos-wsl](https://github.com/nix-community/nixos-wsl)
-- [nix-openwrt-imagebuilder](https://github.com/astro/nix-openwrt-imagebuilder)
+## .envrc
 
-## fun screenshots
+My [nix-direnv](https://github.com/nix-community/nix-direnv) configuration
 
-<details>
-<summary>click me!</summary>
+## flake.nix
 
-![gnome](https://user-images.githubusercontent.com/48872998/223897323-87f8d547-511b-48c3-a2e1-8ff22ac361e9.png)
-![neovim](https://user-images.githubusercontent.com/48872998/223897693-88eb0416-9ebc-45b6-837a-b28ada94336f.png)
+Where everything begins
 
-</details>
+## justfile
+
+Recipes to help me [just](https://github.com/casey/just) get things done
