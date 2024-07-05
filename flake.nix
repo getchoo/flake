@@ -17,14 +17,13 @@
       ];
 
       imports = [
-        # primary outputs
         ./dev
         ./lib
         ./modules
         ./systems
         ./users
 
-        ./ext # external, not so nix-y things
+        ./ext
       ];
     };
 
