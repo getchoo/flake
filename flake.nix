@@ -18,25 +18,14 @@
 
       imports = [
         # primary outputs
+        ./dev
         ./lib
         ./modules
         ./systems
         ./users
 
-        # dev outputs
-        ./checks.nix
-        ./devShells.nix
-        ./hydraJobs.nix
-
-        # external, not so nix-y things
-        ./ext
+        ./ext # external, not so nix-y things
       ];
-
-      perSystem =
-        { pkgs, ... }:
-        {
-          formatter = pkgs.nixfmt-rfc-style;
-        };
     };
 
   inputs = {
