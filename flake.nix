@@ -119,7 +119,7 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         fenix.follows = "";
-        flake-checks.follows = "";
+        treefmt-nix.follows = "";
       };
     };
 
