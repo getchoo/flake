@@ -10,9 +10,10 @@ let
 in
 {
   options.server.mixins.hercules-ci = {
-    enable = lib.mkEnableOption "hercules-ci mixin";
-    manageSecrets = lib.mkEnableOption "automatic secrets management" // {
+    enable = lib.mkEnableOption "Hercules CI mixin";
+    manageSecrets = lib.mkEnableOption "automatic management of secrets" // {
       default = config.traits.secrets.enable;
+      defaultText = lib.literalExpression "config.traits.secrets.enable";
     };
   };
 

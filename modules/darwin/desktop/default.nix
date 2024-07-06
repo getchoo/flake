@@ -1,7 +1,7 @@
 { lib, ... }:
 {
   options.desktop = {
-    enable = lib.mkEnableOption "base desktop settings";
+    enable = lib.mkEnableOption "basic desktop settings";
   };
 
   imports = [

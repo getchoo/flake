@@ -9,7 +9,7 @@ let
 in
 {
   options.base.nixSettings = {
-    enable = lib.mkEnableOption "nix settings" // {
+    enable = lib.mkEnableOption "basic Nix settings" // {
       default = config.base.enable;
     };
 

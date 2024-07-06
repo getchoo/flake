@@ -4,7 +4,7 @@ let
 in
 {
   options.archetypes = {
-    server.enable = lib.mkEnableOption "server archetype";
+    server.enable = lib.mkEnableOption "the \"Server\" archetype";
   };
 
   config = lib.mkIf cfg.enable {

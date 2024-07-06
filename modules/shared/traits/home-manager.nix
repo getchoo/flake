@@ -9,7 +9,7 @@ let
 in
 {
   options.traits.home-manager = {
-    enable = lib.mkEnableOption "home-manager configuration";
+    enable = lib.mkEnableOption "the use of home-manager";
   };
 
   config = lib.mkIf cfg.enable {

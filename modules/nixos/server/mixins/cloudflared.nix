@@ -14,14 +14,16 @@ in
     tunnelName = lib.mkOption {
       type = lib.types.str;
       default = "${config.networking.hostName}-nginx";
-      example = lib.literalExpression "my-tunnel";
-      description = lib.mdDoc ''
+      defaultText = lib.literalExpression "\${config.networking.hostName}-nginx";
+      example = "my-tunnel";
+      description = ''
         Name of the default tunnel being created
       '';
     };
 
-    manageSecrets = lib.mkEnableOption "automatic secrets management" // {
+    manageSecrets = lib.mkEnableOption "automatic management of secrets" // {
       default = config.traits.secrets.enable;
+      defaultText = lib.literalExpression "config.traits.secrets.enable";
     };
   };
 

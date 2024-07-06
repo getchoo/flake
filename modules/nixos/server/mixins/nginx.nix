@@ -4,7 +4,7 @@ let
 in
 {
   options.server.mixins.nginx = {
-    enable = lib.mkEnableOption "nginx mixin";
+    enable = lib.mkEnableOption "NGINX mixin";
   };
 
   config = lib.mkIf cfg.enable {

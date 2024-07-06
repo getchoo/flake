@@ -8,7 +8,7 @@ let
   cfg = config.desktop.budgie;
 in
 {
-  options.desktop.budgie.enable = lib.mkEnableOption "budgie desktop";
+  options.desktop.budgie.enable = lib.mkEnableOption "Budgie desktop";
 
   config = lib.mkIf cfg.enable {
     environment = {

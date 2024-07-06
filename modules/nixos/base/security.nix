@@ -4,7 +4,7 @@ let
 in
 {
   options.base.security = {
-    enable = lib.mkEnableOption "base security settings" // {
+    enable = lib.mkEnableOption "basic security settings" // {
       default = config.base.enable;
     };
   };
