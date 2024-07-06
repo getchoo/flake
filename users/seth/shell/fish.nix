@@ -21,13 +21,11 @@ in
         enable = true;
 
         # TODO: do i still need this weird sourcing?
-        interactiveShellInit = ''
+        interactiveShellInit = lib.optionalString config.seth.standalone.enable ''
           set -l nixfile ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.fish
           if test -e $nixfile
           	source $nixfile
           end
-
-          ${lib.getExe pkgs.nix-your-shell} fish | source
         '';
 
         functions = {
