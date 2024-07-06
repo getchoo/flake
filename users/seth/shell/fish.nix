@@ -20,6 +20,7 @@ in
       {
         enable = true;
 
+        # TODO: do i still need this weird sourcing?
         interactiveShellInit = ''
           set -l nixfile ${config.home.homeDirectory}/.nix-profile/etc/profile.d/nix.fish
           if test -e $nixfile
@@ -27,8 +28,6 @@ in
           end
 
           ${lib.getExe pkgs.nix-your-shell} fish | source
-
-          abbr -a !! --position anywhere --function last_history_item
         '';
 
         functions = {
@@ -37,6 +36,10 @@ in
 
         shellAbbrs = {
           nixgc = "sudo nix-collect-garbage -d && nix-collect-garbage -d";
+          "!!" = {
+            position = "anywhere";
+            function = "last_history_item";
+          };
         };
       }
 
