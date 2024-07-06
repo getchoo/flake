@@ -43,8 +43,6 @@ in
           promptinit
           colors
 
-          ${lib.getExe pkgs.nix-your-shell} zsh | source /dev/stdin
-
           zmodload zsh/zutil
           zmodload zsh/complist
           zstyle ":completion::*" group-name ""
