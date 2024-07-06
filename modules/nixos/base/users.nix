@@ -10,7 +10,7 @@ let
 in
 {
   options.base.users = {
-    enable = lib.mkEnableOption "base user configurations" // {
+    enable = lib.mkEnableOption "basic user configurations" // {
       default = true;
     };
 
@@ -18,8 +18,10 @@ in
       enable = lib.mkEnableOption "default root user configuration" // {
         default = false;
       };
-      manageSecrets = lib.mkEnableOption "automatic secrets management" // {
+
+      manageSecrets = lib.mkEnableOption "automatic management of secrets" // {
         default = config.traits.secrets.enable;
+        defaultText = lib.literalExpression "config.traits.secrets.enable";
       };
     };
   };

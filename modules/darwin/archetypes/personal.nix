@@ -4,7 +4,7 @@ let
 in
 {
   options.archetypes.personal = {
-    enable = lib.mkEnableOption "personal archetype";
+    enable = lib.mkEnableOption "the \"Personal\" archetype";
   };
 
   config = lib.mkIf cfg.enable {

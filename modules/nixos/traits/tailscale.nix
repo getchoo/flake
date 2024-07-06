@@ -11,8 +11,9 @@ in
   options.traits.tailscale = {
     enable = lib.mkEnableOption "Tailscale";
     ssh.enable = lib.mkEnableOption "Tailscale SSH";
-    manageSecrets = lib.mkEnableOption "automatic secrets management" // {
-      default = config.traits.secrets.enable && cfg.ssh.enable;
+    manageSecrets = lib.mkEnableOption "automatic management of secrets" // {
+      default = config.traits.secrets.enable;
+      defaultText = lib.literalExpression "config.traits.secrets.enable";
     };
   };
 

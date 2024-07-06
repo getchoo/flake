@@ -10,7 +10,7 @@ let
 in
 {
   options.server = {
-    enable = lib.mkEnableOption "server settings";
+    enable = lib.mkEnableOption "basic server settings";
   };
 
   imports = [

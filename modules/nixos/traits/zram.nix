@@ -4,7 +4,7 @@ let
 in
 {
   options.traits.zram = {
-    enable = lib.mkEnableOption "zram setup & configuration";
+    enable = lib.mkEnableOption "zram and sysctl optimizations";
   };
 
   config = lib.mkIf cfg.enable {
