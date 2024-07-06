@@ -1,13 +1,7 @@
 {
   imports = [
-    ./checks.nix
     ./devShells.nix
     ./hydraJobs.nix
+    ./treefmt.nix
   ];
-
-  perSystem =
-    { pkgs, ... }:
-    {
-      formatter = pkgs.nixfmt-rfc-style;
-    };
 }

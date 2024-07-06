@@ -420,7 +420,8 @@
         "nixpkgs-tracker-bot": "nixpkgs-tracker-bot",
         "openwrt-imagebuilder": "openwrt-imagebuilder",
         "teawiebot": "teawiebot",
-        "terranix": "terranix"
+        "terranix": "terranix",
+        "treefmt-nix": "treefmt-nix"
       }
     },
     "rust-overlay": {
@@ -508,6 +509,26 @@
       "original": {
         "owner": "terranix",
         "repo": "terranix",
+        "type": "github"
+      }
+    },
+    "treefmt-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1719887753,
+        "narHash": "sha256-p0B2r98UtZzRDM5miGRafL4h7TwGRC4DII+XXHDHqek=",
+        "owner": "numtide",
+        "repo": "treefmt-nix",
+        "rev": "bdb6355009562d8f9313d9460c0d3860f525bc6c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "treefmt-nix",
         "type": "github"
       }
     }
