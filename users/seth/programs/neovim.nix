@@ -12,6 +12,7 @@ in
   options.seth.programs.neovim = {
     enable = lib.mkEnableOption "Neovim configuration" // {
       default = config.seth.enable;
+      defaultText = lib.literalExpression "config.seth.enable";
     };
   };
 

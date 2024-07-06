@@ -10,7 +10,7 @@ let
 in
 {
   options.seth.standalone = {
-    enable = lib.mkEnableOption "Standalone options";
+    enable = lib.mkEnableOption "standalone configuration options";
   };
 
   config = lib.mkIf enable {

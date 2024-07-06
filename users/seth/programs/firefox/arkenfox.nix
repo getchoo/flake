@@ -12,7 +12,7 @@ in
 
   options.seth.programs.firefox.arkenfox = {
     enable = lib.mkEnableOption "Arkenfox settings for Firefox" // {
-      default = config.seth.programs.firefox.enable;
+      default = true;
     };
   };
 

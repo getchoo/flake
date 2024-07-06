@@ -11,6 +11,7 @@ in
   options.seth.programs.ssh = {
     enable = lib.mkEnableOption "SSH configuration" // {
       default = config.seth.enable;
+      defaultText = lib.literalExpression "config.seth.enable";
     };
   };
 

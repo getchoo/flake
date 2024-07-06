@@ -6,6 +6,7 @@ in
   options.seth.programs.mangohud = {
     enable = lib.mkEnableOption "MangoHud configuration" // {
       default = config.seth.desktop.enable;
+      defaultText = lib.literalExpression "config.seth.desktop.enable";
     };
   };
 

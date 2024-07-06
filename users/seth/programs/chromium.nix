@@ -11,6 +11,7 @@ in
   options.seth.programs.chromium = {
     enable = lib.mkEnableOption "Chromium configuration" // {
       default = config.seth.desktop.enable;
+      defaultText = lib.literalExpression "config.seth.desktop.enable";
     };
   };
 

@@ -12,6 +12,7 @@ in
   options.seth.programs.vim = {
     enable = lib.mkEnableOption "Vim configuration" // {
       default = config.seth.enable;
+      defaultText = lib.literalExpression "config.seth.enable";
     };
   };
 

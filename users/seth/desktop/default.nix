@@ -10,8 +10,9 @@ let
 in
 {
   options.seth.desktop = {
-    enable = lib.mkEnableOption "desktop" // {
+    enable = lib.mkEnableOption "desktop (Linux) settings" // {
       default = osConfig.desktop.enable or false;
+      defaultText = lib.literalExpression "osConfig.desktop.enable or false";
     };
   };
 
@@ -22,8 +23,12 @@ in
   ];
 
   config = lib.mkIf cfg.enable {
+    # This is meant for Linux
+    assertions = [ (lib.hm.assertions.assertPlatform "seth.desktop" pkgs lib.platforms.linux) ];
+
     home.packages = [
       (
+        # Add hardware acceleration flags on Linux
         let
           inherit (pkgs) discord;
           flags = lib.concatStringsSep " " [
