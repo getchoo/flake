@@ -12,6 +12,7 @@ in
   options.seth.programs.gpg = {
     enable = lib.mkEnableOption "GnuPG configuration" // {
       default = config.seth.enable;
+      defaultText = lib.literalExpression "config.seth.enable";
     };
   };
 

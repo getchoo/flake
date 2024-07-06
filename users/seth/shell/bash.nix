@@ -6,6 +6,7 @@ in
   options.seth.shell.bash = {
     enable = lib.mkEnableOption "Bash configuration" // {
       default = config.seth.enable;
+      defaultText = lib.literalExpression "config.seth.enable";
     };
   };
 

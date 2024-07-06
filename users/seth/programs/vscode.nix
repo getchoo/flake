@@ -11,6 +11,7 @@ in
   options.seth.programs.vscode = {
     enable = lib.mkEnableOption "VSCode configuration" // {
       default = config.seth.desktop.enable;
+      defaultText = lib.literalExpression "config.seth.desktop.enable";
     };
   };
 

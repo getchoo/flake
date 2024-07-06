@@ -12,6 +12,7 @@ in
   options.seth.programs.firefox = {
     enable = lib.mkEnableOption "Firefox configuration" // {
       default = config.seth.desktop.enable;
+      defaultText = lib.literalExpression "config.seth.desktop.enable";
     };
   };
 

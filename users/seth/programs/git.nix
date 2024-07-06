@@ -6,9 +6,11 @@ in
   options.seth.programs.git = {
     enable = lib.mkEnableOption "Git configuration settings" // {
       default = config.seth.enable;
+      defaultText = lib.literalExpression "config.seth.enable";
     };
+
     gh.enable = lib.mkEnableOption "GitHub CLI support" // {
-      default = cfg.enable;
+      default = true;
     };
   };
 

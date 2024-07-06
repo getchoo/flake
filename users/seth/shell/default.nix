@@ -4,11 +4,14 @@ let
 in
 {
   options.seth.shell = {
-    aliases.enable = lib.mkEnableOption "Shell aliases" // {
+    aliases.enable = lib.mkEnableOption "shell aliases" // {
       default = config.seth.enable;
+      defaultText = lib.literalExpression "config.seth.enable";
     };
-    variables.enable = lib.mkEnableOption "Shell variables" // {
+
+    variables.enable = lib.mkEnableOption "shell variables" // {
       default = config.seth.enable;
+      defaultText = lib.literalExpression "config.seth.enable";
     };
   };
 

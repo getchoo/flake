@@ -6,6 +6,7 @@ in
   options.seth.programs.starship = {
     enable = lib.mkEnableOption "Starship configuration" // {
       default = config.seth.enable;
+      defaultText = lib.literalExpression "config.seth.enable";
     };
   };
 
