@@ -24,8 +24,7 @@
               pkgs.statix
 
               # utils
-              pkgs.deploy-rs
-              pkgs.fzf
+              pkgs.fzf # for just
               pkgs.just
 
               # terranix
