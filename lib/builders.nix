@@ -4,15 +4,28 @@
   self,
 }:
 let
-  # function -> function -> { } -> { }
-  # wrap the `args` applied to `builder` with the result of `apply`
-  # applied to those `args`
+  /**
+    Wrap the `args` applied to `builder` with the result of `apply`
+
+    # Type
+
+    ```
+    wrapBuilderWith :: (AttrSet -> AttrSet) -> (AttrSet -> AttrSet) -> AttrSet -> AttrSet
+    ```
+  */
   wrapBuilderWith =
     apply: builder: args:
     builder (apply args);
 
-  # string -> function -> { } -> { }
-  # wrap the `args` for `builder` of type `type` with nice defaults
+  /**
+    Wrap the `args` applied to `builder` with the result of `apply`
+
+    # Type
+
+    ```
+    wrapBuilder :: String -> (AttrSet -> AttrSet) -> AttrSet -> AttrSet
+    ```
+  */
   wrapBuilder =
     type:
     wrapBuilderWith (
@@ -31,15 +44,37 @@ let
       }
     );
 
-  # function -> { } -> { }
-  # wrap the `args` to the nixos `builder` function with nice defaults
+  /**
+    Wrap the `args` to the NixOS `builder` function with nice defaults
+
+    # Type
+
+    ```
+    wrapNixOS :: (AttrSet -> AttrSet) -> AttrSet -> AttrSet
+    ```
+  */
   wrapNixOS = builder: args: wrapBuilder "nixos" builder args;
-  # function -> { } -> { }
-  # wrap the `args` to the darwin `builder` function with nice defaults
+
+  /**
+    Wrap the `args` to the nix-darwin `builder` function with nice defaults
+
+    # Type
+
+    ```
+    wrapDarwin :: (AttrSet -> AttrSet) -> AttrSet -> AttrSet
+    ```
+  */
   wrapDarwin = builder: args: wrapBuilder "darwin" builder args;
 
-  # function -> { } -> { }
-  # wrap the `args` to the homeManager `builder` function with nice defaults
+  /**
+    Wrap the `args` to the home-manager `builder` function with nice defaults
+
+    # Type
+
+    ```
+    wrapUser :: (AttrSet -> AttrSet) -> AttrSet -> AttrSet
+    ```
+  */
   wrapUser =
     builder: args:
     wrapBuilderWith (
@@ -60,16 +95,87 @@ let
 in
 {
 
-  # { } -> { }
-  # apply nice defaults to the `args` of `nixosSystem`
+  /**
+    Wrap the `args` to `nixpkgs.lib.nixosSystem` function with nice defaults
+
+    # Example
+
+    ```
+    nixosSystem { module = [ ./configuration.nix ]; }
+    ```
+
+    # Type
+
+    ```
+    nixosSystem :: AttrSet -> AttrSet
+    ```
+
+    # Arguments
+
+    - [args] Base arguments to `nixpkgs.lib.nixosSystem`
+  */
   nixosSystem = wrapNixOS inputs.nixpkgs.lib.nixosSystem;
-  # { } -> { }
-  # apply nice defaults to the `args` of (stable) `nixosSystem`
+
+  /**
+    Wrap the `args` to `nixpkgs-stable.lib.nixosSystem` with nice defaults
+
+    # Example
+
+    ```
+    nixosSystemStable { module = [ ./configuration.nix ]; }
+    ```
+
+    # Type
+
+    ```
+    nixosSystemStable :: AttrSet -> AttrSet
+    ```
+
+    # Arguments
+
+    - [args] Base arguments to `nixpkgs.lib.nixosSystem`
+  */
   nixosSystemStable = wrapNixOS inputs.nixpkgs-stable.lib.nixosSystem;
-  # { } -> { }
-  # apply nice defaults to the `args` of `darwinSystem`
+
+  /**
+    Wrap the `args` to `nix-darwin.lib.darwinSystem` with nice defaults
+
+    # Example
+
+    ```
+    darwinSystem { module = [ ./configuration.nix ]; }
+    ```
+
+    # Type
+
+    ```
+    darwinSystem :: AttrSet -> AttrSet
+    ```
+
+    # Arguments
+
+    - [args] Base arguments to `nix-darwin.lib.darwinSystem`
+  */
   darwinSystem = wrapDarwin inputs.nix-darwin.lib.darwinSystem;
-  # { } -> { }
-  # apply nice defaults to the `args` of `homeManagerConfiguration`
+
+  /**
+    Wrap the `args` to `home-manager.lib.homeManagerConfiguration` with nice defaults
+
+    # Example
+
+    ```
+    homeManagerConfiguration { module = [ ./configuration.nix ]; }
+    ```
+
+    # Type
+
+    ```
+    homeManagerConfiguration :: AttrSet -> AttrSet
+    ```
+
+    # Arguments
+
+    - [args] Base arguments to `home-manager.lib.homeManagerConfiguration`
+  */
   homeManagerConfiguration = wrapUser inputs.home-manager.lib.homeManagerConfiguration;
 }
