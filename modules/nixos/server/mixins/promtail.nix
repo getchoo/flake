@@ -10,6 +10,7 @@ in
     clients = lib.mkOption {
       type = types.listOf types.attrs;
       default = [ { } ];
+      defaultText = lib.literalExpression "[ { } ]";
       description = "Clients for promtail";
     };
   };

@@ -22,7 +22,7 @@ in
       };
 
       systemPackages = with pkgs; [
-        adw-gtk3
+        adw-gtk3 # make gtk3 apps look good
         blackbox-terminal
         celluloid
       ];

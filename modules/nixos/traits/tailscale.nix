@@ -18,6 +18,7 @@ in
     lib.mkMerge [
       {
         networking.firewall = {
+          # all connections from tailscale are safe...or should be
           trustedInterfaces = [ config.services.tailscale.interfaceName ];
         };
 

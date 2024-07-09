@@ -24,8 +24,8 @@ in
       };
 
       systemPackages = [
-        pkgs.haruna
-        inputs.krunner-nix.packages.${pkgs.system}.default
+        pkgs.haruna # mpv frontend
+        inputs.krunner-nix.packages.${pkgs.system}.default # thank you leah
       ];
     };
 

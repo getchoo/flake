@@ -12,13 +12,13 @@ in
   options.server.mixins.cloudflared = {
     enable = lib.mkEnableOption "cloudflared mixin";
     tunnelName = lib.mkOption {
+      description = ''
+        Name of the default tunnel being created
+      '';
       type = lib.types.str;
       default = "${config.networking.hostName}-nginx";
       defaultText = lib.literalExpression "\${config.networking.hostName}-nginx";
       example = "my-tunnel";
-      description = ''
-        Name of the default tunnel being created
-      '';
     };
 
     manageSecrets = lib.mkEnableOption "automatic management of secrets" // {
@@ -35,6 +35,7 @@ in
           tunnels.${cfg.tunnelName} = {
             default = "http_status:404";
 
+            # map our virtualHosts from nginx to ingress rules
             ingress = lib.mapAttrs (_: _: {
               service = "http://localhost:${toString nginx.defaultHTTPListenPort}";
             }) nginx.virtualHosts;

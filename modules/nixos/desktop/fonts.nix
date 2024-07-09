@@ -11,6 +11,7 @@ in
   options.desktop.fonts = {
     enable = lib.mkEnableOption "desktop fonts" // {
       default = config.desktop.enable;
+      defaultText = lib.literalExpression "config.desktop.enable";
     };
   };
 
