@@ -6,6 +6,7 @@ in
   options.base.networking = {
     enable = lib.mkEnableOption "base network settings" // {
       default = config.base.enable;
+      defaultText = lib.literalExpression "config.base.enable";
     };
   };
 

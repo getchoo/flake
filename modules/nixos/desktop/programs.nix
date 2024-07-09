@@ -11,6 +11,7 @@ in
   options.desktop.defaultPrograms = {
     enable = lib.mkEnableOption "default desktop programs" // {
       default = config.desktop.enable;
+      defaultText = lib.literalExpression "config.desktop.enable";
     };
   };
 

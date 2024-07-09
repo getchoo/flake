@@ -22,6 +22,7 @@ in
       {
         services.hercules-ci-agent = {
           enable = true;
+          # we want newer features
           package = unstable.hercules-ci-agent;
         };
       }

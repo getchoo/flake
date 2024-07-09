@@ -11,7 +11,8 @@ in
 {
   options.base.users = {
     enable = lib.mkEnableOption "basic user configurations" // {
-      default = true;
+      default = config.base.enable;
+      defaultText = lib.literalExpression "config.base.enable";
     };
 
     defaultRoot = {

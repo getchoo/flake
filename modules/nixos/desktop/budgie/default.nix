@@ -10,6 +10,7 @@ in
 {
   options.desktop.budgie.enable = lib.mkEnableOption "Budgie desktop";
 
+  # TODO: improve this module
   config = lib.mkIf cfg.enable {
     environment = {
       budgie.excludePackages = with pkgs; [
@@ -42,6 +43,7 @@ in
     };
 
     services.xserver = {
+      # fedora uses these by default
       displayManager.lightdm.greeters.slick = {
         theme = {
           name = "Materia-dark";
@@ -55,6 +57,7 @@ in
 
       desktopManager.budgie = {
         enable = true;
+        # make sure we actually use the above themes
         extraGSettingsOverrides = ''
           [org.gnome.desktop.interface:Budgie]
           color-scheme='prefer-dark'

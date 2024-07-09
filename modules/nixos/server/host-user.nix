@@ -10,8 +10,9 @@ let
 in
 {
   options.server.hostUser = {
-    enable = lib.mkEnableOption "${hostName} user configuration" // {
+    enable = lib.mkEnableOption "a default interactive user" // {
       default = config.server.enable;
+      defaultText = lib.literalExpression "config.server.enable";
     };
 
     manageSecrets = lib.mkEnableOption "automatic management of secrets" // {

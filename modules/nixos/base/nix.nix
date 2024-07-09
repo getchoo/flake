@@ -1,10 +1,9 @@
 { config, lib, ... }:
 let
   cfg = config.base.nixSettings;
-  enable = config.base.enable && cfg.enable;
 in
 {
-  config = lib.mkIf enable {
+  config = lib.mkIf cfg.enable {
     nix = {
       channel.enable = lib.mkDefault false;
       settings.trusted-users = [
