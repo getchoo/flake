@@ -3,6 +3,7 @@
   flake = {
     nixosConfigurations =
       let
+        # see ./lib/builders.nix
         inherit (self.lib) nixosSystem nixosSystemStable;
       in
       {

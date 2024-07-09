@@ -2,7 +2,9 @@
 {
   flake.homeConfigurations =
     let
+      # see ./lib/builders.nix
       inherit (self.lib) homeManagerConfiguration;
+
       pkgsFor = system: withSystem system ({ pkgs, ... }: pkgs);
     in
     {
