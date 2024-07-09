@@ -12,6 +12,8 @@
         default = pkgs.mkShellNoCC {
           packages =
             [
+              # we want to make sure we have the same
+              # nix behavior across machines
               pkgs.lix
 
               # format + lint
@@ -25,11 +27,14 @@
               pkgs.deploy-rs
               pkgs.fzf
               pkgs.just
+
+              # terranix
               self'.packages.opentofu
             ]
-            ++ lib.optional pkgs.stdenv.isDarwin [ inputs'.nix-darwin.packages.darwin-rebuild ]
+            # see above comment about {l,n}ix
+            ++ lib.optional pkgs.stdenv.isDarwin inputs'.nix-darwin.packages.darwin-rebuild
             ++ lib.optionals pkgs.stdenv.isLinux [
-              pkgs.nixos-rebuild
+              pkgs.nixos-rebuild # ditto
               inputs'.agenix.packages.agenix
             ];
         };
