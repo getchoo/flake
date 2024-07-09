@@ -14,11 +14,13 @@
   archetypes.personal.enable = true;
 
   base = {
+    # these don't work well on wsl
     networking.enable = false;
     security.enable = false;
   };
 
   environment = {
+    # i occasionally use graphics stuff
     noXlibs = lib.mkForce false;
     systemPackages = with pkgs; [
       wget
@@ -36,13 +38,15 @@
 
   wsl = {
     enable = true;
+
     defaultUser = "seth";
+    interop.includePath = false; # this is so annoying
     nativeSystemd = true;
+    startMenuLaunchers = false; # ditto
+
     wslConf.network = {
       hostname = "glados-wsl";
       generateResolvConf = true;
     };
-    startMenuLaunchers = false;
-    interop.includePath = false;
   };
 }
