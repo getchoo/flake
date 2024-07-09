@@ -16,7 +16,7 @@ in
 
   config = lib.mkIf cfg.enable {
     _module.args = {
-      secretsDir = ../../../secrets/${config.networking.hostName};
+      secretsDir = inputs.self + "/secrets/${config.networking.hostName}";
     };
 
     age = {

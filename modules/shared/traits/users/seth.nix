@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -19,7 +20,7 @@ in
       programs.fish.enable = true;
 
       home-manager.users.seth = {
-        imports = [ ../../../../users/seth ];
+        imports = [ (inputs.self + "/users/seth") ];
         seth = {
           enable = true;
           shell.fish.enable = true;
