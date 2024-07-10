@@ -9,7 +9,7 @@
 
   desktop = {
     enable = true;
-    plasma.enable = true;
+    gnome.enable = true;
   };
 
   environment.systemPackages = [ pkgs.obs-studio ];
