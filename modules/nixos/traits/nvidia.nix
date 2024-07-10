@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, ... }:
 let
   cfg = config.traits.nvidia;
   usingNvidia = lib.elem "nvidia" config.services.xserver.videoDrivers;
@@ -22,12 +17,9 @@ in
 
         services.xserver.videoDrivers = [ "nvidia" ];
 
-        hardware = {
-          graphics.extraPackages = [ pkgs.vaapiVdpau ]; # TODO: does this work...?
-          nvidia = {
-            package = lib.mkDefault config.boot.kernelPackages.nvidiaPackages.latest;
-            modesetting.enable = true;
-          };
+        hardware.nvidia = {
+          package = lib.mkDefault config.boot.kernelPackages.nvidiaPackages.latest;
+          modesetting.enable = true;
         };
       }
 
