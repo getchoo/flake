@@ -62,7 +62,7 @@ in
         };
 
         "com/raggesilver/BlackBox" = {
-          font = "NotoMono Nerd Font 12";
+          font = "NotoMono Nerd Font 11";
           theme-dark = "Catppuccin-Mocha";
           remember-window-size = true;
         };
