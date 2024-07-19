@@ -34,7 +34,7 @@ in
           # TODO: remove this nonsense when all implementations remove repl-flake
           ++ lib.optional (
             lib.versionOlder config.nix.package.version "2.22.0" # repl-flake was removed in nix 2.22.0
-            || lib.versionAtLeast config.nix.package.version "2.90.0-rc1" # but not in lix yet
+            || lib.versionAtLeast config.nix.package.version "2.90.0" # but not in lix yet
           ) "repl-flake";
 
         trusted-substituters = [ "https://getchoo.cachix.org" ];
