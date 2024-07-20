@@ -33,7 +33,7 @@
             # see above comment about {l,n}ix
             ++ lib.optional pkgs.stdenv.isDarwin inputs'.nix-darwin.packages.darwin-rebuild
             ++ lib.optionals pkgs.stdenv.isLinux [
-              pkgs.nixos-rebuild # ditto
+              (pkgs.nixos-rebuild.override { nix = pkgs.lix; }) # ditto
               inputs'.agenix.packages.agenix
             ];
         };
