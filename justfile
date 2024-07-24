@@ -46,8 +46,7 @@ update:
       --commit-lockfile-summary "flake: update all inputs"
 
 update-input input:
-    nix flake lock \
-      --update-input {{ input }} \
+    nix flake update {{ input }} \
       --commit-lock-file \
       --commit-lockfile-summary "flake: update {{ input }}"
 
