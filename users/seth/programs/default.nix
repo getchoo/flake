@@ -24,6 +24,7 @@ in
     ./git.nix
     ./gpg.nix
     ./mangohud.nix
+    ./moar.nix
     ./neovim.nix
     ./ssh.nix
     ./starship
