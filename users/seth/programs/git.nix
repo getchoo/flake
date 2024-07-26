@@ -38,11 +38,7 @@ in
       git = {
         enable = true;
 
-        difftastic = {
-          enable = true;
-          background = "dark";
-          display = "inline";
-        };
+        delta.enable = true;
 
         extraConfig = {
           init = {
