@@ -7,28 +7,34 @@
 {
   imports = [ inputs.lanzaboote.nixosModules.lanzaboote ];
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     # manual lanzaboote maintenance (NOTE: i have not actually used this since ~2022)
-    sbctl
+    pkgs.sbctl
     # TODO: is this actually required for using `tpm2-device=auto` to unlock LUKS volumes in initrd? probably
-    tpm2-tss
+    pkgs.tpm2-tss
   ];
 
   boot = {
-    initrd.systemd.enable = true;
+    initrd.systemd.enable = true; # for unlocking luks root with tpm2
+
     kernelPackages = pkgs.linuxPackages_latest;
 
     kernelParams = [ "amd_pstate=active" ];
 
-    # lanzaboote replaces this
-    loader.systemd-boot.enable = lib.mkForce false;
+    loader.systemd-boot.enable = lib.mkForce false; # lanzaboote replaces this
 
     lanzaboote = {
       enable = true;
+
       pkiBundle = "/etc/secureboot";
+
+      settings = {
+        console-mode = "auto";
+        editor = false;
+        timeout = 0;
+      };
     };
 
-    # for game drive
-    supportedFilesystems = [ "ntfs" ];
+    supportedFilesystems = [ "ntfs" ]; # for game drive
   };
 }
