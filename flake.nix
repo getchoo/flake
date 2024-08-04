@@ -46,7 +46,7 @@
         nixpkgs.follows = "nixpkgs";
         darwin.follows = "";
         home-manager.follows = "";
-        systems.follows = "lanzaboote/flake-utils/systems";
+        systems.follows = "nixos-wsl/flake-utils/systems";
       };
     };
 
@@ -56,7 +56,7 @@
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "";
         pre-commit.follows = "";
-        flake-utils.follows = "lanzaboote/flake-utils";
+        flake-utils.follows = "nixos-wsl/flake-utils";
       };
     };
 
@@ -66,7 +66,7 @@
       url = "sourcehut:~rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "lanzaboote/flake-utils";
+        flake-utils.follows = "nixos-wsl/flake-utils";
       };
     };
 
@@ -110,7 +110,6 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "";
-        flake-utils.follows = "lanzaboote/flake-utils";
       };
     };
 
@@ -140,7 +139,7 @@
       url = "github:terranix/terranix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "lanzaboote/flake-utils";
+        flake-utils.follows = "nixos-wsl/flake-utils";
         terranix-examples.follows = "";
         bats-support.follows = "";
         bats-assert.follows = "";
