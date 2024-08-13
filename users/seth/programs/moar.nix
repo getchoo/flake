@@ -19,7 +19,7 @@ in
     home = {
       packages = [ pkgs.moar ];
       sessionVariables = {
-        MOAR = "-style catppuccin-${config.catppuccin.flavor}";
+        MOAR = "-style catppuccin-${config.catppuccin.flavor} -quit-if-one-screen";
         PAGER = "moar";
       };
     };
