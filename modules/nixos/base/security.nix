@@ -8,20 +8,35 @@ in
       default = config.base.enable;
       defaultText = lib.literalExpression "config.base.enable";
     };
+
+    apparmor = lib.mkEnableOption "AppArmor support" // {
+      default = true;
+    };
+
+    auditing = lib.mkEnableOption "auditing support" // {
+      default = true;
+    };
   };
 
   # much here is sourced from https://xeiaso.net/blog/paranoid-nixos-2021-07-18/
-  config = lib.mkIf cfg.enable {
-    security = {
-      apparmor.enable = lib.mkDefault true;
-      audit.enable = lib.mkDefault true; # TODO: do i really need to set this manually?
-      auditd.enable = lib.mkDefault true; # ditto
-      polkit.enable = lib.mkDefault true; # ditto
-      sudo.execWheelOnly = true;
-    };
-
-    services = {
-      dbus.apparmor = lib.mkDefault "enabled";
-    };
-  };
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      {
+        security = {
+          polkit.enable = true;
+          sudo.execWheelOnly = true;
+        };
+      }
+      (lib.mkIf cfg.auditing {
+        security = {
+          audit.enable = true;
+          auditd.enable = true;
+        };
+      })
+      (lib.mkIf cfg.apparmor {
+        security.apparmor.enable = true;
+        services.dbus.apparmor = lib.mkDefault "enabled";
+      })
+    ]
+  );
 }
