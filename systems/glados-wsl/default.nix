@@ -14,9 +14,13 @@
   archetypes.personal.enable = true;
 
   base = {
-    # these don't work well on wsl
+    # this conflicts with nixos-wsl
     networking.enable = false;
-    security.enable = false;
+    security = {
+      # something, something `resolv.conf` error
+      # (nixos-wsl probably doesn't set it)
+      apparmor = false;
+    };
   };
 
   environment = {
