@@ -1,15 +1,6 @@
+{ pkgs, inputs, ... }:
 {
-  lib,
-  modulesPath,
-  pkgs,
-  inputs,
-  ...
-}:
-{
-  imports = [
-    (modulesPath + "/profiles/minimal.nix")
-    inputs.nixos-wsl.nixosModules.wsl
-  ];
+  imports = [ inputs.nixos-wsl.nixosModules.wsl ];
 
   archetypes.personal.enable = true;
 
@@ -23,14 +14,10 @@
     };
   };
 
-  environment = {
-    # i occasionally use graphics stuff
-    noXlibs = lib.mkForce false;
-    systemPackages = with pkgs; [
-      wget
-      wslu
-    ];
-  };
+  environment.systemPackages = with pkgs; [
+    wget
+    wslu
+  ];
 
   networking.hostName = "glados-wsl";
 
@@ -42,15 +29,10 @@
 
   wsl = {
     enable = true;
-
     defaultUser = "seth";
-    interop.includePath = false; # this is so annoying
-    nativeSystemd = true;
-    startMenuLaunchers = false; # ditto
-
-    wslConf.network = {
-      hostname = "glados-wsl";
-      generateResolvConf = true;
+    interop = {
+      includePath = false; # this is so annoying
+      register = true;
     };
   };
 }
