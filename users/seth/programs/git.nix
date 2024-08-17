@@ -1,8 +1,15 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
 let
   cfg = config.seth.programs.git;
 in
 {
+  imports = [ inputs.self.homeModules.riff ];
+
   options.seth.programs.git = {
     enable = lib.mkEnableOption "Git configuration settings" // {
       default = config.seth.enable;
@@ -38,7 +45,7 @@ in
       git = {
         enable = true;
 
-        delta.enable = true;
+        riff.enable = true;
 
         extraConfig = {
           init = {
