@@ -416,7 +416,7 @@
         "openwrt-imagebuilder": "openwrt-imagebuilder",
         "teawiebot": "teawiebot",
         "terranix": "terranix",
-        "treefmt-nix": "treefmt-nix_2"
+        "treefmt-nix": "treefmt-nix"
       }
     },
     "rust-overlay": {
@@ -460,7 +460,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "treefmt-nix": "treefmt-nix"
+        "treefmt-nix": []
       },
       "locked": {
         "lastModified": 1723478117,
@@ -504,27 +504,6 @@
       }
     },
     "treefmt-nix": {
-      "inputs": {
-        "nixpkgs": [
-          "teawiebot",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1721769617,
-        "narHash": "sha256-6Pqa0bi5nV74IZcENKYRToRNM5obo1EQ+3ihtunJ014=",
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "rev": "8db8970be1fb8be9c845af7ebec53b699fe7e009",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "type": "github"
-      }
-    },
-    "treefmt-nix_2": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
