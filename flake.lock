@@ -356,18 +356,17 @@
     },
     "nixpkgs-tracker-bot": {
       "inputs": {
-        "fenix": [],
         "nixpkgs": [
           "nixpkgs"
         ],
         "treefmt-nix": []
       },
       "locked": {
-        "lastModified": 1723494451,
-        "narHash": "sha256-1b69lWEr3srcddM4O91lzpjydGCMTAq7CP0W0BR2bZQ=",
+        "lastModified": 1723865323,
+        "narHash": "sha256-4Ze+EgkT6Qo85UOhsYV4DtLWgDOcHetaPdim2dzrGLo=",
         "owner": "getchoo",
         "repo": "nixpkgs-tracker-bot",
-        "rev": "66ea6f8c225cc2273cfbfb1b948604c170a78e8c",
+        "rev": "d11ff442b9c6e3fa898adb5e55d28afc11594687",
         "type": "github"
       },
       "original": {
