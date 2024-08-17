@@ -117,7 +117,6 @@
       url = "github:getchoo/nixpkgs-tracker-bot";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        fenix.follows = "";
         treefmt-nix.follows = "";
       };
     };
@@ -131,7 +130,7 @@
       url = "github:getchoo/teawiebot";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        fenix.follows = "";
+        treefmt-nix.follows = "";
       };
     };
 
