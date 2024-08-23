@@ -157,14 +157,15 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ]
+        ],
+        "vim-tera": "vim-tera"
       },
       "locked": {
-        "lastModified": 1723856833,
-        "narHash": "sha256-IhsLiF2S7K1JJiC26zbZKxBheDTGqxEoiu8xCvF5DGY=",
+        "lastModified": 1724447221,
+        "narHash": "sha256-KXJU5FXKi2PD68ga7xE53VqZdVmeX78QwgyltaTmEPQ=",
         "owner": "getchoo",
         "repo": "getchvim",
-        "rev": "597bdd129fd706c500bb7378ae4a48afe646c10c",
+        "rev": "779793ea450464e15cfc84dced17c905ccaca5ce",
         "type": "github"
       },
       "original": {
@@ -520,6 +521,22 @@
       "original": {
         "owner": "numtide",
         "repo": "treefmt-nix",
+        "type": "github"
+      }
+    },
+    "vim-tera": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1716960700,
+        "narHash": "sha256-Zs3rRAwTp9iZc5oOkiR88j7LX7YmDrEELXt29h+j55w=",
+        "owner": "vkhitrin",
+        "repo": "vim-tera",
+        "rev": "235fb7e7e76dfffc0596fabc1e090880bce48844",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vkhitrin",
+        "repo": "vim-tera",
         "type": "github"
       }
     }
