@@ -52,7 +52,7 @@ in
 
       pkgs.element-desktop
       pkgs.spotify
-      (pkgs.prismlauncher.override { withWaylandGLFW = true; })
+      pkgs.prismlauncher
     ];
   };
 }
