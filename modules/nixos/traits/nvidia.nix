@@ -1,25 +1,28 @@
 { config, lib, ... }:
 let
   cfg = config.traits.nvidia;
-  usingNvidia = lib.elem "nvidia" config.services.xserver.videoDrivers;
 in
 {
   options.traits.nvidia = {
     enable = lib.mkEnableOption "NVIDIA drivers";
-    nvk.enable = lib.mkEnableOption "NVK specialisation";
+
+    openModules.enable = lib.mkEnableOption "open kernel modules for the proprietary driver" // {
+      # unlike nixpkgs, i know all of my nvidia cards should prefer the open modules after 560
+      default = lib.versionAtLeast config.hardware.nvidia.package.version "560";
+    };
+
+    nvk.enable = lib.mkEnableOption "an NVK specialisation";
   };
 
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
       {
-        # NOTE: this is experiemental
-        boot.kernelParams = lib.optional usingNvidia "nvidia_drm.fbdev=1";
-
         services.xserver.videoDrivers = [ "nvidia" ];
 
         hardware.nvidia = {
           package = lib.mkDefault config.boot.kernelPackages.nvidiaPackages.latest;
-          modesetting.enable = true;
+
+          open = cfg.openModules.enable;
         };
       }
 
