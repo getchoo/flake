@@ -1,17 +1,17 @@
-{ self, ... }:
+{ inputs, ... }:
 {
-  flake = {
-    nixosConfigurations =
-      let
-        # see ./lib/builders.nix
-        inherit (self.lib) nixosSystem nixosSystemStable;
-      in
-      {
-        glados = nixosSystem { modules = [ ./glados ]; };
+  nixosConfigurations = {
+    glados = {
+      modules = [ ./glados ];
+    };
 
-        glados-wsl = nixosSystem { modules = [ ./glados-wsl ]; };
+    glados-wsl = {
+      modules = [ ./glados-wsl ];
+    };
 
-        atlas = nixosSystemStable { modules = [ ./atlas ]; };
-      };
+    atlas = {
+      nixpkgs = inputs.nixpkgs-stable;
+      modules = [ ./atlas ];
+    };
   };
 }

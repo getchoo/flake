@@ -3,5 +3,6 @@
     ./darwin
     ./home
     ./nixos
+    ./flake
   ];
 }
