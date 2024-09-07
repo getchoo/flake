@@ -1,10 +1,10 @@
 # ./dev/
 
-## devShells.nix
+## dev-shells.nix
 
 A misnomer - this only contains one shell
 
-## hydraJobs.nix
+## hydra-jobs.nix
 
 Jobs I want to run in CI. Currently built by
 [`nix-fast-build`](https://github.com/Mic92/nix-fast-build)

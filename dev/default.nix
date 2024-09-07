@@ -1,7 +1,7 @@
 {
   imports = [
-    ./devShells.nix
-    ./hydraJobs.nix
+    ./dev-shells.nix
+    ./hydra-jobs.nix
     ./treefmt.nix
   ];
 }
