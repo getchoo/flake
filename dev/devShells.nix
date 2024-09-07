@@ -19,7 +19,7 @@
               # format + lint
               pkgs.actionlint
               self'.formatter
-              pkgs.deadnix
+              pkgs.nixfmt-rfc-style
               pkgs.nil
               pkgs.statix
 
