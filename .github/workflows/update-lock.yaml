@@ -33,7 +33,7 @@ jobs:
           diagnostic-endpoint: ""
 
       - name: Update lockfile & make PR
-        uses: DeterminateSystems/update-flake-lock@v23
+        uses: DeterminateSystems/update-flake-lock@v24
         id: update
         with:
           commit-msg: ${{ inputs.commit-msg }}
