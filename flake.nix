@@ -25,12 +25,6 @@
 
         ./ext
       ];
-
-      perSystem =
-        { inputs', ... }:
-        {
-          _module.args.pkgs = inputs'.nixpkgs.legacyPackages.extend inputs.lix-module.overlays.lixFromNixpkgs;
-        };
     };
 
   inputs = {
@@ -98,16 +92,6 @@
         flake-compat.follows = "";
         flake-parts.follows = "flake-parts";
         pre-commit-hooks-nix.follows = "";
-      };
-    };
-
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        lix.follows = "";
-        flake-utils.follows = "nixos-wsl/flake-utils";
-        flakey-profile.follows = "";
       };
     };
 

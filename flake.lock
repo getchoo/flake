@@ -241,30 +241,6 @@
         "type": "github"
       }
     },
-    "lix-module": {
-      "inputs": {
-        "flake-utils": [
-          "nixos-wsl",
-          "flake-utils"
-        ],
-        "flakey-profile": [],
-        "lix": [],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1723510904,
-        "narHash": "sha256-zNW/rqNJwhq2lYmQf19wJerRuNimjhxHKmzrWWFJYts=",
-        "rev": "622a2253a071a1fb97a4d3c8103a91114acc1140",
-        "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/622a2253a071a1fb97a4d3c8103a91114acc1140.tar.gz"
-      },
-      "original": {
-        "type": "tarball",
-        "url": "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz"
-      }
-    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -431,7 +407,6 @@
         "home-manager": "home-manager",
         "krunner-nix": "krunner-nix",
         "lanzaboote": "lanzaboote",
-        "lix-module": "lix-module",
         "nix-darwin": "nix-darwin",
         "nix-index-database": "nix-index-database",
         "nixinate": "nixinate",

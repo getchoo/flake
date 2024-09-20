@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  inputs,
   ...
 }:
 let
@@ -22,6 +21,8 @@ in
 
   config = lib.mkIf cfg.enable {
     nix = {
+      package = lib.mkIf cfg.lix.enable pkgs.lix;
+
       settings = {
         auto-optimise-store = pkgs.stdenv.isLinux;
         experimental-features =
@@ -48,9 +49,6 @@ in
       };
     };
 
-    nixpkgs = {
-      config.allowUnfree = lib.mkDefault true;
-      overlays = lib.mkIf cfg.lix.enable [ inputs.lix-module.overlays.lixFromNixpkgs ];
-    };
+    nixpkgs.config.allowUnfree = lib.mkDefault true;
   };
 }
