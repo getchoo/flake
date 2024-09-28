@@ -16,13 +16,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment = {
-      noXlibs = lib.mkForce false;
-      systemPackages = with pkgs; [
-        wl-clipboard
-        xclip
-      ];
-    };
+    environment.systemPackages = with pkgs; [
+      wl-clipboard
+      xclip
+    ];
 
     programs = {
       chromium.enable = true;
