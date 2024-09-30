@@ -13,5 +13,4 @@ jobs:
       commit-message: "flake: update nixpkgs"
       flake-inputs: "nixpkgs nixpkgs-stable"
     secrets:
-      APP_ID: ${{ secrets.APP_ID }}
       PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
