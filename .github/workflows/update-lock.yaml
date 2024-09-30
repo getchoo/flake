@@ -3,18 +3,21 @@ name: Update flake.lock
 on:
   workflow_call:
     inputs:
-      commit-msg:
+      commit-message:
         description: "Summary for lockfile commit"
         required: true
         type: string
-      inputs:
+      flake-inputs:
         description: "Flake inputs to update"
         required: false
         default: ""
         type: string
     secrets:
-      MERGE_TOKEN:
-        description: PAT to create and merge PR
+      APP_ID:
+        description: GitHub Bot Application ID
+        required: true
+      PRIVATE_KEY:
+        description: GitHub Bot Application client secret
         required: true
 
 jobs:
@@ -24,27 +27,41 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Generate GitHub App token
+        uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.PRIVATE_KEY }}
+
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ steps.app-token.outputs.token }}
 
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@v14
         with:
           diagnostic-endpoint: ""
 
-      - name: Update lockfile & make PR
-        uses: DeterminateSystems/update-flake-lock@v24
-        id: update
+      - name: Update flake.lock
+        run: |
+          nix flake update ${{ inputs.flake-inputs }}
+
+      - name: Create Pull request
+        id: pull-request
+        uses: peter-evans/create-pull-request@v7
         with:
-          commit-msg: ${{ inputs.commit-msg }}
-          inputs: ${{ inputs.inputs }}
-          pr-title: ${{ inputs.commit-msg }}
-          token: ${{ secrets.MERGE_TOKEN }}
+          branch: update-flake-lock
+          commit-message: ${{ inputs.commit-message }}
+          title: ${{ inputs.commit-message }}
+          token: ${{ steps.app-token.outputs.token }}
+          sign-commits: true
 
       - name: Enable auto-merge
         shell: bash
-        if: steps.update.outputs.pull-request-number != ''
-        run: gh pr merge --auto --rebase "$PR_ID"
+        if: ${{ env.PR_ID != '' }}
+        run: gh pr merge --auto --squash "$PR_ID"
         env:
-          GH_TOKEN: ${{ secrets.MERGE_TOKEN }}
-          PR_ID: ${{ steps.update.outputs.pull-request-number }}
+          PR_ID: ${{ steps.pull-request.outputs.pull-request-number }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}

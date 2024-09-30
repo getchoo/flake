@@ -10,5 +10,7 @@ jobs:
   update:
     uses: ./.github/workflows/update-lock.yaml
     with:
-      commit-msg: "flake: update all inputs"
-    secrets: inherit
+      commit-message: "flake: update all inputs"
+    secrets:
+      APP_ID: ${{ secrets.APP_ID }}
+      PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
