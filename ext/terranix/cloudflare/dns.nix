@@ -3,14 +3,14 @@ let
   mkRecord =
     {
       name,
-      value,
+      content,
       type,
       zone_id,
     }:
     {
       inherit
         name
-        value
+        content
         type
         zone_id
         ;
@@ -23,7 +23,8 @@ let
   };
   inherit (zones) getchoo_com;
 
-  atlas_tunnel = lib.tfRef "data.cloudflare_tunnel.atlas-nginx.id" + ".cfargotunnel.com";
+  atlas_tunnel =
+    lib.tfRef "data.cloudflare_zero_trust_tunnel_cloudflared.atlas-nginx.id" + ".cfargotunnel.com";
 
   pagesSubdomainFor = project: lib.tfRef "resource.cloudflare_pages_project.${project}.subdomain";
   blockEmailSpoofingFor =
@@ -34,21 +35,21 @@ let
     {
       "${domain}_dmarc" = {
         name = "_dmarc";
-        value = "v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s;";
+        content = "v=DMARC1; p=reject; sp=reject; adkim=s; aspf=s;";
         type = "TXT";
         inherit zone_id;
       };
 
       "${domain}_domainkey" = {
         name = "*._domainkey";
-        value = "v=DKIM1; p=";
+        content = "v=DKIM1; p=";
         type = "TXT";
         inherit zone_id;
       };
 
       "${domain}_email" = {
         name = "@";
-        value = "v=spf1 -all";
+        content = "v=spf1 -all";
         type = "TXT";
         inherit zone_id;
       };
@@ -65,35 +66,35 @@ in
     lib.mapAttrs (_: mkRecord) {
       getchoo_com_website = {
         name = "@";
-        value = pagesSubdomainFor "personal_website";
+        content = pagesSubdomainFor "personal_website";
         type = "CNAME";
         zone_id = getchoo_com;
       };
 
       getchoo_com_www = {
         name = "www";
-        value = "getchoo.com";
+        content = "getchoo.com";
         type = "CNAME";
         zone_id = getchoo_com;
       };
 
       getchoo_com_api = {
         name = "api";
-        value = pagesSubdomainFor "teawie_api";
+        content = pagesSubdomainFor "teawie_api";
         type = "CNAME";
         zone_id = getchoo_com;
       };
 
       getchoo_com_miniflux = {
         name = "miniflux";
-        value = atlas_tunnel;
+        content = atlas_tunnel;
         type = "CNAME";
         zone_id = getchoo_com;
       };
 
       getchoo_com_keyoxide = {
         name = "@";
-        value = "$argon2id$v=19$m=512,t=256,p=1$AlA6W5fP7J14zMsw0W5KFQ$EQz/NCE0/TQpE64r2Eo/yOpjtMZ9WXevHsv3YYP7CXg";
+        content = "$argon2id$v=19$m=512,t=256,p=1$AlA6W5fP7J14zMsw0W5KFQ$EQz/NCE0/TQpE64r2Eo/yOpjtMZ9WXevHsv3YYP7CXg";
         type = "TXT";
         zone_id = getchoo_com;
       };
