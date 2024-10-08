@@ -24,14 +24,14 @@ in
 
       build_config = {
         build_caching = true;
-        build_command = "./.github/build_site.sh";
+        build_command = "./build-site.sh";
         destination_dir = "/dist";
       };
 
       deployment_configs =
         let
           environment_variables = {
-            MINIFLUX_URL = "https://miniflux.getchoo.com";
+            ZOLA_VERSION = "0.19.2";
           };
         in
         {
