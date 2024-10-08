@@ -14,6 +14,8 @@ in
 
     ./budgie
     ./gnome
+    ./niri
+    ./niri/desktop.nix
     ./plasma
   ];
 
