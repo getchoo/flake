@@ -14,6 +14,7 @@ in
 
     ./budgie
     ./gnome
+    ./niri
     ./plasma
   ];
 
