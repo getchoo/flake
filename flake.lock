@@ -161,11 +161,11 @@
         "vim-tera": "vim-tera"
       },
       "locked": {
-        "lastModified": 1727730706,
-        "narHash": "sha256-L4U5m3LXvI3IcH3GlwWQz6rObXo6ZEMvz1Q6apWzgbw=",
+        "lastModified": 1728490269,
+        "narHash": "sha256-uGLR8XavYB5UOSDafllNn8OFri/Di9d5PE3xE6jXr0M=",
         "owner": "getchoo",
         "repo": "getchvim",
-        "rev": "adf670ce26ad74a52a068854bf42b351827f2e0c",
+        "rev": "18d1a73593ac8302b8341ea897bc08130cae904e",
         "type": "github"
       },
       "original": {
