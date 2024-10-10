@@ -261,6 +261,21 @@
         "type": "github"
       }
     },
+    "nix-filter": {
+      "locked": {
+        "lastModified": 1710156097,
+        "narHash": "sha256-1Wvk8UP7PXdf8bCCaEoMnOT1qe5/Duqgj+rL8sRQsSM=",
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "rev": "3342559a24e85fc164b295c3444e8a139924675b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "nix-filter",
+        "type": "github"
+      }
+    },
     "nix-index-database": {
       "inputs": {
         "nixpkgs": [
@@ -357,17 +372,18 @@
     },
     "nixpkgs-tracker-bot": {
       "inputs": {
+        "nix-filter": "nix-filter",
         "nixpkgs": [
           "nixpkgs"
         ],
         "treefmt-nix": []
       },
       "locked": {
-        "lastModified": 1727729121,
-        "narHash": "sha256-TDVHT8Ixl3JkF/dnXKYMTfJfT2khOvMvkWT0wrIflpo=",
+        "lastModified": 1728559589,
+        "narHash": "sha256-ULu9qilAAtgS7zG7jlYST+GexSdsIrZZJu1l1P24DUY=",
         "owner": "getchoo",
         "repo": "nixpkgs-tracker-bot",
-        "rev": "4e1fab6ff1d17a0fff50e1a87af8c0bbe8c075f9",
+        "rev": "c61b701095a1f6b52777d317275f34687e57ee3e",
         "type": "github"
       },
       "original": {
