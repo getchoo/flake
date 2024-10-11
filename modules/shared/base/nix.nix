@@ -5,6 +5,7 @@
   ...
 }:
 let
+  inherit (pkgs.stdenv.hostPlatform) isLinux;
   cfg = config.base.nixSettings;
 in
 {
@@ -15,7 +16,7 @@ in
     };
 
     lix.enable = lib.mkEnableOption "the use of Lix over Nix" // {
-      default = true;
+      default = isLinux;
     };
   };
 
@@ -24,7 +25,7 @@ in
       package = lib.mkIf cfg.lix.enable pkgs.lix;
 
       settings = {
-        auto-optimise-store = pkgs.stdenv.isLinux;
+        auto-optimise-store = isLinux;
         experimental-features =
           [
             "nix-command"
