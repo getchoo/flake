@@ -379,11 +379,11 @@
         "treefmt-nix": []
       },
       "locked": {
-        "lastModified": 1728559589,
-        "narHash": "sha256-ULu9qilAAtgS7zG7jlYST+GexSdsIrZZJu1l1P24DUY=",
+        "lastModified": 1728740212,
+        "narHash": "sha256-ZOD/8Wjn7lNZjpiOLBwmYCcEe8tYmxxDMhhiWJViGws=",
         "owner": "getchoo",
         "repo": "nixpkgs-tracker-bot",
-        "rev": "c61b701095a1f6b52777d317275f34687e57ee3e",
+        "rev": "35f9d5634450ed8fd6428b7d8b7f5c2b06d01a21",
         "type": "github"
       },
       "original": {
