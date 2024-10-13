@@ -9,10 +9,7 @@ let
 in
 {
   options.seth.programs.vscode = {
-    enable = lib.mkEnableOption "VSCode configuration" // {
-      default = config.seth.desktop.enable;
-      defaultText = lib.literalExpression "config.seth.desktop.enable";
-    };
+    enable = lib.mkEnableOption "VSCode configuration";
   };
 
   config = lib.mkIf cfg.enable {
