@@ -25,6 +25,7 @@ in
       package = lib.mkIf cfg.lix.enable pkgs.lix;
 
       settings = {
+        always-allow-substitutes = true;
         auto-optimise-store = isLinux;
         experimental-features =
           [
