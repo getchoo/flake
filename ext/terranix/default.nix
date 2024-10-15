@@ -24,13 +24,12 @@
     in
     {
       apps = {
-        apply-tf = {
+        tf = {
           type = "app";
           program = lib.getExe (
-            pkgs.writeShellScriptBin "apply" ''
-              cp --force ${terranix} config.tf.json \
-                && ${lib.getExe opentofu} init \
-                && ${lib.getExe opentofu} apply
+            pkgs.writeShellScriptBin "tf" ''
+              ln -sf ${terranix} config.tf.json
+              exec ${lib.getExe opentofu} "$@"
             ''
           );
         };
