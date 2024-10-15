@@ -24,26 +24,30 @@ in
     nix = {
       package = lib.mkIf cfg.lix.enable pkgs.lix;
 
-      settings = {
-        always-allow-substitutes = true;
-        auto-optimise-store = isLinux;
-        experimental-features =
-          [
-            "nix-command"
-            "flakes"
-            "auto-allocate-uids"
-          ]
-          # TODO: remove this nonsense when all implementations remove repl-flake
-          ++ lib.optional (
-            lib.versionOlder config.nix.package.version "2.22.0" # repl-flake was removed in nix 2.22.0
-            || lib.versionAtLeast config.nix.package.version "2.90.0" # but not in lix yet
-          ) "repl-flake";
+      settings =
+        {
+          auto-optimise-store = isLinux;
+          experimental-features =
+            [
+              "nix-command"
+              "flakes"
+              "auto-allocate-uids"
+            ]
+            # TODO: remove this nonsense when all implementations remove repl-flake
+            ++ lib.optional (
+              lib.versionOlder config.nix.package.version "2.22.0" # repl-flake was removed in nix 2.22.0
+              || lib.versionAtLeast config.nix.package.version "2.90.0" # but not in lix yet
+            ) "repl-flake";
 
-        trusted-substituters = [ "https://getchoo.cachix.org" ];
-        trusted-public-keys = [ "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE=" ];
+          trusted-substituters = [ "https://getchoo.cachix.org" ];
+          trusted-public-keys = [ "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE=" ];
 
-        nix-path = config.nix.nixPath;
-      };
+          nix-path = config.nix.nixPath;
+        }
+        // lib.mkIf (lib.versionAtLeast config.nix.package.version "2.19.0") {
+          always-allow-substitutes = true;
+
+        };
 
       gc = {
         automatic = lib.mkDefault true;
