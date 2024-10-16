@@ -1,5 +1,3 @@
 {
-  flake.homeModules = {
-    riff = ./riff.nix;
-  };
+  riff = ./riff.nix;
 }

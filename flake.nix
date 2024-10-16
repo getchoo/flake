@@ -7,8 +7,11 @@
   };
 
   outputs =
-    inputs:
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+    { self, nixpkgs, ... }@inputs:
+    let
+      inherit (nixpkgs) lib;
+      inherit (self.lib.builders) darwinSystem homeManagerConfiguration nixosSystem;
+
       systems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -16,15 +19,166 @@
         "aarch64-darwin"
       ];
 
-      imports = [
-        ./dev
-        ./lib
-        ./modules
-        ./systems
-        ./users
+      forAllSystems = lib.genAttrs systems;
+      nixpkgsFor = forAllSystems (system: nixpkgs.legacyPackages.${system});
+      treefmtFor = forAllSystems (
+        system: inputs.treefmt-nix.lib.evalModule nixpkgsFor.${system} ./treefmt.nix
+      );
+    in
+    {
+      apps = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgsFor.${system};
 
-        ./ext
-      ];
+          opentofu = pkgs.opentofu.withPlugins (plugins: [
+            plugins.cloudflare
+            plugins.tailscale
+          ]);
+
+          terranix = inputs.terranix.lib.terranixConfiguration {
+            inherit system;
+            modules = [ ./terranix ];
+          };
+        in
+        {
+          tf = {
+            type = "app";
+            program = lib.getExe (
+              pkgs.writeShellScriptBin "tf" ''
+                ln -sf ${terranix} config.tf.json
+                exec ${lib.getExe opentofu} "$@"
+              ''
+            );
+          };
+        }
+        // (inputs.nixinate.nixinate.${system} self).nixinate
+      );
+
+      checks = forAllSystems (system: {
+        treefmt = treefmtFor.${system}.config.build.check self;
+      });
+
+      devShells = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgsFor.${system};
+          nixos-rebuild = pkgs.nixos-rebuild.override { nix = pkgs.lix; };
+          inherit (inputs.nix-darwin.packages.${system}) darwin-rebuild;
+        in
+        {
+          default = pkgs.mkShellNoCC {
+            packages =
+              [
+                # For CI
+                pkgs.actionlint
+
+                # Nix tools
+                pkgs.nixfmt-rfc-style
+                pkgs.nil
+                pkgs.statix
+
+                self.formatter.${system}
+                pkgs.just
+              ]
+              ++ lib.optional pkgs.stdenv.isDarwin darwin-rebuild # See next comment
+              ++ lib.optionals pkgs.stdenv.isLinux [
+                # we want to make sure we have the same
+                # nix behavior across machines
+                pkgs.lix
+
+                # ditto
+                nixos-rebuild
+
+                inputs.agenix.packages.${system}.agenix
+              ];
+          };
+        }
+
+      );
+
+      lib = import ./lib { inherit lib inputs self; };
+
+      formatter = forAllSystems (system: treefmtFor.${system}.config.build.wrapper);
+
+      darwinModules = import ./modules/darwin;
+      homeModules = import ./modules/home;
+      nixosModules = import ./modules/nixos;
+
+      darwinConfigurations = lib.mapAttrs (_: darwinSystem) {
+        caroline = {
+          modules = [ ./systems/caroline ];
+        };
+      };
+
+      homeConfigurations = lib.mapAttrs (_: homeManagerConfiguration) {
+        seth = {
+          modules = [ ./users/seth/home.nix ];
+          pkgs = nixpkgsFor.x86_64-linux;
+        };
+      };
+
+      nixosConfigurations = lib.mapAttrs (_: nixosSystem) {
+        glados = {
+          modules = [ ./systems/glados ];
+        };
+
+        glados-wsl = {
+          modules = [ ./systems/glados-wsl ];
+        };
+
+        atlas = {
+          nixpkgs = inputs.nixpkgs-stable;
+          modules = [ ./systems/atlas ];
+        };
+      };
+
+      legacyPackages.x86_64-linux =
+        let
+          pkgs = nixpkgsFor.x86_64-linux;
+
+          openwrtTools = lib.makeScope pkgs.newScope (final: {
+            profileFromRelease =
+              release: (inputs.openwrt-imagebuilder.lib.profiles { inherit pkgs release; }).identifyProfile;
+
+            buildOpenWrtImage =
+              { profile, ... }@args:
+              inputs.openwrt-imagebuilder.lib.build (
+                final.profileFromRelease args.release profile
+                // builtins.removeAttrs args [
+                  "profile"
+                  "release"
+                ]
+              );
+          });
+        in
+        {
+          turret = openwrtTools.callPackage ./openwrt/turret.nix { };
+        };
+
+      hydraJobs =
+        let
+          # architecture of "main" CI machine
+          ciSystem = "x86_64-linux";
+
+          derivFromCfg = deriv: deriv.config.system.build.toplevel or deriv.activationPackage;
+          mapCfgsToDerivs = lib.mapAttrs (lib.const derivFromCfg);
+
+          pkgs = nixpkgsFor.${ciSystem};
+        in
+        {
+          # i don't care to run these for each system, as they should be the same
+          # and don't need to be cached
+          checks = self.checks.${ciSystem};
+          devShells = self.devShells.${ciSystem};
+
+          darwinConfigurations = mapCfgsToDerivs self.darwinConfigurations;
+          homeConfigurations = mapCfgsToDerivs self.homeConfigurations;
+          nixosConfigurations = mapCfgsToDerivs self.nixosConfigurations // {
+            # please add aarch64 runners github...please...
+            atlas = lib.deepSeq (derivFromCfg self.nixosConfigurations.atlas).drvPath pkgs.emptyFile;
+          };
+        };
     };
 
   inputs = {
@@ -33,11 +187,6 @@
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-      inputs.nixpkgs-lib.follows = "nixpkgs";
     };
 
     agenix = {
@@ -90,7 +239,6 @@
       inputs = {
         nixpkgs.follows = "nixpkgs";
         flake-compat.follows = "";
-        flake-parts.follows = "flake-parts";
         pre-commit-hooks-nix.follows = "";
       };
     };

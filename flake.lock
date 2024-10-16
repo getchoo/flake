@@ -118,6 +118,7 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
+          "lanzaboote",
           "nixpkgs"
         ]
       },
@@ -218,9 +219,7 @@
       "inputs": {
         "crane": "crane",
         "flake-compat": [],
-        "flake-parts": [
-          "flake-parts"
-        ],
+        "flake-parts": "flake-parts",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -418,7 +417,6 @@
         "arkenfox": "arkenfox",
         "catppuccin": "catppuccin",
         "firefox-addons": "firefox-addons",
-        "flake-parts": "flake-parts",
         "getchvim": "getchvim",
         "home-manager": "home-manager",
         "krunner-nix": "krunner-nix",

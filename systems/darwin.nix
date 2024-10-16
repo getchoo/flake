@@ -1,7 +1,0 @@
-{
-  darwinConfigurations = {
-    caroline = {
-      modules = [ ./caroline ];
-    };
-  };
-}
