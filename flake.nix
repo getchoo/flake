@@ -52,7 +52,6 @@
             );
           };
         }
-        // (inputs.nixinate.nixinate.${system} self).nixinate
       );
 
       checks = forAllSystems (system: {
@@ -241,11 +240,6 @@
         flake-compat.follows = "";
         pre-commit-hooks-nix.follows = "";
       };
-    };
-
-    nixinate = {
-      url = "github:MatthewCroughan/nixinate";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-index-database = {

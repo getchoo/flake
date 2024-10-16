@@ -16,6 +16,16 @@ default:
 rebuild subcmd *extraArgs="":
     {{ rebuild }} {{ subcmd }} {{ rebuildArgs }} --flake . {{ extraArgs }}
 
+remote-rebuild system subcmd *extraArgs="":
+    {{ rebuild }} \
+      {{ subcmd }} \
+      {{ rebuildArgs }} \
+      --build-host {{ system }} \
+      --target-host {{ system }} \
+      --use-remote-sudo \
+      --flake '.#{{ system }}' \
+      {{ extraArgs }}
+
 boot *extraArgs="": (rebuild "boot" extraArgs)
 
 build *extraArgs="": (rebuild "build" extraArgs)
@@ -51,4 +61,4 @@ update-input input:
       --commit-lockfile-summary "flake: update {{ input }}"
 
 deploy system:
-    nix run '.#{{ system }}'
+	@just remote-rebuild {{ system }} "switch"

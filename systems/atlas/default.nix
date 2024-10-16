@@ -1,4 +1,4 @@
-{ config, modulesPath, ... }:
+{ modulesPath, ... }:
 {
   imports = [
     (modulesPath + "/profiles/minimal.nix")
@@ -8,14 +8,6 @@
     ./nixpkgs-tracker-bot.nix
     ./teawiebot.nix
   ];
-
-  _module.args.nixinate = {
-    host = config.networking.hostName;
-    sshUser = "root";
-    buildOn = "remote";
-    substituteOnTarget = true;
-    hermetic = false;
-  };
 
   archetypes.server.enable = true;
   base.networking.enable = false;
