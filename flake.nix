@@ -21,9 +21,6 @@
 
       forAllSystems = lib.genAttrs systems;
       nixpkgsFor = forAllSystems (system: nixpkgs.legacyPackages.${system});
-      treefmtFor = forAllSystems (
-        system: inputs.treefmt-nix.lib.evalModule nixpkgsFor.${system} ./treefmt.nix
-      );
     in
     {
       apps = forAllSystems (
@@ -54,9 +51,58 @@
         }
       );
 
-      checks = forAllSystems (system: {
-        treefmt = treefmtFor.${system}.config.build.check self;
-      });
+      checks = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgsFor.${system};
+
+          mkCheck =
+            {
+              name,
+              deps ? [ ],
+              script,
+            }:
+            pkgs.runCommand name { nativeBuildInputs = deps; } ''
+              ${script}
+              touch $out
+            '';
+        in
+        {
+          actionlint = mkCheck {
+            name = "check-actionlint";
+            deps = [ pkgs.actionlint ];
+            script = "actionlint ${self}/.github/workflows/**";
+          };
+
+          deadnix = mkCheck {
+            name = "check-deadnix";
+            deps = [ pkgs.deadnix ];
+            script = "deadnix --fail ${self}";
+          };
+
+          just = mkCheck {
+            name = "check-just";
+            deps = [ pkgs.just ];
+            script = ''
+              cd ${self}
+              just --check --fmt --unstable
+              just --summary
+            '';
+          };
+
+          nixfmt = mkCheck {
+            name = "check-nixfmt";
+            deps = [ pkgs.nixfmt-rfc-style ];
+            script = "nixfmt --check ${self}";
+          };
+
+          statix = mkCheck {
+            name = "check-statix";
+            deps = [ pkgs.statix ];
+            script = "statix check ${self}";
+          };
+        }
+      );
 
       devShells = forAllSystems (
         system:
@@ -73,11 +119,10 @@
                 pkgs.actionlint
 
                 # Nix tools
-                pkgs.nixfmt-rfc-style
                 pkgs.nil
                 pkgs.statix
-
                 self.formatter.${system}
+
                 pkgs.just
               ]
               ++ lib.optional pkgs.stdenv.isDarwin darwin-rebuild # See next comment
@@ -93,12 +138,11 @@
               ];
           };
         }
-
       );
 
       lib = import ./lib { inherit lib inputs self; };
 
-      formatter = forAllSystems (system: treefmtFor.${system}.config.build.wrapper);
+      formatter = forAllSystems (system: nixpkgsFor.${system}.nixfmt-rfc-style);
 
       darwinModules = import ./modules/darwin;
       homeModules = import ./modules/home;
@@ -285,11 +329,6 @@
         bats-support.follows = "";
         bats-assert.follows = "";
       };
-    };
-
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }
