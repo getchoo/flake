@@ -1,5 +1,5 @@
 {
-  description = "getchoo's flake for system configurations";
+  description = "Getchoo's Flake for system configurations";
 
   nixConfig = {
     extra-substituters = [ "https://getchoo.cachix.org" ];
@@ -12,15 +12,9 @@
       inherit (nixpkgs) lib;
       inherit (self.lib.builders) darwinSystem homeManagerConfiguration nixosSystem;
 
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
-
+      systems = with lib.platforms; lib.intersectLists (x86_64 ++ aarch64) (darwin ++ linux);
       forAllSystems = lib.genAttrs systems;
-      nixpkgsFor = forAllSystems (system: nixpkgs.legacyPackages.${system});
+      nixpkgsFor = nixpkgs.legacyPackages;
     in
     {
       apps = forAllSystems (
@@ -127,11 +121,11 @@
               ]
               ++ lib.optional pkgs.stdenv.isDarwin darwin-rebuild # See next comment
               ++ lib.optionals pkgs.stdenv.isLinux [
-                # we want to make sure we have the same
-                # nix behavior across machines
+                # We want to make sure we have the same
+                # Nix behavior across machines
                 pkgs.lix
 
-                # ditto
+                # Ditto
                 nixos-rebuild
 
                 inputs.agenix.packages.${system}.agenix
@@ -201,7 +195,7 @@
 
       hydraJobs =
         let
-          # architecture of "main" CI machine
+          # Architecture of "main" CI machine
           ciSystem = "x86_64-linux";
 
           derivFromCfg = deriv: deriv.config.system.build.toplevel or deriv.activationPackage;
@@ -210,7 +204,7 @@
           pkgs = nixpkgsFor.${ciSystem};
         in
         {
-          # i don't care to run these for each system, as they should be the same
+          # I don't care to run these for each system, as they should be the same
           # and don't need to be cached
           checks = self.checks.${ciSystem};
           devShells = self.devShells.${ciSystem};
@@ -227,6 +221,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
