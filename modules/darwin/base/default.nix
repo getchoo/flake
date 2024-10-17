@@ -4,7 +4,6 @@ let
 in
 {
   imports = [
-    ../../shared
     ./programs.nix
   ];
 

@@ -1,15 +1,14 @@
 # ./dev/
 
-## dev-shells.nix
+## shells.nix
 
 A misnomer - this only contains one shell
 
-## hydra-jobs.nix
+## hydra.nix
 
 Jobs I want to run in CI. Currently built by
 [`nix-fast-build`](https://github.com/Mic92/nix-fast-build)
 
-## treefmt.nix
+## checks.nix
 
-[treefmt](https://github.com/numtide/treefmt) configuration via
-[treefmt-nix](https://github.com/numtide/treefmt-nix)
+Basic lint and formatting checks for the entire Flake

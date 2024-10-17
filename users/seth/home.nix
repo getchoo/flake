@@ -1,5 +1,5 @@
 {
-  imports = [ ./. ];
+  imports = [ ./default.nix ];
 
   seth = {
     enable = true;

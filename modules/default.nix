@@ -1,8 +1,11 @@
 {
-  imports = [
-    ./darwin
-    ./home
-    ./nixos
-    ./flake
-  ];
+  flake = {
+    darwinModules = {
+      default = ./darwin;
+    };
+
+    nixosModules = {
+      default = ./nixos;
+    };
+  };
 }

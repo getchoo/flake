@@ -1,6 +1,0 @@
-{
-  imports = [
-    ./openwrt.nix
-    ./terranix
-  ];
-}

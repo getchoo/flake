@@ -1,5 +1,5 @@
 {
-  description = "getchoo's flake for system configurations";
+  description = "Getchoo's Flake for system configurations";
 
   nixConfig = {
     extra-substituters = [ "https://getchoo.cachix.org" ];
@@ -17,19 +17,22 @@
       ];
 
       imports = [
+        inputs.nix-exprs.flakeModules.configs
+
         ./dev
         ./lib
         ./modules
+        ./openwrt
         ./systems
+        ./terranix
         ./users
-
-        ./ext
       ];
     };
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -95,8 +98,8 @@
       };
     };
 
-    nixinate = {
-      url = "github:MatthewCroughan/nixinate";
+    nix-exprs = {
+      url = "github:getchoo/nix-exprs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -143,11 +146,6 @@
         bats-support.follows = "";
         bats-assert.follows = "";
       };
-    };
-
-    treefmt-nix = {
-      url = "github:numtide/treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 }

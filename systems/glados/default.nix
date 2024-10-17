@@ -1,8 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   imports = [
     ./boot.nix
     ./hardware-configuration.nix
+
+    inputs.self.nixosModules.default
   ];
 
   archetypes.personal.enable = true;

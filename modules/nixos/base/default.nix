@@ -9,7 +9,6 @@ let
 in
 {
   imports = [
-    ../../shared
     ./networking.nix
     ./nix.nix
     ./programs.nix

@@ -27,19 +27,28 @@ Small functions I like to use around here
 Sets of modules meant for NixOS and
 [nix-darwin](https://github.com/LnL7/nix-darwin)
 
+## openwrt/
+
+Configurations for
+[nix-openwrt-imagebuilder](https://github.com/astro/nix-openwrt-imagebuilder)
+
 ## secrets/
 
 Configuration secrets managed by the wonderful
 [agenix](https://github.com/ryantm/agenix)
 
+## systems/
+
+My NixOS and nix-darwin system configurations
+
+## terranix/
+
+Personal infrastructure defined with [terranix](https://terranix.org/)
+
 ## users/
 
 Home of my [home-manager](https://nix-community.github.io/home-manager/) user
 configurations
-
-## ext/
-
-External, not so nix-y things
 
 ## .envrc
 
