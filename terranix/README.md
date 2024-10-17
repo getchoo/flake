@@ -12,6 +12,10 @@ Secure, remote access via [tailscale](https://tailscale.com/)
 
 [Cloud backend for OpenTofu state](https://opentofu.org/docs/language/settings/tf-cloud/)
 
+## config.nix
+
+The Entrypoint
+
 ## vars.nix
 
 Shared variable definitions
