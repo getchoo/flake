@@ -19,15 +19,3 @@ Main desktop, but the windows install :p
 
 Ampere ARM server from Oracle, services my [Miniflux](https://miniflux.app/)
 instance and some other things.
-
-## darwin.nix
-
-Declarations of nix-darwin systems
-
-## nixos.nix
-
-Declarations of NixOS systems
-
-## nixinate.nix
-
-Apps to deploy the above systems through [nixinate](https://github.com/MatthewCroughan/nixinate)
