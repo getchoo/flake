@@ -151,14 +151,6 @@
         };
       };
 
-      homeModules = {
-        riff = mkModule {
-          name = "riff";
-          type = "home";
-          imports = [ ./modules/home/riff.nix ];
-        };
-      };
-
       nixosModules = {
         default = mkModule {
           name = "default";
@@ -304,6 +296,11 @@
         flake-compat.follows = "";
         pre-commit-hooks-nix.follows = "";
       };
+    };
+
+    nix-exprs = {
+      url = "github:getchoo/nix-exprs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-index-database = {

@@ -260,6 +260,26 @@
         "type": "github"
       }
     },
+    "nix-exprs": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729190201,
+        "narHash": "sha256-1uergzyLXTHrOLfRbsAx6eE8IlBt0bVO6vNS2TSzrS4=",
+        "owner": "getchoo",
+        "repo": "nix-exprs",
+        "rev": "ad6b2e0573c60f9fd8248bc5856b227f11eb86c7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getchoo",
+        "repo": "nix-exprs",
+        "type": "github"
+      }
+    },
     "nix-filter": {
       "locked": {
         "lastModified": 1710156097,
@@ -402,6 +422,7 @@
         "krunner-nix": "krunner-nix",
         "lanzaboote": "lanzaboote",
         "nix-darwin": "nix-darwin",
+        "nix-exprs": "nix-exprs",
         "nix-index-database": "nix-index-database",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
