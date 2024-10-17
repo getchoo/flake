@@ -1,4 +1,4 @@
-{ modulesPath, ... }:
+{ modulesPath, inputs, ... }:
 {
   imports = [
     (modulesPath + "/profiles/minimal.nix")
@@ -7,6 +7,8 @@
     ./nginx.nix
     ./nixpkgs-tracker-bot.nix
     ./teawiebot.nix
+
+    inputs.self.nixosModules.default
   ];
 
   archetypes.server.enable = true;

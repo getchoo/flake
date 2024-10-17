@@ -1,6 +1,9 @@
 { pkgs, inputs, ... }:
 {
-  imports = [ inputs.nixos-wsl.nixosModules.wsl ];
+  imports = [
+    inputs.nixos-wsl.nixosModules.wsl
+    inputs.self.nixosModules.default
+  ];
 
   archetypes.personal.enable = true;
 
