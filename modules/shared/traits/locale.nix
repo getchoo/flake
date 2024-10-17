@@ -5,7 +5,9 @@ in
 {
   options.traits.locale = {
     US-east = {
-      enable = lib.mkEnableOption "eastern United States locale";
+      enable = lib.mkEnableOption "eastern United States locale" // {
+        default = true;
+      };
     };
   };
 

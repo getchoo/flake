@@ -5,7 +5,9 @@ in
 {
   options.traits.locale = {
     en_US = {
-      enable = lib.mkEnableOption "en_US locale";
+      enable = lib.mkEnableOption "en_US locale" // {
+        default = true;
+      };
     };
   };
 

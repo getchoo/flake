@@ -4,7 +4,7 @@ let
 in
 {
   options.archetypes = {
-    server.enable = lib.mkEnableOption "the \"Server\" archetype";
+    server.enable = lib.mkEnableOption "the Server archetype";
   };
 
   config = lib.mkIf cfg.enable {
@@ -24,11 +24,6 @@ in
 
     traits = {
       autoUpgrade.enable = true;
-
-      locale = {
-        en_US.enable = true;
-        US-east.enable = true;
-      };
 
       secrets.enable = true;
 

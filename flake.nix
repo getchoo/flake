@@ -10,7 +10,12 @@
     { self, nixpkgs, ... }@inputs:
     let
       inherit (nixpkgs) lib;
-      inherit (self.lib.builders) darwinSystem homeManagerConfiguration nixosSystem;
+      inherit (self.lib.builders)
+        darwinSystem
+        homeManagerConfiguration
+        nixosSystem
+        mkModule
+        ;
 
       systems = with lib.platforms; lib.intersectLists (x86_64 ++ aarch64) (darwin ++ linux);
       forAllSystems = lib.genAttrs systems;
@@ -138,9 +143,29 @@
 
       formatter = forAllSystems (system: nixpkgsFor.${system}.nixfmt-rfc-style);
 
-      darwinModules = import ./modules/darwin;
-      homeModules = import ./modules/home;
-      nixosModules = import ./modules/nixos;
+      darwinModules = {
+        default = mkModule {
+          name = "default";
+          type = "darwin";
+          imports = [ ./modules/darwin ];
+        };
+      };
+
+      homeModules = {
+        riff = mkModule {
+          name = "riff";
+          type = "home";
+          imports = [ ./modules/home/riff.nix ];
+        };
+      };
+
+      nixosModules = {
+        default = mkModule {
+          name = "default";
+          type = "nixos";
+          imports = [ ./modules/nixos ];
+        };
+      };
 
       darwinConfigurations = lib.mapAttrs (_: darwinSystem) {
         caroline = {

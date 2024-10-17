@@ -1,6 +1,9 @@
 {
-  archetypes = ./archetypes;
-  base = ./base;
-  desktop = ./desktop;
-  traits = ./traits;
+  imports = [
+    ../shared
+    ./archetypes
+    ./base
+    ./desktop
+    ./traits
+  ];
 }

@@ -4,7 +4,7 @@ let
 in
 {
   options.archetypes = {
-    personal.enable = lib.mkEnableOption "the \"Personal\" archetype";
+    personal.enable = lib.mkEnableOption "the Personal archetype";
   };
 
   config = lib.mkIf cfg.enable {
@@ -12,11 +12,6 @@ in
 
     traits = {
       home-manager.enable = true;
-
-      locale = {
-        en_US.enable = true;
-        US-east.enable = true;
-      };
 
       secrets.enable = true;
       tailscale.enable = true;
