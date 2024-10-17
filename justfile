@@ -1,12 +1,10 @@
 alias b := build
 alias c := check
-alias dr := dry-run
 alias sw := switch
 alias t := test
 alias u := update
 alias ui := update-input
 
-rebuildArgs := "--verbose"
 rebuild := if os() == "macos" { "darwin-rebuild" } else { "nixos-rebuild" }
 
 default:
@@ -14,23 +12,25 @@ default:
 
 [private]
 rebuild subcmd *extraArgs="":
-    {{ rebuild }} {{ subcmd }} {{ rebuildArgs }} --flake . {{ extraArgs }}
+    {{ rebuild }} \
+      {{ subcmd }} \
+      {{ extraArgs }} \
+      --print-build-logs \
+      --flake .
 
 remote-rebuild system subcmd *extraArgs="":
     {{ rebuild }} \
       {{ subcmd }} \
-      {{ rebuildArgs }} \
       --build-host {{ system }} \
       --target-host {{ system }} \
       --use-remote-sudo \
-      --flake '.#{{ system }}' \
-      {{ extraArgs }}
+      {{ extraArgs }} \
+      --print-build-logs \
+      --flake '.#{{ system }}'
 
 boot *extraArgs="": (rebuild "boot" extraArgs)
 
 build *extraArgs="": (rebuild "build" extraArgs)
-
-dry-run *extraArgs="": (rebuild "dry-run" extraArgs)
 
 switch *extraArgs="": (rebuild "switch" extraArgs)
 
@@ -61,4 +61,4 @@ update-input input:
       --commit-lockfile-summary "flake: update {{ input }}"
 
 deploy system:
-	@just remote-rebuild {{ system }} "switch"
+    @just remote-rebuild {{ system }} "switch"
