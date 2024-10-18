@@ -159,20 +159,20 @@
         };
       };
 
-      darwinConfigurations = lib.mapAttrs (_: darwinSystem) {
+      darwinConfigurations = lib.mapAttrs (lib.const darwinSystem) {
         caroline = {
           modules = [ ./systems/caroline ];
         };
       };
 
-      homeConfigurations = lib.mapAttrs (_: homeManagerConfiguration) {
+      homeConfigurations = lib.mapAttrs (lib.const homeManagerConfiguration) {
         seth = {
           modules = [ ./users/seth/home.nix ];
           pkgs = nixpkgsFor.x86_64-linux;
         };
       };
 
-      nixosConfigurations = lib.mapAttrs (_: nixosSystem) {
+      nixosConfigurations = lib.mapAttrs (lib.const nixosSystem) {
         glados = {
           modules = [ ./systems/glados ];
         };
