@@ -17,7 +17,13 @@
         mkModule
         ;
 
-      systems = with lib.platforms; lib.intersectLists (x86_64 ++ aarch64) (darwin ++ linux);
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
+
       forAllSystems = lib.genAttrs systems;
       nixpkgsFor = nixpkgs.legacyPackages;
     in
