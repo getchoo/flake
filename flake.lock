@@ -118,6 +118,7 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
+          "lanzaboote",
           "nixpkgs"
         ]
       },
@@ -218,9 +219,7 @@
       "inputs": {
         "crane": "crane",
         "flake-compat": [],
-        "flake-parts": [
-          "flake-parts"
-        ],
+        "flake-parts": "flake-parts",
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -261,6 +260,26 @@
         "type": "github"
       }
     },
+    "nix-exprs": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1729190201,
+        "narHash": "sha256-1uergzyLXTHrOLfRbsAx6eE8IlBt0bVO6vNS2TSzrS4=",
+        "owner": "getchoo",
+        "repo": "nix-exprs",
+        "rev": "ad6b2e0573c60f9fd8248bc5856b227f11eb86c7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getchoo",
+        "repo": "nix-exprs",
+        "type": "github"
+      }
+    },
     "nix-filter": {
       "locked": {
         "lastModified": 1710156097,
@@ -293,26 +312,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "type": "github"
-      }
-    },
-    "nixinate": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1708891350,
-        "narHash": "sha256-VOQrKK7Df/IVuNki+NshVuGkTa/Tw0GigPjWcZff6kk=",
-        "owner": "MatthewCroughan",
-        "repo": "nixinate",
-        "rev": "452f33c60df5b72ad0858f5f2cf224bdf1f17746",
-        "type": "github"
-      },
-      "original": {
-        "owner": "MatthewCroughan",
-        "repo": "nixinate",
         "type": "github"
       }
     },
@@ -418,22 +417,20 @@
         "arkenfox": "arkenfox",
         "catppuccin": "catppuccin",
         "firefox-addons": "firefox-addons",
-        "flake-parts": "flake-parts",
         "getchvim": "getchvim",
         "home-manager": "home-manager",
         "krunner-nix": "krunner-nix",
         "lanzaboote": "lanzaboote",
         "nix-darwin": "nix-darwin",
+        "nix-exprs": "nix-exprs",
         "nix-index-database": "nix-index-database",
-        "nixinate": "nixinate",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-tracker-bot": "nixpkgs-tracker-bot",
         "openwrt-imagebuilder": "openwrt-imagebuilder",
         "teawiebot": "teawiebot",
-        "terranix": "terranix",
-        "treefmt-nix": "treefmt-nix"
+        "terranix": "terranix"
       }
     },
     "rust-overlay": {
@@ -517,26 +514,6 @@
       "original": {
         "owner": "terranix",
         "repo": "terranix",
-        "type": "github"
-      }
-    },
-    "treefmt-nix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1727984844,
-        "narHash": "sha256-xpRqITAoD8rHlXQafYZOLvUXCF6cnZkPfoq67ThN0Hc=",
-        "owner": "numtide",
-        "repo": "treefmt-nix",
-        "rev": "4446c7a6fc0775df028c5a3f6727945ba8400e64",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "treefmt-nix",
         "type": "github"
       }
     },

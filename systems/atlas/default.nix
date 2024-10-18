@@ -1,4 +1,4 @@
-{ config, modulesPath, ... }:
+{ modulesPath, inputs, ... }:
 {
   imports = [
     (modulesPath + "/profiles/minimal.nix")
@@ -7,15 +7,9 @@
     ./nginx.nix
     ./nixpkgs-tracker-bot.nix
     ./teawiebot.nix
-  ];
 
-  _module.args.nixinate = {
-    host = config.networking.hostName;
-    sshUser = "root";
-    buildOn = "remote";
-    substituteOnTarget = true;
-    hermetic = false;
-  };
+    inputs.self.nixosModules.default
+  ];
 
   archetypes.server.enable = true;
   base.networking.enable = false;

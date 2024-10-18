@@ -8,7 +8,7 @@ let
   cfg = config.seth.programs.git;
 in
 {
-  imports = [ inputs.self.homeModules.riff ];
+  imports = [ inputs.nix-exprs.homeModules.riff ];
 
   options.seth.programs.git = {
     enable = lib.mkEnableOption "Git configuration settings" // {

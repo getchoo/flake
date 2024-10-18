@@ -1,5 +1,9 @@
-{ config, ... }:
+{ config, inputs, ... }:
 {
+  imports = [
+    inputs.self.darwinModules.default
+  ];
+
   archetypes.personal.enable = true;
 
   homebrew.casks = [

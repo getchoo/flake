@@ -1,4 +1,5 @@
-lib: {
+{ lib, ... }:
+{
   /**
     Create an NGINX virtualHost submodule proxying a local port
 

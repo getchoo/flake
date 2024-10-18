@@ -1,9 +1,11 @@
 {
   lib,
+  inputs,
+  self,
   ...
 }:
-{
-  flake.lib = {
-    nginx = import ./nginx.nix lib;
-  };
+
+lib.mapAttrs (_: file: import file { inherit lib inputs self; }) {
+  builders = ./builders.nix;
+  nginx = ./nginx.nix;
 }
