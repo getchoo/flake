@@ -14,10 +14,6 @@ greasy taco i love
 
 </div>
 
-## dev/
-
-Tools that help me make and maintain everything
-
 ## lib/
 
 Small functions I like to use around here
