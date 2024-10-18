@@ -50,6 +50,10 @@ in
           };
         };
       })
+
+      (lib.mkIf config.traits.containers.enable {
+        hardware.nvidia-container-toolkit.enable = true;
+      })
     ]
   );
 }
