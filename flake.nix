@@ -85,6 +85,16 @@
             script = "deadnix --fail ${self}";
           };
 
+          flake-inputs = mkCheck {
+            name = "check-flake-inputs";
+            script = ''
+              if grep '_2' ${self}/flake.lock &>/dev/null; then
+                echo "FOUND DUPLICATE FLAKE INPUTS!!!!"
+                exit 1
+              fi
+            '';
+          };
+
           just = mkCheck {
             name = "check-just";
             deps = [ pkgs.just ];
