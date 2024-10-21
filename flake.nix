@@ -347,7 +347,8 @@
       url = "github:terranix/terranix";
       inputs = {
         nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "nixos-wsl/flake-utils";
+        flake-parts.follows = "lanzaboote/flake-parts";
+        systems.follows = "nixos-wsl/flake-utils/systems";
         terranix-examples.follows = "";
         bats-support.follows = "";
         bats-assert.follows = "";
