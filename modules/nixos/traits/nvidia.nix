@@ -42,7 +42,10 @@ in
               MESA_VK_VERSION_OVERRIDE = "1.3";
             };
 
-            hardware.graphics.extraPackages = lib.mkForce [ ];
+            hardware = {
+              graphics.extraPackages = lib.mkForce [ ];
+              nvidia-container-toolkit.enable = lib.mkForce false;
+            };
 
             services.xserver.videoDrivers = lib.mkForce [ "modesetting" ];
 
