@@ -25,11 +25,14 @@ in
     ./gpg.nix
     ./mangohud.nix
     ./moar.nix
+    ./ncspot.nix
     ./neovim.nix
     ./ssh.nix
     ./starship
     ./vim.nix
     ./vscode.nix
+    ./yazi.nix
+    ./zellij.nix
   ];
 
   config = lib.mkIf cfg.basePrograms.enable {
