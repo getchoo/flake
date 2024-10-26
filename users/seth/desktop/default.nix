@@ -19,6 +19,7 @@ in
   imports = [
     ./budgie
     ./gnome
+    ./niri
     ./plasma
   ];
 
