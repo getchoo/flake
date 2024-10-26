@@ -35,7 +35,7 @@
     containers.enable = true;
     nvidia = {
       enable = true;
-      nvk.enable = true;
+      nvk.enable = false;
     };
     tailscale.enable = true;
     zram.enable = true;
