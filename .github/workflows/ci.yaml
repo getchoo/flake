@@ -50,7 +50,7 @@ jobs:
             --no-nom \
             --skip-cached \
             --systems "$SYSTEM" \
-            --option allow-import-from-derivation false \
+            --option allow-import-from-derivation true \
             --flake '.#hydraJobs'
 
   build-gate:

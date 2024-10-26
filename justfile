@@ -41,13 +41,14 @@ check *args="":
       --print-build-logs \
       --show-trace \
       --accept-flake-config \
+      --allow-import-from-derivation \
       {{ args }}
 
 eval system *args="":
     nix eval \
       --raw \
       '.#nixosConfigurations.{{ system }}.config.system.build.toplevel' \
-      --no-allow-import-from-derivation \
+      --allow-import-from-derivation \
       {{ args }}
 
 update:
