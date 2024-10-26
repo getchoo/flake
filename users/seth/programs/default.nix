@@ -55,7 +55,7 @@ in
 
       eza = {
         enable = true;
-        icons = true;
+        icons = "auto";
       };
 
       direnv = {
