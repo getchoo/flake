@@ -4,5 +4,6 @@
     ./desktop
     ./programs
     ./shell
+    ./tweaks
   ];
 }

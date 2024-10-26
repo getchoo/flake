@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./adwaita-ize.nix
+  ];
+}

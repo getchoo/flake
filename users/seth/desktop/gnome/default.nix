@@ -9,21 +9,6 @@ let
 in
 {
   config = lib.mkIf enable {
-    home = {
-      packages = with pkgs; [
-        adw-gtk3
-        tuba
-        qadwaitadecorations
-        qadwaitadecorations-qt6
-
-        gnomeExtensions.caffeine
-      ];
-
-      sessionVariables = {
-        QT_WAYLAND_DECORATION = "adwaita";
-      };
-    };
-
     dconf = {
       enable = true;
       settings = {
@@ -69,13 +54,15 @@ in
       };
     };
 
-    gtk = {
-      enable = true;
-      theme = {
-        name = "adw-gtk3-dark";
-        package = pkgs.adw-gtk3;
-      };
-    };
+    # Required for adwaita-ize
+    gtk.enable = true;
+
+    home.packages = [
+      pkgs.gnomeExtensions.caffeine
+      pkgs.tuba
+    ];
+
+    seth.tweaks.adwaita-ize.enable = true;
 
     xdg.dataFile."blackbox/schemes/Catppuccin-Mocha.json".source =
       pkgs.fetchFromGitHub {
