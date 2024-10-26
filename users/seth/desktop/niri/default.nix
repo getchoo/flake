@@ -38,6 +38,15 @@ in
       pkgs.xwayland-satellite
     ];
 
+    # Enable things from the NixOS module here to
+    # apply Catppuccin themes
+    programs = {
+      alacritty.enable = true;
+      fuzzel.enable = true;
+      mako.enable = true;
+      swaylock.enable = true;
+    };
+
     seth = {
       programs = {
         # Official Spotify has ugly CSD
