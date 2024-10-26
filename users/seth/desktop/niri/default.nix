@@ -24,17 +24,8 @@ in
     gtk.enable = true;
 
     home.packages = [
-      # Media player
-      pkgs.celluloid
-
-      # PDF reader
-      pkgs.evince
-
       # Torrent client
       pkgs.fragments
-
-      # Image viewer
-      pkgs.loupe
 
       # Mastodon client
       pkgs.tuba

@@ -25,11 +25,24 @@ in
           };
 
           systemPackages = with pkgs; [
-            alacritty # Terminal
-            fuzzel # Application runner
-            mako # Notification daemon
-            pantheon.pantheon-agent-polkit # Polkit agent
-            swaylock # Screen locker
+            # Terminal
+            alacritty
+            # Media player
+            celluloid
+            # PDF viewer
+            evince
+            # Application runner
+            fuzzel
+            # Image viewer
+            loupe
+            # Notification daemon
+            mako
+            # Polkit agent
+            pantheon.pantheon-agent-polkit
+            # Screen locker
+            swaylock
+            # Trash manager
+            trashy
           ];
         };
 
