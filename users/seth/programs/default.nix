@@ -5,19 +5,9 @@
   inputs,
   ...
 }:
-let
-  cfg = config.seth.programs;
-in
 {
-  options.seth.programs = {
-    basePrograms.enable = lib.mkEnableOption "base programs and configurations" // {
-      default = config.seth.enable;
-    };
-  };
-
-  imports = with inputs; [
-    catppuccin.homeManagerModules.catppuccin
-    nix-index-database.hmModules.nix-index
+  imports = [
+    inputs.nix-index-database.hmModules.nix-index
 
     ./bash.nix
     ./chromium.nix
@@ -39,39 +29,26 @@ in
     ./zsh.nix
   ];
 
-  config = lib.mkIf cfg.basePrograms.enable {
-    home.packages = with pkgs; [
-      fd
-      nix-output-monitor
-      nurl
-      rclone
-      restic
-    ];
-
-    catppuccin = {
-      enable = true;
-      flavor = "mocha";
-    };
-
+  config = lib.mkIf config.seth.enable {
     programs = {
-      bat.enable = true;
-      btop.enable = true;
-
-      eza = {
-        enable = true;
-        icons = "auto";
-      };
+      bat.enable = lib.mkDefault true;
+      btop.enable = lib.mkDefault true;
 
       direnv = {
-        enable = true;
+        enable = lib.mkDefault true;
         nix-direnv = {
           enable = true;
-          package = pkgs.nix-direnv.override { nix = pkgs.lix; };
+          package = lib.mkDefault (pkgs.nix-direnv.override { nix = pkgs.lix; });
         };
       };
 
-      ripgrep.enable = true;
+      eza = {
+        enable = lib.mkDefault true;
+        icons = "auto";
+      };
 
+      fd.enable = lib.mkDefault true;
+      ripgrep.enable = lib.mkDefault true;
       nix-index-database.comma.enable = true;
     };
 
