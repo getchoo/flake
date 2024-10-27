@@ -19,20 +19,24 @@ in
     catppuccin.homeManagerModules.catppuccin
     nix-index-database.hmModules.nix-index
 
+    ./bash.nix
     ./chromium.nix
     ./firefox
+    ./fish.nix
     ./git.nix
     ./gpg.nix
     ./mangohud.nix
     ./moar.nix
     ./ncspot.nix
     ./neovim.nix
+    ./nu.nix
     ./ssh.nix
     ./starship
     ./vim.nix
     ./vscode.nix
     ./yazi.nix
     ./zellij.nix
+    ./zsh.nix
   ];
 
   config = lib.mkIf cfg.basePrograms.enable {

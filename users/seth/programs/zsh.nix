@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.seth.shell.zsh;
+  cfg = config.seth.programs.zsh;
 in
 {
-  options.seth.shell.zsh = {
+  options.seth.programs.zsh = {
     enable = lib.mkEnableOption "Zsh configuration";
     withPlugins = lib.mkEnableOption "Zsh plugins" // {
       default = true;

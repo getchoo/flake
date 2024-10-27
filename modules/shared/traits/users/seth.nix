@@ -23,7 +23,7 @@ in
         imports = [ (inputs.self + "/users/seth") ];
         seth = {
           enable = true;
-          shell.fish.enable = true;
+          programs.fish.enable = true;
         };
       };
     })
