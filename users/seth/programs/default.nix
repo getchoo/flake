@@ -36,10 +36,7 @@
 
       direnv = {
         enable = lib.mkDefault true;
-        nix-direnv = {
-          enable = true;
-          package = lib.mkDefault (pkgs.nix-direnv.override { nix = pkgs.lix; });
-        };
+        nix-direnv.enable = true;
       };
 
       eza = {
