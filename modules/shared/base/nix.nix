@@ -22,9 +22,7 @@ in
       defaultText = lib.literalExpression "config.base.enable";
     };
 
-    lix.enable = lib.mkEnableOption "the use of Lix over Nix" // {
-      default = isLinux;
-    };
+    lix.enable = lib.mkEnableOption "the use of Lix over Nix";
   };
 
   config = lib.mkIf cfg.enable (

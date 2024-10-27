@@ -123,13 +123,15 @@
         system:
         let
           pkgs = nixpkgsFor.${system};
-          nixos-rebuild = pkgs.nixos-rebuild.override { nix = pkgs.lix; };
-          inherit (inputs.nix-darwin.packages.${system}) darwin-rebuild;
         in
         {
           default = pkgs.mkShellNoCC {
             packages =
               [
+                # We want to make sure we have the same
+                # Nix behavior across machines
+                pkgs.nix
+
                 # For CI
                 pkgs.actionlint
 
@@ -140,14 +142,14 @@
 
                 pkgs.just
               ]
-              ++ lib.optional pkgs.stdenv.isDarwin darwin-rebuild # See next comment
-              ++ lib.optionals pkgs.stdenv.isLinux [
-                # We want to make sure we have the same
-                # Nix behavior across machines
-                pkgs.lix
+              ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+                # See above comment about Nix
+                inputs.nix-darwin.packages.${system}.darwin-rebuild
+              ]
+              ++ lib.optionals pkgs.stdenv.hostPlatform.isLinux [
 
                 # Ditto
-                nixos-rebuild
+                pkgs.nixos-rebuild
 
                 inputs.agenix.packages.${system}.agenix
               ];
