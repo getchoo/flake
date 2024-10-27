@@ -1,15 +1,13 @@
 { config, lib, ... }:
 let
-  cfg = config.archetypes.personal;
+  cfg = config.profiles.personal;
 in
 {
-  options.archetypes = {
-    personal.enable = lib.mkEnableOption "the Personal archetype";
+  options.profiles.personal = {
+    enable = lib.mkEnableOption "the Personal profile";
   };
 
   config = lib.mkIf cfg.enable {
-    base.enable = true;
-
     traits = {
       home-manager.enable = true;
 

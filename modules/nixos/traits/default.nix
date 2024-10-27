@@ -6,7 +6,9 @@
     ./containers.nix
     ./home-manager.nix
     ./locale.nix
+    ./nvd-diff.nix
     ./nvidia.nix
+    ./resolved.nix
     ./secrets.nix
     ./tailscale.nix
     ./users

@@ -1,20 +1,24 @@
 # ./modules/nixos/
 
-## archetypes
+## defaults
 
-The high-level "type" of a machine (i.e., `personal` or `server`)
-
-## base
-
-Low level options shared for (almost) any kind of system
+Defaults (mostly) shared across all configurations
 
 ## desktop
 
-Installs cool GUI stuff for desktops...or laptops too I guess
+Installs cool GUI stuff for desktops and laptops
 
-## server
+## mixins
 
-Installs cool daemons and such for servers
+Small modules that add onto existing ones; mean to be "mixed in" with your regular configurations
+
+## profiles
+
+The high-level "type" of a machine (i.e., `personal` or `server`)
+
+## services
+
+Custom service modules
 
 ## traits
 

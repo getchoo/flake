@@ -4,29 +4,17 @@
   pkgs,
   ...
 }:
-let
-  cfg = config.desktop.defaultPrograms;
-in
 {
-  options.desktop.defaultPrograms = {
-    enable = lib.mkEnableOption "default desktop programs" // {
-      default = config.desktop.enable;
-      defaultText = lib.literalExpression "config.desktop.enable";
-    };
-  };
-
-  config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      wl-clipboard
-      xclip
+  config = lib.mkIf config.desktop.enable {
+    environment.systemPackages = [
+      pkgs.wl-clipboard
     ];
 
     programs = {
-      chromium.enable = true;
-      firefox.enable = true;
-      xwayland.enable = true;
+      chromium.enable = lib.mkDefault true;
+      firefox.enable = lib.mkDefault true;
     };
 
-    xdg.portal.enable = true;
+    xdg.portal.enable = lib.mkDefault true;
   };
 }

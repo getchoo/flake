@@ -5,10 +5,10 @@
   ...
 }:
 let
-  cfg = config.server.mixins.acme;
+  cfg = config.mixins.acme;
 in
 {
-  options.server.mixins.acme = {
+  options.mixins.acme = {
     enable = lib.mkEnableOption "ACME mixin";
 
     manageSecrets = lib.mkEnableOption "automatic management of secrets" // {

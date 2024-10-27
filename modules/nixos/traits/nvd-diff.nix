@@ -5,22 +5,16 @@
   ...
 }:
 let
-  cfg = config.base;
+  cfg = config.traits.nvd-diff;
 in
 {
-  imports = [
-    ./networking.nix
-    ./nix.nix
-    ./programs.nix
-    ./security.nix
-    ./users.nix
-  ];
+  options.traits.nvd-diff = {
+    enable = lib.mkEnableOption "showing configuration diffs with NVD on upgrade" // {
+      default = true;
+    };
+  };
 
   config = lib.mkIf cfg.enable {
-    services.journald.extraConfig = ''
-      MaxRetentionSec=1w
-    '';
-
     system.activationScripts."upgrade-diff" = {
       supportsDryActivation = true;
       text = ''

@@ -1,9 +1,9 @@
 { config, lib, ... }:
 let
-  cfg = config.server.mixins.nginx;
+  cfg = config.mixins.nginx;
 in
 {
-  options.server.mixins.nginx = {
+  options.mixins.nginx = {
     enable = lib.mkEnableOption "NGINX mixin";
   };
 

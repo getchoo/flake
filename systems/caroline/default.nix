@@ -4,7 +4,7 @@
     inputs.self.darwinModules.default
   ];
 
-  archetypes.personal.enable = true;
+  profiles.personal.enable = true;
 
   homebrew.casks = [
     "altserver"
