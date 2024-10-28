@@ -21,14 +21,15 @@ in
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
       {
+        networking.nameservers = [
+          "1.1.1.1#one.one.one.one"
+          "1.0.0.1#one.one.one.one"
+        ];
+
         services.resolved = {
           enable = true;
           dnssec = "allow-downgrade";
-          extraConfig = ''
-            [Resolve]
-            DNS=1.1.1.1 1.0.0.1
-            DNSOverTLS=yes
-          '';
+          dnsovertls = "true";
         };
       }
 
