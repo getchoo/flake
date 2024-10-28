@@ -12,9 +12,7 @@ in
   options.traits.secrets = {
     enable = lib.mkEnableOption "secrets management";
 
-    rootUser = lib.mkEnableOption "manage secrets for root user" // {
-      default = true;
-    };
+    rootUser = lib.mkEnableOption "manage secrets for root user";
 
     hostUser = lib.mkEnableOption "manager secrets for host user (see `profiles.server.hostUser`)" // {
       default = config.profiles.server.hostUser;
