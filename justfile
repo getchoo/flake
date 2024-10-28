@@ -21,11 +21,10 @@ rebuild subcmd *extraArgs="":
 remote-rebuild system subcmd *extraArgs="":
     {{ rebuild }} \
       {{ subcmd }} \
-      --build-host {{ system }} \
-      --target-host {{ system }} \
-      --use-remote-sudo \
+      --build-host root@{{ system }} \
+      --target-host root@{{ system }} \
+      --fast \
       {{ extraArgs }} \
-      --print-build-logs \
       --flake '.#{{ system }}'
 
 boot *extraArgs="": (rebuild "boot" extraArgs)
