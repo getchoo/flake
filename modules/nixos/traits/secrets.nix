@@ -12,8 +12,6 @@ in
   options.traits.secrets = {
     enable = lib.mkEnableOption "secrets management";
 
-    rootUser = lib.mkEnableOption "manage secrets for root user";
-
     hostUser = lib.mkEnableOption "manager secrets for host user (see `profiles.server.hostUser`)" // {
       default = config.profiles.server.hostUser;
       defaultText = "config.profiles.server.hostUser";
@@ -33,16 +31,6 @@ in
           identityPaths = [ "/etc/age/key" ];
         };
       }
-
-      (lib.mkIf cfg.rootUser {
-        age.secrets = {
-          rootPassword.file = secretsDir + "/rootPassword.age";
-        };
-
-        users.users.root = {
-          hashedPasswordFile = config.age.secrets.rootPassword.path;
-        };
-      })
 
       (lib.mkIf (config.profiles.server.enable && cfg.hostUser) {
         age.secrets = {
