@@ -5,17 +5,7 @@
     inputs.self.nixosModules.default
   ];
 
-  archetypes.personal.enable = true;
-
-  base = {
-    # this conflicts with nixos-wsl
-    networking.enable = false;
-    security = {
-      # something, something `resolv.conf` error
-      # (nixos-wsl probably doesn't set it)
-      apparmor = false;
-    };
-  };
+  profiles.personal.enable = true;
 
   environment.systemPackages = with pkgs; [
     wget
@@ -26,9 +16,16 @@
 
   nixpkgs.hostPlatform = "x86_64-linux";
 
+  # Something, something `resolv.conf` error
+  # (nixos-wsl probably doesn't set it)
+  security.apparmor.enable = false;
+
   system.stateVersion = "23.11";
 
-  traits.tailscale.enable = true;
+  traits = {
+    resolved.enable = false;
+    tailscale.enable = true;
+  };
 
   wsl = {
     enable = true;

@@ -7,7 +7,7 @@
     inputs.self.nixosModules.default
   ];
 
-  archetypes.personal.enable = true;
+  profiles.personal.enable = true;
 
   desktop = {
     enable = true;
@@ -16,7 +16,10 @@
 
   environment.systemPackages = [ pkgs.obs-studio ];
 
-  networking.hostName = "glados";
+  networking = {
+    hostName = "glados";
+    networkmanager.enable = true;
+  };
 
   security.tpm2 = {
     enable = true;

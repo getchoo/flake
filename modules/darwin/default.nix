@@ -1,9 +1,9 @@
 {
   imports = [
     ../shared
-    ./archetypes
-    ./base
+    ./defaults
     ./desktop
+    ./profiles
     ./traits
   ];
 }

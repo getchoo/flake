@@ -1,10 +1,10 @@
 { config, lib, ... }:
 let
-  cfg = config.server.mixins.promtail;
+  cfg = config.mixins.promtail;
   inherit (lib) types;
 in
 {
-  options.server.mixins.promtail = {
+  options.mixins.promtail = {
     enable = lib.mkEnableOption "Promtail mixin";
 
     clients = lib.mkOption {

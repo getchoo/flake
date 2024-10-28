@@ -11,8 +11,7 @@
     inputs.self.nixosModules.default
   ];
 
-  archetypes.server.enable = true;
-  base.networking.enable = false;
+  profiles.server.enable = true;
 
   boot = {
     loader.systemd-boot.enable = true;

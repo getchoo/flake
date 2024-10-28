@@ -1,10 +1,11 @@
 {
   imports = [
     ../shared
-    ./archetypes
-    ./base
+    ./defaults
     ./desktop
-    ./server
+    ./mixins
+    ./profiles
+    ./services
     ./traits
   ];
 }

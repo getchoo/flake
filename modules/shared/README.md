@@ -1,8 +1,8 @@
 # ./modules/shared/
 
-## base
+## defaults
 
-Low level options shared for (almost) any kind of system
+Defaults (mostly) shared across all configurations
 
 ## traits
 

@@ -1,6 +1,6 @@
 {
   imports = [
-    ./base
+    ./defaults
     ./traits
   ];
 }

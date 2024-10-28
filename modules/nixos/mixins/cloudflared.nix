@@ -5,11 +5,11 @@
   ...
 }:
 let
-  cfg = config.server.mixins.cloudflared;
+  cfg = config.mixins.cloudflared;
   inherit (config.services) nginx;
 in
 {
-  options.server.mixins.cloudflared = {
+  options.mixins.cloudflared = {
     enable = lib.mkEnableOption "cloudflared mixin";
     tunnelName = lib.mkOption {
       description = ''

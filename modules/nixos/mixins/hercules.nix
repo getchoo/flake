@@ -6,10 +6,10 @@
   ...
 }:
 let
-  cfg = config.server.mixins.hercules-ci;
+  cfg = config.mixins.hercules-ci;
 in
 {
-  options.server.mixins.hercules-ci = {
+  options.mixins.hercules-ci = {
     enable = lib.mkEnableOption "Hercules CI mixin";
     manageSecrets = lib.mkEnableOption "automatic management of secrets" // {
       default = config.traits.secrets.enable;
