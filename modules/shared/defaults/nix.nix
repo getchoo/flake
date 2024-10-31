@@ -34,9 +34,16 @@ in
           automatic = lib.mkDefault true;
           options = lib.mkDefault "--delete-older-than 2d";
         };
+
+        # See comment below
+        nixPath = [ "nixpkgs=${config.nixpkgs.flake.source}" ];
       };
 
-      nixpkgs.config.allowUnfree = lib.mkDefault true;
+      nixpkgs = {
+        config.allowUnfree = lib.mkDefault true;
+        # The `flake:` syntax in `$NIX_PATH` seems to do some weird copying on Nix 2.24
+        flake.setNixPath = false;
+      };
     }
 
     (lib.mkIf hasReplFlake {
