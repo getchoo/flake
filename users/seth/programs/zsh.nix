@@ -72,8 +72,6 @@ in
           zle -N clear-screen-and-scrollback
           bindkey '^L' clear-screen-and-scrollback
 
-          ${lib.getExe pkgs.nix-your-shell} zsh | source /dev/stdin
-
           [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
         '';
 

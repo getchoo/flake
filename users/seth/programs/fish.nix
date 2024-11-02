@@ -21,10 +21,6 @@ in
         programs.fish = {
           enable = true;
 
-          interactiveShellInit = ''
-            ${lib.getExe pkgs.nix-your-shell} fish | source
-          '';
-
           functions = {
             last_history_item.body = "echo $history[1]";
           };
