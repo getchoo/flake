@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   inputs,
   ...
 }:
@@ -29,6 +30,11 @@
   ];
 
   config = lib.mkIf config.seth.enable {
+    home.packages = with pkgs; [
+      hydra-check
+      nixfmt-rfc-style
+    ];
+
     programs = {
       bat.enable = lib.mkDefault true;
       btop.enable = lib.mkDefault true;
