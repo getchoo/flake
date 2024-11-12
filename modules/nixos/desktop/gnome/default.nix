@@ -14,7 +14,8 @@ in
     environment = {
       gnome.excludePackages = with pkgs; [
         gnome-tour
-        totem # replaced with celluloid
+        totem # Replaced with celluloid
+        seahorse # Replaced with key-rack
       ];
 
       sessionVariables = {
@@ -22,9 +23,10 @@ in
       };
 
       systemPackages = with pkgs; [
-        adw-gtk3 # make gtk3 apps look good
+        adw-gtk3 # Make gtk3 apps look good
         blackbox-terminal
         celluloid
+        key-rack
       ];
     };
 
