@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.desktop;
 in
@@ -18,5 +23,10 @@ in
     ./plasma
   ];
 
-  config = lib.mkIf cfg.enable { services.xserver.enable = true; };
+  config = lib.mkIf cfg.enable {
+    services.xserver = {
+      enable = true;
+      excludePackages = [ pkgs.xterm ];
+    };
+  };
 }
