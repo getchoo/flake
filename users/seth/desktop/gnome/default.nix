@@ -58,9 +58,24 @@ in
     gtk.enable = true;
 
     home.packages = [
+      # Matrix client
+      pkgs.fractal
+
+      # Torrent client
+      pkgs.fragments
+
+      # Keep my screen awake
       pkgs.gnomeExtensions.caffeine
+
+      # Spotify has an ugly CSD
+      pkgs.spot
+
+      # Mastodon client
       pkgs.tuba
     ];
+
+    # See comment for spot
+    services.spotifyd.enable = true;
 
     seth.tweaks.adwaita-ize.enable = true;
 
