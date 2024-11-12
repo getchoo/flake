@@ -26,6 +26,7 @@ in
         adw-gtk3 # Make gtk3 apps look good
         blackbox-terminal
         celluloid
+        kooha
         key-rack
       ];
     };
