@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ inputs, ... }:
 {
   imports = [
     ./boot.nix
@@ -13,8 +13,6 @@
     enable = true;
     gnome.enable = true;
   };
-
-  environment.systemPackages = [ pkgs.obs-studio ];
 
   networking = {
     hostName = "glados";
