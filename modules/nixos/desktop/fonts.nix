@@ -28,14 +28,12 @@ in
           ];
         })
         noto-fonts
-        noto-fonts-extra
         noto-fonts-color-emoji
         noto-fonts-cjk-sans
       ];
 
       fontconfig = {
         enable = true;
-        cache32Bit = lib.mkDefault true;
         defaultFonts = lib.mkDefault {
           serif = [ "Noto Serif" ];
           sansSerif = [ "Noto Sans" ];

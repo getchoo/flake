@@ -7,4 +7,6 @@
       "@wheel"
     ];
   };
+
+  nixpkgs.config.allowAliases = false;
 }

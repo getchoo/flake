@@ -6,6 +6,7 @@
   ...
 }:
 let
+  inherit (pkgs.stdenv.hostPlatform) system;
   cfg = config.seth.programs.neovim;
 in
 {
@@ -20,7 +21,7 @@ in
     home.packages = [
       (
         let
-          getchvim = inputs.getchvim.packages.${pkgs.system}.default;
+          getchvim = inputs.getchvim.packages.${system}.default;
         in
         # remove desktop file
         pkgs.symlinkJoin {

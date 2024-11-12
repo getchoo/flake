@@ -6,6 +6,7 @@
   ...
 }:
 let
+  inherit (pkgs.stdenv.hostPlatform) system;
   cfg = config.desktop.plasma;
 in
 {
@@ -25,7 +26,7 @@ in
 
       systemPackages = [
         pkgs.haruna # mpv frontend
-        inputs.krunner-nix.packages.${pkgs.system}.default # thank you leah
+        inputs.krunner-nix.packages.${system}.default # thank you leah
       ];
     };
 

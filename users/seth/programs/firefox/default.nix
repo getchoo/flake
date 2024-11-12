@@ -6,6 +6,7 @@
   ...
 }:
 let
+  inherit (pkgs.stdenv.hostPlatform) system;
   cfg = config.seth.programs.firefox;
 in
 {
@@ -26,7 +27,7 @@ in
     programs.firefox = {
       enable = true;
       profiles.arkenfox = {
-        extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
+        extensions = with inputs.firefox-addons.packages.${system}; [
           bitwarden
           floccus
           ublock-origin
