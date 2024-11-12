@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   imports = [
     ./boot.nix
@@ -13,6 +13,8 @@
     enable = true;
     gnome.enable = true;
   };
+
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
 
   networking = {
     hostName = "glados";
