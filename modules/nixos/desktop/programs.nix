@@ -14,7 +14,5 @@
       chromium.enable = lib.mkDefault true;
       firefox.enable = lib.mkDefault true;
     };
-
-    xdg.portal.enable = lib.mkDefault true;
   };
 }
