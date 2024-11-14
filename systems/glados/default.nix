@@ -36,6 +36,7 @@
 
   traits = {
     containers.enable = true;
+    mac-builder.enable = true;
     nvidia = {
       enable = true;
       nvk.enable = false;
