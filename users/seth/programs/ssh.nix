@@ -42,6 +42,12 @@ in
             user = "git";
           };
 
+          # macstadium m1
+          "mini.scrumplex.net" = {
+            identityFile = "${sshDir}/macstadium";
+            user = "bob-the-builder";
+          };
+
           # router
           "192.168.1.1" = {
             identityFile = "${sshDir}/openwrt";
