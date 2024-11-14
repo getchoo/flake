@@ -28,7 +28,6 @@ in
 
         services.resolved = {
           enable = true;
-          dnssec = "allow-downgrade";
           dnsovertls = "true";
         };
       }
