@@ -25,6 +25,7 @@ in
               {
                 hostName = "mini.scrumplex.net";
                 maxJobs = 8;
+                publicHostKey = "IyBtaW5pLnNjcnVtcGxleC5uZXQ6MjIgU1NILTIuMC1PcGVuU1NIXzkuOAptaW5pLnNjcnVtcGxleC5uZXQgc3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSU9DV1lXL29TbW5GYU1sOGQ0eHNjaGhxNkNKZkdjQ1M4djhLYkErb0dmQ3IK";
                 sshUser = "bob-the-builder";
                 supportedFeatures = [
                   "nixos-test"
