@@ -6,6 +6,7 @@
     ./containers.nix
     ./home-manager.nix
     ./locale.nix
+    ./mac-builder.nix
     ./nvd-diff.nix
     ./nvidia.nix
     ./resolved.nix
