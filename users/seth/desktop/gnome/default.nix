@@ -67,9 +67,6 @@ in
       # Keep my screen awake
       pkgs.gnomeExtensions.caffeine
 
-      # Spotify has an ugly CSD
-      pkgs.spot
-
       # Mastodon client
       pkgs.tuba
     ];
