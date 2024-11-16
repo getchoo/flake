@@ -10,14 +10,14 @@ in
 {
   options.desktop.budgie.enable = lib.mkEnableOption "Budgie desktop";
 
-  # TODO: improve this module
+  # TODO: Improve this module
   config = lib.mkIf cfg.enable {
     environment = {
       budgie.excludePackages = with pkgs; [
         qogir-theme
         qogir-icon-theme
 
-        # i don't like mates apps. fedora doesn't use them either :/
+        # I don't like MATE's apps. Fedora doesn't use them either :/
         mate.atril
         mate.pluma
         mate.engrampa
@@ -27,18 +27,18 @@ in
         vlc
       ];
 
-      systemPackages = with pkgs; [
-        materia-theme
-        papirus-icon-theme
+      systemPackages = [
+        pkgs.materia-theme
+        pkgs.papirus-icon-theme
 
-        # replacements for mate stuff
-        evince
-        gedit
-        cinnamon.nemo-fileroller
-        gnome.gnome-calculator
-        blackbox-terminal
-        gnome.gnome-system-monitor
-        celluloid
+        # Replacements for mate stuff
+        pkgs.celluloid
+        pkgs.cinnamon.nemo-fileroller
+        pkgs.evince
+        pkgs.gedit
+        pkgs.gnome-console
+        pkgs.gnome.gnome-calculator
+        pkgs.gnome.gnome-system-monitor
       ];
     };
 
