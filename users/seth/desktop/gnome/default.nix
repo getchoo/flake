@@ -41,15 +41,9 @@ in
         };
 
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
-          name = "blackbox";
-          command = "blackbox";
+          name = "ghostty";
+          command = "ghostty";
           binding = "<Control><Alt>t";
-        };
-
-        "com/raggesilver/BlackBox" = {
-          font = "NotoMono Nerd Font 11";
-          theme-dark = "Catppuccin-Mocha";
-          remember-window-size = true;
         };
       };
     };
@@ -75,14 +69,5 @@ in
     services.spotifyd.enable = true;
 
     seth.tweaks.adwaita-ize.enable = true;
-
-    xdg.dataFile."blackbox/schemes/Catppuccin-Mocha.json".source =
-      pkgs.fetchFromGitHub {
-        owner = "catppuccin";
-        repo = "tilix";
-        rev = "3fd05e03419321f2f2a6aad6da733b28be1765ef";
-        sha256 = "sha256-SI7QxQ+WBHzeuXbTye+s8pi4tDVZOV4Aa33mRYO276k=";
-      }
-      + "/src/Catppuccin-Mocha.json";
   };
 }
