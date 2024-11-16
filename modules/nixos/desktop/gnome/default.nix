@@ -22,12 +22,11 @@ in
         NIXOS_OZONE_WL = "1";
       };
 
-      systemPackages = with pkgs; [
-        adw-gtk3 # Make gtk3 apps look good
-        blackbox-terminal
-        celluloid
-        kooha
-        key-rack
+      systemPackages = [
+        pkgs.adw-gtk3 # Make gtk3 apps look good
+        pkgs.celluloid
+        pkgs.kooha
+        pkgs.key-rack
       ];
     };
 
