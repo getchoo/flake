@@ -23,6 +23,7 @@
   system.stateVersion = "23.11";
 
   traits = {
+    arm-builder.enable = true;
     mac-builder.enable = true;
     resolved.enable = false;
     tailscale.enable = true;
