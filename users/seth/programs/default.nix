@@ -16,6 +16,7 @@
     ./gh.nix
     ./git.nix
     ./gpg.nix
+    ./jj.nix
     ./mangohud.nix
     ./moar.nix
     ./ncspot.nix

@@ -31,6 +31,11 @@ in
             user = "git";
           };
 
+          "github.com" = {
+            identityFile = "${sshDir}/github";
+            user = "git";
+          };
+
           # linux packaging
           "aur.archlinux.org" = {
             identityFile = "${sshDir}/aur";
