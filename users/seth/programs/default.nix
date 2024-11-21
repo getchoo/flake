@@ -13,6 +13,7 @@
     ./chromium.nix
     ./firefox
     ./fish.nix
+    ./gh.nix
     ./git.nix
     ./gpg.nix
     ./mangohud.nix

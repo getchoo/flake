@@ -15,52 +15,27 @@ in
       default = config.seth.enable;
       defaultText = lib.literalExpression "config.seth.enable";
     };
-
-    gh.enable = lib.mkEnableOption "GitHub CLI support" // {
-      default = true;
-    };
   };
 
   config = lib.mkIf cfg.enable {
-    programs = {
-      gh = lib.mkIf cfg.gh.enable {
-        enable = true;
-        settings = {
-          git_protocol = "https";
-          editor = "nvim";
-          prompt = "enabled";
-          # workaround for https://github.com/nix-community/home-manager/issues/474
-          version = 1;
-        };
+    programs.git = {
+      enable = true;
 
-        gitCredentialHelper = {
-          enable = true;
-          hosts = [
-            "https://github.com"
-            "https://github.example.com"
-          ];
+      riff.enable = true;
+
+      extraConfig = {
+        init = {
+          defaultBranch = "main";
         };
       };
 
-      git = {
-        enable = true;
-
-        riff.enable = true;
-
-        extraConfig = {
-          init = {
-            defaultBranch = "main";
-          };
-        };
-
-        signing = {
-          key = "D31BD0D494BBEE86";
-          signByDefault = true;
-        };
-
-        userEmail = "getchoo@tuta.io";
-        userName = "seth";
+      signing = {
+        key = "D31BD0D494BBEE86";
+        signByDefault = true;
       };
+
+      userEmail = "getchoo@tuta.io";
+      userName = "seth";
     };
   };
 }
