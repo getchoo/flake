@@ -8,10 +8,7 @@ let
 in
 {
   options.seth.programs.jujutsu = {
-    enable = lib.mkEnableOption "jujutsu configuration settings" // {
-      default = config.seth.enable;
-      defaultText = lib.literalExpression "config.seth.enable";
-    };
+    enable = lib.mkEnableOption "jujutsu configuration settings";
   };
 
   # TODO: Configure
