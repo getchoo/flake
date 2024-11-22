@@ -19,7 +19,6 @@
     ./jj.nix
     ./mangohud.nix
     ./moar.nix
-    ./ncspot.nix
     ./neovim.nix
     ./nu.nix
     ./ssh.nix

@@ -44,14 +44,13 @@ in
       alacritty.enable = true;
       fuzzel.enable = true;
       mako.enable = true;
+      # Official Spotify has ugly CSD
+      ncspot.enable = true;
       swaylock.enable = true;
     };
 
     seth = {
       programs = {
-        # Official Spotify has ugly CSD
-        ncspot.enable = true;
-
         yazi.enable = true;
         zellij.enable = true;
       };
