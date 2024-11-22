@@ -24,7 +24,6 @@
     ./ssh.nix
     ./vim.nix
     ./vscode.nix
-    ./yazi.nix
     ./zsh.nix
   ];
 

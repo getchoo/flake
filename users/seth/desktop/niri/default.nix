@@ -46,14 +46,11 @@ in
       mako.enable = true;
       ncspot.enable = true; # Official Spotify has ugly CSD
       swaylock.enable = true;
+      yazi.enable = true;
       zellij.enable = true;
     };
 
     seth = {
-      programs = {
-        yazi.enable = true;
-      };
-
       # See comment about ncspot
       services.spotifyd.enable = true;
 
