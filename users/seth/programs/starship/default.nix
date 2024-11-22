@@ -18,6 +18,7 @@ in
       catppuccin.enable = false;
 
       enableBashIntegration = false;
+      enableFishIntegration = false;
       enableZshIntegration = false;
 
       settings = {

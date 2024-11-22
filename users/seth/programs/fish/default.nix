@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -10,9 +9,6 @@ in
 {
   options.seth.programs.fish = {
     enable = lib.mkEnableOption "Fish configuration";
-    withPlugins = lib.mkEnableOption "Fish plugins" // {
-      default = true;
-    };
   };
 
   config = lib.mkIf cfg.enable (
@@ -23,6 +19,7 @@ in
 
           functions = {
             last_history_item.body = "echo $history[1]";
+            fish_prompt = lib.readFile ./fish_prompt.fish;
           };
 
           shellAbbrs = {
@@ -44,19 +41,6 @@ in
             	source $nixfile
             end
           '';
-        };
-      })
-
-      (lib.mkIf cfg.withPlugins {
-        programs.fish = {
-          plugins =
-            let
-              useFishPlugins = map (plugin: {
-                name = plugin;
-                inherit (pkgs.fishPlugins.${plugin}) src;
-              });
-            in
-            useFishPlugins [ "autopair" ];
         };
       })
     ]
