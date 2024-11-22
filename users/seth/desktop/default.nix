@@ -17,10 +17,10 @@ in
   };
 
   imports = [
-    ./budgie
-    ./gnome
-    ./niri
-    ./plasma
+    ./budgie.nix
+    ./gnome.nix
+    ./niri.nix
+    ./plasma.nix
   ];
 
   config = lib.mkIf cfg.enable {
