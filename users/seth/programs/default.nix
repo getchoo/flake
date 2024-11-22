@@ -23,7 +23,6 @@
     ./neovim.nix
     ./nu.nix
     ./ssh.nix
-    ./starship
     ./vim.nix
     ./vscode.nix
     ./yazi.nix
