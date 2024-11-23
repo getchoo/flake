@@ -30,6 +30,7 @@
     home.packages = with pkgs; [
       hydra-check
       nixfmt-rfc-style
+      nurl
     ];
 
     programs = {
