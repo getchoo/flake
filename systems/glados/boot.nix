@@ -17,7 +17,7 @@
   boot = {
     initrd.systemd.enable = true; # for unlocking luks root with tpm2
 
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
 
     kernelParams = [ "amd_pstate=active" ];
 
