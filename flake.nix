@@ -7,15 +7,17 @@
   };
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      nixpkgs-stable,
+      nix-darwin,
+      home-manager,
+      ...
+    }@inputs:
+
     let
       inherit (nixpkgs) lib;
-      inherit (self.lib.builders)
-        darwinSystem
-        homeManagerConfiguration
-        nixosSystem
-        mkModule
-        ;
 
       systems = [
         "x86_64-linux"
@@ -26,7 +28,13 @@
 
       forAllSystems = lib.genAttrs systems;
       nixpkgsFor = nixpkgs.legacyPackages;
+
+      mkModule = type: name: file: {
+        _file = "${self.outPath}#${type}.${name}";
+        imports = [ file ];
+      };
     in
+
     {
       apps = forAllSystems (
         system:
@@ -157,53 +165,61 @@
         }
       );
 
-      lib = import ./lib { inherit lib inputs self; };
+      lib = import ./lib { inherit lib; };
 
       formatter = forAllSystems (system: nixpkgsFor.${system}.nixfmt-rfc-style);
 
-      darwinModules = {
-        default = mkModule {
-          name = "default";
-          type = "darwin";
-          imports = [ ./modules/darwin ];
-        };
+      darwinModules = lib.mapAttrs (mkModule "darwin") {
+        default = ./modules/darwin;
       };
 
-      nixosModules = {
-        default = mkModule {
-          name = "default";
-          type = "nixos";
-          imports = [ ./modules/nixos ];
-        };
+      nixosModules = lib.mapAttrs (mkModule "darwin") {
+        default = ./modules/nixos;
       };
 
-      darwinConfigurations = lib.mapAttrs (lib.const darwinSystem) {
+      darwinConfigurations = lib.mapAttrs (lib.const nix-darwin.lib.darwinSystem) {
         caroline = {
           modules = [ ./systems/caroline ];
+          specialArgs = {
+            inherit inputs;
+          };
         };
       };
 
-      homeConfigurations = lib.mapAttrs (lib.const homeManagerConfiguration) {
+      homeConfigurations = lib.mapAttrs (lib.const home-manager.lib.homeManagerConfiguration) {
         seth = {
           modules = [ ./users/seth/home.nix ];
           pkgs = nixpkgsFor.x86_64-linux;
+          extraSpecialArgs = {
+            inherit inputs;
+          };
         };
       };
 
-      nixosConfigurations = lib.mapAttrs (lib.const nixosSystem) {
-        glados = {
-          modules = [ ./systems/glados ];
-        };
+      nixosConfigurations =
+        lib.mapAttrs (lib.const nixpkgs.lib.nixosSystem) {
+          glados = {
+            modules = [ ./systems/glados ];
+            specialArgs = {
+              inherit inputs;
+            };
+          };
 
-        glados-wsl = {
-          modules = [ ./systems/glados-wsl ];
+          glados-wsl = {
+            modules = [ ./systems/glados-wsl ];
+            specialArgs = {
+              inherit inputs;
+            };
+          };
+        }
+        // {
+          atlas = nixpkgs-stable.lib.nixosSystem {
+            modules = [ ./systems/atlas ];
+            specialArgs = {
+              inherit inputs;
+            };
+          };
         };
-
-        atlas = {
-          nixpkgs = inputs.nixpkgs-stable;
-          modules = [ ./systems/atlas ];
-        };
-      };
 
       legacyPackages.x86_64-linux =
         let

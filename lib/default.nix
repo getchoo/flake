@@ -1,11 +1,9 @@
-{
-  lib,
-  inputs,
-  self,
-  ...
-}:
+{ lib }:
 
-lib.mapAttrs (_: file: import file { inherit lib inputs self; }) {
-  builders = ./builders.nix;
-  nginx = ./nginx.nix;
-}
+lib.makeExtensible (
+  final:
+
+  lib.mapAttrs (lib.const (lib.flip import { inherit lib final; })) {
+    nginx = ./nginx.nix;
+  }
+)
