@@ -116,7 +116,7 @@
           nixfmt = mkCheck {
             name = "check-nixfmt";
             deps = [ pkgs.nixfmt-rfc-style ];
-            script = "nixfmt --check ${self}";
+            script = "nixfmt --check ${self}/**/*.nix";
           };
 
           statix = mkCheck {
@@ -271,7 +271,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
 
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
@@ -361,7 +361,11 @@
 
     openwrt-imagebuilder = {
       url = "github:astro/nix-openwrt-imagebuilder";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "lanzaboote/flake-parts";
+        systems.follows = "nixos-wsl/flake-utils/systems";
+      };
     };
 
     teawiebot = {

@@ -32,7 +32,7 @@ in
             boot = {
               # required for GSP firmware
               kernelParams = [ "nouveau.config=NvGspRm=1" ];
-              # we want early KMS 
+              # we want early KMS
               # https://wiki.archlinux.org/title/Kernel_mode_setting#Early_KMS_start
               initrd.kernelModules = [ "nouveau" ];
             };
