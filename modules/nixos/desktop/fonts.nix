@@ -20,16 +20,13 @@ in
       enableDefaultPackages = true;
 
       packages = with pkgs; [
-        (nerdfonts.override {
-          fonts = [
-            "FiraCode"
-            "Hack"
-            "Noto"
-          ];
-        })
         noto-fonts
         noto-fonts-color-emoji
         noto-fonts-cjk-sans
+
+        nerd-fonts.fira-code
+        nerd-fonts.hack
+        nerd-fonts.noto
       ];
 
       fontconfig = {
