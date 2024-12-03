@@ -48,7 +48,7 @@ in
       ##     });
       ##   })
       ## else
-      pkgs.discord
+      pkgs.discord-canary
 
       pkgs.prismlauncher
     ];
