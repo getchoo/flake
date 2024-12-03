@@ -1,6 +1,11 @@
 {
   programs = {
     git.enable = true;
-    vim.defaultEditor = true;
+
+    vim = {
+      enable = true;
+
+      defaultEditor = true;
+    };
   };
 }
