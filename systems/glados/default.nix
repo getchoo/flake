@@ -14,7 +14,7 @@
     gnome.enable = true;
   };
 
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.production;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;
 
   networking = {
     hostName = "glados";
