@@ -30,7 +30,7 @@
     home.packages = with pkgs; [
       hydra-check
       nixfmt-rfc-style
-      nurl
+      (nurl.override { nix = config.nix.package; })
     ];
 
     programs = {
@@ -39,7 +39,10 @@
 
       direnv = {
         enable = lib.mkDefault true;
-        nix-direnv.enable = true;
+        nix-direnv = {
+          enable = true;
+          package = pkgs.nix-direnv.override { nix = config.nix.package; };
+        };
       };
 
       eza = {
