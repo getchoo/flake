@@ -370,10 +370,7 @@
 
     teawiebot = {
       url = "github:getchoo/teawiebot";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        treefmt-nix.follows = "";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     terranix = {

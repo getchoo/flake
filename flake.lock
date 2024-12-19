@@ -479,15 +479,14 @@
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
-        ],
-        "treefmt-nix": []
+        ]
       },
       "locked": {
-        "lastModified": 1727730600,
-        "narHash": "sha256-nyej7X2WAsoQiMUub0f9Y58sESQ+ZGQz3uJwXm8ApfI=",
+        "lastModified": 1734645360,
+        "narHash": "sha256-q/h4bmzknRMz6HFHeDApX1RXUzvdcORWoMIXv3GvpQk=",
         "owner": "getchoo",
         "repo": "teawiebot",
-        "rev": "77309844e6b890544bc4eea7f03bbafe493ba61e",
+        "rev": "426377759bf354754166be2b82b77b9ee64dd16a",
         "type": "github"
       },
       "original": {
