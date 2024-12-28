@@ -93,16 +93,6 @@
             script = "deadnix --fail ${self}";
           };
 
-          flake-inputs = mkCheck {
-            name = "check-flake-inputs";
-            script = ''
-              if grep '_2' ${self}/flake.lock &>/dev/null; then
-                echo "FOUND DUPLICATE FLAKE INPUTS!!!!"
-                exit 1
-              fi
-            '';
-          };
-
           just = mkCheck {
             name = "check-just";
             deps = [ pkgs.just ];
@@ -298,7 +288,18 @@
       };
     };
 
-    catppuccin.url = "github:catppuccin/nix";
+    catppuccin = {
+      url = "github:catppuccin/nix";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        nixpkgs-stable.follows = "";
+        home-manager.follows = "";
+        home-manager-stable.follows = "";
+        nuscht-search.follows = "";
+        catppuccin-v1_1.follows = "";
+        catppuccin-v1_2.follows = "";
+      };
+    };
 
     firefox-addons = {
       url = "sourcehut:~rycee/nur-expressions?dir=pkgs/firefox-addons";
