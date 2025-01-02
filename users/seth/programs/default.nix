@@ -17,7 +17,6 @@
     ./git.nix
     ./gpg.nix
     ./mangohud.nix
-    ./moar.nix
     ./neovim.nix
     ./nu.nix
     ./ssh.nix
