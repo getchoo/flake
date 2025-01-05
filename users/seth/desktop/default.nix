@@ -52,5 +52,7 @@ in
 
       pkgs.prismlauncher
     ];
+
+    programs.ghostty.enable = true;
   };
 }
