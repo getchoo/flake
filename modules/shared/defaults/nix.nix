@@ -25,9 +25,6 @@ in
             "flakes"
             "auto-allocate-uids"
           ];
-
-          trusted-substituters = [ "https://getchoo.cachix.org" ];
-          trusted-public-keys = [ "getchoo.cachix.org-1:ftdbAUJVNaFonM0obRGgR5+nUmdLMM+AOvDOSx0z5tE=" ];
         };
 
         gc = {
