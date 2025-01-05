@@ -11,7 +11,7 @@
 
   desktop = {
     enable = true;
-    plasma.enable = true;
+    gnome.enable = true;
   };
 
   hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.latest;
