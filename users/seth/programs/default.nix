@@ -50,6 +50,7 @@
       };
 
       fd.enable = lib.mkDefault true;
+      ghostty.enable = lib.mkDefault true;
       ripgrep.enable = lib.mkDefault true;
       nix-index-database.comma.enable = true;
     };
