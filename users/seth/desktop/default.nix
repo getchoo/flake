@@ -53,6 +53,6 @@ in
       pkgs.prismlauncher
     ];
 
-    programs.ghostty.enable = true;
+    programs.ghostty.enable = pkgs.stdenv.hostPlatform.isLinux;
   };
 }
