@@ -1,9 +1,11 @@
-{ lib }:
+{ lib, ... }:
 
-lib.makeExtensible (
-  final:
+{
+  flake.lib = lib.makeExtensible (
+    final:
 
-  lib.mapAttrs (lib.const (lib.flip import { inherit lib final; })) {
-    nginx = ./nginx.nix;
-  }
-)
+    lib.mapAttrs (lib.const (lib.flip import { inherit lib final; })) {
+      nginx = ./nginx.nix;
+    }
+  );
+}

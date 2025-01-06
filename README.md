@@ -14,6 +14,10 @@ greasy taco i love
 
 </div>
 
+## flake/
+
+Pieces meant for maintaining this flake
+
 ## lib/
 
 Small functions I like to use around here
@@ -45,10 +49,6 @@ Personal infrastructure defined with [terranix](https://terranix.org/)
 
 Home of my [home-manager](https://nix-community.github.io/home-manager/) user
 configurations
-
-## .envrc
-
-My [nix-direnv](https://github.com/nix-community/nix-direnv) configuration
 
 ## flake.nix
 

@@ -1,9 +1,9 @@
 {
-  buildOpenWrtImage,
+  openwrtPackages,
   runCommand,
 }:
 
-buildOpenWrtImage {
+openwrtPackages.buildOpenWrtImage {
   release = "23.05.0";
   profile = "netgear_wac104";
 

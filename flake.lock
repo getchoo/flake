@@ -123,16 +123,15 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
-          "lanzaboote",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1730504689,
-        "narHash": "sha256-hgmguH29K2fvs9szpq2r3pz2/8cJd2LPS+b4tfNFCwE=",
+        "lastModified": 1735774679,
+        "narHash": "sha256-soePLBazJk0qQdDVhdbM98vYdssfs3WFedcq+raipRI=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "506278e768c2a08bec68eb62932193e341f55c90",
+        "rev": "f2f7418ce0ab4a5309a4596161d154cfc877af66",
         "type": "github"
       },
       "original": {
@@ -156,6 +155,26 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "getchpkgs": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1735955308,
+        "narHash": "sha256-CMje7QJoU5SRQ2chXkM3nNCRORMMh1j+MTg/RPXm8Bs=",
+        "owner": "getchoo",
+        "repo": "nix-exprs",
+        "rev": "bd5a98434f7a394bbb95efcf74e17f15219c8fb9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getchoo",
+        "repo": "nix-exprs",
         "type": "github"
       }
     },
@@ -224,7 +243,9 @@
       "inputs": {
         "crane": "crane",
         "flake-compat": [],
-        "flake-parts": "flake-parts",
+        "flake-parts": [
+          "flake-parts"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -402,7 +423,6 @@
     "openwrt-imagebuilder": {
       "inputs": {
         "flake-parts": [
-          "lanzaboote",
           "flake-parts"
         ],
         "nixpkgs": [
@@ -434,6 +454,8 @@
         "arkenfox": "arkenfox",
         "catppuccin": "catppuccin",
         "firefox-addons": "firefox-addons",
+        "flake-parts": "flake-parts",
+        "getchpkgs": "getchpkgs",
         "getchvim": "getchvim",
         "home-manager": "home-manager",
         "krunner-nix": "krunner-nix",
@@ -511,7 +533,6 @@
         "bats-assert": [],
         "bats-support": [],
         "flake-parts": [
-          "lanzaboote",
           "flake-parts"
         ],
         "nixpkgs": [

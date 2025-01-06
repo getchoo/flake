@@ -2,6 +2,7 @@
   config,
   lib,
   inputs,
+  inputs',
   ...
 }:
 let
@@ -17,7 +18,7 @@ in
       useGlobalPkgs = true;
       useUserPackages = true;
       extraSpecialArgs = {
-        inherit inputs;
+        inherit inputs inputs';
       };
     };
   };
