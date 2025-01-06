@@ -1,0 +1,6 @@
+{
+  imports = [
+    ./darwin
+    ./nixos
+  ];
+}

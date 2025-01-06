@@ -1,0 +1,3 @@
+{
+  terranix = ./terranix.nix;
+}

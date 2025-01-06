@@ -1,8 +1,7 @@
 {
   config,
   lib,
-  pkgs,
-  inputs,
+  inputs',
   ...
 }:
 let
@@ -21,7 +20,7 @@ in
     lib.mkMerge [
       {
         # All servers are most likely on stable, so we want to pull in some newer packages from time to time
-        _module.args.unstable = inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+        _module.args.unstable = inputs'.nixpkgs.legacyPackages;
 
         boot.tmp.cleanOnBoot = lib.mkDefault true;
 
