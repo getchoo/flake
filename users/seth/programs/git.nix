@@ -38,7 +38,7 @@ in
       };
 
       userEmail = "getchoo@tuta.io";
-      userName = "seth";
+      userName = "Seth Flynn";
     };
   };
 }
